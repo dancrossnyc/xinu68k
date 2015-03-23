@@ -8,10 +8,8 @@
  *  dgcntl  -  control function for datagram pseudo-devices
  *------------------------------------------------------------------------
  */
-dgcntl(devptr, func, arg)
-struct	devsw	*devptr;
-int	func;
-int	arg;
+int
+dgcntl(struct devsw *devptr, int func, int arg)
 {
 	struct	dgblk	*dgptr;
 	int	freebuf();

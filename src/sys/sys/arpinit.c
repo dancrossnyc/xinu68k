@@ -9,6 +9,7 @@
  *  arpinit  -  initialize data structures for ARP processing
  *------------------------------------------------------------------------
  */
+void
 arpinit()
 {
 	struct	arpent	*atabptr;

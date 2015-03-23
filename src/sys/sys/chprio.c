@@ -6,11 +6,12 @@
 
 /*------------------------------------------------------------------------
  * chprio  --  change the scheduling priority of a process
+ *
+ * newprio > 0.
  *------------------------------------------------------------------------
  */
-SYSCALL chprio(pid,newprio)
-	int	pid;
-	int	newprio;		/* newprio > 0			*/
+SYSCALL
+chprio(int pid, int newprio)
 {
 	int	oldprio;
 	struct	pentry	*pptr;

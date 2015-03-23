@@ -8,9 +8,8 @@
  *  control  -  control a device (e.g., set the mode)
  *------------------------------------------------------------------------
  */
-SYSCALL	control(descrp, func, addr, addr2)
-int descrp, func;
-char *addr,*addr2;
+SYSCALL
+control(int descrp, int func, char *addr, char *addr2)
 {
 	struct	devsw	*devptr;
 

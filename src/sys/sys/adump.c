@@ -11,6 +11,7 @@ static	char	*st[4] = {"free","???","gateway","direct"};
  *  adump  -  dump the current contents of the arp cache
  *------------------------------------------------------------------------
  */
+void
 adump()
 {
 	int	arindex;

@@ -10,10 +10,8 @@
  *  dfdsrch  --  search disk directory for position of given file name
  *------------------------------------------------------------------------
  */
-struct	fdes	*dfdsrch(dsptr, filenam, mbits)
-struct	dsblk	*dsptr;
-char	*filenam;
-int	mbits;
+struct fdes *
+dfdsrch(struct dsblk *dsptr, char *filenam, int mbits)
 {
 	struct	dir	*dirptr;
 	struct	fdes	*fdptr;
@@ -42,5 +40,6 @@ int	mbits;
 	fdptr->fdiba = inum;
 	write(dsptr->dnum, dskbcpy(dirptr), DIRBLK);
 	signal(dsptr->ddirsem);
+
 	return(fdptr);
 }

@@ -9,6 +9,7 @@
  *  bpdump  -  dump the buffer pool table
  *------------------------------------------------------------------------
  */
+int
 bpdump()
 {
 	int	i;

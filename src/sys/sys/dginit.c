@@ -8,8 +8,8 @@
  *  dginit  -  initialize datagram protocol pseudo device marking it free
  *------------------------------------------------------------------------
  */
-dginit(devptr)
-struct	devsw	*devptr;
+int
+dginit(struct devsw *devptr)
 {
 	struct	dgblk	*dgptr;
 

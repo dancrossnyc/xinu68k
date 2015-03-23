@@ -30,6 +30,7 @@ int	clkruns = FALSE;	/* no clock configured; be sure sleep	*/
  * clkinit - initialize the clock and sleep queue (called at startup)
  *------------------------------------------------------------------------
  */
+void
 clkinit()
 {
 	int *vector;

@@ -8,8 +8,8 @@
  *  ckmode  --  parse open's mode argument and generate actual mode bits
  *------------------------------------------------------------------------
  */
-ckmode(mode)
-char	*mode;
+int
+ckmode(char *mode)
 {
 	int	mbits;
 	char	ch;

@@ -9,8 +9,8 @@
  *  dgclose  -  close a datagram pseudo device, making it available again
  *------------------------------------------------------------------------
  */
-dgclose(devptr)
-struct	devsw	*devptr;
+int
+dgclose(struct devsw *devptr)
 {
 	char	ps;
 	struct	dgblk	*dgptr;

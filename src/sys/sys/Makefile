@@ -3,11 +3,11 @@
 #
 
 .SUFFIXES:.o .c .s
-DIR	=	/usr/Xinu
+DIR	=	/Users/cross/unix/project/xinu68
 BINDIR	=	$(DIR)/bin
 INCDIR	=	$(DIR)/include
 CONFIG	=	./config
-CC	=	$(BINDIR)/cc11
+CC	=	m68k-none-elf-gcc
 CFLAGS	=	-O -c -I../h
 AFLAGS	=	-u $(INCDIR)/sys.s
 AS	=	$(BINDIR)/as11

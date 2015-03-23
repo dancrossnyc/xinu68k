@@ -8,6 +8,7 @@
  *  dgalloc  -  allocate a datagram psuedo device and return descriptor
  *------------------------------------------------------------------------
  */
+int
 dgalloc()
 {
 	struct	dgblk	*dgptr;
@@ -24,5 +25,6 @@ dgalloc()
 		}
 	}
 	restore(ps);
+
 	return(SYSERR);
 }

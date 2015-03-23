@@ -7,17 +7,38 @@
 #include <io.h>
 
 /*------------------------------------------------------------------------
- *  create  -  create a process to start running a procedure
+ * newpid  --  obtain a new (free) process id
  *------------------------------------------------------------------------
  */
-SYSCALL create(procaddr,ssize,priority,name,nargs,args)
-	int	*procaddr;		/* procedure address		*/
-	int	ssize;			/* stack size in words		*/
-	int	priority;		/* process priority > 0		*/
-	char	*name;			/* name (for debugging)		*/
-	int	nargs;			/* number of args that follow	*/
-	int	args;			/* arguments (treated like an	*/
-					/* array in the code)		*/
+static int
+newpid()
+{
+	int	pid;			/* process id to return		*/
+	int	i;
+
+	for (i=0 ; i<NPROC ; i++) {	/* check all NPROC slots	*/
+		if ( (pid=nextproc--) <= 0)
+			nextproc = NPROC-1;
+		if (proctab[pid].pstate == PRFREE)
+			return(pid);
+	}
+	return(SYSERR);
+}
+
+/*------------------------------------------------------------------------
+ *  create  -  create a process to start running a procedure
+ *
+ *	int	*procaddr;		procedure address
+ *	int	ssize;			stack size in words
+ *	int	priority;		process priority > 0
+ *	char	*name;			name (for debugging)
+ *	int	nargs;			number of args that follow
+ *	int	args;			arguments (treated like an
+ *					array in the code)
+ *------------------------------------------------------------------------
+ */
+SYSCALL
+create(int procaddr, int ssize, int priority, char *name, int nargs, int args)
 {
 	int	pid;			/* stores new process id	*/
 	struct	pentry	*pptr;		/* pointer to proc. table entry */
@@ -59,23 +80,6 @@ SYSCALL create(procaddr,ssize,priority,name,nargs,args)
 	*saddr = (int)INITRET;		/* push on return address	*/
 	pptr->pregs[SP] = (int)saddr;
 	restore(ps);
+
 	return(pid);
-}
-
-/*------------------------------------------------------------------------
- * newpid  --  obtain a new (free) process id
- *------------------------------------------------------------------------
- */
-LOCAL	newpid()
-{
-	int	pid;			/* process id to return		*/
-	int	i;
-
-	for (i=0 ; i<NPROC ; i++) {	/* check all NPROC slots	*/
-		if ( (pid=nextproc--) <= 0)
-			nextproc = NPROC-1;
-		if (proctab[pid].pstate == PRFREE)
-			return(pid);
-	}
-	return(SYSERR);
 }

@@ -9,8 +9,8 @@
  *  arpfind  -  find or insert entry in ARP cache and return its index
  *------------------------------------------------------------------------
  */
-arpfind(faddr)
-IPaddr	faddr;
+int
+arpfind(IPaddr faddr)
 {
 	int	i;
 	int	arindex;

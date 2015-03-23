@@ -8,8 +8,8 @@
  *  close  -  close a device
  *------------------------------------------------------------------------
  */
-SYSCALL	close(descrp)
-int descrp;
+SYSCALL
+close(int descrp)
 {
 	struct	devsw	*devptr;
 

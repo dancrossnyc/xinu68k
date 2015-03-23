@@ -8,13 +8,12 @@
  *  dgdump  -  dump the datagram pseudo device control blocks
  *------------------------------------------------------------------------
  */
+int
 dgdump()
 {
-	struct	dgblk	*dgptr;
-	int	i;
 
-	for (i=0 ; i<Ndg ; i++) {
-		dgptr = &dgtab[i];
+	for (int i = 0 ; i < Ndg ; i++) {
+		struct dgblk *dgptr = &dgtab[i];
 		if (dgptr->dg_state == DG_FREE)
 			continue;
 		kprintf("Dev=%2d: ",dgptr->dg_dnum);

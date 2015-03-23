@@ -10,15 +10,15 @@
  *------------------------------------------------------------------------
  */
 #ifdef	Ndf
+int
 dfalloc()		/* assume exclusion for dir. provided by caller	*/
 {
-	int	i;
-
-	for (i=0 ; i<Ndf ; i++)
+	for (int i = 0 ; i < Ndf ; i++)
 		if (fltab[i].fl_pid == 0) {
 			fltab[i].fl_pid = getpid();
 			return(i);
 		}
+
 	return(SYSERR);
 }
 #endif

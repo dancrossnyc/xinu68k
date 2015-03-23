@@ -8,10 +8,8 @@
  *  dgmopen  -  open a fresh datagram pseudo device and return descriptor
  *------------------------------------------------------------------------
  */
-dgmopen(devptr, forport, locport)
-struct	devsw	*devptr;
-char	*forport;
-int	locport;
+int
+dgmopen(struct devsw *devptr, char *forport, int locport)
 {
 	struct	dgblk	*dgptr;
 	struct	netq	*nqptr;

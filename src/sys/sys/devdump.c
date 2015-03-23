@@ -7,6 +7,7 @@
  *  devdump  -  dump device names from the device switch table
  *------------------------------------------------------------------------
  */
+void
 devdump()
 {
 	struct	devsw	*devptr;

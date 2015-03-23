@@ -9,9 +9,8 @@
  *  dgparse  -  parse foreign address specification; get IP and port #s
  *------------------------------------------------------------------------
  */
-dgparse(dgptr, fspec)
-struct	dgblk	*dgptr;
-char	*fspec;
+int
+dgparse(struct dgblk *dgptr, char *fspec)
 {
 	int	i, byte;
 	char	ch;
@@ -41,5 +40,6 @@ char	*fspec;
 	if (i==0 || ch!='\0')
 		return(SYSERR);
 	dgptr->dg_fport = i;
+
 	return(OK);
 }

@@ -9,9 +9,8 @@
  *  access  -  determine accessability given file name and desired mode
  *------------------------------------------------------------------------
  */
-SYSCALL	access(name, mode)
-char	*name;
-int	mode;
+SYSCALL
+access(char *name, int mode)
 {
 	char	fullnam[NAMLEN];
 	struct	devsw	*devptr;
