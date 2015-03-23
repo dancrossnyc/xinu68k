@@ -14,7 +14,6 @@ FILE	*confc;
 FILE	*confh;
 
 char	*dbstr;
-extern	char *malloc();
 int	ndevs = 0;
 int	currname = -1;
 int	currtname = -1;
@@ -83,6 +82,9 @@ char	*ftout[] =
 		"extern\tstruct\tdevsw devtab[];",
 		"\t\t/* one entry per device */\n\n",
 		NULL};
+
+extern unsigned long yyleng;
+extern char *yytext;
 %}
 %%
 config.input	:	devicetypes devicedescriptors
@@ -169,9 +171,9 @@ optional.on	:	/**/
 		;
 %%
 #include "lex.yy.c"
-main(argc, argv)
-	int	argc;
-	char	*argv[];
+
+int
+main(int argc, char *argv[])
 {
 	int	n, i, j, l, fcount;
 	dvptr	s;
@@ -342,8 +344,7 @@ main(argc, argv)
 }
 
 
-yyerror(s)
-	char *s;
+yyerror(char *s)
 {
 	fprintf(stderr,"Syntax error in %s on line %d\n",
 		doing,linectr);
@@ -351,10 +352,8 @@ yyerror(s)
 
 
 /*  lookup  --  lookup a name in the symbol table; return position */
-
-lookup(str,len)
-	char	*str;
-	int	len;
+int
+lookup(char *str, int len)
 {
 	int	i;
 	char	*s;
@@ -366,49 +365,40 @@ lookup(str,len)
 	s = malloc(len+1);
 	strncpy(s,str,len);
 	s[len] = '\000';
-	for (i=0 ; i<nsym ; i++)
-		if (strcmp(s,symtab[i].symname) == 0){
+	for (i=0 ; i<nsym ; i++) {
+		if (strcmp(s,symtab[i].symname) == 0) {
 			return(i);
 		}
+	}
 	symtab[nsym].symname = s;
 	symtab[nsym].symoccurs = 0;
 	return(nsym++);
 }
 
-atoi(str,len)
-	char *str;
-	int len;
+int
+otoi(char *str, int len)
 {
 	int i;
 	char c;
 
-	for (i=0; len > 0 ; len--) {
-		c = *str++;
-		i = 10*i + (c - '0');
-		}
-}
-otoi(str,len)
-	char *str;
-	int len;
-{
-	int i;
-	char c;
-
-	for (i=0; len > 0 ; len--) {
+	for (i = 0; len > 0 ; len--) {
 		c = *str++;
 		if (c > '7')
 			fprintf(stderr,"invalid octal digit on line %d\n",
 				linectr);
 		else
 			i = 8*i + (c - '0');
-		}
+	}
+
+	return i;
 }
 
-/* newattr -- add a new attribute spec to current type/device description	*/
+/* newattr -- add a new attribute spec to current type/device description
 
-newattr(tok,val)
-	int	tok;			/* token type (attribute type)	*/
-	int	val;			/* symbol number of value	*/
+	int	tok;			token type (attribute type)
+	int	val;			symbol number of value
+*/
+newattr(int tok, int val)
 {
 	char	*c;
 	dvptr	s;
@@ -580,7 +570,7 @@ mkdev(nameid, typid, deviceid)
 	found = 0;
 	for (s=ftypes ; s != NULL ; s=s->dvnext)
 		if (s->dvtname == tn && (dn==NULL || s->dvdevice==dn)) {
-			strdup(lastdv,s,sizeof(struct dvtype));
+			memmove(lastdv,s,sizeof(struct dvtype));
 			found=1;
 			break;
 		}
@@ -613,12 +603,4 @@ extern	dvptr	devs;
 			}
 		}
 	return(devid);
-}
-
-strdup(tostr,fromstr,len)
-	char	*tostr, *fromstr;
-	int	len;
-{
-	for( ; len > 0 ; len--)
-		*tostr++ = *fromstr++;
 }
