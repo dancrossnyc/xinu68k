@@ -7,7 +7,6 @@ echo '*** Making '"`pwd`"'/src/sys/config'
 echo
 
 (cd config && make && make install)
-#/bin/ranlib11 ../lib/libx.a
 
 echo '*************************************************************'
 echo '*************************************************************'
