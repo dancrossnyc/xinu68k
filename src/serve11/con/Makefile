@@ -1,19 +1,22 @@
 #
 # Make the Xinu configuration program
 #
-all:		config
+YFLAGS=         -d
+CFLAGS=		-O -Wall -ansi -pedantic -std=c11
+OBJS=           parser.o
+SRCS=           parser.y lexer.l
+PROG=           config
+LIBS=           -ly -ll
+RM=             rm -f
 
-config:		lex.yy.c y.tab.c
-		cc -o config y.tab.c -ll
+all:		${PROG}
 
-lex.yy.c:	config.l
-		lex config.l
+${PROG}:        lexer.c ${OBJS}
+		${CC} -o ${PROG} ${OBJS} ${LIBS}
+		${RM} lexer.c
 
-y.tab.c:	config.y
-		yacc config.y
-
-install:	config
-		cp config ../sys/config
+install:	${PROG}
+		cp ${PROG} ../sys/config
 
 clean:
-		rm -f lex.yy.c y.tab.c core
+		${RM} ${PROG} ${OBJS} lexer.c *.o y.tab.h

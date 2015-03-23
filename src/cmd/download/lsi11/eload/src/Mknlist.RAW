@@ -1,6 +1,0 @@
-#! /bin/sh
-PATH=/bin:/usr/bin
-DIR={Xinu-directory}
-OUTFILE=$1
-shift
-$DIR/bin/nm11 -n eload | egrep ' T | D | B ' > $OUTFILE
