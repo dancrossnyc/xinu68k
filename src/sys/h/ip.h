@@ -1,4 +1,7 @@
 /* ip.h */
+#ifndef IP_H__
+#define IP_H__
+
 
 /* DARPA Internet Protocol (IP)  Constants and Datagram Format */
 
@@ -40,3 +43,5 @@ struct	ip	{		/* Format of DARPA Internet datagram	*/
 #define	ITIM2LIV	10	/* Initial time-to-live value		*/
 
 extern	int	ipackid;	/* Internet datagram id			*/
+
+#endif

@@ -62,3 +62,5 @@ typedef	char		Bool;		/* Boolean type			*/
 
 extern	int	rdyhead, rdytail;
 extern	int	preempt;
+
+#include "fns.h"

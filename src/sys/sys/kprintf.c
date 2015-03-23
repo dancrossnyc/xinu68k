@@ -6,31 +6,14 @@
 #include <slu.h>
 #include <tty.h>
 
-/*------------------------------------------------------------------------
- *  kprintf  --  kernel printf: formatted, unbuffered output to CONSOLE
- *------------------------------------------------------------------------
- */
-int
-kprintf(			/* Derived by Bob Brown, Purdue U.      */
-	       char *fmt,	/* Flow control added by Steve Munson   */
-	       int args)
-{
-	int kputc();
-
-	savestate(CONSOLE);
-	_doprnt(fmt, &args, kputc, CONSOLE);
-	rststate();
-	return (OK);
-}
-
 #define DELAY	100
-/*------------------------------------------------------------------------
- *  kputc  --  write a character on the console using polled I/O
- *------------------------------------------------------------------------
- */
-LOCAL
-kputc(int device, int c		/* character to print from _doprnt      */
-    )
+//------------------------------------------------------------------------
+//  kputc  --  write a character on the console using polled I/O
+//
+//  c is the character to print from _doprnt
+//------------------------------------------------------------------------
+static void
+kputc(int device, int c)
 {
 	struct csr *csrptr;
 	struct tty *ttyptr;
@@ -60,13 +43,12 @@ kputc(int device, int c		/* character to print from _doprnt      */
 	while (!(csrptr->ctstat & SLUREADY));	/* poll for idle */
 }
 
-LOCAL int savedev, savecrstat, savectstat;
-LOCAL char saveps;
-/*------------------------------------------------------------------------
- *  savestate  --  save the console control and status register
- *------------------------------------------------------------------------
- */
-LOCAL
+static int savedev, savecrstat, savectstat;
+static char saveps;
+//------------------------------------------------------------------------
+//  savestate  --  save the console control and status register
+//------------------------------------------------------------------------
+static int
 savestate(int device)
 {
 	char ps;
@@ -82,11 +64,10 @@ savestate(int device)
 	((struct csr *) devtab[device].dvcsr)->ctstat = SLUDISABLE;
 }
 
-/*------------------------------------------------------------------------
- *  rststate  --  restore the console output control and status register
- *------------------------------------------------------------------------
- */
-LOCAL
+//------------------------------------------------------------------------
+//  rststate  --  restore the console output control and status register
+//------------------------------------------------------------------------
+static int
 rststate(void)
 {
 	char ps;
@@ -95,4 +76,20 @@ rststate(void)
 	((struct csr *) devtab[savedev].dvcsr)->ctstat = savectstat;
 	ps = saveps;
 	restore(ps);
+}
+
+//------------------------------------------------------------------------
+//  kprintf  --  kernel printf: formatted, unbuffered output to CONSOLE
+// Derived by Bob Brown, Purdue U.
+// Flow control added by Steve Munson
+//------------------------------------------------------------------------
+int
+kprintf(char *fmt, int args)
+{
+	int kputc();
+
+	savestate(CONSOLE);
+	_doprnt(fmt, &args, kputc, CONSOLE);
+	rststate();
+	return OK;
 }

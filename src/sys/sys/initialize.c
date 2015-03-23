@@ -1,4 +1,4 @@
-/* initialize.c - nulluser, sysinit */
+// initialize.c - nulluser, sysinit
 
 #include <conf.h>
 #include <kernel.h>
@@ -12,10 +12,7 @@
 #include <disk.h>
 #include <network.h>
 
-extern int main();		/* address of user's main prog  */
-
-/* Declarations of major kernel variables */
-
+// Declarations of major kernel variables
 struct pentry proctab[NPROC];	/* process table                        */
 int nextproc;			/* next process slot to use in create   */
 struct sentry semaph[NSEM];	/* semaphore table                      */
@@ -31,8 +28,7 @@ struct mblock memlist;		/* list of free memory blocks           */
 struct tty tty[Ntty];		/* SLU buffers and mode control         */
 #endif
 
-/* active system status */
-
+// active system status
 int numproc;			/* number of live user processes        */
 int currpid;			/* id of currently running process      */
 int reboot = 0;			/* non-zero after first boot            */
@@ -54,52 +50,10 @@ char vers[] = VERSION;		/* Xinu version printed at startup      */
 /***								      ***/
 /************************************************************************/
 
-/*------------------------------------------------------------------------
- *  nulluser  -- initialize system and become the null process (id==0)
- *------------------------------------------------------------------------
- */
-int
-nulluser(void)
-{				/* babysit CPU when no one home */
-	int userpid;
-	char ps;
-
-	kprintf("\n\nXinu Version %s", vers);
-	if (reboot++ < 1)
-		kprintf("\n");
-	else
-		kprintf("   (reboot %d)\n", reboot);
-	sysinit();		/* initialize all of Xinu */
-	kprintf("%u real mem\n",
-		(unsigned) maxaddr + (unsigned) sizeof(int));
-	kprintf("%u avail mem\n",
-		(unsigned) maxaddr - (unsigned) (&end) +
-		(unsigned) sizeof(int));
-	kprintf("clock %sabled\n\n", clkruns == 1 ? "en" : "dis");
-	enable();		/* enable interrupts */
-
-	/* create a process to execute the user's main program */
-
-	userpid = create(main, INITSTK, INITPRIO, INITNAME, INITARGS);
-
-#ifdef	NETDAEMON
-	/* start the network input daemon process */
-	resume(create(NETIN, NETISTK, NETIPRI, NETINAM, NETIARGC, userpid)
-	    );
-#else
-	resume(userpid);
-#endif
-
-	while (TRUE) {		/* run forever without actually */
-		pause();	/*  executing instructions      */
-	}
-}
-
-/*------------------------------------------------------------------------
- *  sysinit  --  initialize all Xinu data structures and devices
- *------------------------------------------------------------------------
- */
-LOCAL
+//------------------------------------------------------------------------
+//  sysinit  --  initialize all Xinu data structures and devices
+//------------------------------------------------------------------------
+static int
 sysinit(void)
 {
 	int i;
@@ -153,4 +107,44 @@ sysinit(void)
 	for (i = 0; i < NDEVS; i++)	/* initialize devices */
 		init(i);
 	return (OK);
+}
+
+//------------------------------------------------------------------------
+//  nulluser  -- initialize system and become the null process (id==0)
+//------------------------------------------------------------------------
+int
+nulluser(void)
+{				/* babysit CPU when no one home */
+	int userpid;
+	char ps;
+
+	kprintf("\n\nXinu Version %s", vers);
+	if (reboot++ < 1)
+		kprintf("\n");
+	else
+		kprintf("   (reboot %d)\n", reboot);
+	sysinit();		/* initialize all of Xinu */
+	kprintf("%u real mem\n",
+		(unsigned) maxaddr + (unsigned) sizeof(int));
+	kprintf("%u avail mem\n",
+		(unsigned) maxaddr - (unsigned) (&end) +
+		(unsigned) sizeof(int));
+	kprintf("clock %sabled\n\n", clkruns == 1 ? "en" : "dis");
+	enable();		/* enable interrupts */
+
+	/* create a process to execute the user's main program */
+
+	userpid = create(main, INITSTK, INITPRIO, INITNAME, INITARGS);
+
+#ifdef	NETDAEMON
+	/* start the network input daemon process */
+	resume(create(NETIN, NETISTK, NETIPRI, NETINAM, NETIARGC, userpid)
+	    );
+#else
+	resume(userpid);
+#endif
+
+	while (TRUE) {		/* run forever without actually */
+		pause();	/*  executing instructions      */
+	}
 }

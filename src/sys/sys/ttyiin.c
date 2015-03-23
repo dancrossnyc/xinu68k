@@ -6,16 +6,83 @@
 #include <io.h>
 #include <slu.h>
 
-/*------------------------------------------------------------------------
- *  ttyiin  --  lower-half tty device driver for input interrupts
- *------------------------------------------------------------------------
- */
-INTPROC
-ttyiin(register struct tty *iptr	/* pointer to tty block         */
-    )
+//------------------------------------------------------------------------
+//  eputc - put one character in the echo queue
+//------------------------------------------------------------------------
+static void
+eputc(int ch, struct tty *iptr, struct csr *cptr)
 {
-	register struct csr *cptr;
-	register int ch;
+	iptr->ebuff[iptr->ehead++] = ch;
+	if (iptr->ehead >= EBUFLEN)
+		iptr->ehead = 0;
+	cptr->ctstat = SLUENABLE;
+}
+
+//------------------------------------------------------------------------
+//  erase1  --  erase one character honoring erasing backspace
+//------------------------------------------------------------------------
+static void
+erase1(struct tty *iptr, struct csr *cptr)
+{
+	char ch;
+
+	if (--(iptr->ihead) < 0)
+		iptr->ihead += IBUFLEN;
+	ch = iptr->ibuff[iptr->ihead];
+	if (iptr->iecho) {
+		if (ch < BLANK || ch == 0177) {
+			if (iptr->evis) {
+				eputc(BACKSP, iptr, cptr);
+				if (iptr->ieback) {
+					eputc(BLANK, iptr, cptr);
+					eputc(BACKSP, iptr, cptr);
+				}
+			}
+			eputc(BACKSP, iptr, cptr);
+			if (iptr->ieback) {
+				eputc(BLANK, iptr, cptr);
+				eputc(BACKSP, iptr, cptr);
+			}
+		} else {
+			eputc(BACKSP, iptr, cptr);
+			if (iptr->ieback) {
+				eputc(BLANK, iptr, cptr);
+				eputc(BACKSP, iptr, cptr);
+			}
+		}
+	} else
+		cptr->ctstat = SLUENABLE;
+}
+
+//------------------------------------------------------------------------
+// echoch  --  echo a character with visual and ocrlf options
+// ch is character to echo
+// iptr is pointer to I/O block for this devptr
+// cptr	is csr address for this devptr
+//------------------------------------------------------------------------
+static void
+echoch(int ch, struct tty *iptr, struct csr *cptr)
+{
+	if ((ch == NEWLINE || ch == RETURN) && iptr->ecrlf) {
+		eputc(RETURN, iptr, cptr);
+		eputc(NEWLINE, iptr, cptr);
+	} else if ((ch < BLANK || ch == 0177) && iptr->evis) {
+		eputc(UPARROW, iptr, cptr);
+		eputc(ch + 0100, iptr, cptr);	/* make it printable    */
+	} else {
+		eputc(ch, iptr, cptr);
+	}
+}
+
+//------------------------------------------------------------------------
+//  ttyiin  --  lower-half tty device driver for input interrupts
+//  iptr is pointer to tty block
+//------------------------------------------------------------------------
+INTPROC
+ttyiin(struct tty *iptr)
+{
+	struct csr *cptr;
+	int ch;
 	int ct;
 
 	cptr = iptr->ioaddr;
@@ -109,75 +176,4 @@ ttyiin(register struct tty *iptr	/* pointer to tty block         */
 				iptr->ihead = 0;
 		}
 	}
-}
-
-/*------------------------------------------------------------------------
- *  erase1  --  erase one character honoring erasing backspace
- *------------------------------------------------------------------------
- */
-LOCAL
-erase1(struct tty *iptr, struct csr *cptr)
-{
-	char ch;
-
-	if (--(iptr->ihead) < 0)
-		iptr->ihead += IBUFLEN;
-	ch = iptr->ibuff[iptr->ihead];
-	if (iptr->iecho) {
-		if (ch < BLANK || ch == 0177) {
-			if (iptr->evis) {
-				eputc(BACKSP, iptr, cptr);
-				if (iptr->ieback) {
-					eputc(BLANK, iptr, cptr);
-					eputc(BACKSP, iptr, cptr);
-				}
-			}
-			eputc(BACKSP, iptr, cptr);
-			if (iptr->ieback) {
-				eputc(BLANK, iptr, cptr);
-				eputc(BACKSP, iptr, cptr);
-			}
-		} else {
-			eputc(BACKSP, iptr, cptr);
-			if (iptr->ieback) {
-				eputc(BLANK, iptr, cptr);
-				eputc(BACKSP, iptr, cptr);
-			}
-		}
-	} else
-		cptr->ctstat = SLUENABLE;
-}
-
-/*------------------------------------------------------------------------
- *  echoch  --  echo a character with visual and ocrlf options
- *------------------------------------------------------------------------
- */
-LOCAL
-echoch(int ch,			/* character to echo                    */
-       struct tty *iptr,	/* pointer to I/O block for this devptr */
-       struct csr *cptr		/* csr address for this devptr          */
-    )
-{
-	if ((ch == NEWLINE || ch == RETURN) && iptr->ecrlf) {
-		eputc(RETURN, iptr, cptr);
-		eputc(NEWLINE, iptr, cptr);
-	} else if ((ch < BLANK || ch == 0177) && iptr->evis) {
-		eputc(UPARROW, iptr, cptr);
-		eputc(ch + 0100, iptr, cptr);	/* make it printable    */
-	} else {
-		eputc(ch, iptr, cptr);
-	}
-}
-
-/*------------------------------------------------------------------------
- *  eputc - put one character in the echo queue
- *------------------------------------------------------------------------
- */
-LOCAL
-eputc(int ch, struct tty *iptr, struct csr *cptr)
-{
-	iptr->ebuff[iptr->ehead++] = ch;
-	if (iptr->ehead >= EBUFLEN)
-		iptr->ehead = 0;
-	cptr->ctstat = SLUENABLE;
 }

@@ -8,7 +8,7 @@ BINDIR	=	$(DIR)/bin
 INCDIR	=	$(DIR)/include
 CONFIG	=	./config
 CC	=	m68k-none-elf-gcc
-CFLAGS	=	-std=c11 -O -c -I../h -ansi -pedantic -Wall
+CFLAGS	=	-O -c -I../h -ansi -pedantic -std=c11 -Wall
 AFLAGS	=	-u $(INCDIR)/sys.s
 AS	=	$(BINDIR)/as11
 LD	=	$(BINDIR)/ld11

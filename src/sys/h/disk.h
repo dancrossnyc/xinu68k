@@ -1,5 +1,8 @@
 /* disk.h - dssync, dsdirec */
 
+#ifndef DISK_H__
+#define DISK_H__
+
 #include <xebec.h>			/* disk controller constants	*/
 #include <dtc.h>			/* disk interface constants	*/
 
@@ -52,3 +55,5 @@ extern	int	dskdbp;			/* disk data block buffer pool	*/
 #define	dssync(ddev)	control((ddev),DSKSYNC);
 
 #define	dsdirec(ddev)	((struct dir *)devtab[ddev].dvioblk->ddir)
+
+#endif

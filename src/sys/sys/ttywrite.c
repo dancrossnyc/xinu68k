@@ -6,40 +6,14 @@
 #include <io.h>
 #include <slu.h>
 
-/*------------------------------------------------------------------------
- *  ttywrite - write one or more characters to a tty device
- *------------------------------------------------------------------------
- */
-int
-ttywrite(struct devsw *devptr, char *buff, int count)
+//------------------------------------------------------------------------
+//  writecopy - high-speed copy from user's buffer into system buffer
+//------------------------------------------------------------------------
+static int
+writecopy(char *buff, struct tty * ttyp, int count)
 {
-	register struct tty *ttyp;
-	int ncopied;
-	char ps;
-
-	if (count < 0)
-		return (SYSERR);
-	if (count == 0)
-		return (OK);
-	disable(ps);
-	ttyp = &tty[devptr->dvminor];
-	count -= (ncopied = writcopy(buff, ttyp, count));
-	buff += ncopied;
-	for (; count > 0; count--)
-		ttyputc(devptr, *buff++);
-	restore(ps);
-	return (OK);
-}
-
-/*------------------------------------------------------------------------
- *  writcopy - high-speed copy from user's buffer into system buffer
- *------------------------------------------------------------------------
- */
-LOCAL
-writcopy(char *buff, struct tty * ttyp, int count)
-{
-	register int avail;
-	register char *cp, *qhead, *qend, *uend;
+	int avail;
+	char *cp, *qhead, *qend, *uend;
 
 	avail = scount(ttyp->osem);
 	qhead = &ttyp->obuff[ttyp->ohead];
@@ -60,5 +34,31 @@ writcopy(char *buff, struct tty * ttyp, int count)
 	ttyp->ohead = qhead - ttyp->obuff;	/* extra time when loop */
 	sreset(ttyp->osem, ++avail);	/* condition fails.     */
 	(ttyp->ioaddr)->ctstat = SLUENABLE;
-	return (cp - buff);
+
+	return(cp - buff);
+}
+
+//------------------------------------------------------------------------
+//  ttywrite - write one or more characters to a tty device
+//------------------------------------------------------------------------
+int
+ttywrite(struct devsw *devptr, char *buff, int count)
+{
+	struct tty *ttyp;
+	int ncopied;
+	char ps;
+
+	if (count < 0)
+		return (SYSERR);
+	if (count == 0)
+		return (OK);
+	disable(ps);
+	ttyp = &tty[devptr->dvminor];
+	count -= (ncopied = writcopy(buff, ttyp, count));
+	buff += ncopied;
+	for (; count > 0; count--)
+		ttyputc(devptr, *buff++);
+	restore(ps);
+
+	return OK;
 }

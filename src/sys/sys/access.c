@@ -1,14 +1,13 @@
-/* access.c - access */
+// access.c - access
 
 #include <conf.h>
 #include <kernel.h>
 #include <file.h>
 #include <name.h>
 
-/*------------------------------------------------------------------------
- *  access  -  determine accessability given file name and desired mode
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  access  -  determine accessability given file name and desired mode
+//------------------------------------------------------------------------
 SYSCALL
 access(char *name, int mode)
 {
@@ -17,7 +16,7 @@ access(char *name, int mode)
 	int dev;
 
 	if ((dev = nammap(name, fullnam)) == SYSERR)
-		return (SYSERR);
+		return SYSERR;
 	devptr = &devtab[dev];
-	return ((*devptr->dvcntl) (devptr, FLACCESS, fullnam, mode));
+	return (*devptr->dvcntl)(devptr, FLACCESS, fullnam, mode);
 }

@@ -1,5 +1,8 @@
 /* iblock.h - ibtodb, ibdisp */
 
+#ifndef IBLOCK_H__
+#define IBLOCK_H__
+
 typedef	int		IBADDR;		/* iblocks addressed 0,1,2,...	*/
 
 #define	IBLEN		29		/* # d-block ptrs in an i-block	*/
@@ -17,3 +20,5 @@ struct	iblk		{		/* index block layout		*/
 
 #define	ibtodb(ib)	(((ib)>>3)+IBAREA)/* iblock to disk block addr.	*/
 #define	ibdisp(ib)	(((ib)&07)*sizeof(struct iblk))
+
+#endif
