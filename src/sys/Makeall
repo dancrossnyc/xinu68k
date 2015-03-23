@@ -1,28 +1,23 @@
-: ' Makeall  --  Print message about making all of Xinu'
-:
-: 'Makeall'
-:
-PATH=/bin:/usr/bin
+#!/bin/sh
+#
+# Makeall  --  Print message about making all of Xinu
+#
 echo
-echo '*** Making {Xinu--directory}/src/sys/con'
-cd con
-make
-make install
-cd ..
-/usr/Xinu/bin/ranlib11 /usr/Xinu/lib/libx.a
+echo '*** Making '"`pwd`"'/src/sys/config'
 echo
-echo
-echo '***********************************************************'
-echo '***********************************************************'
-echo '***********************************************************'
-echo '***							***'
-echo '***			N O T E				***'
-echo '***	To make all of Xinu, change to directory	***'
-echo '***	{Xinu - directory}/src/sys/sys and look		***'
-echo '***	at file Configuration.  If your LSI 11 has	***'
-echo '***	a standard hardware configuration you may	***'
-echo '***	not need to recompile at all.			***'
-echo '***							***'
-echo '***********************************************************'
-echo '***********************************************************'
-echo '***********************************************************'
+
+(cd config && make && make install)
+#/bin/ranlib11 ../lib/libx.a
+
+echo '*************************************************************'
+echo '*************************************************************'
+echo '***                                                       ***'
+echo '***                       N O T E                         ***'
+echo '***       To make all of Xinu, change to directory        ***'
+echo '***       $XINU/src/sys/sys and look at the file          ***'
+echo '***       Configuration.  If your 68008 has a standard    ***'
+echo '***       hardware configuration you may not need to      ***'
+echo '***       recompile at all.                               ***'
+echo '***                                                       ***'
+echo '*************************************************************'
+echo '*************************************************************'
