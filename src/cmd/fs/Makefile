@@ -32,12 +32,6 @@ fs:		$(OFILES)
 fsd:		fsd.c
 		cc -O -o fsd fsd.c
 
-book:		.formatted
-
-.formatted:	$(CFILES) fsd.c
-		Doform
-		touch .formatted
-
 depend:
 		grep '^#include' *.c *.h			\
 		| sed	-e 's/</"\/usr\/include\//;s/>/"/'	\
