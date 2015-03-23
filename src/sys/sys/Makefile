@@ -184,11 +184,6 @@ d:		a.out
 		$(DOWNLOAD) -s
 		$(ODT)
 
-lint:		,lint
-
-,lint:		$(CFILES)
-		lint -n -I../h $(CFILES) | ./Flint > ,lint
-
 print:
 		$(CPRINT) -c Cover ../h/*.h *.c *.s
 
