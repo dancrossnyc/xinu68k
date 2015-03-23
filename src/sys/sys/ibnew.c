@@ -11,17 +11,16 @@
  *  ibnew  --  allocate a new iblock from free list on disk
  *------------------------------------------------------------------------
  */
-ibnew(diskdev, writedir)
-int	diskdev;
-Bool	writedir;
+int
+ibnew(int diskdev, int writedir)
 {
-	struct	dir	*dirptr;
-	struct	iblk	iblock;
-	IBADDR	inum;
-	int	i;
-	int	sem;
+	struct dir *dirptr;
+	struct iblk iblock;
+	IBADDR inum;
+	int i;
+	int sem;
 
-	sem =  ((struct dsblk *)devtab[diskdev].dvioblk)->dflsem;
+	sem = ((struct dsblk *) devtab[diskdev].dvioblk)->dflsem;
 	dirptr = dsdirec(diskdev);
 	wait(sem);
 	inum = dirptr->d_filst;
@@ -32,5 +31,5 @@ Bool	writedir;
 	signal(sem);
 	ibclear(&iblock, 0L);
 	ibput(diskdev, inum, &iblock);
-	return(inum);
+	return (inum);
 }

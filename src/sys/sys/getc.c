@@ -8,13 +8,13 @@
  *  getc  -  get one character from a device
  *------------------------------------------------------------------------
  */
-SYSCALL	getc(descrp)
-int descrp;
+SYSCALL
+getc(int descrp)
 {
-	struct	devsw	*devptr;
+	struct devsw *devptr;
 
-	if (isbaddev(descrp) )
-		return(SYSERR);
+	if (isbaddev(descrp))
+		return (SYSERR);
 	devptr = &devtab[descrp];
-        return( (*devptr->dvgetc)(devptr) );
+	return ((*devptr->dvgetc) (devptr));
 }

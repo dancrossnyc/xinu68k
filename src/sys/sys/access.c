@@ -12,12 +12,12 @@
 SYSCALL
 access(char *name, int mode)
 {
-	char	fullnam[NAMLEN];
-	struct	devsw	*devptr;
-	int	dev;
+	char fullnam[NAMLEN];
+	struct devsw *devptr;
+	int dev;
 
-	if ( (dev=nammap(name, fullnam)) == SYSERR)
-		return(SYSERR);
+	if ((dev = nammap(name, fullnam)) == SYSERR)
+		return (SYSERR);
 	devptr = &devtab[dev];
-	return(	(*devptr->dvcntl)(devptr, FLACCESS, fullnam, mode) );
+	return ((*devptr->dvcntl) (devptr, FLACCESS, fullnam, mode));
 }

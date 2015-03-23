@@ -8,17 +8,16 @@
  *  sendf  --  sendf a message to another process, forcing delivery
  *------------------------------------------------------------------------
  */
-SYSCALL	sendf(pid, msg)
-int	pid;
-int	msg;
+SYSCALL
+sendf(int pid, int msg)
 {
-	struct	pentry	*pptr;
-	char	ps;
+	struct pentry *pptr;
+	char ps;
 
 	disable(ps);
-	if (isbadpid(pid)||((pptr= &proctab[pid])->pstate == PRFREE)) {
+	if (isbadpid(pid) || ((pptr = &proctab[pid])->pstate == PRFREE)) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	pptr->pmsg = msg;
 	pptr->phasmsg = TRUE;
@@ -29,5 +28,5 @@ int	msg;
 		ready(pid, RESCHYES);
 	}
 	restore(ps);
-	return(OK);
+	return (OK);
 }

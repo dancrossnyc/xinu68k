@@ -12,15 +12,15 @@
 int
 arpfind(IPaddr faddr)
 {
-	int	i;
-	int	arindex;
-	struct	arpent	*atabptr;
+	int i;
+	int arindex;
+	struct arpent *atabptr;
 
-	for (arindex=0; arindex<Arp.atabsiz; arindex++) {
+	for (arindex = 0; arindex < Arp.atabsiz; arindex++) {
 		atabptr = &Arp.arptab[arindex];
 		if (blkequ(atabptr->arp_Iad, faddr, IPLEN)
-			&& atabptr->arp_state != AR_FREE)
-			return(arindex);
+		    && atabptr->arp_state != AR_FREE)
+			return (arindex);
 	}
 	if (Arp.atabsiz < AR_TAB) {
 		Arp.atabsiz++;
@@ -31,8 +31,8 @@ arpfind(IPaddr faddr)
 	atabptr = &Arp.arptab[arindex];
 	atabptr->arp_state = AR_ALLOC;
 	blkcopy(atabptr->arp_Iad, faddr, IPLEN);
-	for(i=0 ; i<EPADLEN ; i++)
+	for (i = 0; i < EPADLEN; i++)
 		atabptr->arp_Ead[i] = '\0';
 	atabptr->arp_dev = -1;
-	return(arindex);
+	return (arindex);
 }

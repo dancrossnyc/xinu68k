@@ -7,17 +7,15 @@
  *  lfwrite  --  write 'count' bytes onto a local disk file
  *------------------------------------------------------------------------
  */
-lfwrite(devptr, buff, count)
-struct	devsw	*devptr;
-char	*buff;
-int	count;
+int
+lfwrite(struct devsw *devptr, char *buff, int count)
 {
-	int	i;
+	int i;
 
 	if (count < 0)
-		return(SYSERR);
-	for (i=count; i>0 ; i--)
+		return (SYSERR);
+	for (i = count; i > 0; i--)
 		if (lfputc(devptr, *buff++) == SYSERR)
-			return(SYSERR);
-	return(count);
+			return (SYSERR);
+	return (count);
 }

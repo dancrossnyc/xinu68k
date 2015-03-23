@@ -9,16 +9,14 @@
  *  ethread - read a single packet from the ethernet
  *------------------------------------------------------------------------
  */
-ethread(devptr, buff, len)
-struct	devsw	*devptr;
-char	*buff;
-int	len;
+int
+ethread(struct devsw *devptr, char *buff, int len)
 {
-	char	ps;
-	char	*wbuff;
-	struct	etblk	*etptr;
-	struct	dcmd	*dcmptr;
-	struct	dqregs	*dqptr;
+	char ps;
+	char *wbuff;
+	struct etblk *etptr;
+	struct dcmd *dcmptr;
+	struct dqregs *dqptr;
 
 	etptr = (struct etblk *) devptr->dvioblk;
 	dcmptr = etptr->ercmd;
@@ -29,20 +27,22 @@ int	len;
 	recvclr();
 	ethrstrt(etptr, buff, len);
 	while (recvtim(DQ_RTO) == TIMEOUT) {
-		wbuff = (dcmptr=etptr->ewcmd)->dc_buf;
+		wbuff = (dcmptr = etptr->ewcmd)->dc_buf;
 		ethstrt(etptr, buff);
 		ethrstrt(etptr, buff, len);
 		if (etptr->etlen != 0) {
 			ethwstrt(etptr, wbuff, etptr->etlen, DC_NORM);
 		}
 	}
-	if ( (dcmptr->dc_st1 & DC_LUSE) == DC_ERRU) {
+	if ((dcmptr->dc_st1 & DC_LUSE) == DC_ERRU) {
 		len = SYSERR;
 	} else {
-		len = (dcmptr->dc_st1&DC_HLEN)|(dcmptr->dc_st2 & DC_LLEN);
+		len =
+		    (dcmptr->dc_st1 & DC_HLEN) | (dcmptr->
+						  dc_st2 & DC_LLEN);
 		len += DC_XLEN;
 	}
 	signal(etptr->etrsem);
 	restore(ps);
-	return(len);
+	return (len);
 }

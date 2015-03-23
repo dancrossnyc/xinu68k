@@ -8,15 +8,15 @@
  *  ethinit  -  initialize ethernet I/O device and buffers
  *------------------------------------------------------------------------
  */
-ethinit(devptr)
-	struct	devsw	*devptr;
+int
+ethinit(struct devsw *devptr)
 {
-	struct	etblk	*etptr;
-	struct	dqregs	*dqptr;
-	struct	dcmd	*dcmptr;
-	short	*iptr;
-	int	i;
-	struct	dqsetu	setup;
+	struct etblk *etptr;
+	struct dqregs *dqptr;
+	struct dcmd *dcmptr;
+	short *iptr;
+	int i;
+	struct dqsetu setup;
 
 	etptr = &eth[devptr->dvminor];
 	devptr->dvioblk = (char *) etptr;
@@ -42,13 +42,13 @@ ethinit(devptr)
 
 	/* extract physical ethernet address */
 
-	for (iptr=(short *)dqptr ,i=0 ; i<EPADLEN ; i++)
+	for (iptr = (short *) dqptr, i = 0; i < EPADLEN; i++)
 		etptr->etpaddr[i] = LOWBYTE & *iptr++;
 
 	ethstrt(etptr, &setup);
-	return(OK);
+	return (OK);
 }
 
 #ifdef	Neth
-struct	etblk	eth[Neth];
+struct etblk eth[Neth];
 #endif

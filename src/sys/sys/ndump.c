@@ -11,16 +11,17 @@
  *  ndump  -  dump current mappings in object naming system
  *------------------------------------------------------------------------
  */
-ndump()
+int
+ndump(void)
 {
-	struct	nament	*nptr;
-	int	i, len, dev;
-	char	*p;
+	struct nament *nptr;
+	int i, len, dev;
+	char *p;
 
-	for (i=0 ; i<Nam.nnames ; i++) {
-		nptr = & Nam.nametab[i];
+	for (i = 0; i < Nam.nnames; i++) {
+		nptr = &Nam.nametab[i];
 		kprintf("\"%-s\"", nptr->npre);
-		for (len=strlen(nptr->npre) ; len < PADTO ; len++)
+		for (len = strlen(nptr->npre); len < PADTO; len++)
 			kprintf(" ");
 		dev = nptr->ndev;
 		if (isbaddev(dev))

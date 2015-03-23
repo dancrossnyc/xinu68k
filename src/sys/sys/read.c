@@ -8,14 +8,13 @@
  *  read  -  read one or more bytes from a device
  *------------------------------------------------------------------------
  */
-SYSCALL	read(descrp, buff, count)
-int descrp, count;
-char *buff;
+SYSCALL
+read(int descrp, char *buff, int count)
 {
-	struct	devsw	*devptr;
+	struct devsw *devptr;
 
-	if (isbaddev(descrp) )
-		return(SYSERR);
+	if (isbaddev(descrp))
+		return (SYSERR);
 	devptr = &devtab[descrp];
-	return(	(*devptr->dvread)(devptr,buff,count) );
+	return ((*devptr->dvread) (devptr, buff, count));
 }

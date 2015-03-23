@@ -10,7 +10,8 @@
  *  stopclk  --  put the clock in defer mode
  *------------------------------------------------------------------------
  */
-stopclk()
+int
+stopclk(void)
 {
 	defclk++;
 }
@@ -19,24 +20,25 @@ stopclk()
  *  strtclk  --  take the clock out of defer mode
  *------------------------------------------------------------------------
  */
-strtclk()
+int
+strtclk(void)
 {
 	char ps;
 	int makeup;
 	int next;
 
 	disable(ps);
-	if ( defclk<=0 || --defclk>0 ) {
+	if (defclk <= 0 || --defclk > 0) {
 		restore(ps);
 		return;
 	}
 	makeup = clkdiff;
 	preempt -= makeup;
 	clkdiff = 0;
-	if ( slnempty ) {
-		for (next=firstid(clockq) ; 
-		    next < NPROC && q[next].qkey < makeup ;
-		    next=q[next].qnext) {
+	if (slnempty) {
+		for (next = firstid(clockq);
+		     next < NPROC && q[next].qkey < makeup;
+		     next = q[next].qnext) {
 			makeup -= q[next].qkey;
 			q[next].qkey = 0;
 		}
@@ -44,7 +46,7 @@ strtclk()
 			q[next].qkey -= makeup;
 		wakeup();
 	}
-	if ( preempt <= 0 )
+	if (preempt <= 0)
 		resched();
 	restore(ps);
 }

@@ -9,14 +9,12 @@
  *  dsread  --  read a block from a disk device
  *------------------------------------------------------------------------
  */
-dsread(devptr, buff, block)
-	struct	devsw	*devptr;
-	char	*buff;
-	DBADDR	block;
+int
+dsread(struct devsw *devptr, char *buff, DBADDR block)
 {
-	struct	dreq	*drptr;
-	int	stat;
-	char	ps;
+	struct dreq *drptr;
+	int stat;
+	char ps;
 
 	disable(ps);
 	drptr = (struct dreq *) getbuf(dskrbp);
@@ -24,11 +22,11 @@ dsread(devptr, buff, block)
 	drptr->drpid = currpid;
 	drptr->drbuff = buff;
 	drptr->drop = DREAD;
-	if ( (stat=dskenq(drptr, devptr->dvioblk)) == DONQ) {
+	if ((stat = dskenq(drptr, devptr->dvioblk)) == DONQ) {
 		suspend(currpid);
 		stat = drptr->drstat;
 	}
 	freebuf(drptr);
 	restore(ps);
-	return(stat);
+	return (stat);
 }

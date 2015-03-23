@@ -10,26 +10,25 @@
  *  sreset  --  reset the count and queue of a semaphore
  *------------------------------------------------------------------------
  */
-SYSCALL sreset(sem,count)
-	int	sem;
-	int	count;
+SYSCALL
+sreset(int sem, int count)
 {
-	struct	sentry	*sptr;
-	char	ps;
-	int	pid;
-	int	slist;
+	struct sentry *sptr;
+	char ps;
+	int pid;
+	int slist;
 
 	disable(ps);
-	if (isbadsem(sem) || count<0 || semaph[sem].sstate==SFREE) {
+	if (isbadsem(sem) || count < 0 || semaph[sem].sstate == SFREE) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	sptr = &semaph[sem];
 	slist = sptr->sqhead;
-	while ((pid=getfirst(slist)) != EMPTY)
-		ready(pid,RESCHNO);
+	while ((pid = getfirst(slist)) != EMPTY)
+		ready(pid, RESCHNO);
 	sptr->semcnt = count;
 	resched();
 	restore(ps);
-	return(OK);
+	return (OK);
 }

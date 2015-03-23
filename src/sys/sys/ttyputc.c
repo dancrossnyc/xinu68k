@@ -10,22 +10,21 @@
  *  ttyputc - write one character to a tty device
  *------------------------------------------------------------------------
  */
-ttyputc(devptr, ch )
-struct	devsw	*devptr;
-char	ch;
+int
+ttyputc(struct devsw *devptr, int ch)
 {
-	struct	tty   *iptr;
-	char	ps;
+	struct tty *iptr;
+	char ps;
 
 	iptr = &tty[devptr->dvminor];
-        if ( ch==NEWLINE && iptr->ocrlf )
-                ttyputc(devptr,RETURN);
+	if (ch == NEWLINE && iptr->ocrlf)
+		ttyputc(devptr, RETURN);
 	disable(ps);
-	wait(iptr->osem);		/* wait	for space in queue	*/
+	wait(iptr->osem);	/* wait for space in queue      */
 	iptr->obuff[iptr->ohead++] = ch;
-	if (iptr->ohead	>= OBUFLEN)
+	if (iptr->ohead >= OBUFLEN)
 		iptr->ohead = 0;
 	(iptr->ioaddr)->ctstat = SLUENABLE;
 	restore(ps);
-	return(OK);
+	return (OK);
 }

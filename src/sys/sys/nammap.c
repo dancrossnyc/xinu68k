@@ -8,13 +8,12 @@
  *  nammap  -  using namespace, iteratively map name onto (newname,device) 
  *------------------------------------------------------------------------
  */
-SYSCALL	nammap(name, newname)
-char	*name;
-char	*newname;
+SYSCALL
+nammap(char *name, char *newname)
 {
-	char	ps;
-	int	dev;
-	char	tmpnam[NAMLEN];
+	char ps;
+	int dev;
+	char tmpnam[NAMLEN];
 
 	disable(ps);
 	dev = namrepl(name, newname);
@@ -23,5 +22,5 @@ char	*newname;
 		dev = namrepl(tmpnam, newname);
 	}
 	restore(ps);
-	return(dev);
+	return (dev);
 }

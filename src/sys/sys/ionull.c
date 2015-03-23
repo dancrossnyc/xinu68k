@@ -7,7 +7,8 @@
  *  ionull  -  do nothing (used for "don't care" entries in devtab)
  *------------------------------------------------------------------------
  */
-ionull()
+int
+ionull(void)
 {
-	return(OK);
+	return (OK);
 }

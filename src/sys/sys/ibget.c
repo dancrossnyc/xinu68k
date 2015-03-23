@@ -10,20 +10,18 @@
  *  ibget  --  get an iblock from disk given its number
  *------------------------------------------------------------------------
  */
-ibget(diskdev, inum, loc)
-int	diskdev;
-IBADDR	inum;
-struct	iblk	*loc;
+int
+ibget(int diskdev, IBADDR inum, struct iblk *loc)
 {
-	char	*from, *to;
-	int	i;
-	char	*buff;
+	char *from, *to;
+	int i;
+	char *buff;
 
 	buff = getbuf(dskdbp);
 	read(diskdev, buff, ibtodb(inum));
 	from = buff + ibdisp(inum);
-	to = (char *)loc;
-	for (i=0 ; i<sizeof(struct iblk) ; i++)
+	to = (char *) loc;
+	for (i = 0; i < sizeof(struct iblk); i++)
 		*to++ = *from++;
 	freebuf(buff);
 }

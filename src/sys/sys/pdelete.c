@@ -9,23 +9,22 @@
  *  pdelete  --  delete a port, freeing waiting processes and messages
  *------------------------------------------------------------------------
  */
-SYSCALL	pdelete(portid, dispose)
-	int	portid;
-	int	(*dispose)();
+SYSCALL
+pdelete(int portid, int (*dispose) (void))
 {
-	char	ps;
-	struct	pt *ptptr;
+	char ps;
+	struct pt *ptptr;
 
 	disable(ps);
-	if ( isbadport(portid) ||
+	if (isbadport(portid) ||
 #ifdef	MEMMARK
-	     unmarked(ptmark) ||
+	    unmarked(ptmark) ||
 #endif
-	     (ptptr= &ports[portid])->ptstate != PTALLOC ) {
+	    (ptptr = &ports[portid])->ptstate != PTALLOC) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	_ptclear(ptptr, PTFREE, dispose);
 	restore(ps);
-	return(OK);
+	return (OK);
 }

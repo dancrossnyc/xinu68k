@@ -9,26 +9,24 @@
  *  ttyread - read one or more characters from a tty device
  *------------------------------------------------------------------------
  */
-ttyread(devptr, buff, count)
-struct	devsw	*devptr;
-int count;
-char *buff;
+int
+ttyread(struct devsw *devptr, char *buff, int count)
 {
 	char ps;
-	register struct	tty *iptr;
+	register struct tty *iptr;
 	int avail, nread;
 	char ch, eofch;
-	int	donow, dolater;
+	int donow, dolater;
 
 	if (count < 0)
-		return(SYSERR);
+		return (SYSERR);
 	disable(ps);
-	if ( (avail=scount((iptr= &tty[devptr->dvminor])->isem)) < 0)
+	if ((avail = scount((iptr = &tty[devptr->dvminor])->isem)) < 0)
 		avail = 0;
 	if (count == 0) {	/* read whatever is available */
 		if (avail == 0) {
 			restore(ps);
-			return(0);
+			return (0);
 		}
 		count = avail;
 	}
@@ -44,18 +42,18 @@ char *buff;
 		ch = iptr->ibuff[iptr->itail++];
 		if (iptr->itail >= IBUFLEN)
 			iptr->itail = 0;
-		if ( ((eofch=iptr->ieofc) == ch) && iptr->ieof) {
-				sreset(iptr->isem, avail-1);
-				restore(ps);
-				return(EOF);
+		if (((eofch = iptr->ieofc) == ch) && iptr->ieof) {
+			sreset(iptr->isem, avail - 1);
+			restore(ps);
+			return (EOF);
 		}
 		*buff++ = ch;
-		for (nread=1 ; nread < donow ; ) {
+		for (nread = 1; nread < donow;) {
 			ch = iptr->ibuff[iptr->itail];
-			if ( (ch==eofch) && iptr->ieof) {
+			if ((ch == eofch) && iptr->ieof) {
 				sreset(iptr->isem, avail - nread);
 				restore(ps);
-				return(nread);
+				return (nread);
 			}
 			*buff++ = ch;
 			if (++iptr->itail >= IBUFLEN)
@@ -64,21 +62,21 @@ char *buff;
 			if (ch == NEWLINE || ch == RETURN) {
 				sreset(iptr->isem, avail - nread);
 				restore(ps);
-				return(nread);
+				return (nread);
 			}
 		}
 		sreset(iptr->isem, avail - nread);
 	}
 	donow = nread;
-	for (nread=0 ; nread < dolater ; ) {
+	for (nread = 0; nread < dolater;) {
 		wait(iptr->isem);
 		ch = iptr->ibuff[iptr->itail];
 		if (ch == iptr->ieofc && iptr->ieof) {
 			if (nread == 0 && donow == 0) {
 				if (++iptr->itail >= IBUFLEN)
-				iptr->itail = 0;
+					iptr->itail = 0;
 				restore(ps);
-				return(EOF);
+				return (EOF);
 			}
 			signal(iptr->isem);
 			break;
@@ -91,5 +89,5 @@ char *buff;
 			break;
 	}
 	restore(ps);
-	return(donow + nread);
+	return (donow + nread);
 }

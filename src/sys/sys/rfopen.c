@@ -8,22 +8,20 @@
  *  rfopen  --  open a remote file
  *------------------------------------------------------------------------
  */
-rfopen(devptr, name, mode)
-struct	devsw	*devptr;
-char	*name;
-char	*mode;
+int
+rfopen(struct devsw *devptr, char *name, char *mode)
 {
-	struct	rfblk	*rfptr;
-	int	i;
-	int	mbits;
-	int	devnum;
-	char	ps;
+	struct rfblk *rfptr;
+	int i;
+	int mbits;
+	int devnum;
+	char ps;
 
 	disable(ps);
-	if (strlen(name) > RNAMLEN || (mbits=ckmode(mode)) == SYSERR
-	    || (i=rfalloc()) == SYSERR) {
+	if (strlen(name) > RNAMLEN || (mbits = ckmode(mode)) == SYSERR
+	    || (i = rfalloc()) == SYSERR) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	rfptr = &Rf.rftab[i];
 	devnum = rfptr->rf_dnum;
@@ -33,11 +31,11 @@ char	*mode;
 
 	/* send remote file open request */
 
-	if ( rfio(&devtab[devnum], FS_OPEN, NULLSTR, mbits) == SYSERR ) {
+	if (rfio(&devtab[devnum], FS_OPEN, NULLSTR, mbits) == SYSERR) {
 		rfptr->rf_state = RFREE;
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	restore(ps);
-	return(devnum);
+	return (devnum);
 }

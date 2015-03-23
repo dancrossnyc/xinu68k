@@ -8,30 +8,29 @@
  *  namrepl  -  using namespace, replace name with (newname,device)
  *------------------------------------------------------------------------
  */
-SYSCALL	namrepl(name, newname)
-char	*name;
-char	*newname;
+SYSCALL
+namrepl(char *name, char *newname)
 {
-	register struct	nament	*nptr;
-	register struct	nament	*nlast;
-	int	plen, rlen;
-	char	ps;
+	register struct nament *nptr;
+	register struct nament *nlast;
+	int plen, rlen;
+	char ps;
 
 	disable(ps);
 	nlast = &Nam.nametab[Nam.nnames];
-	for (nptr= Nam.nametab ; nptr<nlast ; nptr++) {
+	for (nptr = Nam.nametab; nptr < nlast; nptr++) {
 		plen = strlen(nptr->npre);
 		if (strncmp(nptr->npre, name, plen) == 0) {
 			rlen = strlen(nptr->nrepl);
-			if ((rlen+strlen(name)-plen) >= NAMLEN)
+			if ((rlen + strlen(name) - plen) >= NAMLEN)
 				break;
 			strcpy(newname, nptr->nrepl);
 			strcat(newname, name + plen);
 			restore(ps);
-			return(nptr->ndev);
+			return (nptr->ndev);
 		}
 	}
 	strcpy(newname, "");
 	restore(ps);
-	return(SYSERR);
+	return (SYSERR);
 }

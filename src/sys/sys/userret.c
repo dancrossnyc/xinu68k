@@ -7,7 +7,8 @@
  * userret  --  entered when a process exits by return
  *------------------------------------------------------------------------
  */
-userret()
+int
+userret(void)
 {
-	kill( getpid() );
+	kill(getpid());
 }

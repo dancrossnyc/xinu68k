@@ -8,17 +8,18 @@
  *  recvclr  --  clear messages, returning waiting message (if any)
  *------------------------------------------------------------------------
  */
-SYSCALL	recvclr()
+SYSCALL
+recvclr(void)
 {
-	char	ps;
-	int	msg;
+	char ps;
+	int msg;
 
 	disable(ps);
-	if ( proctab[currpid].phasmsg ) {	/* existing message?	*/
+	if (proctab[currpid].phasmsg) {	/* existing message?    */
 		proctab[currpid].phasmsg = FALSE;
 		msg = proctab[currpid].pmsg;
 	} else
 		msg = OK;
 	restore(ps);
-	return(msg);
+	return (msg);
 }

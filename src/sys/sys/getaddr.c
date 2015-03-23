@@ -8,16 +8,16 @@
  *  getaddr  -  obtain this system's complete address (IP address)
  *------------------------------------------------------------------------
  */
-SYSCALL	getaddr(address)
-IPaddr	address;
+SYSCALL
+getaddr(IPaddr address)
 {
-	wait (Arp.rarpsem);
+	wait(Arp.rarpsem);
 	if (!Net.mavalid)
 		sndrarp();
 	signal(Arp.rarpsem);
 
 	if (!Net.mavalid)
-		return(SYSERR);
+		return (SYSERR);
 	blkcopy(address, Net.myaddr, IPLEN);
-	return(OK);
+	return (OK);
 }

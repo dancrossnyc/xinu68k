@@ -9,18 +9,19 @@
  * ready  --  make a process eligible for CPU service
  *------------------------------------------------------------------------
  */
-int	ready (pid, resch)
-	int	pid;			/* id of process to make ready	*/
-	int	resch;			/* reschedule afterward?	*/
+int
+ready(int pid,			/* id of process to make ready  */
+      int resch			/* reschedule afterward?        */
+    )
 {
-	register struct	pentry	*pptr;
+	register struct pentry *pptr;
 
 	if (isbadpid(pid))
-		return(SYSERR);
+		return (SYSERR);
 	pptr = &proctab[pid];
 	pptr->pstate = PRREADY;
-	insert(pid,rdyhead,pptr->pprio);
+	insert(pid, rdyhead, pptr->pprio);
 	if (resch)
 		resched();
-	return(OK);
+	return (OK);
 }

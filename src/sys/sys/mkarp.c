@@ -8,18 +8,15 @@
  *  mkarp  -  allocate and fill in an ARP or RARP packet
  *------------------------------------------------------------------------
  */
-struct	epacket	*mkarp(typ, op, spaddr, tpaddr)
-short	typ;
-short	op;
-IPaddr	spaddr;
-IPaddr	tpaddr;
+struct epacket *
+mkarp(int typ, int op, IPaddr spaddr, IPaddr tpaddr)
 {
-	register struct	arppak	*apacptr;
-	struct	epacket	*packet;
+	register struct arppak *apacptr;
+	struct epacket *packet;
 
 	packet = (struct epacket *) getbuf(Net.netpool);
-	if ( ((int)packet) == SYSERR)
-		return((struct epacket *)SYSERR);
+	if (((int) packet) == SYSERR)
+		return ((struct epacket *) SYSERR);
 	blkcopy(packet->ep_hdr.e_dest, EBCAST, AR_HLEN);
 	packet->ep_hdr.e_ptype = hs2net(typ);
 	apacptr = (struct arppak *) packet->ep_data;
@@ -32,5 +29,5 @@ IPaddr	tpaddr;
 	blkcopy(apacptr->ar_spa, spaddr, AR_PLEN);
 	blkcopy(apacptr->ar_tha, eth[0].etpaddr, AR_HLEN);
 	blkcopy(apacptr->ar_tpa, tpaddr, AR_PLEN);
-	return(packet);
+	return (packet);
 }

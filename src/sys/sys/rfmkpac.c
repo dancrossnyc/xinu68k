@@ -4,21 +4,17 @@
 #include <kernel.h>
 #include <network.h>
 
-static	struct	fpacket	packet;
+static struct fpacket packet;
 
 /*------------------------------------------------------------------------
  *  rfmkpac  --  make a remote file request packet and send it
  *------------------------------------------------------------------------
  */
-rfmkpac(rop, rname, rpos, buff, len)
-int	rop;
-char	*rname;
-long	*rpos;
-char	*buff;
-int	len;
+int
+rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 {
-	struct	fphdr	*fptr;
-	int	reqlen, rplylen;
+	struct fphdr *fptr;
+	int reqlen, rplylen;
 
 	wait(Rf.rmutex);
 	fptr = (struct fphdr *) &packet;
@@ -29,55 +25,55 @@ int	len;
 	reqlen = rplylen = FPHLEN + len;
 	switch (rop) {
 
-	    case FS_WRITE:
-	    case FS_RENAME:
+	case FS_WRITE:
+	case FS_RENAME:
 		if (len > RDATLEN) {
 			signal(Rf.rmutex);
-			return(SYSERR);
+			return (SYSERR);
 		}
 		blkcopy(packet.fpdata, buff, len);
 		rplylen = FPHLEN;
 		break;
 
-	    case FS_CLOSE:
-	    case FS_OPEN:
-	    case FS_UNLINK:
-	    case FS_MKDIR:
-	    case FS_RMDIR:
-	    case FS_ACCESS:
+	case FS_CLOSE:
+	case FS_OPEN:
+	case FS_UNLINK:
+	case FS_MKDIR:
+	case FS_RMDIR:
+	case FS_ACCESS:
 		rplylen = FPHLEN;
 		/* fall through */
-		
-	    case FS_READ:
+
+	case FS_READ:
 		if (len > RDATLEN) {
 			signal(Rf.rmutex);
-			return(SYSERR);
+			return (SYSERR);
 		}
 		reqlen = FPHLEN;
 		break;
 
-	    default:
-	    	;
+	default:
+		;
 	}
 	if (rfsend(fptr, reqlen, rplylen) == SYSERR ||
 	    net2hs(fptr->f_op) == FS_ERROR) {
 		signal(Rf.rmutex);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	switch (rop) {
 
-	    case FS_READ:
+	case FS_READ:
 		blkcopy(buff, packet.fpdata, len);
 		/* fall through */
 
-	    case FS_WRITE:
+	case FS_WRITE:
 		*rpos = net2hl(fptr->f_pos);
 		len = net2hs(fptr->f_count);
 		break;
 
-	    default:
+	default:
 		len = OK;
 	}
 	signal(Rf.rmutex);
-	return(len);
+	return (len);
 }

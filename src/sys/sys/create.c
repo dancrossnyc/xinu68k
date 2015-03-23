@@ -11,18 +11,18 @@
  *------------------------------------------------------------------------
  */
 static int
-newpid()
+newpid(void)
 {
-	int	pid;			/* process id to return		*/
-	int	i;
+	int pid;		/* process id to return         */
+	int i;
 
-	for (i=0 ; i<NPROC ; i++) {	/* check all NPROC slots	*/
-		if ( (pid=nextproc--) <= 0)
-			nextproc = NPROC-1;
+	for (i = 0; i < NPROC; i++) {	/* check all NPROC slots        */
+		if ((pid = nextproc--) <= 0)
+			nextproc = NPROC - 1;
 		if (proctab[pid].pstate == PRFREE)
-			return(pid);
+			return (pid);
 	}
-	return(SYSERR);
+	return (SYSERR);
 }
 
 /*------------------------------------------------------------------------
@@ -38,48 +38,48 @@ newpid()
  *------------------------------------------------------------------------
  */
 SYSCALL
-create(int procaddr, int ssize, int priority, char *name, int nargs, int args)
+create(int procaddr, int ssize, int priority, char *name, int nargs,
+       int args)
 {
-	int	pid;			/* stores new process id	*/
-	struct	pentry	*pptr;		/* pointer to proc. table entry */
-	int	i;
-	int	*a;			/* points to list of args	*/
-	int	*saddr;			/* stack address		*/
-	char	ps;			/* saved processor status	*/
-	int	INITRET();
+	int pid;		/* stores new process id        */
+	struct pentry *pptr;	/* pointer to proc. table entry */
+	int i;
+	int *a;			/* points to list of args       */
+	int *saddr;		/* stack address                */
+	char ps;		/* saved processor status       */
+	int INITRET();
 	disable(ps);
 	ssize = roundew(ssize);
-	if ( ssize < MINSTK || ((saddr=getstk(ssize)) == SYSERR ) ||
-		(pid=newpid()) == SYSERR || isodd(procaddr) ||
-		priority < 1 ) {
+	if (ssize < MINSTK || ((saddr = getstk(ssize)) == SYSERR) ||
+	    (pid = newpid()) == SYSERR || isodd(procaddr) ||
+	    priority < 1) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	numproc++;
 	pptr = &proctab[pid];
 	pptr->pstate = PRSUSP;
-	for (i=0 ; i<PNMLEN && (pptr->pname[i]=name[i])!=0 ; i++)
-		;
+	for (i = 0; i < PNMLEN && (pptr->pname[i] = name[i]) != 0; i++);
 	pptr->pprio = priority;
-	pptr->pbase = (short)saddr;
+	pptr->pbase = (short) saddr;
 	pptr->pstklen = ssize;
 	pptr->psem = 0;
 	pptr->phasmsg = FALSE;
-	pptr->plimit = (short)((unsigned)saddr - ssize + sizeof(int));
+	pptr->plimit = (short) ((unsigned) saddr - ssize + sizeof(int));
 	*saddr-- = MAGIC;
 	pptr->pargs = nargs;
-	for (i=0 ; i<PNREGS ; i++)
-		pptr->pregs[i]=INITREG;
-	pptr->pregs[PC] = pptr->paddr = (short)procaddr;
+	for (i = 0; i < PNREGS; i++)
+		pptr->pregs[i] = INITREG;
+	pptr->pregs[PC] = pptr->paddr = (short) procaddr;
 	pptr->pregs[PS] = INITPS;
 	pptr->pnxtkin = BADPID;
 	pptr->pdevs[0] = pptr->pdevs[1] = BADDEV;
-	a = (&args) + (nargs-1);	/* point to last argument	*/
-	for ( ; nargs > 0 ; nargs--)	/* machine dependent; copy args	*/
-		*saddr-- = *a--;	/* onto created process' stack	*/
-	*saddr = (int)INITRET;		/* push on return address	*/
-	pptr->pregs[SP] = (int)saddr;
+	a = (&args) + (nargs - 1);	/* point to last argument       */
+	for (; nargs > 0; nargs--)	/* machine dependent; copy args     */
+		*saddr-- = *a--;	/* onto created process' stack  */
+	*saddr = (int) INITRET;	/* push on return address       */
+	pptr->pregs[SP] = (int) saddr;
 	restore(ps);
 
-	return(pid);
+	return (pid);
 }

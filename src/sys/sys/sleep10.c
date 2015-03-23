@@ -10,23 +10,23 @@
  * sleep10  --  delay the caller for a time specified in tenths of seconds
  *------------------------------------------------------------------------
  */
-SYSCALL	sleep10(n)
-	int n;
+SYSCALL
+sleep10(int n)
 {
 	char ps;
 
-	if (n < 0  || clkruns==0)
-		return(SYSERR);
-        disable(ps);
-	if (n == 0) {			/* sleep10(0) -> end time slice	*/
+	if (n < 0 || clkruns == 0)
+		return (SYSERR);
+	disable(ps);
+	if (n == 0) {		/* sleep10(0) -> end time slice */
 		;
 	} else {
-	        insertd(currpid,clockq,n);
+		insertd(currpid, clockq, n);
 		slnempty = TRUE;
-		sltop = (int *) & q[q[clockq].qnext].qkey;
-	        proctab[currpid].pstate = PRSLEEP;
+		sltop = (int *) &q[q[clockq].qnext].qkey;
+		proctab[currpid].pstate = PRSLEEP;
 	}
 	resched();
-        restore(ps);
-	return(OK);
+	restore(ps);
+	return (OK);
 }

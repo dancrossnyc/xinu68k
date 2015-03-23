@@ -11,7 +11,8 @@
  *  qdump  --  dump the contents of the q structure for debugging
  *------------------------------------------------------------------------
  */
-qdump()
+int
+qdump(void)
 {
 	qxdump(0);
 }
@@ -20,7 +21,8 @@ qdump()
  *  qdumph  --  dump the contents of the q structure and halt
  *------------------------------------------------------------------------
  */
-qdumph()
+int
+qdumph(void)
 {
 	qxdump(0);
 	kprintf("\nDump complete -- type P to continue\n");
@@ -31,48 +33,50 @@ qdumph()
  *  qdumpa  --  dump the contents of the q structure printing all info
  *------------------------------------------------------------------------
  */
-qdumpa()
+int
+qdumpa(void)
 {
 	qxdump(1);
 }
 
-static qxdump(all)
-int	all;
+static
+qxdump(int all)
 {
-	struct	qent *qp;
-	int	i;
-	struct	pentry *pptr;
-	int	pr;
+	struct qent *qp;
+	int i;
+	struct pentry *pptr;
+	int pr;
 
-	for (i=0 ; i<NQENT ; i++) {
-	    if ( (pr=all) == 0) {
-		qp = &q[i];
-		if (i < NPROC) {
-			pptr = &proctab[i];
-			if (pptr->pstate!=PRFREE)
-				pr = 1;
-		} else { /* normal queue - could be head or tail */
-			if ( (qp->qnext<NPROC && qp->qnext>=0)
-			   ||(qp->qprev<NPROC && qp->qprev>=0) )
-				pr = 1;
-			else if (qp->qkey == MAXINT) {
-				if (qp->qnext != EMPTY
-				    || isbadq(qp->qprev)
-				    || q[qp->qprev].qkey != MININT
-				    || q[qp->qprev].qnext != i)
+	for (i = 0; i < NQENT; i++) {
+		if ((pr = all) == 0) {
+			qp = &q[i];
+			if (i < NPROC) {
+				pptr = &proctab[i];
+				if (pptr->pstate != PRFREE)
 					pr = 1;
-			} else if (qp->qkey == MININT) {
-				if (qp->qprev != EMPTY
-				    || isbadq(qp->qnext)
-				    || q[qp->qnext].qkey != MAXINT
-				    || q[qp->qnext].qprev != i)
+			} else {	/* normal queue - could be head or tail */
+				if ((qp->qnext < NPROC && qp->qnext >= 0)
+				    || (qp->qprev < NPROC
+					&& qp->qprev >= 0))
 					pr = 1;
-			} else
-				pr = 1;
+				else if (qp->qkey == MAXINT) {
+					if (qp->qnext != EMPTY
+					    || isbadq(qp->qprev)
+					    || q[qp->qprev].qkey != MININT
+					    || q[qp->qprev].qnext != i)
+						pr = 1;
+				} else if (qp->qkey == MININT) {
+					if (qp->qprev != EMPTY
+					    || isbadq(qp->qnext)
+					    || q[qp->qnext].qkey != MAXINT
+					    || q[qp->qnext].qprev != i)
+						pr = 1;
+				} else
+					pr = 1;
+			}
 		}
-	    }
-	if (pr != 0)
-		kprintf("q[%4d ] key=%6d,next=%6d,qprev=%6d\n",
-			i, qp->qkey, qp->qnext, qp->qprev);
+		if (pr != 0)
+			kprintf("q[%4d ] key=%6d,next=%6d,qprev=%6d\n",
+				i, qp->qkey, qp->qnext, qp->qprev);
 	}
 }

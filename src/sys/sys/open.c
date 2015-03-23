@@ -8,15 +8,13 @@
  *  open  -  open a connection to a device/file (parms 2 &3 are optional)
  *------------------------------------------------------------------------
  */
-SYSCALL	open(descrp, nam, mode)
-int	descrp;
-char	*nam;
-char	*mode;
+SYSCALL
+open(int descrp, char *nam, char *mode)
 {
-	struct	devsw	*devptr;
+	struct devsw *devptr;
 
-	if ( isbaddev(descrp) )
-		return(SYSERR);
+	if (isbaddev(descrp))
+		return (SYSERR);
 	devptr = &devtab[descrp];
-	return(	(*devptr->dvopen)(devptr, nam, mode) );
+	return ((*devptr->dvopen) (devptr, nam, mode));
 }

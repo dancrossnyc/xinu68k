@@ -11,14 +11,14 @@
 int
 dginit(struct devsw *devptr)
 {
-	struct	dgblk	*dgptr;
+	struct dgblk *dgptr;
 
 	devptr->dvioblk = (char *) (dgptr = &dgtab[devptr->dvminor]);
 	dgptr->dg_dnum = devptr->dvnum;
 	dgptr->dg_state = DG_FREE;
-	return(OK);
+	return (OK);
 }
 
 #ifdef	Ndg
-struct	dgblk	dgtab[Ndg];		/* dg device control blocks	*/
+struct dgblk dgtab[Ndg];	/* dg device control blocks     */
 #endif

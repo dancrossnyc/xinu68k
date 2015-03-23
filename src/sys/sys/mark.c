@@ -5,15 +5,16 @@
 #include <mark.h>
 
 #ifdef	MEMMARK
-int	*marks[MAXMARK];
-int	nmarks;
-int	mkmutex;
+int *marks[MAXMARK];
+int nmarks;
+int mkmutex;
 
 /*------------------------------------------------------------------------
  *  _mkinit  --  called once at system startup
  *------------------------------------------------------------------------
  */
-_mkinit()
+int
+_mkinit(void)
 {
 	mkmutex = screate(1);
 	nmarks = 0;
@@ -25,16 +26,16 @@ _mkinit()
  *  mark  --  mark a location if it hasn't been marked
  *------------------------------------------------------------------------
  */
-SYSCALL	mark(loc)
-int	*loc;
+SYSCALL
+mark(int *loc)
 {
-	if ( *loc>=0 && *loc<nmarks && marks[*loc]==loc )
-		return(0);
-	if (nmarks>=MAXMARK)
-		return(SYSERR);
+	if (*loc >= 0 && *loc < nmarks && marks[*loc] == loc)
+		return (0);
+	if (nmarks >= MAXMARK)
+		return (SYSERR);
 	wait(mkmutex);
-	marks[ (*loc) = nmarks++] = loc;
+	marks[(*loc) = nmarks++] = loc;
 	signal(mkmutex);
-	return(OK);
+	return (OK);
 }
 #endif

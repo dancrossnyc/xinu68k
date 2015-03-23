@@ -8,20 +8,21 @@
  *  receive  -  wait for a message and return it
  *------------------------------------------------------------------------
  */
-SYSCALL	receive()
+SYSCALL
+receive(void)
 {
-	struct	pentry	*pptr;
-	int	msg;
-	char	ps;
+	struct pentry *pptr;
+	int msg;
+	char ps;
 
 	disable(ps);
 	pptr = &proctab[currpid];
-	if ( !pptr->phasmsg ) {		/* if no message, wait for one	*/
+	if (!pptr->phasmsg) {	/* if no message, wait for one  */
 		pptr->pstate = PRRECV;
 		resched();
 	}
-	msg = pptr->pmsg;		/* retrieve message		*/
+	msg = pptr->pmsg;	/* retrieve message             */
 	pptr->phasmsg = FALSE;
 	restore(ps);
-	return(msg);
+	return (msg);
 }

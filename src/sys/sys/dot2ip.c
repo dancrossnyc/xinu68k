@@ -8,9 +8,7 @@
  *  dot2ip  -  convert network address from "decimal dot" form to IPaddr
  *------------------------------------------------------------------------
  */
-dot2ip(ip, nad1, nad2, nad3, nad4)
-char	*ip;
-int	nad1, nad2, nad3, nad4;
+dot2ip(char *ip, int nad1, int nad2, int nad3, int nad4)
 {
 	*ip++ = LOWBYTE & nad1;
 	*ip++ = LOWBYTE & nad2;

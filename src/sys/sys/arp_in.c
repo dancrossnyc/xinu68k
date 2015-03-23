@@ -12,13 +12,13 @@
 int
 arp_in(struct epacket *packet, int device)
 {
-	char	ps;
-	int	pid;
-	short	arop;
-	struct	arppak	*apacptr;
-	struct	arpent	*atabptr;
-	struct	etblk	*etptr;	
-	
+	char ps;
+	int pid;
+	short arop;
+	struct arppak *apacptr;
+	struct arpent *atabptr;
+	struct etblk *etptr;
+
 	etptr = (struct etblk *) devtab[device].dvioblk;
 	apacptr = (struct arppak *) packet->ep_data;
 	atabptr = &Arp.arptab[arpfind(apacptr->ar_spa)];
@@ -30,10 +30,10 @@ arp_in(struct epacket *packet, int device)
 	arop = net2hs(apacptr->ar_op);
 	switch (arop) {
 
-	    case AR_REQ:	/* request - answer if for me */
-		if (! blkequ(Net.myaddr, apacptr->ar_tpa, IPLEN)) {
+	case AR_REQ:		/* request - answer if for me */
+		if (!blkequ(Net.myaddr, apacptr->ar_tpa, IPLEN)) {
 			freebuf(packet);
-			return(OK);
+			return (OK);
 		}
 		apacptr->ar_op = hs2net(AR_RPLY);
 		blkcopy(apacptr->ar_tpa, apacptr->ar_spa, IPLEN);
@@ -42,9 +42,9 @@ arp_in(struct epacket *packet, int device)
 		blkcopy(apacptr->ar_sha, etptr->etpaddr, EPADLEN);
 		blkcopy(apacptr->ar_spa, Net.myaddr, IPLEN);
 		write(device, packet, EMINPAK);
-		return(OK);
+		return (OK);
 
-	    case AR_RPLY:	/* reply - awaken requestor if any */
+	case AR_RPLY:		/* reply - awaken requestor if any */
 		disable(ps);
 		pid = Arp.arppid;
 		if (!isbadpid(pid)
@@ -54,11 +54,11 @@ arp_in(struct epacket *packet, int device)
 		}
 		freebuf(packet);
 		restore(ps);
-		return(OK);
+		return (OK);
 
-	    default:
+	default:
 		Net.ndrop++;
 		freebuf(packet);
-		return(SYSERR);
+		return (SYSERR);
 	}
 }

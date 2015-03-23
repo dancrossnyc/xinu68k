@@ -8,7 +8,8 @@
  * getpid  --  get the process id of currently executing process
  *------------------------------------------------------------------------
  */
-SYSCALL getpid()
+SYSCALL
+getpid(void)
 {
-	return(currpid);
+	return (currpid);
 }

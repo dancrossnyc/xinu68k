@@ -7,10 +7,8 @@
  *  ttyopen - open tty device and return descriptor (for namespace)
  *------------------------------------------------------------------------
  */
-ttyopen(devptr, nam, mode)
-struct	devsw	*devptr;
-char	*nam;
-char	*mode;
+int
+ttyopen(struct devsw *devptr, char *nam, char *mode)
 {
 
 	/* This routine is not usually used to open tty devices,   */
@@ -18,7 +16,7 @@ char	*mode;
 	/* fail.  It returns SYSERR unless called with a null name */
 
 	if (*nam == '\0')
-		return( devptr->dvnum );
+		return (devptr->dvnum);
 	else
-		return(SYSERR);
+		return (SYSERR);
 }

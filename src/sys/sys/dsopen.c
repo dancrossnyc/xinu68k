@@ -11,27 +11,25 @@
  *------------------------------------------------------------------------
  */
 #ifdef	Ndf
-dsopen(devptr, filenam, mode)
-struct	devsw	*devptr;
-char	*filenam;
-char	*mode;
+int
+dsopen(struct devsw *devptr, char *filenam, char *mode)
 {
-	struct	dir	*dirptr;
-	struct	flblk	*flptr;
-	struct	fdes	*fdptr;
-	DBADDR	dba;
-	int	mbits, findex;
-	int	retcode;
-	char	ps;
+	struct dir *dirptr;
+	struct flblk *flptr;
+	struct fdes *fdptr;
+	DBADDR dba;
+	int mbits, findex;
+	int retcode;
+	char ps;
 
 	disable(ps);
 	dirptr = dsdirec(devptr->dvnum);
-	if ( (mbits=ckmode(mode)) == SYSERR)
+	if ((mbits = ckmode(mode)) == SYSERR)
 		retcode = SYSERR;
-	else if( (int)(fdptr=dfdsrch(devptr->dvioblk,filenam,mbits))
-		== SYSERR)
+	else if ((int) (fdptr = dfdsrch(devptr->dvioblk, filenam, mbits))
+		 == SYSERR)
 		retcode = SYSERR;
-	else if ( (findex=dfalloc()) == SYSERR)
+	else if ((findex = dfalloc()) == SYSERR)
 		retcode = SYSERR;
 	else {
 		flptr = &fltab[findex];
@@ -51,6 +49,6 @@ char	*mode;
 		retcode = flptr->fl_id;
 	}
 	restore(ps);
-	return(retcode);
+	return (retcode);
 }
 #endif

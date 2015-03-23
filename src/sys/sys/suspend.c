@@ -8,18 +8,20 @@
  *  suspend  --  suspend a process, placing it in hibernation
  *------------------------------------------------------------------------
  */
-SYSCALL	suspend(pid)
-	int	pid;			/* id of process to suspend	*/
+SYSCALL
+suspend(int pid			/* id of process to suspend     */
+    )
 {
-	struct	pentry	*pptr;		/* pointer to proc. tab. entry	*/
-	char	ps;			/* saved processor status	*/
-	int	prio;			/* priority returned		*/
+	struct pentry *pptr;	/* pointer to proc. tab. entry  */
+	char ps;		/* saved processor status       */
+	int prio;		/* priority returned            */
 
 	disable(ps);
-	if (isbadpid(pid) || pid==NULLPROC ||
-	 ((pptr= &proctab[pid])->pstate!=PRCURR && pptr->pstate!=PRREADY)) {
+	if (isbadpid(pid) || pid == NULLPROC ||
+	    ((pptr = &proctab[pid])->pstate != PRCURR
+	     && pptr->pstate != PRREADY)) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	if (pptr->pstate == PRREADY) {
 		dequeue(pid);
@@ -30,5 +32,5 @@ SYSCALL	suspend(pid)
 	}
 	prio = pptr->pprio;
 	restore(ps);
-	return(prio);
+	return (prio);
 }

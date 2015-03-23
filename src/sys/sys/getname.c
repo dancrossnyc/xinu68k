@@ -8,21 +8,21 @@
  *  getname  -  get name of this host and place it where specified
  *------------------------------------------------------------------------
  */
-SYSCALL	getname(nam)
-char	*nam;
+SYSCALL
+getname(char *nam)
 {
-	IPaddr	myaddr[4];
-	char	*p;
+	IPaddr myaddr[4];
+	char *p;
 
 	*nam = NULLCH;
 	if (!Net.mnvalid) {
 		getaddr(myaddr);
 		if (ip2name(myaddr, Net.myname) == SYSERR)
-			return(SYSERR);
+			return (SYSERR);
 		Net.mnvalid = TRUE;
 	}
-	for (p=Net.myname ; *p != NULLCH && *p != '.' ; )
+	for (p = Net.myname; *p != NULLCH && *p != '.';)
 		*nam++ = *p++;
 	*nam = NULLCH;
-	return(OK);
+	return (OK);
 }

@@ -10,15 +10,16 @@
  *------------------------------------------------------------------------
  */
 int
-bpdump()
+bpdump(void)
 {
-	int	i;
-	struct	bpool	*bpptr;
+	int i;
+	struct bpool *bpptr;
 
-	for (i=0 ; i<NBPOOLS ; i++) {
-	    bpptr = &bptab[i];
-	    kprintf("Buffer Pool %2d: buf size=%4d, sem=%2d, count=%d\n",
-		i, bpptr->bpsize, bpptr->bpsem, scount(bpptr->bpsem));
+	for (i = 0; i < NBPOOLS; i++) {
+		bpptr = &bptab[i];
+		kprintf
+		    ("Buffer Pool %2d: buf size=%4d, sem=%2d, count=%d\n",
+		     i, bpptr->bpsize, bpptr->bpsem, scount(bpptr->bpsem));
 	}
-	return(OK);
+	return (OK);
 }

@@ -13,26 +13,26 @@
 SYSCALL
 chprio(int pid, int newprio)
 {
-	int	oldprio;
-	struct	pentry	*pptr;
-        char    ps;
+	int oldprio;
+	struct pentry *pptr;
+	char ps;
 
 	disable(ps);
-	if (isbadpid(pid) || newprio<=0 ||
+	if (isbadpid(pid) || newprio <= 0 ||
 	    (pptr = &proctab[pid])->pstate == PRFREE) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	oldprio = pptr->pprio;
 	pptr->pprio = newprio;
 	switch (pptr->pstate) {
 	case PRREADY:
-		insert( dequeue(pid), rdyhead, newprio);
+		insert(dequeue(pid), rdyhead, newprio);
 	case PRCURR:
 		resched();
 	default:
 		break;
 	}
 	restore(ps);
-	return(oldprio);
+	return (oldprio);
 }

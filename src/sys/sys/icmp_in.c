@@ -8,16 +8,14 @@
  *  icmp_in  -  handle ICMP packet coming in from the network
  *------------------------------------------------------------------------
  */
-icmp_in(packet, icmpp, lim)
-struct	epacket	*packet;
-int	icmpp;
-int	lim;
+int
+icmp_in(struct epacket *packet, int icmpp, int lim)
 {
-	struct	ip	*ipptr;
-	struct	icmp	*icmpptr;
-	int	len;
+	struct ip *ipptr;
+	struct icmp *icmpptr;
+	int len;
 
-	ipptr = (struct ip *)packet->ep_data;
+	ipptr = (struct ip *) packet->ep_data;
 	icmpptr = (struct icmp *) ipptr->i_data;
 	if (!Net.mavalid || icmpptr->ic_typ != ICRQECH) {
 		freebuf(packet);
@@ -29,11 +27,11 @@ int	lim;
 			ipptr->i_data[len++] = NULLCH;
 		}
 		icmpptr->ic_cksum = 0;
-		icmpptr->ic_cksum = cksum(icmpptr, len>>1);
+		icmpptr->ic_cksum = cksum(icmpptr, len >> 1);
 		if (pcount(icmpp) < lim)
 			psend(icmpp, packet);
 		else
 			freebuf(packet);
 	}
-	return(OK);
+	return (OK);
 }

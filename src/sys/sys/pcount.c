@@ -9,26 +9,26 @@
  *  pcount  --  return the count of current messages in a port
  *------------------------------------------------------------------------
  */
-SYSCALL	pcount(portid)
-int	portid;
+SYSCALL
+pcount(int portid)
 {
-	int	scnt;
-	int	count;
-	char	ps;
-	struct	pt	*ptptr;
+	int scnt;
+	int count;
+	char ps;
+	struct pt *ptptr;
 
 	disable(ps);
-	if ( isbadport(portid) ||
+	if (isbadport(portid) ||
 #ifdef	MEMMARK
-		unmarked(ptmark) ||
+	    unmarked(ptmark) ||
 #endif
-		(ptptr= &ports[portid])->ptstate != PTALLOC ) {
-			restore(ps);
-			return(SYSERR);
+	    (ptptr = &ports[portid])->ptstate != PTALLOC) {
+		restore(ps);
+		return (SYSERR);
 	}
 	count = scount(ptptr->ptrsem);
-	if ( (scnt=scount(ptptr->ptssem)) < 0 )
-		count -= scnt;			/* add number waiting	*/
+	if ((scnt = scount(ptptr->ptssem)) < 0)
+		count -= scnt;	/* add number waiting   */
 	restore(ps);
-	return(count);
+	return (count);
 }

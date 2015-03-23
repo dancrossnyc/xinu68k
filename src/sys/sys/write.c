@@ -8,14 +8,13 @@
  *  write  -  write 1 or more bytes to a device
  *------------------------------------------------------------------------
  */
-SYSCALL	write(descrp, buff, count)
-	int descrp, count;
-	char *buff;
+SYSCALL
+write(int descrp, char *buff, int count)
 {
-	struct	devsw	*devptr;
+	struct devsw *devptr;
 
-	if (isbaddev(descrp) )
-		return(SYSERR);
+	if (isbaddev(descrp))
+		return (SYSERR);
 	devptr = &devtab[descrp];
-	return(	(*devptr->dvwrite)(devptr,buff,count) );
+	return ((*devptr->dvwrite) (devptr, buff, count));
 }

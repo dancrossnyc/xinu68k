@@ -10,23 +10,22 @@
  *  signaln -- signal a semaphore n times
  *------------------------------------------------------------------------
  */
-SYSCALL signaln(sem,count)
-	int	sem;
-	int	count;
+SYSCALL
+signaln(int sem, int count)
 {
-	struct	sentry	*sptr;
-	char	ps;
+	struct sentry *sptr;
+	char ps;
 
 	disable(ps);
-	if (isbadsem(sem) || semaph[sem].sstate==SFREE || count<=0) {
+	if (isbadsem(sem) || semaph[sem].sstate == SFREE || count <= 0) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	sptr = &semaph[sem];
-	for (; count > 0  ; count--)
+	for (; count > 0; count--)
 		if ((sptr->semcnt++) < 0)
 			ready(getfirst(sptr->sqhead), RESCHNO);
 	resched();
 	restore(ps);
-	return(OK);
+	return (OK);
 }

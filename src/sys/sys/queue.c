@@ -8,12 +8,13 @@
  * enqueue  --	insert an item at the tail of a list
  *------------------------------------------------------------------------
  */
-int	enqueue(item, tail)
-	int	item;			/* item to enqueue on a list	*/
-	int	tail;			/* index in q of list tail	*/
+int
+enqueue(int item,		/* item to enqueue on a list    */
+	int tail		/* index in q of list tail      */
+    )
 {
-	struct	qent	*tptr;		/* points to tail entry		*/
-	struct	qent	*mptr;		/* points to item entry		*/
+	struct qent *tptr;	/* points to tail entry         */
+	struct qent *mptr;	/* points to item entry         */
 
 	tptr = &q[tail];
 	mptr = &q[item];
@@ -21,7 +22,7 @@ int	enqueue(item, tail)
 	mptr->qprev = tptr->qprev;
 	q[tptr->qprev].qnext = item;
 	tptr->qprev = item;
-	return(item);
+	return (item);
 }
 
 
@@ -29,13 +30,13 @@ int	enqueue(item, tail)
  *  dequeue  --  remove an item from a list and return it
  *------------------------------------------------------------------------
  */
-int	dequeue(item)
-	int	item;
+int
+dequeue(int item)
 {
-	struct	qent	*mptr;		/* pointer to q entry for item	*/
+	struct qent *mptr;	/* pointer to q entry for item  */
 
 	mptr = &q[item];
 	q[mptr->qprev].qnext = mptr->qnext;
 	q[mptr->qnext].qprev = mptr->qprev;
-	return(item);
+	return (item);
 }

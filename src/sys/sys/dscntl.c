@@ -9,23 +9,23 @@
  *  dscntl  --  control disk driver/device
  *------------------------------------------------------------------------
  */
-dscntl(devptr, func)
-	struct	devsw	*devptr;
+int
+dscntl(struct devsw *devptr, int func)
 {
-	int	stat;
-	char	ps;
+	int stat;
+	char ps;
 
 	disable(ps);
 	switch (func) {
 
-		case DSKSYNC:
-			stat = dsksync(devptr);
-			break;
+	case DSKSYNC:
+		stat = dsksync(devptr);
+		break;
 
-		default:
-			stat = SYSERR;
-			break;
+	default:
+		stat = SYSERR;
+		break;
 	}
 	restore(ps);
-	return(stat);
+	return (stat);
 }

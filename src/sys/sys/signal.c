@@ -10,19 +10,19 @@
  * signal  --  signal a semaphore, releasing one waiting process
  *------------------------------------------------------------------------
  */
-SYSCALL signal(sem)
-register int	sem;
+SYSCALL
+signal(register int sem)
 {
-	register struct	sentry	*sptr;
-	char	ps;
+	register struct sentry *sptr;
+	char ps;
 
 	disable(ps);
-	if (isbadsem(sem) || (sptr= &semaph[sem])->sstate==SFREE) {
+	if (isbadsem(sem) || (sptr = &semaph[sem])->sstate == SFREE) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	if ((sptr->semcnt++) < 0)
 		ready(getfirst(sptr->sqhead), RESCHYES);
 	restore(ps);
-	return(OK);
+	return (OK);
 }

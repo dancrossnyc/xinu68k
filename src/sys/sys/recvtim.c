@@ -10,30 +10,30 @@
  *  recvtim  -  wait to receive a message or timeout and return result
  *------------------------------------------------------------------------
  */
-SYSCALL	recvtim(maxwait)
-	int	maxwait;
+SYSCALL
+recvtim(int maxwait)
 {
-	struct	pentry	*pptr;
-	int	msg;
-	char	ps;
+	struct pentry *pptr;
+	int msg;
+	char ps;
 
-	if (maxwait<0 || clkruns == 0)
-		return(SYSERR);
+	if (maxwait < 0 || clkruns == 0)
+		return (SYSERR);
 	disable(ps);
 	pptr = &proctab[currpid];
-	if ( !pptr->phasmsg ) {		/* if no message, wait		*/
-	        insertd(currpid, clockq, maxwait);
+	if (!pptr->phasmsg) {	/* if no message, wait          */
+		insertd(currpid, clockq, maxwait);
 		slnempty = TRUE;
-		sltop = (int *)&q[q[clockq].qnext].qkey;
-	        pptr->pstate = PRTRECV;
+		sltop = (int *) &q[q[clockq].qnext].qkey;
+		pptr->pstate = PRTRECV;
 		resched();
 	}
-	if ( pptr->phasmsg ) {
-		msg = pptr->pmsg;	/* msg. arrived => retrieve it	*/
+	if (pptr->phasmsg) {
+		msg = pptr->pmsg;	/* msg. arrived => retrieve it  */
 		pptr->phasmsg = FALSE;
-	} else {			/* still no message => TIMEOUT	*/
+	} else {		/* still no message => TIMEOUT  */
 		msg = TIMEOUT;
 	}
 	restore(ps);
-	return(msg);
+	return (msg);
 }

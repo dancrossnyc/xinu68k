@@ -11,10 +11,10 @@
 SYSCALL
 close(int descrp)
 {
-	struct	devsw	*devptr;
+	struct devsw *devptr;
 
-	if (isbaddev(descrp) )
-		return(SYSERR);
+	if (isbaddev(descrp))
+		return (SYSERR);
 	devptr = &devtab[descrp];
-	return( (*devptr->dvclose)(devptr));
+	return ((*devptr->dvclose) (devptr));
 }

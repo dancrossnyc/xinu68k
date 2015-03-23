@@ -9,21 +9,21 @@
  *  ttygetc - read one character from a tty device
  *------------------------------------------------------------------------
  */
-ttygetc(devptr)
-struct	devsw	*devptr;
+int
+ttygetc(struct devsw *devptr)
 {
-	char	ps;
-	int	ch;
-	struct	tty   *iptr;
+	char ps;
+	int ch;
+	struct tty *iptr;
 
 	disable(ps);
 	iptr = &tty[devptr->dvminor];
-	wait(iptr->isem);		/* wait	for a character	in buff	*/
+	wait(iptr->isem);	/* wait for a character in buff */
 	ch = LOWBYTE & iptr->ibuff[iptr->itail++];
-	if (iptr->itail	>= IBUFLEN)
+	if (iptr->itail >= IBUFLEN)
 		iptr->itail = 0;
-	if (iptr->ieof && (iptr->ieofc == ch) )
+	if (iptr->ieof && (iptr->ieofc == ch))
 		ch = EOF;
 	restore(ps);
-	return(ch);
+	return (ch);
 }

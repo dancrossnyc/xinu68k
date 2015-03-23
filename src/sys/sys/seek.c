@@ -8,14 +8,13 @@
  *  seek  --  position a device (very common special case of control)
  *------------------------------------------------------------------------
  */
-SYSCALL	seek(descrp, pos)
-int descrp;
-long pos;
+SYSCALL
+seek(int descrp, long pos)
 {
-	struct	devsw	*devptr;
+	struct devsw *devptr;
 
-	if (isbaddev(descrp) )
-		return(SYSERR);
+	if (isbaddev(descrp))
+		return (SYSERR);
 	devptr = &devtab[descrp];
-        return( (*devptr->dvseek)(devptr,pos) );
+	return ((*devptr->dvseek) (devptr, pos));
 }

@@ -9,18 +9,19 @@
  *  rfalloc  --  allocate pseudo device for a remote file; return id
  *------------------------------------------------------------------------
  */
-rfalloc()
+int
+rfalloc(void)
 {
-	int	i;
-	char	ps;
+	int i;
+	char ps;
 
 	disable(ps);
-	for (i=0 ; i<Nrf ; i++)
+	for (i = 0; i < Nrf; i++)
 		if (Rf.rftab[i].rf_state == RFREE) {
 			Rf.rftab[i].rf_state = RUSED;
 			restore(ps);
-			return(i);
+			return (i);
 		}
 	restore(ps);
-	return(SYSERR);
+	return (SYSERR);
 }

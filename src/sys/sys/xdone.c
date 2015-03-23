@@ -4,8 +4,9 @@
  * xdone  --  print system completion message as last process exits
  *------------------------------------------------------------------------
  */
-xdone()
+int
+xdone(void)
 {
-        printf("\n\nAll user processes have completed.\n\n");
+	printf("\n\nAll user processes have completed.\n\n");
 
 }

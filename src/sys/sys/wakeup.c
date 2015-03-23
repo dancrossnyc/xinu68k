@@ -10,11 +10,12 @@
  * wakeup  --  called by clock interrupt dispatcher to awaken processes
  *------------------------------------------------------------------------
  */
-INTPROC	wakeup()
+INTPROC
+wakeup(void)
 {
-        while (nonempty(clockq) && firstkey(clockq) <= 0)
-                ready(getfirst(clockq),RESCHNO);
-	if ( slnempty = nonempty(clockq) )
-		sltop = (int *) & q[q[clockq].qnext].qkey;
+	while (nonempty(clockq) && firstkey(clockq) <= 0)
+		ready(getfirst(clockq), RESCHNO);
+	if (slnempty = nonempty(clockq))
+		sltop = (int *) &q[q[clockq].qnext].qkey;
 	resched();
 }

@@ -8,20 +8,21 @@
  *  sndrarp  -  broadcast a RARP packet to obtain my IP address
  *------------------------------------------------------------------------
  */
-sndrarp()
+int
+sndrarp(void)
 {
-	struct	epacket	*mkarp();
-	struct	epacket	*packet;
-	int	i;
-	int	mypid;
-	int	resp;
-	IPaddr	junk; /* needed for argument to mkarp; not ever used */
-	char	ps;
+	struct epacket *mkarp();
+	struct epacket *packet;
+	int i;
+	int mypid;
+	int resp;
+	IPaddr junk;		/* needed for argument to mkarp; not ever used */
+	char ps;
 
 	mypid = getpid();
-	for (i=0 ; i<AR_RTRY ; i++) {
+	for (i = 0; i < AR_RTRY; i++) {
 		packet = mkarp(EP_RARP, AR_RREQ, junk, junk);
-		if ( ((int)packet) == SYSERR)
+		if (((int) packet) == SYSERR)
 			break;
 		disable(ps);
 		Arp.rarppid = mypid;
@@ -30,8 +31,8 @@ sndrarp()
 		resp = recvtim(AR_TIME);
 		restore(ps);
 		if (resp != TIMEOUT)
-			return(OK);
+			return (OK);
 	}
 	panic("No response to RARP");
-	return(SYSERR);
+	return (SYSERR);
 }

@@ -8,14 +8,13 @@
  *  putc  -  write a single character to a device
  *------------------------------------------------------------------------
  */
-SYSCALL	putc(descrp, ch)
-int descrp;
-char ch;
+SYSCALL
+putc(int descrp, int ch)
 {
-	struct	devsw	*devptr;
+	struct devsw *devptr;
 
-	if (isbaddev	(descrp) )
-		return(SYSERR);
+	if (isbaddev(descrp))
+		return (SYSERR);
 	devptr = &devtab[descrp];
-	return(	(*devptr->dvputc)(devptr,ch) );
+	return ((*devptr->dvputc) (devptr, ch));
 }

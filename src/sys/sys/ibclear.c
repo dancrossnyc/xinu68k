@@ -10,14 +10,13 @@
  *  ibclear  --  clear in-core copy of an iblock
  *------------------------------------------------------------------------
  */
-ibclear(ibptr, ibbyte)
-struct	iblk	*ibptr;
-long	ibbyte;
+int
+ibclear(struct iblk *ibptr, long ibbyte)
 {
-	int	i;
+	int i;
 
 	ibptr->ib_byte = ibbyte;
-	for (i=0 ; i<IBLEN ; i++)
+	for (i = 0; i < IBLEN; i++)
 		ibptr->ib_dba[i] = DBNULL;
 	ibptr->ib_next = IBNULL;
 }

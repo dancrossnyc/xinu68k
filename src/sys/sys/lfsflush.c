@@ -10,15 +10,15 @@
  *  lfsflush  --  flush data and i-block for a file
  *------------------------------------------------------------------------
  */
-lfsflush(flptr)
-struct	flblk	*flptr;
+int
+lfsflush(struct flblk *flptr)
 {
-	DBADDR	dba;
+	DBADDR dba;
 
 	if (!flptr->fl_dch)
-		return(SYSERR);
+		return (SYSERR);
 	dba = flptr->fl_iblk.ib_dba[flptr->fl_ipnum];
 	write(flptr->fl_dev, dskbcpy(flptr->fl_buff), dba);
 	flptr->fl_dch = FALSE;
-	return(OK);
+	return (OK);
 }

@@ -9,12 +9,11 @@
  *  dsseek  --  schedule a request to move the disk arm
  *------------------------------------------------------------------------
  */
-dsseek(devptr, block)
-	struct	devsw	*devptr;
-	DBADDR	block;
+int
+dsseek(struct devsw *devptr, DBADDR block)
 {
-	struct	dreq	*drptr;
-	char	ps;
+	struct dreq *drptr;
+	char ps;
 
 	disable(ps);
 	drptr = (struct dreq *) getbuf(dskrbp);
@@ -27,5 +26,5 @@ dsseek(devptr, block)
 
 	dskenq(drptr, devptr->dvioblk);
 	restore(ps);
-	return(OK);
+	return (OK);
 }

@@ -11,38 +11,41 @@
 int
 ckmode(char *mode)
 {
-	int	mbits;
-	char	ch;
+	int mbits;
+	char ch;
 
 	mbits = 0;
 	while (ch = *mode++)
 		switch (ch) {
 
-		    case FLRMODE:
-				if (mbits&FLREAD) return(SYSERR);
-				mbits |= FLREAD;
-				break;
+		case FLRMODE:
+			if (mbits & FLREAD)
+				return (SYSERR);
+			mbits |= FLREAD;
+			break;
 
-		    case FLWMODE:
-				if (mbits&FLWRITE) return(SYSERR);
-				mbits |= FLWRITE;
-				break;
+		case FLWMODE:
+			if (mbits & FLWRITE)
+				return (SYSERR);
+			mbits |= FLWRITE;
+			break;
 
-		    case FLOMODE:
-				if (mbits&FLOLD || mbits&FLNEW)
-					return(SYSERR);
-				mbits |= FLOLD;
-				break;
+		case FLOMODE:
+			if (mbits & FLOLD || mbits & FLNEW)
+				return (SYSERR);
+			mbits |= FLOLD;
+			break;
 
-		    case FLNMODE:
-				if (mbits&FLOLD || mbits&FLNEW)
-					return(SYSERR);
-				mbits |= FLNEW;
-				break;
+		case FLNMODE:
+			if (mbits & FLOLD || mbits & FLNEW)
+				return (SYSERR);
+			mbits |= FLNEW;
+			break;
 
-		    default:	return(SYSERR);
+		default:
+			return (SYSERR);
 		}
-	if ((mbits&FLREAD) == (mbits&FLWRITE))	/* default: allow R + W	*/
+	if ((mbits & FLREAD) == (mbits & FLWRITE))	/* default: allow R + W     */
 		mbits |= FLRW;
-	return(mbits);
+	return (mbits);
 }

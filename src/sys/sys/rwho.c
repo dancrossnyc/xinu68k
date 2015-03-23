@@ -9,10 +9,11 @@
  *  rwho  -  Initialize rwho subsystem and start daemon processes
  *------------------------------------------------------------------------
  */
-rwho()
+int
+rwho(void)
 {
-	resume( create(RWIN,  RWISTK, RWIPRIO, RWINAM, RWIARGS) );
-	resume( create(RWOUT, RWOSTK, RWOPRIO, RWONAM, RWOARGS) );
+	resume(create(RWIN, RWISTK, RWIPRIO, RWINAM, RWIARGS));
+	resume(create(RWOUT, RWOSTK, RWOPRIO, RWONAM, RWOARGS));
 }
 
-struct	rwinfo	Rwho;		/* all globals used by rwho subsystem	*/
+struct rwinfo Rwho;		/* all globals used by rwho subsystem   */

@@ -9,10 +9,10 @@
  *  rfinit  --  initialize remote file pseudo devices
  *------------------------------------------------------------------------
  */
-rfinit(devptr)
-struct	devsw	*devptr;
+int
+rfinit(struct devsw *devptr)
 {
-	struct	rfblk	*rfptr;
+	struct rfblk *rfptr;
 
 	devptr->dvioblk = (char *) (rfptr = &Rf.rftab[devptr->dvminor]);
 	rfptr->rf_dnum = devptr->dvnum;
@@ -26,4 +26,4 @@ struct	devsw	*devptr;
 	}
 }
 
-struct	rfinfo	Rf;
+struct rfinfo Rf;

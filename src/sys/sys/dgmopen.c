@@ -11,34 +11,35 @@
 int
 dgmopen(struct devsw *devptr, char *forport, int locport)
 {
-	struct	dgblk	*dgptr;
-	struct	netq	*nqptr;
-	int	slot;
-	int	nq;
-	int	i;
-	char	ps;
+	struct dgblk *dgptr;
+	struct netq *nqptr;
+	int slot;
+	int nq;
+	int i;
+	char ps;
 
 	disable(ps);
-	if ( (slot=dgalloc()) == SYSERR) {
+	if ((slot = dgalloc()) == SYSERR) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	dgptr = &dgtab[slot];
 	if (locport == ANYLPORT)
 		locport = udpnxtp();
 	else {
-		for (i=0 ; i<NETQS ; i++)
-			if (Net.netqs[i].valid && 
-				Net.netqs[i].uport == locport) {
+		for (i = 0; i < NETQS; i++)
+			if (Net.netqs[i].valid &&
+			    Net.netqs[i].uport == locport) {
 				dgptr->dg_state = DG_FREE;
 				restore(ps);
-				return(SYSERR);
+				return (SYSERR);
 			}
 	}
-	if (dgparse(dgptr,forport)==SYSERR || (nq=nqalloc())==SYSERR ) {
+	if (dgparse(dgptr, forport) == SYSERR
+	    || (nq = nqalloc()) == SYSERR) {
 		dgptr->dg_state = DG_FREE;
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	nqptr = &Net.netqs[nq];
 	nqptr->uport = dgptr->dg_lport = locport;
@@ -46,5 +47,5 @@ dgmopen(struct devsw *devptr, char *forport, int locport)
 	dgptr->dg_netq = nq;
 	dgptr->dg_mode = DG_NMODE;
 	restore(ps);
-	return(dgptr->dg_dnum);
+	return (dgptr->dg_dnum);
 }

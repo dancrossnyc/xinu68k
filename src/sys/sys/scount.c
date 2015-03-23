@@ -8,11 +8,11 @@
  *  scount  --  return a semaphore count
  *------------------------------------------------------------------------
  */
-SYSCALL scount(sem)
-	int	sem;
+SYSCALL
+scount(int sem)
 {
 
-	if (isbadsem(sem) || semaph[sem].sstate==SFREE)
-		return(SYSERR);
-	return(semaph[sem].semcnt);
+	if (isbadsem(sem) || semaph[sem].sstate == SFREE)
+		return (SYSERR);
+	return (semaph[sem].semcnt);
 }

@@ -9,17 +9,18 @@
  *  netinit  -  initialize network data structures
  *------------------------------------------------------------------------
  */
-netinit()
+int
+netinit(void)
 {
-	struct	netq	*nqptr;
-	int	i;
+	struct netq *nqptr;
+	int i;
 
-	/* Initialize pool of network buffers and rest of Net structure	*/
+	/* Initialize pool of network buffers and rest of Net structure */
 
 	if (clkruns == FALSE)
 		panic("net: no clock");
 	Net.netpool = mkpool(EMAXPAK, NETBUFS);
-	for (i=0 ; i<NETQS ; i++) {
+	for (i = 0; i < NETQS; i++) {
 		nqptr = &Net.netqs[i];
 		nqptr->valid = FALSE;
 		nqptr->uport = -1;
@@ -30,7 +31,7 @@ netinit()
 	Net.nxtprt = ULPORT;
 	Net.nmutex = screate(1);
 	Net.npacket = Net.ndrop = Net.nover = 0;
-	return(OK);
+	return (OK);
 }
 
-struct	netinfo	Net;
+struct netinfo Net;

@@ -8,9 +8,10 @@
  *  main  --  start UDP echo server and then run Xinu pseudo-shell
  *------------------------------------------------------------------------
  */
-main()
+int
+main(void)
 {
-	int	udpecho();
+	int udpecho();
 
 	/* start rwho daemon and input processes */
 
@@ -18,7 +19,7 @@ main()
 
 	/* start UDP echo server */
 
-	resume( create(udpecho, 380, 30, "UDPecho", 0) );
+	resume(create(udpecho, 380, 30, "UDPecho", 0));
 
 	while (TRUE) {
 		login(CONSOLE);

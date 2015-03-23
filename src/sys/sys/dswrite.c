@@ -9,13 +9,11 @@
  *  dswrite  --  write a block (system buffer) onto a disk device
  *------------------------------------------------------------------------
  */
-dswrite(devptr, buff, block)
-	struct	devsw	*devptr;
-	char	*buff;
-	DBADDR	block;
+int
+dswrite(struct devsw *devptr, char *buff, DBADDR block)
 {
-	struct	dreq	*drptr;
-	char	ps;
+	struct dreq *drptr;
+	char ps;
 
 	disable(ps);
 	drptr = (struct dreq *) getbuf(dskrbp);
@@ -25,7 +23,5 @@ dswrite(devptr, buff, block)
 	drptr->drop = DWRITE;
 	dskenq(drptr, devptr->dvioblk);
 	restore(ps);
-	return(OK);
+	return (OK);
 }
-
-

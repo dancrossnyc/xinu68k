@@ -10,23 +10,21 @@
  *------------------------------------------------------------------------
  */
 
-ethwrite(devptr, buff, len)
-struct	devsw	*devptr;
-char	*buff;
-int	len;
+int
+ethwrite(struct devsw *devptr, char *buff, int len)
 {
-	struct	etblk	*etptr;
-	char	ps;
+	struct etblk *etptr;
+	char ps;
 
 	if (len > EMAXPAK)
-		return(SYSERR);
+		return (SYSERR);
 	if (len < EMINPAK)
 		len = EMINPAK;
-	etptr = (struct etblk *)devptr->dvioblk;
-	blkcopy(((struct eheader *)buff)->e_src, etptr->etpaddr, EPADLEN);
+	etptr = (struct etblk *) devptr->dvioblk;
+	blkcopy(((struct eheader *) buff)->e_src, etptr->etpaddr, EPADLEN);
 	disable(ps);
 	wait(etptr->etwsem);
 	ethwstrt(etptr, buff, etptr->etlen = len, DC_NORM);
 	restore(ps);
-	return(OK);
+	return (OK);
 }

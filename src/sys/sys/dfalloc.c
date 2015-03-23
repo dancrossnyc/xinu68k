@@ -11,14 +11,14 @@
  */
 #ifdef	Ndf
 int
-dfalloc()		/* assume exclusion for dir. provided by caller	*/
-{
-	for (int i = 0 ; i < Ndf ; i++)
+dfalloc(void)
+{				/* assume exclusion for dir. provided by caller   */
+	for (int i = 0; i < Ndf; i++)
 		if (fltab[i].fl_pid == 0) {
 			fltab[i].fl_pid = getpid();
-			return(i);
+			return (i);
 		}
 
-	return(SYSERR);
+	return (SYSERR);
 }
 #endif

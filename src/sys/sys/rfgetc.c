@@ -8,16 +8,16 @@
  *  rfgetc  --  get a character from a remote file
  *------------------------------------------------------------------------
  */
-rfgetc(devptr)
-struct	devsw	*devptr;
+int
+rfgetc(struct devsw *devptr)
 {
-	char	ch;
-	int	retcode;
+	char ch;
+	int retcode;
 
-	if ( (retcode=read(devptr->dvnum, &ch, 1)) == 1)
-		return(ch);
+	if ((retcode = read(devptr->dvnum, &ch, 1)) == 1)
+		return (ch);
 	else if (retcode == 0)
-		return(EOF);
+		return (EOF);
 	else
-		return(SYSERR);
+		return (SYSERR);
 }

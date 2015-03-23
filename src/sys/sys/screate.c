@@ -10,40 +10,42 @@
  * screate  --  create and initialize a semaphore, returning its id
  *------------------------------------------------------------------------
  */
-SYSCALL screate(count)
-	int	count;			/* initial count (>=0)		*/
+SYSCALL
+screate(int count		/* initial count (>=0)          */
+    )
 {
-	char	ps;
-	int	sem;
+	char ps;
+	int sem;
 
 	disable(ps);
-	if ( count<0 || (sem=newsem())==SYSERR ) {
+	if (count < 0 || (sem = newsem()) == SYSERR) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	semaph[sem].semcnt = count;
 	/* sqhead and sqtail were initialized at system startup */
 	restore(ps);
-	return(sem);
+	return (sem);
 }
 
 /*------------------------------------------------------------------------
  * newsem  --  allocate an unused semaphore and return its index
  *------------------------------------------------------------------------
  */
-LOCAL	newsem()
+LOCAL
+newsem(void)
 {
-	int	sem;
-	int	i;
+	int sem;
+	int i;
 
-	for (i=0 ; i<NSEM ; i++) {
-		sem=nextsem--;
+	for (i = 0; i < NSEM; i++) {
+		sem = nextsem--;
 		if (nextsem < 0)
-			nextsem = NSEM-1;
-		if (semaph[sem].sstate==SFREE) {
+			nextsem = NSEM - 1;
+		if (semaph[sem].sstate == SFREE) {
 			semaph[sem].sstate = SUSED;
-			return(sem);
+			return (sem);
 		}
 	}
-	return(SYSERR);
+	return (SYSERR);
 }

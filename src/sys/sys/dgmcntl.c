@@ -11,9 +11,9 @@
 int
 dgmcntl(struct devsw *devptr, int func, char *addr)
 {
-	int	status;
+	int status;
 
-	switch ( func )	{
+	switch (func) {
 #ifdef	NETDAEMON
 	case NC_SETGW:
 		blkcopy(Net.gateway, addr, IPLEN);
@@ -23,5 +23,5 @@ dgmcntl(struct devsw *devptr, int func, char *addr)
 	default:
 		status = SYSERR;
 	}
-	return(status);
+	return (status);
 }

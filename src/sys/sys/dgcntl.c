@@ -11,27 +11,27 @@
 int
 dgcntl(struct devsw *devptr, int func, int arg)
 {
-	struct	dgblk	*dgptr;
-	int	freebuf();
-	char	ps;
-	int	ret;
+	struct dgblk *dgptr;
+	int freebuf();
+	char ps;
+	int ret;
 
 	disable(ps);
-	dgptr = (struct dgblk *)devptr->dvioblk;
+	dgptr = (struct dgblk *) devptr->dvioblk;
 	ret = OK;
 	switch (func) {
 
-		case DG_SETMODE:	/* set mode bits */
-			dgptr->dg_mode = arg;
-			break;
+	case DG_SETMODE:	/* set mode bits */
+		dgptr->dg_mode = arg;
+		break;
 
-		case DG_CLEAR:		/* clear queued packets */
-			preset(dgptr->dg_xport, freebuf);
-			break;
+	case DG_CLEAR:		/* clear queued packets */
+		preset(dgptr->dg_xport, freebuf);
+		break;
 
-		default:
-			ret = SYSERR;
+	default:
+		ret = SYSERR;
 	}
 	restore(ps);
-	return(ret);
+	return (ret);
 }

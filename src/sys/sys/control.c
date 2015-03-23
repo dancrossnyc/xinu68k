@@ -11,10 +11,10 @@
 SYSCALL
 control(int descrp, int func, char *addr, char *addr2)
 {
-	struct	devsw	*devptr;
+	struct devsw *devptr;
 
-	if (isbaddev(descrp) )
-		return(SYSERR);
+	if (isbaddev(descrp))
+		return (SYSERR);
 	devptr = &devtab[descrp];
-	return(	(*devptr->dvcntl)(devptr, func, addr, addr2) );
+	return ((*devptr->dvcntl) (devptr, func, addr, addr2));
 }

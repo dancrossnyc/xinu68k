@@ -9,23 +9,23 @@
  *  freebuf  --  free a buffer that was allocated from a pool by getbuf
  *------------------------------------------------------------------------
  */
-SYSCALL	freebuf(buf)
-int *buf;
+SYSCALL
+freebuf(int *buf)
 {
-	char	ps;
-	int	poolid;
+	char ps;
+	int poolid;
 
 #ifdef	MEMMARK
-	if ( unmarked(bpmark) )
-		return(SYSERR);
+	if (unmarked(bpmark))
+		return (SYSERR);
 #endif
 	poolid = *(--buf);
-	if (poolid<0 || poolid>=nbpools)
-		return(SYSERR);
+	if (poolid < 0 || poolid >= nbpools)
+		return (SYSERR);
 	disable(ps);
 	*buf = (int) bptab[poolid].bpnext;
 	bptab[poolid].bpnext = (char *) buf;
 	restore(ps);
 	signal(bptab[poolid].bpsem);
-	return(OK);
+	return (OK);
 }

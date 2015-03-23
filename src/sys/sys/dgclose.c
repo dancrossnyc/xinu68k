@@ -12,10 +12,10 @@
 int
 dgclose(struct devsw *devptr)
 {
-	char	ps;
-	struct	dgblk	*dgptr;
-	struct	netq	*nqptr;
-	int	nq;
+	char ps;
+	struct dgblk *dgptr;
+	struct netq *nqptr;
+	int nq;
 
 	dgptr = (struct dgblk *) devptr->dvioblk;
 	disable(ps);
@@ -26,6 +26,5 @@ dgclose(struct devsw *devptr)
 	nqptr->pid = BADPID;
 	dgptr->dg_state = DG_FREE;
 	restore(ps);
-	return(OK);
+	return (OK);
 }
-

@@ -7,7 +7,8 @@
  *  ioerr  -  return an error (used for "error" entries in devtab)
  *------------------------------------------------------------------------
  */
-ioerr()
+int
+ioerr(void)
 {
-	return(SYSERR);
+	return (SYSERR);
 }

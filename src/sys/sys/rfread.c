@@ -8,10 +8,8 @@
  *  rfread  --  read one or more bytes from a remote file
  *------------------------------------------------------------------------
  */
-rfread(devptr, buff, len)
-struct	devsw	*devptr;
-char	*buff;
-int	len;
+int
+rfread(struct devsw *devptr, char *buff, int len)
 {
-	return( rfio(devptr, FS_READ, buff, min(len,RDATLEN) ) );
+	return (rfio(devptr, FS_READ, buff, min(len, RDATLEN)));
 }

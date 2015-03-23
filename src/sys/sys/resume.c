@@ -8,20 +8,20 @@
  * resume  --  unsuspend a process, making it ready; return the priority
  *------------------------------------------------------------------------
  */
-SYSCALL resume(pid)
-	int	pid;
+SYSCALL
+resume(int pid)
 {
-	char	ps;			/* saved processor status	*/
-	struct	pentry	*pptr;		/* pointer to proc. tab. entry	*/
-	int	prio;			/* priority to return		*/
+	char ps;		/* saved processor status       */
+	struct pentry *pptr;	/* pointer to proc. tab. entry  */
+	int prio;		/* priority to return           */
 
 	disable(ps);
 	if (isbadpid(pid) || (pptr = &proctab[pid])->pstate != PRSUSP) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	prio = pptr->pprio;
 	ready(pid, RESCHYES);
 	restore(ps);
-	return(prio);
+	return (prio);
 }

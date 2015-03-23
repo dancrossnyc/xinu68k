@@ -8,11 +8,11 @@
  *  dsinter  --  process disk interrupt (DTC interface; XEBEC controller)
  *------------------------------------------------------------------------
  */
-INTPROC	dsinter(dsptr)
-	struct	dsblk	*dsptr;
+INTPROC
+dsinter(struct dsblk *dsptr)
 {
-	struct	dtc	*dtptr;
-	struct	dreq	*drptr;
+	struct dtc *dtptr;
+	struct dreq *drptr;
 
 	dtptr = dsptr->dcsr;
 	drptr = dsptr->dreqlst;
@@ -24,19 +24,19 @@ INTPROC	dsinter(dsptr)
 		drptr->drstat = SYSERR;
 	else
 		drptr->drstat = OK;
-	if ( (dsptr->dreqlst=drptr->drnext) != DRNULL)
+	if ((dsptr->dreqlst = drptr->drnext) != DRNULL)
 		dskstrt(dsptr);
 	switch (drptr->drop) {
 
-		case DREAD:
-		case DSYNC:
-			ready(drptr->drpid, RESCHYES);
-			return;
+	case DREAD:
+	case DSYNC:
+		ready(drptr->drpid, RESCHYES);
+		return;
 
-		case DWRITE:
-			freebuf(drptr->drbuff);
-			/* fall through */
-		case DSEEK:
-			freebuf(drptr);
+	case DWRITE:
+		freebuf(drptr->drbuff);
+		/* fall through */
+	case DSEEK:
+		freebuf(drptr);
 	}
 }

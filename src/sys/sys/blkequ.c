@@ -11,6 +11,6 @@ blkequ(char *first, char *second, int nbytes)
 {
 	while (--nbytes >= 0)
 		if (*first++ != *second++)
-			return(FALSE);
-	return(TRUE);
+			return (FALSE);
+	return (TRUE);
 }

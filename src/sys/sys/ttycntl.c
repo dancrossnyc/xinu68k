@@ -10,21 +10,20 @@
  *  ttycntl  -  control a tty device by setting modes
  *------------------------------------------------------------------------
  */
-ttycntl(devptr, func)
-struct	devsw	*devptr;
-int func;
+int
+ttycntl(struct devsw *devptr, int func)
 {
-	register struct	tty *ttyp;
-	char	ch;
-	char	ps;
+	register struct tty *ttyp;
+	char ch;
+	char ps;
 
 	ttyp = &tty[devptr->dvminor];
-	switch ( func )	{
+	switch (func) {
 	case TCSETBRK:
-		ttyp->ioaddr->ctstat |=	SLUTBREAK;
+		ttyp->ioaddr->ctstat |= SLUTBREAK;
 		break;
 	case TCRSTBRK:
-		ttyp->ioaddr->ctstat &=	~SLUTBREAK;
+		ttyp->ioaddr->ctstat &= ~SLUTBREAK;
 		break;
 	case TCNEXTC:
 		disable(ps);
@@ -32,7 +31,7 @@ int func;
 		ch = ttyp->ibuff[ttyp->itail];
 		restore(ps);
 		signal(ttyp->isem);
-		return(ch);
+		return (ch);
 	case TCMODER:
 		ttyp->imode = IMRAW;
 		break;
@@ -49,7 +48,7 @@ int func;
 		ttyp->iecho = FALSE;
 		break;
 	case TCICHARS:
-		return(scount(ttyp->isem));
+		return (scount(ttyp->isem));
 	case TCINT:
 		ttyp->iintr = TRUE;
 		ttyp->iintpid = getpid();
@@ -58,7 +57,7 @@ int func;
 		ttyp->iintr = FALSE;
 		break;
 	default:
-		return(SYSERR);
+		return (SYSERR);
 	}
-	return(OK);
+	return (OK);
 }

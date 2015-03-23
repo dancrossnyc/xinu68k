@@ -11,5 +11,5 @@ blkcopy(char *to, char *from, int nbytes)
 {
 	while (--nbytes >= 0)
 		*to++ = *from++;
-	return(OK);
+	return (OK);
 }

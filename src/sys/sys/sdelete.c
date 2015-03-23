@@ -10,25 +10,25 @@
  * sdelete  --  delete a semaphore by releasing its table entry
  *------------------------------------------------------------------------
  */
-SYSCALL sdelete(sem)
-	int	sem;
+SYSCALL
+sdelete(int sem)
 {
-	char	ps;
-	int	pid;
-	struct	sentry	*sptr;		/* address of sem to free	*/
+	char ps;
+	int pid;
+	struct sentry *sptr;	/* address of sem to free       */
 
 	disable(ps);
-	if (isbadsem(sem) || semaph[sem].sstate==SFREE) {
+	if (isbadsem(sem) || semaph[sem].sstate == SFREE) {
 		restore(ps);
-		return(SYSERR);
+		return (SYSERR);
 	}
 	sptr = &semaph[sem];
 	sptr->sstate = SFREE;
-	if (nonempty(sptr->sqhead)) {	/* free waiting processes	*/
-		while( (pid=getfirst(sptr->sqhead)) != EMPTY)
-			ready(pid,RESCHNO);
+	if (nonempty(sptr->sqhead)) {	/* free waiting processes       */
+		while ((pid = getfirst(sptr->sqhead)) != EMPTY)
+			ready(pid, RESCHNO);
 		resched();
 	}
 	restore(ps);
-	return(OK);
+	return (OK);
 }

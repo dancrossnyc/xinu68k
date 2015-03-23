@@ -8,14 +8,14 @@
  *  dskbcpy  --  copy data into a new disk buffer and return its address
  *------------------------------------------------------------------------
  */
-dskbcpy(oldbuf)
-char	*oldbuf;
+char *
+dskbcpy(char *oldbuf)
 {
-	int	i;
-	char	*newbuf, *to;
+	int i;
+	char *newbuf, *to;
 
 	newbuf = to = getbuf(dskdbp);
-	for (i=0 ; i<DBUFSIZ ; i++)
+	for (i = 0; i < DBUFSIZ; i++)
 		*to++ = *oldbuf++;
-	return(newbuf);
+	return (newbuf);
 }

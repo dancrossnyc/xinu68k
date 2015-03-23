@@ -9,33 +9,31 @@
  *  dgread  -  read one datagram from a datagram protocol pseudo-device
  *------------------------------------------------------------------------
  */
-dgread(devptr, buff, len)
-struct	devsw	*devptr;
-struct	xgram	*buff;
-int	len;
+int
+dgread(struct devsw *devptr, struct xgram *buff, int len)
 {
-	struct	dgblk	*dgptr;
-	struct	epacket	*packet;
-	struct	udp	*udpptr;
-	struct	ip	*ipptr;
-	struct	netq	*nqptr;
-	int	datalen;
-	char	ps;
+	struct dgblk *dgptr;
+	struct epacket *packet;
+	struct udp *udpptr;
+	struct ip *ipptr;
+	struct netq *nqptr;
+	int datalen;
+	char ps;
 
 	disable(ps);
-	dgptr = (struct dgblk *)devptr->dvioblk;
+	dgptr = (struct dgblk *) devptr->dvioblk;
 	if (dgptr->dg_mode & DG_TMODE) {
 		nqptr = &Net.netqs[dgptr->dg_netq];
-		if ( !isbadpid(nqptr->pid) ) {
+		if (!isbadpid(nqptr->pid)) {
 			restore(ps);
-			return(SYSERR);
+			return (SYSERR);
 		}
 		if (pcount(dgptr->dg_xport) <= 0) {
 			nqptr->pid = getpid();
 			if (recvtim(DG_TIME) == TIMEOUT) {
 				nqptr->pid = BADPID;
 				restore(ps);
-				return(TIMEOUT);
+				return (TIMEOUT);
 			}
 		}
 	}
@@ -44,13 +42,13 @@ int	len;
 	/* copy data into user's buffer & set length */
 
 	ipptr = (struct ip *) packet->ep_data;
-	udpptr = (struct udp *)ipptr->i_data;
+	udpptr = (struct udp *) ipptr->i_data;
 	datalen = net2hs(udpptr->u_udplen) - UHLEN;
 	if (dgptr->dg_mode & DG_NMODE) {
-		if ( (datalen+XGHLEN) > len) {
+		if ((datalen + XGHLEN) > len) {
 			freebuf(packet);
 			restore(ps);
-			return(SYSERR);
+			return (SYSERR);
 		}
 		blkcopy(buff->xg_faddr, ipptr->i_src, IPLEN);
 		buff->xg_fport = net2hs(udpptr->u_sport);
@@ -63,5 +61,5 @@ int	len;
 	}
 	freebuf(packet);
 	restore(ps);
-	return(datalen);
+	return (datalen);
 }
