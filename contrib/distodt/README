@@ -1,0 +1,59 @@
+
+		Distributed Odt/Download README File
+		------------------------------------
+
+This is the beta version of the Distributed Odt/Download software.
+The software runs on both SUNs and VAXes, however downloading to
+non-sun backends is not yet possible.
+
+These are the directories and their contents:
+
+./src		contains all the Dist Odt/Download software and Makefile
+./h		header files for Dist Odt/Download
+./sunbin	directory for sun binaries when compiled
+./vaxbin	directory for vax binaries when compiled
+./man		manual pages for using the new Dist Odt/Download software
+
+
+To compile the system and get it running you need to change a few of
+the constants in the header files to suit your system.  Look in the
+file ./h/bed.h and modify the constants at the top - there are
+comments indicating which constants need to be modified.  The BED
+server needs to read a machines database and so you should find a
+directory to place the machines database in.  There is an example
+machines database in the file ./src/machines that you can modify and
+place in the correct directory.  The only fields of the machines database
+that are currently used be the software are the 'ttyline',
+'be-name', 'baud', and 'class'.  The other fields must be there but
+can be anything. You also will have to specify the 
+directory to use for storing lock files.  Since lock files are
+temporary the constant in ./h/bed.h currently specifies /tmp/xinu as
+the directory for lock files, but you may want to change this.
+Each frontend running the BED server must have a machines database
+that specifies the backends connected to it, and each frontend must
+have a directory reserved for the lock files.  These must be set up on
+each frontend before you start up the BED process.
+
+Another constant that probably needs explaining is STATTIMEOUT.  Status
+messages are broadcast to all frontends to find out if they have a backend
+available.  The program then waits for status responses from all the BED
+servers.  It will wait accept status responses for the next STATTIMEOUT
+seconds and then it will assume that it has heared from all the BED
+servers.  Currently STATTIMEOUT is set to 2 seconds.  On our system here at
+Purdue a 1 second timeout is long enough, but you will have to adjust this
+to fit your network.
+
+Once you have modified ./h/bed.h to fit your configuration you can
+compile the system.  You can compile either the sun or the vax
+version.  First cd to ./src and edit the Makefile there.  You should
+edit the lines at the top of the Makefile which indicate which
+architecture you are compiling for.  Then typing 'make all' will make
+the entire system and store the executables in ./sunbin or ./vaxbin
+depending on the architecture you have selected in the Makefile.
+
+To run the BED server, simply log into the frontend you want to run it
+on, cd to the correct {sun/vax}bin directory and type 'bed'.
+
+See the manual pages for other commands and their usage.
+
+

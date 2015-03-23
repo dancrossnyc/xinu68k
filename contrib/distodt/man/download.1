@@ -1,0 +1,70 @@
+.TH DOWNLOAD 1
+.SH NAME
+download \- load program into SUN test machine 
+.SH SYNOPSIS
+.B download
+[ option ] ...
+[ file ]
+.SH DESCRIPTION
+.I Download
+takes an absolute binary program image (SUN a.out format)
+and copies it to the frontend file
+.I /tftpboot/a.out
+for the backend sun to use when booting.
+.I Download
+determines which backend SUN the user has reserved, or finds a free
+backend SUN if the user does not have a backend SUN reserved.  Once
+a backend is found,
+.I download
+uses TCP to send the binary program image to the associated front end.
+Note that local net broadcasts are used to find free backend SUNs
+so downloading is only allowed to SUNs connected to the local net.
+.PP
+Loading the object program takes time proportional to the size
+of the program itself.
+In two seconds, download will transfer about 56K bytes over the ethernet
+using TCP.
+.PP
+.I Download
+transfers the user's program as specified in the command line.
+If no program name is given,
+.I a.out
+is used.
+.PP
+Options are:
+.TP
+.BI \-c "CLASS"
+Class.
+Use a machine in the class
+.I CLASS.
+The default class is SUN.
+If the user already has a backend reserved in class
+.I CLASS,
+then it will be used.  If the user already has a backend reserved, but
+it is in a different 
+class, then it will be released before a new one is reserved.
+If no machines are available in class
+.I CLASS
+a message indicating this will be printed.
+See also
+.I busers,
+which displays which class each backend machine belongs to.
+.TP
+.BI \-m "MACH"
+Machine.
+Use the backend machine named
+.I MACH
+if it is available.
+If the user already has a different machine reserved, it will be
+released before the new machine
+.I MACH
+is reserved.
+.SH "SEE ALSO"
+busers(1), odt(1), odtunlock(1)
+.SH FILES
+.ta 1.6i
+/tmp/xinu/*   Local lock files.  Named by user's login id
+.SH BUGS
+Currently it only works to download to a backend SUN.  You can
+download from a frontend SUN or VAX.  In future versions
+you will be able to download from anything to anything.
