@@ -14,8 +14,8 @@ SYSCALL
 wait(int sem)
 {
 	char ps;
-	register struct sentry *sptr;
-	register struct pentry *pptr;
+	struct sentry *sptr;
+	struct pentry *pptr;
 
 	disable(ps);
 	if (isbadsem(sem) || (sptr = &semaph[sem])->sstate == SFREE) {

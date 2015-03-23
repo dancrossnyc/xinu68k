@@ -3,9 +3,8 @@
  * for going between the 11 and the interdata
  */
 
-swab(pf, pt, n)
-register short *pf, *pt;
-register n;
+int
+swab(short *pf, short *pt, int n)
 {
 
 	n /= 2;

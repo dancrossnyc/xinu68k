@@ -7,11 +7,11 @@
  *  printf  --  write formatted output on CONSOLE 
  *------------------------------------------------------------------------
  */
-printf(fmt, args)
-	char	*fmt;
+int
+printf(char *fmt, int args)
 {
-	int	putc();
+	int putc();
 
 	_doprnt(fmt, &args, putc, CONSOLE);
-	return(OK);
+	return (OK);
 }

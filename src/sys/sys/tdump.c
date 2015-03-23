@@ -60,7 +60,7 @@ tdumph(void)
 int
 tdump1(int tnum)
 {
-	register struct tty *iptr;
+	struct tty *iptr;
 	char ps;
 	int i;
 
@@ -90,7 +90,7 @@ tdump1(int tnum)
 static
 tqdump(int start, int len, int maxlen, char *buff)
 {
-	register int i;
+	int i;
 	for (i = start; len > 0; len--) {
 		if (buff[i] & 0200)
 			kprintf("M-");

@@ -349,7 +349,7 @@ SYSCALL setdev(int pid, int dev1, int dev2);
 /* setnok.c */
 SYSCALL setnok(int nok, int pid);
 /* signal.c */
-SYSCALL signal(register int sem);
+SYSCALL signal(int sem);
 /* signaln.c */
 SYSCALL signaln(int sem, int count);
 /* sleep.c */
@@ -376,11 +376,11 @@ int ttycntl(struct devsw *devptr, int func);
 /* ttygetc.c */
 int ttygetc(struct devsw *devptr);
 /* ttyiin.c */
-INTPROC ttyiin(register struct tty *iptr);
+INTPROC ttyiin(struct tty *iptr);
 /* ttyinit.c */
 int ttyinit(struct devsw *devptr);
 /* ttyoin.c */
-INTPROC ttyoin(register struct tty *iptr);
+INTPROC ttyoin(struct tty *iptr);
 /* ttyopen.c */
 int ttyopen(struct devsw *devptr, char *nam, char *mode);
 /* ttyputc.c */

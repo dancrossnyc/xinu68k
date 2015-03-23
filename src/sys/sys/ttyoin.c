@@ -11,9 +11,9 @@
  *------------------------------------------------------------------------
  */
 INTPROC
-ttyoin(register struct tty *iptr)
+ttyoin(struct tty *iptr)
 {
-	register struct csr *cptr;
+	struct csr *cptr;
 	int ct;
 
 	cptr = iptr->ioaddr;

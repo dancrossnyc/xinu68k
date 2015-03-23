@@ -12,8 +12,8 @@ int
 udpsend(IPaddr faddr, int fport, int lport, struct epacket *packet,
 	int datalen)
 {
-	register struct udp *udpptr;
-	register struct ip *ipptr;
+	struct udp *udpptr;
+	struct ip *ipptr;
 
 	/* Fill in UDP header; pass to ipsend to fill in IP header */
 

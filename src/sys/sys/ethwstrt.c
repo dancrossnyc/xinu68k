@@ -13,8 +13,8 @@
 int
 ethwstrt(struct etblk *etptr, char *buf, int len, int setup)
 {
-	register struct dcmd *dcmptr;
-	register struct dqregs *dqptr;
+	struct dcmd *dcmptr;
+	struct dqregs *dqptr;
 
 	dqptr = etptr->eioaddr;
 	while (!(dqptr->d_csr & DQ_XLI));

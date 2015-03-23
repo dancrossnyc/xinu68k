@@ -3,13 +3,13 @@
  * non-NULL bytes in string argument.
  */
 
-strlen(s)
-register char *s;
+int
+strlen(char *s)
 {
-	register n;
+	int n;
 
 	n = 0;
 	while (*s++)
 		n++;
-	return(n);
+	return (n);
 }

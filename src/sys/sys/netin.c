@@ -13,7 +13,7 @@ PROCESS
 netin(int userpid		/* user process to resume       */
     )
 {
-	register struct epacket *packet;
+	struct epacket *packet;
 	struct epacket *getbuf();
 	int icmpp;
 

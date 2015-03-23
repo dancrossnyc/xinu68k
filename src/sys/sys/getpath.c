@@ -17,8 +17,8 @@ getpath(IPaddr faddr)
 	int mypid;		/* local copy of my process id  */
 	IPaddr myaddr;		/* my IP address                */
 	char ps;
-	register struct arpent *arpptr;
-	register struct arppak *apacptr;
+	struct arpent *arpptr;
+	struct arppak *apacptr;
 	struct epacket *packet, *mkarp();
 
 	wait(Arp.arpsem);

@@ -11,8 +11,8 @@
 SYSCALL
 namrepl(char *name, char *newname)
 {
-	register struct nament *nptr;
-	register struct nament *nlast;
+	struct nament *nptr;
+	struct nament *nlast;
 	int plen, rlen;
 	char ps;
 

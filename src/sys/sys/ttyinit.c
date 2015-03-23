@@ -14,8 +14,8 @@
 int
 ttyinit(struct devsw *devptr)
 {
-	register struct tty *iptr;
-	register struct csr *cptr;
+	struct tty *iptr;
+	struct csr *cptr;
 	int junk, isconsole;
 
 	/* set up interrupt vector and interrupt dispatch table */

@@ -4,26 +4,24 @@
  *  sprintf  --  format arguments and place output in a string
  *------------------------------------------------------------------------
  */
-char	*sprintf(str, fmt, args)
-        char *str;
-        char *fmt;
+char *
+sprintf(char *str, char *fmt, int args)
 {
-        int     sprntf();
-        char    *s;
+	int sprntf();
+	char *s;
 
-        s = str;
-        _doprnt(fmt, &args, sprntf, &s);
-        *s++ = '\0';
-        return(str);
+	s = str;
+	_doprnt(fmt, &args, sprntf, &s);
+	*s++ = '\0';
+	return (str);
 }
 
 /*------------------------------------------------------------------------
  *  sprntf  --  routine called by doprnt to handle each character
  *------------------------------------------------------------------------
  */
-static	sprntf(cpp, c)
-        char    **cpp;
-        char    c;
+static
+sprntf(char **cpp, int c)
 {
-        return(*(*cpp)++ = c);
+	return (*(*cpp)++ = c);
 }

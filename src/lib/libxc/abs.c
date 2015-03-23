@@ -1,7 +1,8 @@
-abs(arg)
+int
+abs(int arg)
 {
 
-	if(arg < 0)
+	if (arg < 0)
 		arg = -arg;
-	return(arg);
+	return (arg);
 }

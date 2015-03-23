@@ -11,9 +11,9 @@
  *------------------------------------------------------------------------
  */
 SYSCALL
-signal(register int sem)
+signal(int sem)
 {
-	register struct sentry *sptr;
+	struct sentry *sptr;
 	char ps;
 
 	disable(ps);

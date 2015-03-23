@@ -13,7 +13,7 @@ int
 ttyread(struct devsw *devptr, char *buff, int count)
 {
 	char ps;
-	register struct tty *iptr;
+	struct tty *iptr;
 	int avail, nread;
 	char ch, eofch;
 	int donow, dolater;

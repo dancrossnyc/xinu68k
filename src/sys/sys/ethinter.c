@@ -13,7 +13,7 @@ INTPROC
 ethinter(struct etblk *etptr)
 {
 	struct dqregs *dqptr;
-	register struct dcmd *dcmptr;
+	struct dcmd *dcmptr;
 	short csr;
 	int pid;
 

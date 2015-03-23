@@ -1,12 +1,13 @@
-static	long	randx = 1;
+static long randx = 1;
 
-srand(x)
-unsigned x;
+int
+srand(unsigned x)
 {
 	randx = x;
 }
 
-rand()
+int
+rand(void)
 {
-	return(((randx = randx*1103515245 + 12345)>>16) & 077777);
+	return (((randx = randx * 1103515245 + 12345) >> 16) & 077777);
 }

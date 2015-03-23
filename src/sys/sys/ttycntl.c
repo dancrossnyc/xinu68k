@@ -13,7 +13,7 @@
 int
 ttycntl(struct devsw *devptr, int func)
 {
-	register struct tty *ttyp;
+	struct tty *ttyp;
 	char ch;
 	char ps;
 

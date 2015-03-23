@@ -4,14 +4,13 @@
  *  fputs  --  write a null-terminated string to a device (file)
  *------------------------------------------------------------------------
  */
-fputs(dev, s)
-        register char *s;
-        register int dev;
+int
+fputs(int dev, char *s)
 {
-	register r;
-	register c;
+	int r;
+	int c;
 
 	while (c = *s++)
-                r = putc(dev, c);
-	return(r);
+		r = putc(dev, c);
+	return (r);
 }

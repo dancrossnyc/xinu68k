@@ -6,12 +6,11 @@
  *  fprintf  --  print a formatted message on specified device (file)
  *------------------------------------------------------------------------
  */
-fprintf(dev, fmt, args)
-        int  dev;
-        char *fmt;
+int
+fprintf(int dev, char *fmt, int args)
 {
-        int     putc();
+	int putc();
 
-        _doprnt(fmt, &args, putc, dev);
-        return(OK);
+	_doprnt(fmt, &args, putc, dev);
+	return (OK);
 }

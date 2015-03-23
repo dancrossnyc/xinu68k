@@ -6,12 +6,12 @@
  *  puts  --  write a null-terminated string to the console
  *------------------------------------------------------------------------
  */
-puts(s)
-register char *s;
+int
+puts(char *s)
 {
-	register c;
+	int c;
 
 	while (c = *s++)
-                putc(CONSOLE,c);
-        return(putc(CONSOLE,'\n'));
+		putc(CONSOLE, c);
+	return (putc(CONSOLE, '\n'));
 }

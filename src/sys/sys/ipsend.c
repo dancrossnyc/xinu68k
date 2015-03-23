@@ -11,7 +11,7 @@
 int
 ipsend(IPaddr faddr, struct epacket *packet, int datalen)
 {
-	register struct ip *ipptr;
+	struct ip *ipptr;
 
 	packet->ep_hdr.e_ptype = hs2net(EP_IP);
 	ipptr = (struct ip *) packet->ep_data;

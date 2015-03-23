@@ -11,7 +11,7 @@
 struct epacket *
 mkarp(int typ, int op, IPaddr spaddr, IPaddr tpaddr)
 {
-	register struct arppak *apacptr;
+	struct arppak *apacptr;
 	struct epacket *packet;
 
 	packet = (struct epacket *) getbuf(Net.netpool);

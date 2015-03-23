@@ -14,8 +14,8 @@ ip2name(IPaddr ip, char *nam)
 	char tmpstr[20];	/* temporary string buffer      */
 	char *buf;		/* buffer to hold domain query  */
 	int dg, i;
-	register char *p;
-	register struct dn_mesg *dnptr;
+	char *p;
+	struct dn_mesg *dnptr;
 
 	dnptr = (struct dn_mesg *) (buf = (char *) getmem(DN_MLEN));
 	*nam = NULLCH;
