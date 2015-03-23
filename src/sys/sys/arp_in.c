@@ -9,7 +9,7 @@
  *  arp_in  -  handle ARP packet coming in from Ethernet network
  *------------------------------------------------------------------------
  */
-void
+int
 arp_in(struct epacket *packet, int device)
 {
 	char	ps;

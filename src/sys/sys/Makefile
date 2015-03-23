@@ -8,7 +8,7 @@ BINDIR	=	$(DIR)/bin
 INCDIR	=	$(DIR)/include
 CONFIG	=	./config
 CC	=	m68k-none-elf-gcc
-CFLAGS	=	-O -c -I../h
+CFLAGS	=	-std=c11 -O -c -I../h -ansi -pedantic -Wall
 AFLAGS	=	-u $(INCDIR)/sys.s
 AS	=	$(BINDIR)/as11
 LD	=	$(BINDIR)/ld11
@@ -245,32 +245,6 @@ xref:		,xref
 
 conf.c:		Configuration
 		$(CONFIG)
-
-book:		.formatted
-		./Doform l
-
-.formatted:	.hupdate .cupdate .supdate .shupdate .Cupdate
-		touch .formatted
-
-.supdate:	$(SFILES)
-		./Doform s
-		touch .supdate
-
-.shupdate:	sh.o
-		./Doform sh
-		touch .shupdate
-
-.cupdate:	$(CFILES)
-		./Doform c
-		touch .cupdate
-
-.hupdate:	$(HFILES)
-		./Doform h
-		touch .hupdate
-
-.Cupdate:	Configuration
-		./Doform C
-		touch .Cupdate
 
 depend:
 		grep '^#include' *.c ../h/*.h			\

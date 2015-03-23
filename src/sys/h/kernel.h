@@ -52,11 +52,13 @@ typedef	char		Bool;		/* Boolean type			*/
 
 #define	isodd(x)	(01&(int)(x))
 #define	min(a,b)	( (a) < (b) ? (a) : (b) )
+#if 0
 #define	disable(ps)	asm("mfps ~ps");asm("mtps $0340")
 #define	restore(ps)	asm("mtps ~ps")	/* restore interrupt status	*/
 #define	enable()	asm("mtps $000")/* enable interrupts		*/
 #define	pause()		asm("wait")	/* machine "wait for interr."	*/
 #define	halt()		asm("halt")	/* machine halt	instruction	*/
+#endif
 
 extern	int	rdyhead, rdytail;
 extern	int	preempt;
