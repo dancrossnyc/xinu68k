@@ -3,7 +3,7 @@
 #
 
 .SUFFIXES:.o .c .s
-DIR	=	/Users/cross/unix/project/xinu68
+DIR	=	/Users/cross/unix/project/xinu68k
 BINDIR	=	$(DIR)/bin
 CC	=	m68k-none-elf-gcc
 CFLAGS	=	-O -c -I../../h -ansi -pedantic -std=c11 -Wall -nostdlib -nostartfiles -ffreestanding

@@ -3,7 +3,7 @@
 #
 
 .SUFFIXES:.o .c .s
-DIR	=	/Users/cross/unix/project/xinu68
+DIR	=	/Users/cross/unix/project/xinu68k
 BINDIR	=	$(DIR)/bin
 INCDIR	=	$(DIR)/include
 CONFIG	=	./config
