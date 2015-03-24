@@ -9,7 +9,7 @@
  *  getbuf  --  get a buffer from a preestablished buffer pool
  *------------------------------------------------------------------------
  */
-SYSCALL *
+void *
 getbuf(int poolid)
 {
 	char ps;
@@ -17,15 +17,15 @@ getbuf(int poolid)
 
 #ifdef	MEMMARK
 	if (unmarked(bpmark))
-		return ((int *) SYSERR);
+		return (void *)SYSERR;
 #endif
 	if (poolid < 0 || poolid >= nbpools)
-		return ((int *) SYSERR);
+		return (void *)SYSERR;
 	wait(bptab[poolid].bpsem);
 	disable(ps);
-	buf = (int *) bptab[poolid].bpnext;
-	bptab[poolid].bpnext = (char *) *buf;
+	buf = bptab[poolid].bpnext;
+	bptab[poolid].bpnext = (int *)(*buf);
 	restore(ps);
 	*buf++ = poolid;
-	return (buf);
+	return (void *)buf;
 }

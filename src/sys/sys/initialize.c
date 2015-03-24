@@ -116,7 +116,6 @@ int
 nulluser(void)
 {				/* babysit CPU when no one home */
 	int userpid;
-	char ps;
 
 	kprintf("\n\nXinu Version %s", vers);
 	if (reboot++ < 1)
@@ -138,8 +137,7 @@ nulluser(void)
 
 #ifdef	NETDAEMON
 	/* start the network input daemon process */
-	resume(create(NETIN, NETISTK, NETIPRI, NETINAM, NETIARGC, userpid)
-	    );
+	resume(create(NETIN, NETISTK, NETIPRI, NETINAM, NETIARGC, userpid));
 #else
 	resume(userpid);
 #endif

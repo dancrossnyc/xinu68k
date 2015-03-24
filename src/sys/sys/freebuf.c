@@ -1,31 +1,32 @@
-/* freebuf.c - freebuf */
+// freebuf.c - freebuf
 
 #include <conf.h>
 #include <kernel.h>
 #include <mark.h>
 #include <bufpool.h>
 
-/*------------------------------------------------------------------------
- *  freebuf  --  free a buffer that was allocated from a pool by getbuf
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  freebuf  --  free a buffer that was allocated from a pool by getbuf
+//------------------------------------------------------------------------
 SYSCALL
-freebuf(int *buf)
+freebuf(void *buf)
 {
 	char ps;
 	int poolid;
+	int *bp;
 
 #ifdef	MEMMARK
 	if (unmarked(bpmark))
 		return (SYSERR);
 #endif
-	poolid = *(--buf);
+	bp = (int *)buf;
+	poolid = *(--bp);
 	if (poolid < 0 || poolid >= nbpools)
 		return (SYSERR);
 	disable(ps);
-	*buf = (int) bptab[poolid].bpnext;
-	bptab[poolid].bpnext = (char *) buf;
+	*bp = (int)bptab[poolid].bpnext;
+	bptab[poolid].bpnext = (void *)buf;
 	restore(ps);
 	signal(bptab[poolid].bpsem);
-	return (OK);
+	return OK;
 }

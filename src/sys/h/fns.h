@@ -43,7 +43,7 @@ SYSCALL close(int descrp);
 /* control.c */
 SYSCALL control(int descrp, int func, char *addr, char *addr2);
 /* create.c */
-SYSCALL create(int procaddr, int ssize, int priority, char *name, int nargs, int args);
+SYSCALL create(PROCESS (*procaddr), int ssize, int priority, char *name, int nargs, ...);
 /* devdump.c */
 void devdump(void);
 /* dfalloc.c */
@@ -117,13 +117,13 @@ int ethwrite(struct devsw *devptr, char *buff, int len);
 /* ethwstrt.c */
 int ethwstrt(struct etblk *etptr, char *buf, int len, int setup);
 /* freebuf.c */
-SYSCALL freebuf(int *buf);
+SYSCALL freebuf(void *buf);
 /* freemem.c */
 SYSCALL freemem(struct mblock *block, unsigned size);
 /* getaddr.c */
 SYSCALL getaddr(IPaddr address);
 /* getbuf.c */
-SYSCALL *getbuf(int poolid);
+void *getbuf(int poolid);
 /* getc.c */
 SYSCALL getc(int descrp);
 /* getitem.c */
@@ -279,7 +279,7 @@ int dequeue(int item);
 /* rarp_in.c */
 int rarp_in(struct epacket *packet, int device);
 /* read.c */
-SYSCALL read(int descrp, char *buff, int count);
+SYSCALL read(int descrp, void *buff, int count);
 /* ready.c */
 int ready(int pid, int resch);
 /* receive.c */
@@ -406,6 +406,6 @@ SYSCALL wait(int sem);
 /* wakeup.c */
 INTPROC wakeup(void);
 /* write.c */
-SYSCALL write(int descrp, char *buff, int count);
+SYSCALL write(int descrp, void *buff, int count);
 /* xdone.c */
 int xdone(void);

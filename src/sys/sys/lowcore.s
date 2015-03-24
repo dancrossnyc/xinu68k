@@ -1,26 +1,27 @@
-/* lowcore.s - (map of interupt vectors in low part of memory) */
+/*
+; lowcore.s - (map of interupt vectors in low part of memory)
 
-DISABLE	=	340			/ PS to	disable	interrupts
-ENABLE	=	000			/ PS to	enable interrupts
+DISABLE	=	340			; PS to	disable	interrupts
+ENABLE	=	000			; PS to	enable interrupts
 
-/*------------------------------------------------------------------------
-/*  absolute location 0  -- fixed interrupt and exception vectors
-/*------------------------------------------------------------------------
-.	=	000^.			/ panic because something jumped
-	jmp	panic0			/     to location zero
-.	=	004^.			/ bus error (e.g., malfunction)
+;------------------------------------------------------------------------
+; absolute location 0  -- fixed interrupt and exception vectors
+;------------------------------------------------------------------------
+.	=	000^.			; panic because something jumped
+	jmp	panic0			;     to location zero
+.	=	004^.			; bus error (e.g., malfunction)
 	panic;	DISABLE+0
-.	=	010^.			/ illegal/reserved instruction
+.	=	010^.			; illegal/reserved instruction
 	panic;	DISABLE+1
-.	=	014^.			/ BPT instruction and T bit
+.	=	014^.			; BPT instruction and T bit
 	panic;	DISABLE+2
-.	=	020^.			/ Input/Output trap
+.	=	020^.			; Input/Output trap
 	panic;	DISABLE+3
-.	=	024^.			/ Power	fail
+.	=	024^.			; Power	fail
 	panic;	DISABLE+4
-.	=	030^.			/ EMT instruction, emulator trap
+.	=	030^.			; EMT instruction, emulator trap
 	panic;	DISABLE+5
-.	=	034^.			/ TRAP instruction
+.	=	034^.			; TRAP instruction
 	panic;	DISABLE+6
 .	=	040^.
 	panic;	DISABLE+7
@@ -30,15 +31,15 @@ ENABLE	=	000			/ PS to	enable interrupts
 	panic;	DISABLE+7
 .	=	054^.
 	panic;	DISABLE+7
-.	=	060^.			/ Console terminal, input
-	panic;	DISABLE+7		/  (usually, device 0)
-.	=	064^.			/ Console terminal, output
-	panic;	DISABLE+7		/  (usually, device 0)
+.	=	060^.			; Console terminal, input
+	panic;	DISABLE+7		;  (usually, device 0)
+.	=	064^.			; Console terminal, output
+	panic;	DISABLE+7		;  (usually, device 0)
 .	=	070^.
 	panic;	DISABLE+7
 .	=	074^.
 	panic;	DISABLE+7
-.	=	100^.			/ BEVENT (real-time clock)
+.	=	100^.			; BEVENT (real-time clock)
 	panic;	DISABLE+7
 .	=	104^.
 	panic;	DISABLE+7
@@ -48,7 +49,7 @@ ENABLE	=	000			/ PS to	enable interrupts
 	panic;	DISABLE+7
 .	=	120^.
 	panic;	DISABLE+7
-.	=	124^.			/ DRV11-B
+.	=	124^.			; DRV11-B
 	panic;	DISABLE+7
 .	=	130^.
 	panic;	DISABLE+7
@@ -62,7 +63,7 @@ ENABLE	=	000			/ PS to	enable interrupts
 	panic;	DISABLE+7
 .	=	154^.
 	panic;	DISABLE+7
-.	=	160^.			/ RLV11	DMA interface
+.	=	160^.			; RLV11	DMA interface
 	panic;	DISABLE+7
 .	=	164^.
 	panic;	DISABLE+7
@@ -70,7 +71,7 @@ ENABLE	=	000			/ PS to	enable interrupts
 	panic;	DISABLE+7
 .	=	174^.
 	panic;	DISABLE+7
-.	=	200^.			/ LAV11, LPV11 line printers
+.	=	200^.			; LAV11, LPV11 line printers
 	panic;	DISABLE+7
 .	=	204^.
 	panic;	DISABLE+7
@@ -78,7 +79,7 @@ ENABLE	=	000			/ PS to	enable interrupts
 	panic;	DISABLE+7
 .	=	214^.
 	panic;	DISABLE+7
-.	=	220^.			/ RKV11	disk
+.	=	220^.			; RKV11	disk
 	panic;	DISABLE+7
 .	=	224^.
 	panic;	DISABLE+7
@@ -88,21 +89,21 @@ ENABLE	=	000			/ PS to	enable interrupts
 	panic;	DISABLE+7
 .	=	240^.
 	panic;	DISABLE+7
-.	=	244^.			/ Floating point error
+.	=	244^.			; Floating point error
 	panic;	DISABLE+7
-.	=	250^.			/ Memory management (11/23)
+.	=	250^.			; Memory management (11/23)
 	panic;	DISABLE+7
 .	=	254^.
 	panic;	DISABLE+7
 .	=	260^.
 	panic;	DISABLE+7
-.	=	264^.			/ RXV11, RXV21 floppy disks
+.	=	264^.			; RXV11, RXV21 floppy disks
 	panic;	DISABLE+7
 .	=	270^.
 	panic;	DISABLE+7
 .	=	274^.
 	panic;	DISABLE+7
-.	=	300^.			/ Start	of floating vectors
+.	=	300^.			; Start	of floating vectors
 	panic;	DISABLE+7
 .	=	304^.
 	panic;	DISABLE+7
@@ -262,3 +263,4 @@ ENABLE	=	000			/ PS to	enable interrupts
 	panic;	DISABLE+7
 .	=	774^.
 	panic;	DISABLE+7
+*/

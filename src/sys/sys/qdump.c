@@ -7,38 +7,6 @@
 
 #define	isbadq(i)	( (i)<0 || (i)>=NQENT )
 
-/*------------------------------------------------------------------------
- *  qdump  --  dump the contents of the q structure for debugging
- *------------------------------------------------------------------------
- */
-int
-qdump(void)
-{
-	qxdump(0);
-}
-
-/*------------------------------------------------------------------------
- *  qdumph  --  dump the contents of the q structure and halt
- *------------------------------------------------------------------------
- */
-int
-qdumph(void)
-{
-	qxdump(0);
-	kprintf("\nDump complete -- type P to continue\n");
-	halt();
-}
-
-/*------------------------------------------------------------------------
- *  qdumpa  --  dump the contents of the q structure printing all info
- *------------------------------------------------------------------------
- */
-int
-qdumpa(void)
-{
-	qxdump(1);
-}
-
 static
 qxdump(int all)
 {
@@ -79,4 +47,36 @@ qxdump(int all)
 			kprintf("q[%4d ] key=%6d,next=%6d,qprev=%6d\n",
 				i, qp->qkey, qp->qnext, qp->qprev);
 	}
+}
+
+/*------------------------------------------------------------------------
+ *  qdump  --  dump the contents of the q structure for debugging
+ *------------------------------------------------------------------------
+ */
+int
+qdump(void)
+{
+	qxdump(0);
+}
+
+/*------------------------------------------------------------------------
+ *  qdumph  --  dump the contents of the q structure and halt
+ *------------------------------------------------------------------------
+ */
+int
+qdumph(void)
+{
+	qxdump(0);
+	kprintf("\nDump complete -- type P to continue\n");
+	halt();
+}
+
+/*------------------------------------------------------------------------
+ *  qdumpa  --  dump the contents of the q structure printing all info
+ *------------------------------------------------------------------------
+ */
+int
+qdumpa(void)
+{
+	qxdump(1);
 }

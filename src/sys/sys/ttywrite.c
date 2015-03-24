@@ -1,4 +1,4 @@
-/* ttywrite.c - ttywrite, writcopy */
+/* ttywrite.c - ttywrite, writecopy */
 
 #include <conf.h>
 #include <kernel.h>
@@ -54,7 +54,7 @@ ttywrite(struct devsw *devptr, char *buff, int count)
 		return (OK);
 	disable(ps);
 	ttyp = &tty[devptr->dvminor];
-	count -= (ncopied = writcopy(buff, ttyp, count));
+	count -= (ncopied = writecopy(buff, ttyp, count));
 	buff += ncopied;
 	for (; count > 0; count--)
 		ttyputc(devptr, *buff++);

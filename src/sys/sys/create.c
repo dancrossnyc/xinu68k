@@ -28,18 +28,16 @@ newpid(void)
 /*------------------------------------------------------------------------
  *  create  -  create a process to start running a procedure
  *
- *	int	*procaddr;		procedure address
- *	int	ssize;			stack size in words
- *	int	priority;		process priority > 0
- *	char	*name;			name (for debugging)
- *	int	nargs;			number of args that follow
- *	int	args;			arguments (treated like an
- *					array in the code)
+ *	int	*procaddr;	procedure address
+ *	int	ssize;		stack size in words
+ *	int	priority;	process priority > 0
+ *	char	*name;		name (for debugging)
+ *	int	nargs;		number of args that follow
+ *	...;			arguments (treated like an array in the code)
  *------------------------------------------------------------------------
  */
 SYSCALL
-create(int procaddr, int ssize, int priority, char *name, int nargs,
-       int args)
+create(PROCESS (*procaddr), int ssize, int priority, char *name, int nargs, ...)
 {
 	int pid;		/* stores new process id        */
 	struct pentry *pptr;	/* pointer to proc. table entry */
@@ -74,9 +72,11 @@ create(int procaddr, int ssize, int priority, char *name, int nargs,
 	pptr->pregs[PS] = INITPS;
 	pptr->pnxtkin = BADPID;
 	pptr->pdevs[0] = pptr->pdevs[1] = BADDEV;
+	va_list(args, nargs);
 	a = (&args) + (nargs - 1);	/* point to last argument       */
 	for (; nargs > 0; nargs--)	/* machine dependent; copy args     */
 		*saddr-- = *a--;	/* onto created process' stack  */
+	va_end(args);
 	*saddr = (int) INITRET;	/* push on return address       */
 	pptr->pregs[SP] = (int) saddr;
 	restore(ps);

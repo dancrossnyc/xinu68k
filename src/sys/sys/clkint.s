@@ -1,8 +1,9 @@
-/* clkint.s -  clkint */
+/*
+; clkint.s -  clkint
 
-/*------------------------------------------------------------------------
-/* clkint  --  real-time clock interrupt service routine 
-/*------------------------------------------------------------------------
+;------------------------------------------------------------------------
+; clkint  --  real-time clock interrupt service routine 
+;------------------------------------------------------------------------
 	.globl	_clkint
 _clkint:
 	dec	_count6			/ Is this the 6th interrupt?
@@ -38,3 +39,4 @@ clpreem:
 	mov	(sp)+,r0		/	 because C doesn't)
 clret:
 	rtt				/ Return from interrupt
+*/

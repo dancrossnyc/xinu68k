@@ -23,7 +23,7 @@ adump(void)
 		atabptr = &Arp.arptab[arindex];
 		if (atabptr->arp_state != AR_FREE) {
 			kprintf(" %2d. Route=%7s, Dev=%2d", arindex,
-				st[atabptr->arp_state], atabptr->arp_dev);
+				st[(int)atabptr->arp_state], atabptr->arp_dev);
 			kprintf(" IPaddr=%03d.%03d.%03d.%03d, ",
 				atabptr->arp_Iad[0] & 0377,
 				atabptr->arp_Iad[1] & 0377,

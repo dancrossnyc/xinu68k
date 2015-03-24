@@ -17,7 +17,6 @@ ibnew(int diskdev, int writedir)
 	struct dir *dirptr;
 	struct iblk iblock;
 	IBADDR inum;
-	int i;
 	int sem;
 
 	sem = ((struct dsblk *) devtab[diskdev].dvioblk)->dflsem;

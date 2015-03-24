@@ -9,7 +9,7 @@
  *------------------------------------------------------------------------
  */
 SYSCALL
-write(int descrp, char *buff, int count)
+write(int descrp, void *buff, int count)
 {
 	struct devsw *devptr;
 

@@ -9,7 +9,7 @@
  *------------------------------------------------------------------------
  */
 SYSCALL
-read(int descrp, char *buff, int count)
+read(int descrp, void *buff, int count)
 {
 	struct devsw *devptr;
 

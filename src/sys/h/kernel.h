@@ -60,6 +60,13 @@ typedef	char		Bool;		/* Boolean type			*/
 #define	halt()		asm("halt")	/* machine halt	instruction	*/
 #endif
 
+#define disable(ps) (ps = Disable())
+int Disable();
+void restore(int ps);
+void enable();
+void pause();
+void halt();
+
 extern	int	rdyhead, rdytail;
 extern	int	preempt;
 

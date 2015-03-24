@@ -48,7 +48,7 @@ static char saveps;
 //------------------------------------------------------------------------
 //  savestate  --  save the console control and status register
 //------------------------------------------------------------------------
-static int
+static void
 savestate(int device)
 {
 	char ps;
@@ -67,7 +67,7 @@ savestate(int device)
 //------------------------------------------------------------------------
 //  rststate  --  restore the console output control and status register
 //------------------------------------------------------------------------
-static int
+static void
 rststate(void)
 {
 	char ps;

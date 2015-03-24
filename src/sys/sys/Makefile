@@ -7,8 +7,8 @@ DIR	=	/Users/cross/unix/project/xinu68
 BINDIR	=	$(DIR)/bin
 INCDIR	=	$(DIR)/include
 CONFIG	=	./config
-CC	=	m68k-none-elf-gcc
-CFLAGS	=	-O -c -I../h -ansi -pedantic -std=c11 -Wall
+CC	=	m68k-none-elf-gcc -mc68000
+CFLAGS	=	-O -c -I../h -ansi -pedantic -std=c11 -Wall -nostdlib -nostartfiles -ffreestanding
 AFLAGS	=	-u $(INCDIR)/sys.s
 AS	=	$(BINDIR)/as11
 LD	=	$(BINDIR)/ld11
@@ -235,7 +235,7 @@ xref:		,xref
 
 ../h/conf.h:	Configuration
 		$(CONFIG)
-		/bin/rm $(INCDIR)/conf.h
+		/bin/rm -f $(INCDIR)/conf.h
 		/bin/ln ../h/conf.h $(INCDIR)/conf.h
 
 conf.c:		Configuration

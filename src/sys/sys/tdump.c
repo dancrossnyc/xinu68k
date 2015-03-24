@@ -57,6 +57,20 @@ tdumph(void)
  *  tdump1  --  dump one tty control block
  *------------------------------------------------------------------------
  */
+static
+tqdump(int start, int len, int maxlen, char *buff)
+{
+	int i;
+	for (i = start; len > 0; len--) {
+		if (buff[i] & 0200)
+			kprintf("M-");
+		kprintf("%s", unctrl[buff[i] & 0177]);
+		if (++i >= maxlen)
+			i = 0;
+	}
+	kprintf("\n");
+}
+
 int
 tdump1(int tnum)
 {
@@ -85,18 +99,4 @@ tdump1(int tnum)
 		i = OBUFLEN;
 	tqdump(iptr->otail, i, OBUFLEN, iptr->obuff);
 	restore(ps);
-}
-
-static
-tqdump(int start, int len, int maxlen, char *buff)
-{
-	int i;
-	for (i = start; len > 0; len--) {
-		if (buff[i] & 0200)
-			kprintf("M-");
-		kprintf("%s", unctrl[buff[i] & 0177]);
-		if (++i >= maxlen)
-			i = 0;
-	}
-	kprintf("\n");
 }
