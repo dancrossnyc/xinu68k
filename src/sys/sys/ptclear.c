@@ -10,7 +10,7 @@
  *------------------------------------------------------------------------
  */
 int
-_ptclear(struct pt *ptptr, int newstate, int (*dispose) (void))
+_ptclear(struct pt *ptptr, int newstate, int (*dispose)(int))
 {
 	struct ptnode *p;
 

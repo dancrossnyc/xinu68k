@@ -16,5 +16,5 @@ control(int descrp, int func, char *addr, char *addr2)
 	if (isbaddev(descrp))
 		return (SYSERR);
 	devptr = &devtab[descrp];
-	return ((*devptr->dvcntl) (devptr, func, addr, addr2));
+	return (*devptr->dvcntl)(devptr, func, addr, addr2);
 }

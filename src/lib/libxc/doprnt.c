@@ -1,19 +1,22 @@
 /* doprnt.c - _doprnt, _prt10, _prtl10, _prt8, _prtl8, _prt16, _prtl16 */
 
+#include <stdarg.h>
+
 #define	MAXSTR	80
 #define	LOCAL	static
 
-/*------------------------------------------------------------------------
- *  _doprnt --  format and write output using 'func' to write characters
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  _doprnt --  format and write output using 'func' to write characters
+//
+// Adapted by S. Salisbury, Purdue U.
+//
+//  fmt: Format string for printf
+//  args: Arguments to printf
+//  func: Function to put a character
+//  farg: Argument to func
+//------------------------------------------------------------------------
 int
-_doprnt(			/* adapted by S. Salisbury, Purdue U.   */
-	       char *fmt,	/* Format string for printf             */
-	       int *args,	/* Arguments to printf                  */
-	       int (*func) (void),	/* Function to put a character          */
-	       int farg		/* Argument to func                     */
-    )
+_doprnt(char *fmt, va_list args, int (*func) (int), int farg)
 {
 	int c;
 	int i;
@@ -51,7 +54,7 @@ _doprnt(			/* adapted by S. Salisbury, Purdue U.   */
 		/* Also allow %* for variable width (%0* as well)       */
 		fmin = 0;
 		if (*fmt == '*') {
-			fmin = *args++;
+			fmin = va_arg(args, int);
 			++fmt;
 		} else
 			while ('0' <= *fmt && *fmt <= '9') {
@@ -61,7 +64,7 @@ _doprnt(			/* adapted by S. Salisbury, Purdue U.   */
 		fmax = 0;
 		if (*fmt == '.') {
 			if (*(++fmt) == '*') {
-				fmax = *args++;
+				fmax = va_arg(args, int);
 				++fmt;
 			} else
 				while ('0' <= *fmt && *fmt <= '9') {
@@ -80,14 +83,14 @@ _doprnt(			/* adapted by S. Salisbury, Purdue U.   */
 
 		switch (f) {
 		case 'c':
-			string[0] = (char) *args;
+			string[0] = (char) va_arg(args, char);
 			string[1] = '\0';
 			fmax = 0;
 			fill = ' ';
 			break;
 
 		case 's':
-			str = (char *) *args;
+			str = (char *) va_arg(args, char *);
 			fill = ' ';
 			break;
 

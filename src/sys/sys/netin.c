@@ -14,7 +14,6 @@ netin(int userpid		/* user process to resume       */
     )
 {
 	struct epacket *packet;
-	struct epacket *getbuf();
 	int icmpp;
 
 	arpinit();

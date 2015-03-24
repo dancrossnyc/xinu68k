@@ -20,20 +20,17 @@ rfsend(struct fphdr *fptr, int reqlen, int rplylen)
 	if (Rf.device == RCLOSED) {
 		Rf.device = open(INTERNET, RSERVER, ANYLPORT);
 		if (Rf.device == SYSERR ||
-		    control(Rf.device, DG_SETMODE, DG_DMODE | DG_TMODE)
-		    == SYSERR)
+		    control(Rf.device, DG_SETMODE, DG_DMODE | DG_TMODE, 0) == SYSERR)
 			return (SYSERR);
 	}
 	disable(ps);
-	control(Rf.device, DG_CLEAR);
+	control(Rf.device, DG_CLEAR, 0, 0);
 	for (trys = 0; trys < RMAXTRY; trys++) {
-		if (write(Rf.device, fptr, reqlen)
-		    == SYSERR) {
+		if (write(Rf.device, fptr, reqlen) == SYSERR) {
 			restore(ps);
 			return (SYSERR);
 		}
-		if ((ret = read(Rf.device, fptr, rplylen))
-		    != SYSERR && ret != TIMEOUT) {
+		if ((ret = read(Rf.device, fptr, rplylen)) != SYSERR && ret != TIMEOUT) {
 			restore(ps);
 			return (ret);
 		}

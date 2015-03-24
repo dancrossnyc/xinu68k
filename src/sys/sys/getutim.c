@@ -25,7 +25,7 @@ getutim(long *timvar)
 	if (clktime < SECPERHR) {	/* assume small numbers invalid */
 		if ((dev = open(INTERNET, TSERVER, ANYLPORT)) == SYSERR ||
 		    control(dev, DG_SETMODE,
-			    DG_TMODE | DG_DMODE) == SYSERR) {
+			    DG_TMODE | DG_DMODE, 0) == SYSERR) {
 			panic(msg);
 			ret = SYSERR;
 		}

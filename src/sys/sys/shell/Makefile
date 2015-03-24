@@ -8,13 +8,13 @@ BINDIR	=	$(DIR)/bin
 CC	=	m68k-none-elf-gcc
 CFLAGS	=	-O -c -I../../h -ansi -pedantic -std=c11 -Wall -nostdlib -nostartfiles -ffreestanding
 AFLAGS	=	-u $(DIR)/include/sys.s
-AS	=	$(BINDIR)/as11
-LD	=	$(BINDIR)/ld11
-AR	=	/bin/ar
-LORDER	=	$(BINDIR)/lorder11
-RANLIB	=	$(BINDIR)/ranlib11
+AS	=	m68k-none-elf-as
+LD	=	m68k-none-elf-ld
+AR	=	m68k-none-elf-ar
+LORDER	=	m68k-none-elf-lorder
+RANLIB	=	m68k-none-elf-ranlib
 CPRINT	=	$(BINDIR)/cprint
-SIZE	=	$(BINDIR)/size11
+SIZE	=	m68k-none-elf-size
 LIB	=	$(DIR)/lib
 .c.o:
 		$(CC) $(CFLAGS)	$<

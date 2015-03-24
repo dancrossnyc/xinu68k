@@ -5,6 +5,7 @@
 #include <proc.h>
 #include <mem.h>
 #include <io.h>
+#include <stdarg.h>
 
 /*------------------------------------------------------------------------
  * newpid  --  obtain a new (free) process id
@@ -39,10 +40,10 @@ newpid(void)
 SYSCALL
 create(PROCESS (*procaddr), int ssize, int priority, char *name, int nargs, ...)
 {
+	va_list args;
 	int pid;		/* stores new process id        */
 	struct pentry *pptr;	/* pointer to proc. table entry */
 	int i;
-	int *a;			/* points to list of args       */
 	int *saddr;		/* stack address                */
 	char ps;		/* saved processor status       */
 	int INITRET();
@@ -72,11 +73,12 @@ create(PROCESS (*procaddr), int ssize, int priority, char *name, int nargs, ...)
 	pptr->pregs[PS] = INITPS;
 	pptr->pnxtkin = BADPID;
 	pptr->pdevs[0] = pptr->pdevs[1] = BADDEV;
-	va_list(args, nargs);
-	a = (&args) + (nargs - 1);	/* point to last argument       */
+	va_start(args, nargs);
+	saddr -= nargs;
 	for (; nargs > 0; nargs--)	/* machine dependent; copy args     */
-		*saddr-- = *a--;	/* onto created process' stack  */
+		*++saddr = va_arg(args, int);	/* onto created process's stack  */
 	va_end(args);
+	saddr -= nargs;
 	*saddr = (int) INITRET;	/* push on return address       */
 	pptr->pregs[SP] = (int) saddr;
 	restore(ps);

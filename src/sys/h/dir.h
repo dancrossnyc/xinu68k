@@ -1,5 +1,8 @@
 /* dir.h */
 
+#ifndef DIR_H__
+#define DIR_H__
+
 #define	FDNLEN	10			/* length of file name + 1	*/
 #define	NFDES	28			/* number of files per directory*/
 
@@ -21,3 +24,5 @@ struct	dir	{			/* directory layout		*/
 struct	freeblk	{			/* shape of block on free list	*/
 	DBADDR	fbnext;			/* address of next free block	*/
 };
+
+#endif

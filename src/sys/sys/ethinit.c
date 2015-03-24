@@ -16,7 +16,7 @@ ethinit(struct devsw *devptr)
 	struct dcmd *dcmptr;
 	short *iptr;
 	int i;
-	struct dqsetu setup;
+	struct dqsetup setup;
 
 	etptr = &eth[devptr->dvminor];
 	devptr->dvioblk = (char *) etptr;

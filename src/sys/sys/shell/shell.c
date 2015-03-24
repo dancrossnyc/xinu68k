@@ -131,7 +131,7 @@ int	dev;
 		len += (ntokens+2) * (sizeof(char *) + sizeof(char));
 		if (isodd(len))
 			len--;
-		control(dev, TCINT, getpid());
+		control(dev, TCINT, getpid(), 0);
 
 		/* create process to execute conventional command */
 

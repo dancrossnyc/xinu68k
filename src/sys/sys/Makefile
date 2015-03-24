@@ -10,14 +10,14 @@ CONFIG	=	./config
 CC	=	m68k-none-elf-gcc -mc68000
 CFLAGS	=	-O -c -I../h -ansi -pedantic -std=c11 -Wall -nostdlib -nostartfiles -ffreestanding
 AFLAGS	=	-u $(INCDIR)/sys.s
-AS	=	$(BINDIR)/as11
-LD	=	$(BINDIR)/ld11
-AR	=	/bin/ar
-RANLIB	=	$(BINDIR)/ranlib11
-LORDER	=	$(BINDIR)/lorder11
+AS	=	m68k-none-elf-as
+LD	=	m68k-none-elf-ld
+AR	=	m68k-none-elf-ar
+RANLIB	=	m68k-none-elf-ranlib
+LORDER	=	m68k-none-elf-lorder
 LIB	=	$(DIR)/lib
 DOWNLOAD=	$(BINDIR)/download
-SIZE11	=	$(BINDIR)/size11
+SIZE11	=	m68k-none-elf-size
 CPRINT	=	$(BINDIR)/cprint
 ODT	=	$(BINDIR)/odt
 .c.o:

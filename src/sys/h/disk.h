@@ -54,6 +54,6 @@ extern	int	dskdbp;			/* disk data block buffer pool	*/
 #define	DSKSYNC	0			/* synchronize (flush all I/O)	*/
 #define	dssync(ddev)	control((ddev),DSKSYNC);
 
-#define	dsdirec(ddev)	((struct dir *)devtab[ddev].dvioblk->ddir)
+#define	dsdirec(ddev)	(((struct dsblk *)(devtab[ddev].dvioblk))->ddir)
 
 #endif

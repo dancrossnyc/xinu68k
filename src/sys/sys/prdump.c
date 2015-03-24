@@ -5,38 +5,6 @@
 #include <proc.h>
 #include <q.h>
 
-/*------------------------------------------------------------------------
- *  prdump  --  dump the active process table entries
- *------------------------------------------------------------------------
- */
-int
-prdump(void)
-{
-	pxdump(0);
-}
-
-/*------------------------------------------------------------------------
- *  prdumph  --  dump the active process table entries and halt
- *------------------------------------------------------------------------
- */
-int
-prdumph(void)
-{
-	pxdump(0);
-	kprintf("\nDump complete -- type P to continue\n");
-	halt();
-}
-
-/*------------------------------------------------------------------------
- *  prdumpa  --  dump the process table entries printing all entries
- *------------------------------------------------------------------------
- */
-int
-prdumpa(void)
-{
-	pxdump(1);
-}
-
 static
 pxdump(int all)
 {
@@ -80,4 +48,36 @@ pxdump(int all)
 	}
 	kprintf("\n");
 	restore(ps);
+}
+
+/*------------------------------------------------------------------------
+ *  prdump  --  dump the active process table entries
+ *------------------------------------------------------------------------
+ */
+int
+prdump(void)
+{
+	pxdump(0);
+}
+
+/*------------------------------------------------------------------------
+ *  prdumph  --  dump the active process table entries and halt
+ *------------------------------------------------------------------------
+ */
+int
+prdumph(void)
+{
+	pxdump(0);
+	kprintf("\nDump complete -- type P to continue\n");
+	halt();
+}
+
+/*------------------------------------------------------------------------
+ *  prdumpa  --  dump the process table entries printing all entries
+ *------------------------------------------------------------------------
+ */
+int
+prdumpa(void)
+{
+	pxdump(1);
 }

@@ -5,6 +5,7 @@
 #include <io.h>
 #include <slu.h>
 #include <tty.h>
+#include <stdarg.h>
 
 #define DELAY	100
 //------------------------------------------------------------------------
@@ -84,12 +85,13 @@ rststate(void)
 // Flow control added by Steve Munson
 //------------------------------------------------------------------------
 int
-kprintf(char *fmt, int args)
+kprintf(const char *fmt, ...)
 {
-	int kputc();
-
+	va_list args;
 	savestate(CONSOLE);
-	_doprnt(fmt, &args, kputc, CONSOLE);
+	va_start(args, fmt);
+	_doprnt(fmt, args, kputc, CONSOLE);
+	va_end(args);
 	rststate();
 	return OK;
 }

@@ -1,7 +1,3 @@
-#include "disk.h"
-#include "iblock.h"
-#include "ip.h"
-
 struct epacket;
 struct dgblk;
 struct dqsetup;
@@ -15,6 +11,10 @@ struct mblock;
 struct pt;
 struct tty;
 struct xgram;
+
+#include "disk.h"
+#include "iblock.h"
+#include "ip.h"
 
 /* access.c */
 SYSCALL access(char *name, int mode);
@@ -185,7 +185,7 @@ int ipsend(IPaddr faddr, struct epacket *packet, int datalen);
 /* kill.c */
 SYSCALL kill(int pid);
 /* kprintf.c */
-int kprintf(char *fmt, ...);
+int kprintf(const char *fmt, ...);
 /* lfclose.c */
 int lfclose(struct devsw *devptr);
 /* lfgetc.c */
@@ -266,7 +266,7 @@ SYSCALL preset(int portid, int (*dispose)(void));
 /* psend.c */
 SYSCALL psend(int portid, int msg);
 /* ptclear.c */
-int _ptclear(struct pt *ptptr, int newstate, int (*dispose)(void));
+int _ptclear(struct pt *ptptr, int newstate, int (*dispose)(int));
 /* putc.c */
 SYSCALL putc(int descrp, int ch);
 /* qdump.c */

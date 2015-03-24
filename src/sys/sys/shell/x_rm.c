@@ -16,7 +16,7 @@ char	*args[];
 		fprintf(stderr, "usage: rm file\n");
 		return(SYSERR);
 	}
-	if ( remove(args[1]) == SYSERR ) {
+	if (remove(args[1], 0) == SYSERR) {
 		fprintf(stderr, "Cannot remove %s\n", args[1]);
 		return(SYSERR);
 	}

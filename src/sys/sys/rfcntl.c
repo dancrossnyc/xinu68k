@@ -19,7 +19,7 @@ rfcntl(struct devsw *devptr, int func, char *addr, char *addr2)
 
 	case RFCLEAR:
 		/* clear port associated with rfserver */
-		control(Rf.device, DG_CLEAR);
+		control(Rf.device, DG_CLEAR, 0, 0);
 		return (OK);
 
 		/* Universal file manipulation functions */

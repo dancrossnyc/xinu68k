@@ -44,7 +44,7 @@ ip2name(IPaddr ip, char *nam)
 	/* Broadcast query */
 
 	dg = open(INTERNET, NSERVER, ANYLPORT);
-	control(dg, DG_SETMODE, DG_DMODE | DG_TMODE);
+	control(dg, DG_SETMODE, DG_DMODE | DG_TMODE, 0);
 	write(dg, buf, p - buf);
 	if ((i = read(dg, buf, DN_MLEN)) == SYSERR || i == TIMEOUT)
 		panic("No response from name server");
