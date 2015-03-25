@@ -28,6 +28,50 @@ char _sctab[128] = {
 };
 
 int
+_instr(char *ptr, int type, int len, int (*getch)(int, void *),
+       int (*ungetch)(int, void *), int arg1, void *arg2, int *eofptr)
+{
+	int ch;
+	char *optr;
+	int ignstp;
+
+	*eofptr = 0;
+	optr = ptr;
+	if (type == 'c' && len == 30000)
+		len = 1;
+	ignstp = 0;
+	if (type == 's')
+		ignstp = SPC;
+	while (_sctab[ch = (*getch)(arg1, arg2)] & ignstp)
+		if (ch == EOF)
+			break;
+	ignstp = SPC;
+	if (type == 'c')
+		ignstp = 0;
+	else if (type == '[')
+		ignstp = STP;
+	while (ch != EOF && (_sctab[ch] & ignstp) == 0) {
+		if (ptr)
+			*ptr++ = ch;
+		if (--len <= 0)
+			break;
+		ch = (*getch)(arg1, arg2);
+	}
+	if (ch != EOF) {
+		if (len > 0)
+			(*ungetch)(arg1, arg2);
+		*eofptr = 0;
+	} else
+		*eofptr = 1;
+	if (ptr && ptr != optr) {
+		if (type != 'c')
+			*ptr++ = '\0';
+		return 1;
+	}
+	return 0;
+}
+
+int
 _innum(int **ptr, int type, int len, int size, int (*getch)(int, void *),
        int (*ungetch)(int, void *), int arg1, void *arg2, int *eofptr)
 {
@@ -35,7 +79,7 @@ _innum(int **ptr, int type, int len, int size, int (*getch)(int, void *),
 	char *np;
 	char numbuf[64];
 	int c, base;
-	int expseen, negflg, c1, ndigit;
+	int negflg, c1, ndigit;
 	long lcval;
 
 	if (type == 'c' || type == 's' || type == '[')
@@ -49,7 +93,6 @@ _innum(int **ptr, int type, int len, int size, int (*getch)(int, void *),
 	else if (type == 'x')
 		base = 16;
 	np = numbuf;
-	expseen = 0;
 	negflg = 0;
 	while ((c = (*getch)(arg1, arg2)) == ' ' || c == '\t' || c == '\n')
 		;
@@ -64,8 +107,8 @@ _innum(int **ptr, int type, int len, int size, int (*getch)(int, void *),
 	}
 	for (; --len >= 0; *np++ = c, c = (*getch)(arg1, arg2)) {
 		if (isdigit(c) ||
-		    base == 16 && (('a' <= c && c <= 'f') ||
-				   ('A' <= c && c <= 'F'))) {
+		    ((base == 16) && (('a' <= c && c <= 'f') ||
+				   ('A' <= c && c <= 'F')))) {
 			ndigit++;
 			if (base == 8)
 				lcval <<= 3;
@@ -111,50 +154,6 @@ _innum(int **ptr, int type, int len, int size, int (*getch)(int, void *),
 		break;
 	}
 	return 1;
-}
-
-int
-_instr(char *ptr, int type, int len, int (*getch)(int, void *),
-       int (*ungetch)(int, void *), int arg1, void *arg2, int *eofptr)
-{
-	int ch;
-	char *optr;
-	int ignstp;
-
-	*eofptr = 0;
-	optr = ptr;
-	if (type == 'c' && len == 30000)
-		len = 1;
-	ignstp = 0;
-	if (type == 's')
-		ignstp = SPC;
-	while (_sctab[ch = (*getch)(arg1, arg2)] & ignstp)
-		if (ch == EOF)
-			break;
-	ignstp = SPC;
-	if (type == 'c')
-		ignstp = 0;
-	else if (type == '[')
-		ignstp = STP;
-	while (ch != EOF && (_sctab[ch] & ignstp) == 0) {
-		if (ptr)
-			*ptr++ = ch;
-		if (--len <= 0)
-			break;
-		ch = (*getch)(arg1, arg2);
-	}
-	if (ch != EOF) {
-		if (len > 0)
-			(*ungetch)(arg1, arg2);
-		*eofptr = 0;
-	} else
-		*eofptr = 1;
-	if (ptr && ptr != optr) {
-		if (type != 'c')
-			*ptr++ = '\0';
-		return 1;
-	}
-	return 0;
 }
 
 char *

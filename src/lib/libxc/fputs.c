@@ -8,8 +8,10 @@ fputs(int dev, char *s)
 {
 	int r;
 	int c;
+	int putc(int, int);
 
-	while (c = *s++)
+	r = 0;
+	while ((c = *s++) != '\0')
 		r = putc(dev, c);
 
 	return r;

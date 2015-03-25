@@ -10,8 +10,10 @@ fgets(int dev, char *s, int n)
 {
 	int c;
 	char *cs;
+	int getc(int);
 
 	cs = s;
+	c = -1;
 	while (--n > 0 && (c = getc(dev)) >= 0) {
 		*cs++ = c;
 		if (c == '\n')

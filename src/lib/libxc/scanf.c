@@ -32,7 +32,7 @@ getch(int dev, int *buf)
 static int
 ungetch(int dev, int *buf)
 {
-	*buf = EMPTY;
+	return *buf = EMPTY;
 }
 /*------------------------------------------------------------------------
  *  scanf  --  read from the console according to a format

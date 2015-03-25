@@ -8,7 +8,7 @@ AR	=	m68k-none-elf-ar
 AS	=	m68k-none-elf-as
 AFLAGS	=	-u $(DIR)/include/sys.s
 CC	=	m68k-none-elf-gcc
-CFLAGS	=	-O -c -I../../sys/h -nostdlib -nostartfiles -ffreestanding
+CFLAGS	=	-O -c -I../../sys/h -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
 RANLIB	=	m68k-none-elf-ranlib
 
 .s.o:

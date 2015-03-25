@@ -1,6 +1,6 @@
 static long randx = 1;
 
-int
+void
 srand(unsigned x)
 {
 	randx = x;

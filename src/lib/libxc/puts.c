@@ -9,8 +9,10 @@ int
 puts(char *s)
 {
 	int c;
+	int putc(int, int);
 
-	while (c = *s++)
+	while ((c = *s++) != '\0')
 		putc(CONSOLE, c);
-	return (putc(CONSOLE, '\n'));
+
+	return putc(CONSOLE, '\n');
 }

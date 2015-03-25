@@ -3,7 +3,7 @@
 static int (*qscmp) ();
 static int qses;
 
-static
+static void
 qsexc(char *i, char *j)
 {
 	char *ri, *rj, c;
@@ -19,7 +19,7 @@ qsexc(char *i, char *j)
 	} while (--n);
 }
 
-static
+static void
 qstexc(char *i, char *j, char *k)
 {
 	char *ri, *rj, *rk;
@@ -38,12 +38,11 @@ qstexc(char *i, char *j, char *k)
 	} while (--n);
 }
 
-static
+static void
 qs1(char *a, char *l)
 {
 	char *i, *j;
 	int es;
-	char **k;
 	char *lp, *hp;
 	int c;
 	unsigned n;
@@ -109,7 +108,7 @@ loop:
 	}
 }
 
-int
+void
 qsort(char *a, unsigned n, int es, int (*fc) (void))
 {
 	qscmp = fc;
