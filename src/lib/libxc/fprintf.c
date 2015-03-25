@@ -1,13 +1,12 @@
-/* fprintf.c - fprintf */
+// fprintf.c - fprintf
 
 #include <stdarg.h>
 
 #define	OK	1
 
-/*------------------------------------------------------------------------
- *  fprintf  --  print a formatted message on specified device (file)
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  fprintf  --  print a formatted message on specified device (file)
+//------------------------------------------------------------------------
 int
 fprintf(int dev, const char *fmt, ...)
 {

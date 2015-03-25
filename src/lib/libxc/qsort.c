@@ -1,4 +1,4 @@
-/* qsort.c - qsort */
+// qsort.c - qsort
 
 static int (*qscmp) ();
 static int qses;

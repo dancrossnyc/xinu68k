@@ -30,7 +30,6 @@ CFILES	=	abs.c atoi.c atol.c				\
 		ctype_.c					\
 		doprnt.c doscan.c				\
 		fgets.c fprintf.c fputs.c			\
-		gets.c						\
 		index.c						\
 		printf.c puts.c					\
 		qsort.c						\
@@ -46,7 +45,6 @@ OFILES	=	abs.o						\
 		ctype_.o					\
 		doprnt.o doscan.o				\
 		fgets.o fprintf.o fputs.o			\
-		gets.o						\
 		index.o						\
 		printf.o puts.o					\
 		qsort.o						\

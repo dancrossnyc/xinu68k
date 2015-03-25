@@ -1,11 +1,10 @@
-/* fgets.c - fgets */
+// fgets.c - fgets
 
 #define NULL    0
 
-/*------------------------------------------------------------------------
- *  fgets  --  read a newline-terminated string from device (file) dev
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  fgets  --  read a newline-terminated string from device (file) dev
+//------------------------------------------------------------------------
 char *
 fgets(int dev, char *s, int n)
 {
@@ -21,5 +20,6 @@ fgets(int dev, char *s, int n)
 	if (c < 0 && cs == s)
 		return (NULL);
 	*cs++ = '\0';
+
 	return (s);
 }

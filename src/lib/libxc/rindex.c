@@ -1,7 +1,5 @@
-/*
- * Return the ptr in sp at which the character c last
- * appears; NULL if not found
-*/
+// Return the ptr in sp at which the character c last
+// appears; NULL if not found
 
 #define NULL 0
 

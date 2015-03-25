@@ -1,7 +1,5 @@
-/*
- * Return the ptr in sp at which the character c appears;
- * NULL if not found
- */
+// Return the ptr in sp at which the character c appears;
+// NULL if not found
 
 #define	NULL	0
 
@@ -12,5 +10,6 @@ index(char *sp, int c)
 		if (*sp == c)
 			return (sp);
 	} while (*sp++);
-	return (NULL);
+
+	return NULL;
 }

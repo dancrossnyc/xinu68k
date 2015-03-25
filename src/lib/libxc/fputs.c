@@ -1,9 +1,8 @@
-/* fputs.c - fputs */
+// fputs.c - fputs
 
-/*------------------------------------------------------------------------
- *  fputs  --  write a null-terminated string to a device (file)
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  fputs  --  write a null-terminated string to a device (file)
+//------------------------------------------------------------------------
 int
 fputs(int dev, char *s)
 {
@@ -12,5 +11,6 @@ fputs(int dev, char *s)
 
 	while (c = *s++)
 		r = putc(dev, c);
-	return (r);
+
+	return r;
 }

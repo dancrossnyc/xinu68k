@@ -1,6 +1,4 @@
-/*
- * Compare strings (at most n bytes):  s1>s2: >0  s1==s2: 0  s1<s2: <0
- */
+// Compare strings (at most n bytes):  s1>s2: >0  s1==s2: 0  s1<s2: <0
 
 int
 strncmp(char *s1, char *s2, int n)

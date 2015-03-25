@@ -1,7 +1,5 @@
-/*
- * Copy s2 to s1, truncating or null-padding to always copy n bytes
- * return s1
- */
+// Copy s2 to s1, truncating or null-padding to always copy n bytes
+// return s1
 
 char *
 strncpy(char *s1, char *s2, int n)

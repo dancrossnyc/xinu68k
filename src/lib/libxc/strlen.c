@@ -1,7 +1,5 @@
-/*
- * Returns the number of
- * non-NULL bytes in string argument.
- */
+// Returns the number of
+// non-NULL bytes in string argument.
 
 int
 strlen(char *s)
