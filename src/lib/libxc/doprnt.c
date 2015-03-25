@@ -1,9 +1,118 @@
-/* doprnt.c - _doprnt, _prt10, _prtl10, _prt8, _prtl8, _prt16, _prtl16 */
+// doprnt.c - _doprnt, _prt10, _prtl10, _prt8, _prtl8, _prt16, _prtl16
 
 #include <stdarg.h>
 
 #define	MAXSTR	80
-#define	LOCAL	static
+
+static void
+_prt10(unsigned int num, char *str)
+{
+	int i;
+	char temp[6];
+
+	temp[0] = '\0';
+	for (i = 1; i <= 5; i++) {
+		temp[i] = num % 10 + '0';
+		num /= 10;
+	}
+	for (i = 5; temp[i] == '0'; i--);
+	if (i == 0)
+		i++;
+	while (i >= 0)
+		*str++ = temp[i--];
+}
+
+static void
+_prtl10(long num, char *str)
+{
+	int i;
+	char temp[11];
+
+	temp[0] = '\0';
+	for (i = 1; i <= 10; i++) {
+		temp[i] = num % 10L + '0';
+		num /= 10L;
+	}
+	for (i = 10; temp[i] == '0'; i--);
+	if (i == 0)
+		i++;
+	while (i >= 0)
+		*str++ = temp[i--];
+}
+
+static void
+_prt8(unsigned int num, char *str)
+{
+	int i;
+	char temp[7];
+
+	temp[0] = '\0';
+	for (i = 1; i <= 6; i++) {
+		temp[i] = (num & 07) + '0';
+		num = (num >> 3) & 0037777;
+	}
+	temp[6] &= '1';
+	for (i = 6; temp[i] == '0'; i--);
+	if (i == 0)
+		i++;
+	while (i >= 0)
+		*str++ = temp[i--];
+}
+
+static void
+_prtl8(long num, char *str)
+{
+	int i;
+	char temp[12];
+
+	temp[0] = '\0';
+	for (i = 1; i <= 11; i++) {
+		temp[i] = (num & 07) + '0';
+		num = num >> 3;
+	}
+	temp[11] &= '3';
+	for (i = 11; temp[i] == '0'; i--);
+	if (i == 0)
+		i++;
+	while (i >= 0)
+		*str++ = temp[i--];
+}
+
+static void
+_prt16(unsigned int num, char *str)
+{
+	int i;
+	char temp[5];
+
+	temp[0] = '\0';
+	for (i = 1; i <= 4; i++) {
+		temp[i] = "0123456789abcdef"[num & 0x0f];
+		num = num >> 4;
+	}
+	for (i = 4; temp[i] == '0'; i--);
+	if (i == 0)
+		i++;
+	while (i >= 0)
+		*str++ = temp[i--];
+}
+
+static void
+_prtl16(long num, char *str)
+{
+	int i;
+	char temp[9];
+
+	temp[0] = '\0';
+	for (i = 1; i <= 8; i++) {
+		temp[i] = "0123456789abcdef"[num & 0x0f];
+		num = num >> 4;
+	}
+	for (i = 8; temp[i] == '0'; i--);
+	if (i == 0)
+		i++;
+	while (i >= 0)
+		*str++ = temp[i--];
+}
 
 //------------------------------------------------------------------------
 //  _doprnt --  format and write output using 'func' to write characters
@@ -15,8 +124,8 @@
 //  func: Function to put a character
 //  farg: Argument to func
 //------------------------------------------------------------------------
-int
-_doprnt(char *fmt, va_list args, int (*func) (int), int farg)
+void
+_doprnt(char *fmt, va_list args, int (*func)(int, int), int farg)
 {
 	int c;
 	int i;
@@ -46,7 +155,7 @@ _doprnt(char *fmt, va_list args, int (*func) (int), int farg)
 			continue;
 		}
 		/* Check for "%-..." == Left-justified output */
-		if (leftjust = ((*fmt == '-') ? 1 : 0))
+		if ((leftjust = ((*fmt == '-') ? 1 : 0)) != 0)
 			fmt++;
 		/* Allow for zero-filled numeric outputs ("%0...") */
 		fill = (*fmt == '0') ? *fmt++ : ' ';
@@ -72,7 +181,7 @@ _doprnt(char *fmt, va_list args, int (*func) (int), int farg)
 				}
 		}
 		/* Check for the 'l' option to force long numeric */
-		if (longflag = ((*fmt == 'l') ? 1 : 0))
+		if ((longflag = ((*fmt == 'l') ? 1 : 0)) != 0)
 			fmt++;
 		str = string;
 		if ((f = *fmt++) == '\0') {
@@ -185,115 +294,4 @@ _doprnt(char *fmt, va_list args, int (*func) (int), int farg)
 			for (i = 0; i < leading; i++)
 				(*func) (farg, fill);
 	}
-}
-
-LOCAL
-_prt10(unsigned int num, char *str)
-{
-	int i;
-	char c, temp[6];
-
-	temp[0] = '\0';
-	for (i = 1; i <= 5; i++) {
-		temp[i] = num % 10 + '0';
-		num = /10;
-	}
-	for (i = 5; temp[i] == '0'; i--);
-	if (i == 0)
-		i++;
-	while (i >= 0)
-		*str++ = temp[i--];
-}
-
-LOCAL
-_prtl10(long num, char *str)
-{
-	int i;
-	char c, temp[11];
-
-	temp[0] = '\0';
-	for (i = 1; i <= 10; i++) {
-		temp[i] = num % 10L + '0';
-		num = /10L;
-	}
-	for (i = 10; temp[i] == '0'; i--);
-	if (i == 0)
-		i++;
-	while (i >= 0)
-		*str++ = temp[i--];
-}
-
-LOCAL
-_prt8(unsigned int num, char *str)
-{
-	int i;
-	char c;
-	char temp[7];
-
-	temp[0] = '\0';
-	for (i = 1; i <= 6; i++) {
-		temp[i] = (num & 07) + '0';
-		num = (num >> 3) & 0037777;
-	}
-	temp[6] &= '1';
-	for (i = 6; temp[i] == '0'; i--);
-	if (i == 0)
-		i++;
-	while (i >= 0)
-		*str++ = temp[i--];
-}
-
-LOCAL
-_prtl8(long num, char *str)
-{
-	int i;
-	char c, temp[12];
-
-	temp[0] = '\0';
-	for (i = 1; i <= 11; i++) {
-		temp[i] = (num & 07) + '0';
-		num = num >> 3;
-	}
-	temp[11] &= '3';
-	for (i = 11; temp[i] == '0'; i--);
-	if (i == 0)
-		i++;
-	while (i >= 0)
-		*str++ = temp[i--];
-}
-
-LOCAL
-_prt16(unsigned int num, char *str)
-{
-	int i;
-	char c, temp[5];
-
-	temp[0] = '\0';
-	for (i = 1; i <= 4; i++) {
-		temp[i] = "0123456789abcdef"[num & 0x0f];
-		num = num >> 4;
-	}
-	for (i = 4; temp[i] == '0'; i--);
-	if (i == 0)
-		i++;
-	while (i >= 0)
-		*str++ = temp[i--];
-}
-
-LOCAL
-_prtl16(long num, char *str)
-{
-	int i;
-	char c, temp[9];
-
-	temp[0] = '\0';
-	for (i = 1; i <= 8; i++) {
-		temp[i] = "0123456789abcdef"[num & 0x0f];
-		num = num >> 4;
-	}
-	for (i = 8; temp[i] == '0'; i--);
-	if (i == 0)
-		i++;
-	while (i >= 0)
-		*str++ = temp[i--];
 }

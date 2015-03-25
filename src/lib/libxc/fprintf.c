@@ -1,5 +1,7 @@
 /* fprintf.c - fprintf */
 
+#include <stdarg.h>
+
 #define	OK	1
 
 /*------------------------------------------------------------------------
@@ -7,10 +9,14 @@
  *------------------------------------------------------------------------
  */
 int
-fprintf(int dev, char *fmt, int args)
+fprintf(int dev, const char *fmt, ...)
 {
+	va_list args;
 	int putc();
 
+	va_start(args, fmt);
 	_doprnt(fmt, &args, putc, dev);
-	return (OK);
+	va_end(args);
+
+	return OK;
 }

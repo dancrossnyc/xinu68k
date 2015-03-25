@@ -1,27 +1,29 @@
-/* sprintf.c - sprintf */
+// sprintf.c - sprintf
 
-/*------------------------------------------------------------------------
- *  sprintf  --  format arguments and place output in a string
- *------------------------------------------------------------------------
- */
-char *
-sprintf(char *str, char *fmt, int args)
-{
-	int sprntf();
-	char *s;
+#include <stdarg.h>
 
-	s = str;
-	_doprnt(fmt, &args, sprntf, &s);
-	*s++ = '\0';
-	return (str);
-}
-
-/*------------------------------------------------------------------------
- *  sprntf  --  routine called by doprnt to handle each character
- *------------------------------------------------------------------------
- */
-static
+//------------------------------------------------------------------------
+//  sprntf  --  routine called by doprnt to handle each character
+//------------------------------------------------------------------------
+static int
 sprntf(char **cpp, int c)
 {
 	return (*(*cpp)++ = c);
+}
+
+//------------------------------------------------------------------------
+//  sprintf  --  format arguments and place output in a string
+//------------------------------------------------------------------------
+char *
+sprintf(char *str, const char *fmt, ...)
+{
+	va_list args;
+	char *s;
+
+	s = str;
+	va_start(args, fmt);
+	_doprnt(fmt, &args, sprntf, &s);
+	va_end(args);
+	*s++ = '\0';
+	return (str);
 }

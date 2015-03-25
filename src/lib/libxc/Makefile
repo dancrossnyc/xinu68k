@@ -2,14 +2,14 @@
 #  Make the Xinu version of the C run-time support library
 #
 
-DIR	=	/usr/Xinu
+DIR	=	/Users/cross/unix/project/xinu68k
 LIB	=	$(DIR)/lib
-AR	=	/bin/ar
-AS	=	$(DIR)/bin/as11
+AR	=	m68k-none-elf-ar
+AS	=	m68k-none-elf-as
 AFLAGS	=	-u $(DIR)/include/sys.s
-CC	=	$(DIR)/bin/cc11
-CFLAGS	=	-O -c
-RANLIB	=	$(DIR)/bin/ranlib11
+CC	=	m68k-none-elf-gcc
+CFLAGS	=	-O -c -I../../sys/h -nostdlib -nostartfiles -ffreestanding
+RANLIB	=	m68k-none-elf-ranlib
 
 .s.o:
 		$(AS) -o $@ $(AFLAGS) $<
@@ -39,13 +39,15 @@ CFILES	=	abs.c atoi.c atol.c				\
 		strcat.c strcmp.c strcpy.c strlen.c		\
 		strncat.c strncmp.c strncpy.c swab.c
 
-OFILES	=	abs.o aldiv.o almul.o alrem.o atoi.o atol.o	\
-		cerror.o csv.o ctype_.o				\
+#aldiv.o almul.o alrem.o cerror.o csv.o ldiv.o lmul.o lrem.o
+
+OFILES	=	abs.o						\
+		atoi.o atol.o					\
+		ctype_.o					\
 		doprnt.o doscan.o				\
 		fgets.o fprintf.o fputs.o			\
 		gets.o						\
 		index.o						\
-		ldiv.o lmul.o lrem.o				\
 		printf.o puts.o					\
 		qsort.o						\
 		rand.o rindex.o					\
