@@ -23,7 +23,7 @@ arp_in(struct epacket *packet, int device)
 	apacptr = (struct arppak *) packet->ep_data;
 	atabptr = &Arp.arptab[arpfind(apacptr->ar_spa)];
 	if (atabptr->arp_state != AR_RSLVD) {
-		blkcopy(atabptr->arp_Ead, apacptr->ar_sha, EPADLEN);
+		memmove(atabptr->arp_Ead, apacptr->ar_sha, EPADLEN);
 		atabptr->arp_dev = device;
 		atabptr->arp_state = AR_RSLVD;
 	}
@@ -36,11 +36,11 @@ arp_in(struct epacket *packet, int device)
 			return (OK);
 		}
 		apacptr->ar_op = hs2net(AR_RPLY);
-		blkcopy(apacptr->ar_tpa, apacptr->ar_spa, IPLEN);
-		blkcopy(apacptr->ar_tha, packet->ep_hdr.e_src, EPADLEN);
-		blkcopy(packet->ep_hdr.e_dest, apacptr->ar_tha, EPADLEN);
-		blkcopy(apacptr->ar_sha, etptr->etpaddr, EPADLEN);
-		blkcopy(apacptr->ar_spa, Net.myaddr, IPLEN);
+		memmove(apacptr->ar_tpa, apacptr->ar_spa, IPLEN);
+		memmove(apacptr->ar_tha, packet->ep_hdr.e_src, EPADLEN);
+		memmove(packet->ep_hdr.e_dest, apacptr->ar_tha, EPADLEN);
+		memmove(apacptr->ar_sha, etptr->etpaddr, EPADLEN);
+		memmove(apacptr->ar_spa, Net.myaddr, IPLEN);
 		write(device, packet, EMINPAK);
 		return (OK);
 

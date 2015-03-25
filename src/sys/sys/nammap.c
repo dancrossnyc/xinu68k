@@ -1,13 +1,12 @@
-/* nammap.c - nammap */
+// nammap.c - nammap
 
 #include <conf.h>
 #include <kernel.h>
 #include <name.h>
 
-/*------------------------------------------------------------------------
- *  nammap  -  using namespace, iteratively map name onto (newname,device)
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  nammap  -  using namespace, iteratively map name onto (newname,device)
+//------------------------------------------------------------------------
 SYSCALL
 nammap(char *name, char *newname)
 {

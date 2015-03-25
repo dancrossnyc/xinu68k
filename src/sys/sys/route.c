@@ -26,7 +26,7 @@ route(IPaddr faddr, struct epacket *packet, int totlen)
 	/* NOTE: This code uses host 0 as broadcast like 4.2bsd UNIX */
 	if (blkequ(mynet, faddr, IPLEN)) {
 		dev = ETHER;
-		blkcopy(packet->ep_hdr.e_dest, EBCAST, EPADLEN);
+		memmove(packet->ep_hdr.e_dest, EBCAST, EPADLEN);
 	} else {
 		if (!blkequ(destnet, mynet, IPLEN))
 			faddr = Net.gateway;
@@ -42,7 +42,7 @@ route(IPaddr faddr, struct epacket *packet, int totlen)
 			}
 		}
 		dev = arpptr->arp_dev;
-		blkcopy(packet->ep_hdr.e_dest, arpptr->arp_Ead, EPADLEN);
+		memmove(packet->ep_hdr.e_dest, arpptr->arp_Ead, EPADLEN);
 	}
 	result = write(dev, packet, totlen);
 	signal(Net.nmutex);

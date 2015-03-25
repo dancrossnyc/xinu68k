@@ -1,30 +1,29 @@
-/* getpath.c - getpath */
+// getpath.c - getpath
 
 #include <conf.h>
 #include <kernel.h>
 #include <proc.h>
 #include <network.h>
 
-/*------------------------------------------------------------------------
- *  getpath  -  find a path (route table entry) for a given IP address
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  getpath  -  find a path (route table entry) for a given IP address
+//------------------------------------------------------------------------
 int
 getpath(IPaddr faddr)
 {
 	int i;
-	int arindex;		/* route table entry index      */
-	int mypid;		/* local copy of my process id  */
-	IPaddr myaddr;		/* my IP address                */
+	int arindex;		// route table entry index
+	int mypid;		// local copy of my process id
+	IPaddr myaddr;		// my IP address
 	char ps;
 	struct arpent *arpptr;
-	struct epacket *packet, *mkarp();
+	struct epacket *packet;
 
 	wait(Arp.arpsem);
 	arpptr = &Arp.arptab[arindex = arpfind(faddr)];
 	if (arpptr->arp_state != AR_ALLOC) {
 		signal(Arp.arpsem);
-		return (arindex);
+		return arindex;
 	}
 
 	/* Use ARP to obtain and record IP-to-Ether binding */
@@ -33,7 +32,7 @@ getpath(IPaddr faddr)
 	mypid = getpid();
 	for (i = 0; i < AR_RTRY; i++) {
 		packet = mkarp(EP_ARP, AR_REQ, myaddr, faddr);
-		blkcopy(Arp.arpwant, faddr, AR_PLEN);
+		memmove(Arp.arpwant, faddr, AR_PLEN);
 		disable(ps);
 		Arp.arppid = mypid;
 		recvclr();
@@ -44,5 +43,5 @@ getpath(IPaddr faddr)
 	}
 	Arp.arppid = BADPID;
 	signal(Arp.arpsem);
-	return (arindex);
+	return arindex;
 }

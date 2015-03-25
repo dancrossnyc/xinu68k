@@ -65,20 +65,11 @@ typedef	char		Bool;		/* Boolean type			*/
 
 #define	isodd(x)	(01&(int)(x))
 #define	min(a,b)	( (a) < (b) ? (a) : (b) )
-#if 0
-#define	disable(ps)	asm("mfps ~ps");asm("mtps $0340")
-#define	restore(ps)	asm("mtps ~ps")	/* restore interrupt status	*/
-#define	enable()	asm("mtps $000")/* enable interrupts		*/
-#define	pause()		asm("wait")	/* machine "wait for interr."	*/
-#define	halt()		asm("halt")	/* machine halt	instruction	*/
-#endif
-
-#define disable(ps) (ps = Disable())
-int Disable();
-void restore(int ps);
-void enable();
-void pause();
-void halt();
+#define	disable(ps) ((ps) = 0)
+#define	restore(ps) ((ps) = ((ps) == 0) ? 0 : 1)
+#define	enable()
+#define	pause()
+#define	halt()
 
 extern	int	rdyhead, rdytail;
 extern	int	preempt;

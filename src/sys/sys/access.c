@@ -1,7 +1,7 @@
 // access.c - access
 
-#include <conf.h>
 #include <kernel.h>
+#include <conf.h>
 #include <file.h>
 #include <name.h>
 

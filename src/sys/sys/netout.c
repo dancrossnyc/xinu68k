@@ -1,14 +1,13 @@
-/* netout.c - netout */
+// netout.c - netout
 
 #include <conf.h>
 #include <kernel.h>
 #include <network.h>
-#define  MNAMLEN  24		/* maximum size of this machine's name  */
+#define  MNAMLEN  24		// maximum size of this machine's name
 
-/*------------------------------------------------------------------------
- *  netout  -  start network by finding address and forward IP packets
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  netout  -  start network by finding address and forward IP packets
+//------------------------------------------------------------------------
 PROCESS
 netout(int userpid, int icmpp)
 {
@@ -26,7 +25,7 @@ netout(int userpid, int icmpp)
 	while (TRUE) {
 		packet = (struct epacket *) preceive(icmpp);
 		ipptr = (struct ip *) packet->ep_data;
-		blkcopy(addr, ipptr->i_dest, IPLEN);
+		memmove(addr, ipptr->i_dest, IPLEN);
 		len = net2hs(ipptr->i_paclen) - IPHLEN;
 		ipsend(addr, packet, len);
 	}

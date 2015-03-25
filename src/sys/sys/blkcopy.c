@@ -8,7 +8,6 @@
 int
 blkcopy(char *to, char *from, int nbytes)
 {
-	while (--nbytes >= 0)
-		*to++ = *from++;
+	memmove(to, from, nbytes);
 	return (OK);
 }

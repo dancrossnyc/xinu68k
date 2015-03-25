@@ -21,7 +21,7 @@ ethwrite(struct devsw *devptr, char *buff, int len)
 	if (len < EMINPAK)
 		len = EMINPAK;
 	etptr = (struct etblk *) devptr->dvioblk;
-	blkcopy(((struct eheader *) buff)->e_src, etptr->etpaddr, EPADLEN);
+	memmove(((struct eheader *) buff)->e_src, etptr->etpaddr, EPADLEN);
 	disable(ps);
 	wait(etptr->etwsem);
 	ethwstrt(etptr, buff, etptr->etlen = len, DC_NORM);

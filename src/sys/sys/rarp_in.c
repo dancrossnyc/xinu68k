@@ -22,7 +22,7 @@ rarp_in(struct epacket *packet, int device)
 	if (net2hs(apacptr->ar_op) == AR_RRLY) {
 		etptr = (struct etblk *) devtab[device].dvioblk;
 		if (blkequ(apacptr->ar_tha, etptr->etpaddr, EPADLEN)) {
-			blkcopy(Net.myaddr, apacptr->ar_tpa, IPLEN);
+			memmove(Net.myaddr, apacptr->ar_tpa, IPLEN);
 			netnum(Net.mynet, Net.myaddr);
 			disable(ps);
 			Net.mavalid = TRUE;

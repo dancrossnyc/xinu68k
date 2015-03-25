@@ -31,7 +31,7 @@ rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 			signal(Rf.rmutex);
 			return (SYSERR);
 		}
-		blkcopy(packet.fpdata, buff, len);
+		memmove(packet.fpdata, buff, len);
 		rplylen = FPHLEN;
 		break;
 
@@ -63,7 +63,7 @@ rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 	switch (rop) {
 
 	case FS_READ:
-		blkcopy(buff, packet.fpdata, len);
+		memmove(buff, packet.fpdata, len);
 		/* fall through */
 
 	case FS_WRITE:

@@ -53,6 +53,7 @@ CFILES=		access.c adump.c arp_in.c arpfind.c	\
 		lfclose.c lfgetc.c lfinit.c lfputc.c	\
 		lfread.c lfsdfree.c lfseek.c lfsetup.c	\
 		lfsflush.c lfsnewd.c lfwrite.c		\
+		libk.c					\
 		mark.c mdump.c mkarp.c mkpool.c mount.c	\
 		naminit.c nammap.c namopen.c namrepl.c	\
 		ndump.c netdump.c netin.c netinit.c	\
@@ -117,6 +118,7 @@ OFILES=		access.o adump.o arp_in.o arpfind.o	\
 		lfclose.o lfgetc.o lfinit.o lfputc.o	\
 		lfread.o lfsdfree.o lfseek.o lfsetup.o	\
 		lfsflush.o lfsnewd.o lfwrite.o		\
+		libk.o					\
 		mark.o mdump.o mkarp.o mkpool.o mount.o	\
 		naminit.o nammap.o namopen.o namrepl.o	\
 		ndump.o netdump.o netin.o netinit.o	\
@@ -214,13 +216,7 @@ xinu.o:		$(XOFILES)
 		$(LD) -r $(XOFILES) -o xinu.o
 
 a.out:		libx.a xinu.o test.o
-		$(LD) -S -e start xinu.o test.o libx.a $(LIB)/libxc.a libx.a
-		./Mknlist ,nm
-
-nm:		,nm
-
-,nm:		a.out
-		./Mknlist ,nm
+		$(LD) -S -e start xinu.o test.o libx.a libx.a -L/opt/gnu/lib/gcc/m68k-none-elf/4.9.2/m68000 -lgcc
 
 tags:		,tags
 

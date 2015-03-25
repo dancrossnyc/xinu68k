@@ -16,7 +16,7 @@ dgmcntl(struct devsw *devptr, int func, char *addr)
 	switch (func) {
 #ifdef	NETDAEMON
 	case NC_SETGW:
-		blkcopy(Net.gateway, addr, IPLEN);
+		memmove(Net.gateway, addr, IPLEN);
 		status = OK;
 		break;
 #endif

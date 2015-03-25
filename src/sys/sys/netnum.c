@@ -11,7 +11,7 @@
 int
 netnum(IPaddr netpart, IPaddr address)
 {
-	blkcopy(netpart, address, IPLEN);
+	memmove(netpart, address, IPLEN);
 	switch (netpart[0] & IPTMASK) {
 	case IPATYP:
 		netpart[1] = '\0';	/* fall through */

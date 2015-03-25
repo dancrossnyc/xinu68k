@@ -1,13 +1,12 @@
-/* icmp_in.c - icmp_in */
+// icmp_in.c - icmp_in
 
 #include <conf.h>
 #include <kernel.h>
 #include <network.h>
 
-/*------------------------------------------------------------------------
- *  icmp_in  -  handle ICMP packet coming in from the network
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  icmp_in  -  handle ICMP packet coming in from the network
+//------------------------------------------------------------------------
 int
 icmp_in(struct epacket *packet, int icmpp, int lim)
 {
@@ -21,7 +20,7 @@ icmp_in(struct epacket *packet, int icmpp, int lim)
 		freebuf(packet);
 	} else {
 		icmpptr->ic_typ = (char) ICRPECH;
-		blkcopy(ipptr->i_dest, ipptr->i_src, IPLEN);
+		memmove(ipptr->i_dest, ipptr->i_src, IPLEN);
 		len = net2hs(ipptr->i_paclen) - IPHLEN;
 		if (isodd(len)) {
 			ipptr->i_data[len++] = NULLCH;
@@ -33,5 +32,5 @@ icmp_in(struct epacket *packet, int icmpp, int lim)
 		else
 			freebuf(packet);
 	}
-	return (OK);
+	return OK;
 }

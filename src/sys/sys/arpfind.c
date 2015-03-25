@@ -30,7 +30,7 @@ arpfind(IPaddr faddr)
 		Arp.atabnxt = 0;
 	atabptr = &Arp.arptab[arindex];
 	atabptr->arp_state = AR_ALLOC;
-	blkcopy(atabptr->arp_Iad, faddr, IPLEN);
+	memmove(atabptr->arp_Iad, faddr, IPLEN);
 	for (i = 0; i < EPADLEN; i++)
 		atabptr->arp_Ead[i] = '\0';
 	atabptr->arp_dev = -1;

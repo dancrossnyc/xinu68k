@@ -1,13 +1,12 @@
-/* mkarp.c - mkarp */
+// mkarp.c - mkarp
 
 #include <conf.h>
 #include <kernel.h>
 #include <network.h>
 
-/*------------------------------------------------------------------------
- *  mkarp  -  allocate and fill in an ARP or RARP packet
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  mkarp  -  allocate and fill in an ARP or RARP packet
+//------------------------------------------------------------------------
 struct epacket *
 mkarp(int typ, int op, IPaddr spaddr, IPaddr tpaddr)
 {
@@ -16,8 +15,8 @@ mkarp(int typ, int op, IPaddr spaddr, IPaddr tpaddr)
 
 	packet = (struct epacket *) getbuf(Net.netpool);
 	if (((int) packet) == SYSERR)
-		return ((struct epacket *) SYSERR);
-	blkcopy(packet->ep_hdr.e_dest, EBCAST, AR_HLEN);
+		return (struct epacket *)SYSERR;
+	memmove(packet->ep_hdr.e_dest, EBCAST, AR_HLEN);
 	packet->ep_hdr.e_ptype = hs2net(typ);
 	apacptr = (struct arppak *) packet->ep_data;
 	apacptr->ar_hrd = hs2net(AR_HRD);
@@ -25,9 +24,9 @@ mkarp(int typ, int op, IPaddr spaddr, IPaddr tpaddr)
 	apacptr->ar_hlen = AR_HLEN;
 	apacptr->ar_plen = AR_PLEN;
 	apacptr->ar_op = hs2net(op);
-	blkcopy(apacptr->ar_sha, eth[0].etpaddr, AR_HLEN);
-	blkcopy(apacptr->ar_spa, spaddr, AR_PLEN);
-	blkcopy(apacptr->ar_tha, eth[0].etpaddr, AR_HLEN);
-	blkcopy(apacptr->ar_tpa, tpaddr, AR_PLEN);
-	return (packet);
+	memmove(apacptr->ar_sha, eth[0].etpaddr, AR_HLEN);
+	memmove(apacptr->ar_spa, spaddr, AR_PLEN);
+	memmove(apacptr->ar_tha, eth[0].etpaddr, AR_HLEN);
+	memmove(apacptr->ar_tpa, tpaddr, AR_PLEN);
+	return packet;
 }

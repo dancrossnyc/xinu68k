@@ -17,7 +17,7 @@ getaddr(IPaddr address)
 	signal(Arp.rarpsem);
 
 	if (!Net.mavalid)
-		return (SYSERR);
-	blkcopy(address, Net.myaddr, IPLEN);
-	return (OK);
+		return SYSERR;
+	memmove(address, Net.myaddr, IPLEN);
+	return OK;
 }

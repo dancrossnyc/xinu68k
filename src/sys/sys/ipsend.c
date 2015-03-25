@@ -1,13 +1,12 @@
-/* ipsend.c - ipsend */
+// ipsend.c - ipsend
 
 #include <conf.h>
 #include <kernel.h>
 #include <network.h>
 
-/*------------------------------------------------------------------------
- *  ipsend  -  fill in IP header and send datagram to specified address
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ipsend  -  fill in IP header and send datagram to specified address
+//------------------------------------------------------------------------
 int
 ipsend(IPaddr faddr, struct epacket *packet, int datalen)
 {
@@ -23,7 +22,7 @@ ipsend(IPaddr faddr, struct epacket *packet, int datalen)
 	ipptr->i_tim2liv = ITIM2LIV;
 	ipptr->i_cksum = 0;
 	getaddr(ipptr->i_src);
-	blkcopy(ipptr->i_dest, faddr, IPLEN);
+	memmove(ipptr->i_dest, faddr, IPLEN);
 	ipptr->i_cksum = cksum(ipptr, IPHLEN >> 1);
 	return (route(faddr, packet, EHLEN + IPHLEN + datalen));
 }
