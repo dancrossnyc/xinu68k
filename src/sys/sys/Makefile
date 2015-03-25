@@ -27,7 +27,7 @@ ODT	=	$(BINDIR)/odt
 
 CFILES=		access.c adump.c arp_in.c arpfind.c	\
 		arpinit.c				\
-		blkcopy.c blkequ.c bpdump.c		\
+		blkequ.c bpdump.c			\
 		chprio.c ckmode.c clkinit.c close.c	\
 		conf.c control.c create.c		\
 		devdump.c dfalloc.c dfdsrch.c dgalloc.c	\
@@ -91,7 +91,7 @@ SFILES=		cksum.s clkint.s csv.s ctxsw.s		\
 
 OFILES=		access.o adump.o arp_in.o arpfind.o	\
 		arpinit.o				\
-		blkcopy.o blkequ.o bpdump.o		\
+		blkequ.o bpdump.o			\
 		chprio.o ckmode.o cksum.o clkinit.o	\
 		clkint.o close.o control.o create.o	\
 		csv.o ctxsw.o				\
@@ -174,8 +174,9 @@ install:	libx.a xinu.o
 		cp xinu.o $(LIB)
 
 clean:
-		-/bin/rm -rf *.o ,* .,* ../h/,* ../h/.,*
-		-/bin/rm -rf libx.a a.out conf.c ../h/conf.h core make.out
+		-/bin/rm -f *.o ,* .,* ../h/,* ../h/.,*
+		-/bin/rm -f libx.a a.out conf.c ../h/conf.h core make.out
+		-(cd shell && make clean)
 
 everything:	a.out xref checkup sizes lint
 
