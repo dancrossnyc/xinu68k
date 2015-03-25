@@ -14,7 +14,6 @@ int
 lfseek(struct devsw *devptr, long offset)
 {
 	struct flblk *flptr;
-	int retcode;
 	char ps;
 
 	disable(ps);
@@ -24,10 +23,10 @@ lfseek(struct devsw *devptr, long offset)
 			lfsflush(flptr);
 	} else if (offset > (flptr->fl_dent)->fdlen) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	flptr->fl_pos = offset;
-	retcode = lfsetup(flptr->fl_dev, flptr);
+	lfsetup(flptr->fl_dev, flptr);
 	restore(ps);
-	return (retcode);
+	return OK;
 }

@@ -1,4 +1,4 @@
-/* ndump.c - ndump */
+// ndump.c - ndump
 
 #include <conf.h>
 #include <kernel.h>
@@ -7,11 +7,10 @@
 
 #define	PADTO	24
 
-/*------------------------------------------------------------------------
- *  ndump  -  dump current mappings in object naming system
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  ndump  -  dump current mappings in object naming system
+//------------------------------------------------------------------------
+void
 ndump(void)
 {
 	struct nament *nptr;

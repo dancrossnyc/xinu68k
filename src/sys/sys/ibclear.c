@@ -1,4 +1,4 @@
-/* ibclear.c - ibclear */
+// ibclear.c - ibclear
 
 #include <conf.h>
 #include <kernel.h>
@@ -6,11 +6,10 @@
 #include <lfile.h>
 #include <dir.h>
 
-/*------------------------------------------------------------------------
- *  ibclear  --  clear in-core copy of an iblock
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  ibclear  --  clear in-core copy of an iblock
+//------------------------------------------------------------------------
+void
 ibclear(struct iblk *ibptr, long ibbyte)
 {
 	int i;

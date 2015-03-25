@@ -1,5 +1,5 @@
 /*
-; ctxsw.s - ctxsw 
+; ctxsw.s - ctxsw
 
 ;------------------------------------------------------------------------
 ; ctxsw  --  actually perform context switch, saving;loading registers

@@ -2,7 +2,7 @@
 ; clkint.s -  clkint
 
 ;------------------------------------------------------------------------
-; clkint  --  real-time clock interrupt service routine 
+; clkint  --  real-time clock interrupt service routine
 ;------------------------------------------------------------------------
 	.globl	_clkint
 _clkint:

@@ -1,14 +1,13 @@
-/* ethinit.c - ethinit */
+// ethinit.c - ethinit
 
 #include <conf.h>
 #include <kernel.h>
 #include <network.h>
 
-/*------------------------------------------------------------------------
- *  ethinit  -  initialize ethernet I/O device and buffers
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  ethinit  -  initialize ethernet I/O device and buffers
+//------------------------------------------------------------------------
+void
 ethinit(struct devsw *devptr)
 {
 	struct etblk *etptr;
@@ -46,7 +45,6 @@ ethinit(struct devsw *devptr)
 		etptr->etpaddr[i] = LOWBYTE & *iptr++;
 
 	ethstrt(etptr, &setup);
-	return (OK);
 }
 
 #ifdef	Neth

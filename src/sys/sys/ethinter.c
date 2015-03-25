@@ -31,8 +31,8 @@ ethinter(struct etblk *etptr)
 		} else {	/* error, so retry operation */
 			dcmptr->dc_st1 = dcmptr->dc_st2 = DC_INIT;
 			dcmptr->dc_flag = DC_NUSED;
-			dqptr->d_rcmd = (short) dcmptr;
-			dqptr->d_rcmdh = (short) NULL;
+			dqptr->d_rcmd = (char *)dcmptr;
+			dqptr->d_rcmdh = NULL;
 		}
 	}
 	if (csr & DQ_XINT) {
@@ -47,8 +47,8 @@ ethinter(struct etblk *etptr)
 			while (!(dqptr->d_csr & DQ_XLI));
 			dcmptr->dc_st1 = dcmptr->dc_st2 = DC_INIT;
 			dcmptr->dc_flag = DC_NUSED;
-			dqptr->d_wcmd = (short) dcmptr;
-			dqptr->d_wcmdh = (short) NULL;
+			dqptr->d_wcmd = (char *)dcmptr;
+			dqptr->d_wcmdh = NULL;
 		} else {
 			if (etptr->etsetup == DC_NORM) {
 				freebuf(dcmptr->dc_buf);

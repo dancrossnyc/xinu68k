@@ -23,8 +23,8 @@ getbuf(int poolid)
 		return (void *)SYSERR;
 	wait(bptab[poolid].bpsem);
 	disable(ps);
-	buf = bptab[poolid].bpnext;
-	bptab[poolid].bpnext = (int *)(*buf);
+	buf = (int *)bptab[poolid].bpnext;
+	bptab[poolid].bpnext = (char *)(*buf);
 	restore(ps);
 	*buf++ = poolid;
 	return (void *)buf;

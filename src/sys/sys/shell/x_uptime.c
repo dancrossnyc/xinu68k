@@ -9,9 +9,8 @@
  *  x_uptime  -  (command uptime or ruptime) print remote machine status
  *------------------------------------------------------------------------
  */
-COMMAND	x_uptime(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_uptime (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	int	i, j;
 	struct	rwent	*rwptr;
@@ -49,7 +48,7 @@ char	*args[];
 		found = TRUE;
 		sprintf(str,"%-14s", rwptr->rwmach);
 		tottim = now - rwptr->rwlast;
-		if (up = (tottim < RWCDOWN))
+		if ((up = (tottim < RWCDOWN)) != 0)
 			tottim = rwptr->rwslast - rwptr->rwboot + 59;
 		days = tottim / (24L * 60L * 60L);
 		 tottim %= (24L * 60L * 60L);

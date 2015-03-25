@@ -9,9 +9,8 @@
  *  x_mem  -  (command mem) print memory use and free list information
  *------------------------------------------------------------------------
  */
-COMMAND	x_mem(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_mem (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	int	i;
 	struct	mblock	*mptr;

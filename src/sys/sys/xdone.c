@@ -1,12 +1,12 @@
-/* xdone.c - xdone */
+// xdone.c - xdone
 
-/*------------------------------------------------------------------------
- * xdone  --  print system completion message as last process exits
- *------------------------------------------------------------------------
- */
-int
+#include <kernel.h>
+
+//------------------------------------------------------------------------
+// xdone  --  print system completion message as last process exits
+//------------------------------------------------------------------------
+void
 xdone(void)
 {
-	printf("\n\nAll user processes have completed.\n\n");
-
+	kprintf("\n\nAll user processes have completed.\n\n");
 }

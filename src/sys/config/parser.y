@@ -63,7 +63,7 @@ char *ftout[] = {
 	"struct\tdevsw\t{\t\t\t/* device table entry */\n",
 	"\tint\tdvnum;\n",
 	"\tchar\t*dvname;\n",
-	"\tint\t(*dvinit)();\n",
+	"\tvoid\t(*dvinit)();\n",
 	"\tint\t(*dvopen)();\n",
 	"\tint\t(*dvclose)();\n",
 	"\tint\t(*dvread)();\n",
@@ -75,8 +75,8 @@ char *ftout[] = {
 	"\tint\tdvcsr;\n",
 	"\tint\tdvivec;\n",
 	"\tint\tdvovec;\n",
-	"\tint\t(*dviint)();\n",
-	"\tint\t(*dvoint)();\n",
+	"\tvoid\t(*dviint)();\n",
+	"\tvoid\t(*dvoint)();\n",
 	"\tchar\t*dvioblk;\n",
 	"\tint\tdvminor;\n",
 	"\t};\n\n",
@@ -232,6 +232,7 @@ main(int argc, char *argv[])
 	}
 	fprintf(confh, "/* conf.h (GENERATED FILE; DO NOT EDIT) */\n");
 	fprintf(confc, "/* conf.c (GENERATED FILE; DO NOT EDIT) */\n");
+	fprintf(confc, "\n#include <kernel.h>\n");
 	fprintf(confc, "\n#include %s\n", CONFHREF);
 	fprintf(confh, "\n#define\tNULLPTR\t(char *)0\n");
 
@@ -275,10 +276,10 @@ main(int argc, char *argv[])
 		lookup(s->dvoint, strlen(s->dvoint));
 
 	}
-	fprintf(confh,
-		"/* Declarations of I/O routines referenced */\n\n");
-	for (i = 0; i < nsym; i++)
-		fprintf(confh, "extern\tint\t%s();\n", symtab[i].symname);
+	//fprintf(confh,
+	//	"/* Declarations of I/O routines referenced */\n\n");
+	//for (i = 0; i < nsym; i++)
+	//	fprintf(confh, "extern\tint\t%s();\n", symtab[i].symname);
 
 
 	// produce devtab (giant I/O switch table)
@@ -298,7 +299,7 @@ main(int argc, char *argv[])
 	for (fcount = 0, s = devs; s != NULL; s = s->dvnext, fcount++) {
 		fprintf(confc, "\n/*  %s  is %s  */\n\n", s->dvname,
 			s->dvtname);
-		fprintf(confc, "%d, \"%s\",\n", fcount, s->dvname);
+		fprintf(confc, "{ %d, \"%s\",\n", fcount, s->dvname);
 		fprintf(confc, "%s, %s, %s,\n",
 			s->dvinit, s->dvopen, s->dvclose);
 		fprintf(confc, "%s, %s, %s,\n",
@@ -310,9 +311,9 @@ main(int argc, char *argv[])
 		fprintf(confc, "%s, %s, NULLPTR, %d",
 			s->dviint, s->dvoint, s->dvminor);
 		if (s->dvnext != NULL)
-			fprintf(confc, ",\n");
+			fprintf(confc, "},\n");
 		else
-			fprintf(confc, "\n\t};");
+			fprintf(confc, "}\n\t};");
 	}
 
 	// Copy definitions to output

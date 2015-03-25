@@ -22,7 +22,7 @@ df:
 	on DSK		-i lfinit	-o ioerr	-c lfclose
 			-r lfread	-w lfwrite	-s lfseek
 			-n ioerr	-g lfgetc	-p lfputc
-			-iint ioerr	-oint ioerr	-csr 0
+			-iint interr	-oint interr	-csr 0
 			-ivec 0		-ovec 0
 
 /* Ethernet using a DEQNA interface */
@@ -34,10 +34,10 @@ eth:
 
 /* Datagram interface to network (master device) */
 dgm:
-	on ETH		-i ionull	-o dgmopen	-c ioerr
+	on ETH		-i initnull	-o dgmopen	-c ioerr
 			-r ioerr	-w ioerr	-s ioerr
 			-n dgmcntl	-g ioerr	-p ioerr
-			-iint ioerr	-oint ioerr	-csr 0
+			-iint interr	-oint interr	-csr 0
 			-ivec 0		-ovec 0
 
 /* A datagram "connection"  (pseudo-device returned by dgm open) */
@@ -45,22 +45,22 @@ dg:
 	on ETH		-i dginit	-o ioerr	-c dgclose
 			-r dgread	-w dgwrite	-s ioerr
 			-n dgcntl	-g ioerr	-p ioerr
-			-iint ioerr	-oint ioerr	-csr 0
+			-iint interr	-oint interr	-csr 0
 			-ivec 0		-ovec 0
 
 /* Remote file system master device (open to get rf device) */
 rfm:
-	on DGM		-i ioerr	-o rfopen	-c ioerr
+	on DGM		-i initnull	-o rfopen	-c ioerr
 			-r ioerr	-w ioerr	-s ioerr
 			-n rfcntl	-g ioerr	-p ioerr
-			-iint ioerr	-oint ioerr	-csr 0
+			-iint interr	-oint interr	-csr 0
 			-ivec 0		-ovec 0
 
 /* A remote file (pseudo-device returned by rfm open) */
 rf:
 	on DGM		-i rfinit	-o ioerr	-c rfclose
 			-n rfcntl	-g rfgetc	-p rfputc
-			-iint ioerr	-oint ioerr	-csr 0
+			-iint interr	-oint interr	-csr 0
 			-ivec 0		-ovec 0
 
 /* Name system (topmost level of name resolution mechanism) */
@@ -68,7 +68,7 @@ nam:
 	on TOP		-i naminit	-o namopen	-c ioerr
 			-r ioerr	-w ioerr	-s ioerr
 			-n ioerr	-g ioerr	-p ioerr
-			-iint ioerr	-oint ioerr	-csr 0
+			-iint interr	-oint interr	-csr 0
 			-ivec 0		-ovec 0
 %
 

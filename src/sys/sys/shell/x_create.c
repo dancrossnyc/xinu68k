@@ -10,15 +10,14 @@ LOCAL	char	symfile[] = "a.out";	/* name of object file to search*/
  *  x_creat  -  (command create) create a process given a starting address
  *------------------------------------------------------------------------
  */
-COMMAND	x_creat(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_creat (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	int	ssize, prio;
 	struct	exec	*aoutptr;
 	int	dev, len;
 	int	pid;
-	char	*loc;
+	int	(*loc)();
 	char	*buf;
 	Bool	found;
 	long	offset;
@@ -58,11 +57,11 @@ char	*args[];
 			freemem(buf, 512);
 			return(SYSERR);
 		}
-		last = (struct nlist *)&buf[len]; 
+		last = (struct nlist *)&buf[len];
 		for (symptr=(struct nlist *)buf ; symptr<last ;symptr++) {
 			if (symptr->n_type == (N_TEXT|N_EXT) &&
 				strncmp(symptr->n_name,tmp,8)==0) {
-				loc = (char *)symptr->n_value;
+				loc = (int(*)())symptr->n_value;
 				found = TRUE;
 				break;
 			}

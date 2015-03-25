@@ -3,13 +3,13 @@
 
 #define	INTVECI	inint		/* input interrupt dispatch routine	*/
 #define	INTVECO	outint		/* output interrupt dispatch routine	*/
-extern	int	INTVECI();
-extern	int	INTVECO();
+extern	void	INTVECI();
+extern	void	INTVECO();
 
 struct	intmap	{		/* device-to-interrupt routine mapping	*/
-	int	(*iin)();	/* address of input interrupt routine	*/
+	void	(*iin)();	/* address of input interrupt routine	*/
 	int	icode;		/* argument passed to input routine	*/
-	int	(*iout)();	/* address of output interrupt routine	*/
+	void	(*iout)();	/* address of output interrupt routine	*/
 	int	ocode;		/* argument passed to output routine	*/
 };
 
@@ -27,6 +27,6 @@ extern	struct	intmap intmap[NDEVS];
 #define	fputc(unit,ch)	putc((unit),(ch))
 
 struct	vector	{
-	char	*vproc;		/* address of interrupt procedure	*/
+	void	(*vproc)();	/* address of interrupt procedure	*/
 	int	vps;		/* saved process status word		*/
 };

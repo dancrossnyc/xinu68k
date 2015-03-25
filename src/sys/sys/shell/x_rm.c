@@ -8,9 +8,8 @@
  *  x_rm  -  (command rm) remove a file given its name
  *------------------------------------------------------------------------
  */
-COMMAND	x_rm(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_rm (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	if (nargs != 2) {
 		fprintf(stderr, "usage: rm file\n");

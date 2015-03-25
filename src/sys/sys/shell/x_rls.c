@@ -8,9 +8,8 @@
  *  x_rls  -  (command rls) list contents of remote file system directory
  *------------------------------------------------------------------------
  */
-COMMAND	x_rls(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_rls (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	char	*p, *buf;
 	int	dev, len;
@@ -26,13 +25,12 @@ char	*args[];
 
 
 	aflag = FALSE;
+	p = ".";
 	if (nargs > 1 && strcmp(p=args[1],"-a") == 0) {
 		nargs--;
 		aflag = TRUE;
 		p = args[2];
 	}
-	if (nargs == 1)
-		p = ".";
 	else if (nargs != 2) {
 		printf("use: rls [-a] directory\n");
 		return(SYSERR);

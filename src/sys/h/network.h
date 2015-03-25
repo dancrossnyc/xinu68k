@@ -16,8 +16,8 @@
 
 /* Declarations data conversion and checksum routines */
 
-extern	short		hs2net();	/* host to network short	*/
-extern	short		net2hs();	/* network to host short	*/
+extern	unsigned short	hs2net();	/* host to network short	*/
+extern	unsigned short	net2hs();	/* network to host short	*/
 extern	long		hl2net();	/* host-to-network long		*/
 extern	long		net2hl();	/* network to host long		*/
 extern	long		hl2vax();	/* pdp11-to-vax long		*/

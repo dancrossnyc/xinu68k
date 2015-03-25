@@ -13,7 +13,7 @@ int
 dgparse(struct dgblk *dgptr, char *fspec)
 {
 	int i, byte;
-	char ch;
+	int ch;
 	char *ipptr;
 
 	if (fspec == ANYFPORT) {
@@ -26,7 +26,7 @@ dgparse(struct dgblk *dgptr, char *fspec)
 	ipptr = (char *) dgptr->dg_faddr;
 	for (i = 0; i < 4; i++) {
 		byte = 0;
-		while (isdigit(ch = *fspec++))
+		while (isdigit((ch = *fspec++)))
 			byte = 10 * byte + (ch - '0');
 		if (byte > 256 || (i < 3 && ch != '.'))
 			return (SYSERR);
@@ -35,7 +35,7 @@ dgparse(struct dgblk *dgptr, char *fspec)
 	if (ch != ':')
 		return (SYSERR);
 	i = 0;
-	while (isdigit(ch = *fspec++))
+	while (isdigit((ch = *fspec++)))
 		i = 10 * i + (ch - '0');
 	if (i == 0 || ch != '\0')
 		return (SYSERR);

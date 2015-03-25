@@ -1,11 +1,11 @@
-/* prdump.c - prdump, prdumph, prdumpa */
+// prdump.c - prdump, prdumph, prdumpa
 
 #include <conf.h>
 #include <kernel.h>
 #include <proc.h>
 #include <q.h>
 
-static
+static void
 pxdump(int all)
 {
 	int i, j, ctr;
@@ -50,21 +50,19 @@ pxdump(int all)
 	restore(ps);
 }
 
-/*------------------------------------------------------------------------
- *  prdump  --  dump the active process table entries
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  prdump  --  dump the active process table entries
+//------------------------------------------------------------------------
+void
 prdump(void)
 {
 	pxdump(0);
 }
 
-/*------------------------------------------------------------------------
- *  prdumph  --  dump the active process table entries and halt
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  prdumph  --  dump the active process table entries and halt
+//------------------------------------------------------------------------
+void
 prdumph(void)
 {
 	pxdump(0);
@@ -72,11 +70,10 @@ prdumph(void)
 	halt();
 }
 
-/*------------------------------------------------------------------------
- *  prdumpa  --  dump the process table entries printing all entries
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  prdumpa  --  dump the process table entries printing all entries
+//------------------------------------------------------------------------
+void
 prdumpa(void)
 {
 	pxdump(1);

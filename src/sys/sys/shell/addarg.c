@@ -9,10 +9,11 @@
  *  addarg  -  copy arguments to area reserved on process stack
  *------------------------------------------------------------------------
  */
-addarg(pid, nargs, len)
-int	pid;				/* process to receive arguments	*/
-int	nargs;				/* number of arguments to copy	*/
-int	len;				/* size of arg. area (in bytes)	*/
+/* pid: process to receive arguments	*/
+/* nargs: number of arguments to copy	*/
+/* len: size of arg. area (in bytes)	*/
+int
+addarg(int pid, int nargs, int len)
 {
 	struct	pentry	*pptr;
 	char	**fromarg;
@@ -21,13 +22,14 @@ int	len;				/* size of arg. area (in bytes)	*/
 
 	if (isbadpid(pid) || (pptr= &proctab[pid])->pstate != PRSUSP)
 		return(SYSERR);
-	toarg = (int *) ( ((unsigned)pptr->pbase) - (unsigned)len );
+	toarg = (int *)(((unsigned)pptr->pbase) - (unsigned)len);
 	to = (char *) (toarg + (nargs + 2));
-	*toarg++ = (int) (toarg + 1);
+	*toarg = (int) (toarg + 1);
+	toarg++;
 	for (fromarg=Shl.shtok ; nargs > 0 ; nargs--) {
-		*toarg++ = to;
+		*toarg++ = (int)to;
 		strcpy(to, *fromarg++);
-		to += strlen(to) + 1;		
+		to += strlen(to) + 1;
 	}
 	*toarg = 0;
 	return(OK);

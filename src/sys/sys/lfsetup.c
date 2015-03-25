@@ -10,7 +10,7 @@
  *  lfsetup  --  set up appropriate iblock and data block in memory
  *------------------------------------------------------------------------
  */
-int
+void
 lfsetup(int diskdev, struct flblk *flptr)
 {
 	struct iblk *ibptr;

@@ -38,7 +38,7 @@ newpid(void)
  *------------------------------------------------------------------------
  */
 SYSCALL
-create(PROCESS (*procaddr), int ssize, int priority, char *name, int nargs, ...)
+create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ...)
 {
 	va_list args;
 	int pid;		/* stores new process id        */
@@ -46,10 +46,11 @@ create(PROCESS (*procaddr), int ssize, int priority, char *name, int nargs, ...)
 	int i;
 	int *saddr;		/* stack address                */
 	char ps;		/* saved processor status       */
-	int INITRET();
+	uword *procaddrp = (uword *)&procaddr;
+
 	disable(ps);
-	ssize = roundew(ssize);
-	if (ssize < MINSTK || ((saddr = getstk(ssize)) == SYSERR) ||
+	ssize = (int)roundew(ssize);
+	if (ssize < MINSTK || ((saddr = getstk(ssize)) == (int *)SYSERR) ||
 	    (pid = newpid()) == SYSERR || isodd(procaddr) ||
 	    priority < 1) {
 		restore(ps);
@@ -60,16 +61,17 @@ create(PROCESS (*procaddr), int ssize, int priority, char *name, int nargs, ...)
 	pptr->pstate = PRSUSP;
 	for (i = 0; i < PNMLEN && (pptr->pname[i] = name[i]) != 0; i++);
 	pptr->pprio = priority;
-	pptr->pbase = (short) saddr;
+	pptr->pbase = (char *)saddr;
 	pptr->pstklen = ssize;
 	pptr->psem = 0;
 	pptr->phasmsg = FALSE;
-	pptr->plimit = (short) ((unsigned) saddr - ssize + sizeof(int));
+	pptr->plimit = (char *)((uword)saddr - ssize + sizeof(int));
 	*saddr-- = MAGIC;
 	pptr->pargs = nargs;
 	for (i = 0; i < PNREGS; i++)
 		pptr->pregs[i] = INITREG;
-	pptr->pregs[PC] = pptr->paddr = (short) procaddr;
+	pptr->paddr = (char *)(*procaddrp);
+	pptr->pregs[PC] = *procaddrp;
 	pptr->pregs[PS] = INITPS;
 	pptr->pnxtkin = BADPID;
 	pptr->pdevs[0] = pptr->pdevs[1] = BADDEV;

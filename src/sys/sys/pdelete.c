@@ -10,7 +10,7 @@
  *------------------------------------------------------------------------
  */
 SYSCALL
-pdelete(int portid, int (*dispose) (void))
+pdelete(int portid, int (*dispose)(void *))
 {
 	char ps;
 	struct pt *ptptr;

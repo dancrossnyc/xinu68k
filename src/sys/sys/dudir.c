@@ -1,4 +1,4 @@
-/* dudir.c - dudir */
+// dudir.c - dudir
 
 #include <conf.h>
 #include <kernel.h>
@@ -7,18 +7,15 @@
 #include <lfile.h>
 #include <dir.h>
 
-/*------------------------------------------------------------------------
- *  dudir  --  print file system directory in readable form on CONSOLE
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dudir  --  print file system directory in readable form on CONSOLE
+//------------------------------------------------------------------------
 int
 dudir(int diskdev)
 {
-	DBADDR firstdb, lastdb;
 	struct dir *dirptr;
 	struct fdes *fdptr;
 	int i, l;
-	char ps;
 
 	if (isbaddev(diskdev))
 		return (SYSERR);

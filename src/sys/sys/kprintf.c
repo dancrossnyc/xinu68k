@@ -87,6 +87,7 @@ rststate(void)
 int
 kprintf(const char *fmt, ...)
 {
+	extern void _doprnt(const char *, va_list, void (*putc)(int, int), int);
 	va_list args;
 	savestate(CONSOLE);
 	va_start(args, fmt);

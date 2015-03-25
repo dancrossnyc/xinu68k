@@ -11,7 +11,7 @@
 SYSCALL
 getname(char *nam)
 {
-	IPaddr myaddr[4];
+	IPaddr myaddr;
 	char *p;
 
 	*nam = NULLCH;

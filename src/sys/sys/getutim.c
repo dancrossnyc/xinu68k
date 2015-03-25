@@ -14,9 +14,7 @@ SYSCALL
 getutim(long *timvar)
 {
 	int dev;
-	int len;
 	int ret;
-	long now;
 	long utnow;
 	char *msg = "No time server response";
 
@@ -24,8 +22,7 @@ getutim(long *timvar)
 	ret = OK;
 	if (clktime < SECPERHR) {	/* assume small numbers invalid */
 		if ((dev = open(INTERNET, TSERVER, ANYLPORT)) == SYSERR ||
-		    control(dev, DG_SETMODE,
-			    DG_TMODE | DG_DMODE, 0) == SYSERR) {
+		    control(dev, DG_SETMODE, DG_TMODE | DG_DMODE) == SYSERR) {
 			panic(msg);
 			ret = SYSERR;
 		}

@@ -8,9 +8,8 @@
  *  x_mv  -  (command mv) move (rename) a file
  *------------------------------------------------------------------------
  */
-COMMAND	x_mv(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_mv (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	if (nargs != 3) {
 		fprintf(stderr, "usage: mv file tofile\n");

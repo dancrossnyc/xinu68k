@@ -8,9 +8,8 @@
  *  x_exit  -  (builtin command exit) exit from the shell
  *------------------------------------------------------------------------
  */
-BUILTIN	x_exit(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+BUILTIN
+x_exit (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	return(SHEXIT);
 }

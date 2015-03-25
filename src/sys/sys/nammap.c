@@ -5,7 +5,7 @@
 #include <name.h>
 
 /*------------------------------------------------------------------------
- *  nammap  -  using namespace, iteratively map name onto (newname,device) 
+ *  nammap  -  using namespace, iteratively map name onto (newname,device)
  *------------------------------------------------------------------------
  */
 SYSCALL

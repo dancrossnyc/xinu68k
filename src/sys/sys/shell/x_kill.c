@@ -8,9 +8,8 @@
  *  x_kill  -  (command kill) terminate a process
  *------------------------------------------------------------------------
  */
-BUILTIN	x_kill(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+BUILTIN
+x_kill (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	int	pid;
 

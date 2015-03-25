@@ -22,8 +22,8 @@ dsinit(struct devsw *devptr)
 	char ps;
 
 	disable(ps);
-	devptr->dvioblk = dsptr = &dstab[devptr->dvminor];
-	dsptr->dcsr = devptr->dvcsr;
+	devptr->dvioblk = (char *)(dsptr = &dstab[devptr->dvminor]);
+	dsptr->dcsr = (struct dtc *)devptr->dvcsr;
 	dsptr->dreqlst = DRNULL;
 	dsptr->dnum = devptr->dvnum;
 	dsptr->dibsem = screate(1);
@@ -44,7 +44,8 @@ dsinit(struct devsw *devptr)
 	dtptr = dsptr->dcsr;
 	dtptr->dt_dar = dsptr->ddir;
 	dtptr->dt_car = &dsptr->ddcb;
-	dtptr->dt_xdar = dtptr->dt_xcar = NULL;
+	dtptr->dt_xdar = NULL;
+	dtptr->dt_xcar = NULL;
 	dtptr->dt_csr = DTGO;
 	while (((status = dtptr->dt_csr) & DTDONE) == 0);
 	if (status & DTERROR)

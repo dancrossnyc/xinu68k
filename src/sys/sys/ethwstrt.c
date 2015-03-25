@@ -10,7 +10,7 @@
  *------------------------------------------------------------------------
  */
 
-int
+void
 ethwstrt(struct etblk *etptr, char *buf, int len, int setup)
 {
 	struct dcmd *dcmptr;
@@ -23,10 +23,10 @@ ethwstrt(struct etblk *etptr, char *buf, int len, int setup)
 	dcmptr->dc_bufh = DC_VALID | DC_ENDM | (etptr->etsetup = setup);
 	if (isodd(len))
 		dcmptr->dc_bufh |= DC_LBIT;
-	dcmptr->dc_buf = (short) buf;
+	dcmptr->dc_buf = buf;
 	dcmptr->dc_len = dqlen(len);
 	dcmptr->dc_st1 = dcmptr->dc_st2 = DC_INIT;
 	dcmptr->dc_flag = DC_NUSED;
-	dqptr->d_wcmd = (short) dcmptr;
-	dqptr->d_wcmdh = (short) NULL;
+	dqptr->d_wcmd = (char *) dcmptr;
+	dqptr->d_wcmdh = NULL;
 }

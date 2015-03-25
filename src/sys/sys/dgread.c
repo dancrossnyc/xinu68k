@@ -50,14 +50,14 @@ dgread(struct devsw *devptr, struct xgram *buff, int len)
 			restore(ps);
 			return (SYSERR);
 		}
-		blkcopy(buff->xg_faddr, ipptr->i_src, IPLEN);
+		memmove(buff->xg_faddr, ipptr->i_src, IPLEN);
 		buff->xg_fport = net2hs(udpptr->u_sport);
 		buff->xg_lport = dgptr->dg_lport;
-		blkcopy(buff->xg_data, udpptr->u_data, datalen);
+		memmove(buff->xg_data, udpptr->u_data, datalen);
 	} else {
 		if (datalen > len)
 			datalen = len;
-		blkcopy(buff, udpptr->u_data, datalen);
+		memmove(buff, udpptr->u_data, datalen);
 	}
 	freebuf(packet);
 	restore(ps);

@@ -41,9 +41,9 @@ void clkinit(void);
 /* close.c */
 SYSCALL close(int descrp);
 /* control.c */
-SYSCALL control(int descrp, int func, char *addr, char *addr2);
+SYSCALL control(int descrp, int func, int addr);
 /* create.c */
-SYSCALL create(PROCESS (*procaddr), int ssize, int priority, char *name, int nargs, ...);
+SYSCALL create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ...);
 /* devdump.c */
 void devdump(void);
 /* dfalloc.c */
@@ -59,7 +59,7 @@ int dgcntl(struct devsw *devptr, int func, int arg);
 /* dgdump.c */
 int dgdump(void);
 /* dginit.c */
-int dginit(struct devsw *devptr);
+void dginit(struct devsw *devptr);
 /* dgmcntl.c */
 int dgmcntl(struct devsw *devptr, int func, char *addr);
 /* dgmopen.c */
@@ -71,7 +71,7 @@ int dgread(struct devsw *devptr, struct xgram *buff, int len);
 /* dgwrite.c */
 int dgwrite(struct devsw *devptr, struct xgram *buff, int len);
 /* dot2ip.c */
-int dot2ip(char *ip, int nad1, int nad2, int nad3, int nad4);
+void dot2ip(char *ip, int nad1, int nad2, int nad3, int nad4);
 /* dscntl.c */
 int dscntl(struct devsw *devptr, int func);
 /* dsinit.c */
@@ -79,7 +79,7 @@ int dsinit(struct devsw *devptr);
 /* dsinter.c */
 INTPROC dsinter(struct dsblk *dsptr);
 /* dskbcpy.c */
-char *dskbcpy(char *oldbuf);
+char *dskbcpy(void *oldbuf);
 /* dskenq.c */
 int dskenq(struct dreq *drptr, struct dsblk *dsptr);
 /* dskqopt.c */
@@ -103,7 +103,7 @@ int dumkfs(int diskdev, int niblks, unsigned int nblocks, int diskid, Bool verbo
 int dumkdl(int diskdev, DBADDR firstfb, DBADDR lastfb, Bool verbose);
 int dumkil(int diskdev, int niblks, Bool verbose);
 /* ethinit.c */
-int ethinit(struct devsw *devptr);
+void ethinit(struct devsw *devptr);
 /* ethinter.c */
 INTPROC ethinter(struct etblk *etptr);
 /* ethread.c */
@@ -115,11 +115,11 @@ int ethstrt(struct etblk *etptr, struct dqsetup *setup);
 /* ethwrite.c */
 int ethwrite(struct devsw *devptr, char *buff, int len);
 /* ethwstrt.c */
-int ethwstrt(struct etblk *etptr, char *buf, int len, int setup);
+void ethwstrt(struct etblk *etptr, char *buf, int len, int setup);
 /* freebuf.c */
 SYSCALL freebuf(void *buf);
 /* freemem.c */
-SYSCALL freemem(struct mblock *block, unsigned size);
+SYSCALL freemem(void *block, unsigned size);
 /* getaddr.c */
 SYSCALL getaddr(IPaddr address);
 /* getbuf.c */
@@ -148,11 +148,11 @@ SYSCALL gettime(long *timvar);
 /* getutim.c */
 SYSCALL getutim(long *timvar);
 /* ibclear.c */
-int ibclear(struct iblk *ibptr, long ibbyte);
+void ibclear(struct iblk *ibptr, long ibbyte);
 /* ibfree.c */
 int ibfree(int diskdev, IBADDR inum);
 /* ibget.c */
-int ibget(int diskdev, IBADDR inum, struct iblk *loc);
+void ibget(int diskdev, IBADDR inum, struct iblk *loc);
 /* iblfree.c */
 int iblfree(int diskdev, IBADDR iblist);
 /* ibnew.c */
@@ -171,11 +171,13 @@ int insert(int proc, int head, int key);
 int insertd(int pid, int head, int key);
 /* ioerr.c */
 int ioerr(void);
+INTPROC interr(void);
 /* ioinit.c */
 int ioinit(int descrp);
-int iosetvec(int descrp, int incode, int outcode);
+int iosetvec(int descrp, void *incode, void *outcode);
 /* ionull.c */
 int ionull(void);
+void initnull(void);
 /* ip2name.c */
 SYSCALL ip2name(IPaddr ip, char *nam);
 /* ip_in.c */
@@ -201,7 +203,7 @@ int lfsdfree(int diskdev, DBADDR dba);
 /* lfseek.c */
 int lfseek(struct devsw *devptr, long offset);
 /* lfsetup.c */
-int lfsetup(int diskdev, struct flblk *flptr);
+void lfsetup(int diskdev, struct flblk *flptr);
 /* lfsflush.c */
 int lfsflush(struct flblk *flptr);
 /* lfsnewd.c */
@@ -209,10 +211,10 @@ int lfsnewd(int diskdev, struct flblk *flptr);
 /* lfwrite.c */
 int lfwrite(struct devsw *devptr, char *buff, int count);
 /* mark.c */
-int _mkinit(void);
+void _mkinit(void);
 SYSCALL mark(int *loc);
 /* mdump.c */
-int mdump(void);
+void mdump(void);
 /* mkarp.c */
 struct epacket *mkarp(int typ, int op, IPaddr spaddr, IPaddr tpaddr);
 /* mkpool.c */
@@ -220,7 +222,7 @@ SYSCALL mkpool(int bufsiz, int numbufs);
 /* mount.c */
 SYSCALL mount(char *prefix, int dev, char *replace);
 /* naminit.c */
-int naminit(void);
+void naminit(void);
 /* nammap.c */
 SYSCALL nammap(char *name, char *newname);
 /* namopen.c */
@@ -228,7 +230,7 @@ int namopen(struct devsw *devptr, char *filenam, char *mode);
 /* namrepl.c */
 SYSCALL namrepl(char *name, char *newname);
 /* ndump.c */
-int ndump(void);
+void ndump(void);
 /* netdump.c */
 int netdump(void);
 /* netin.c */
@@ -250,29 +252,29 @@ SYSCALL pcount(int portid);
 /* pcreate.c */
 SYSCALL pcreate(int count);
 /* pdelete.c */
-SYSCALL pdelete(int portid, int (*dispose)(void));
+SYSCALL pdelete(int portid, int (*dispose)(void *));
 /* pinit.c */
 SYSCALL pinit(int maxmsgs);
 /* poolinit.c */
 int poolinit(void);
 /* prdump.c */
-int prdump(void);
-int prdumph(void);
-int prdumpa(void);
+void prdump(void);
+void prdumph(void);
+void prdumpa(void);
 /* preceive.c */
 SYSCALL preceive(int portid);
 /* preset.c */
-SYSCALL preset(int portid, int (*dispose)(void));
+SYSCALL preset(int portid, int (*dispose)(void *));
 /* psend.c */
-SYSCALL psend(int portid, int msg);
+SYSCALL psend(int portid, uword msg);
 /* ptclear.c */
-int _ptclear(struct pt *ptptr, int newstate, int (*dispose)(int));
+void _ptclear(struct pt *ptptr, int newstate, int (*dispose)(void *));
 /* putc.c */
 SYSCALL putc(int descrp, int ch);
 /* qdump.c */
-int qdump(void);
-int qdumph(void);
-int qdumpa(void);
+void qdump(void);
+void qdumph(void);
+void qdumpa(void);
 /* queue.c */
 int enqueue(int item, int tail);
 int dequeue(int item);
@@ -303,11 +305,11 @@ int rfclose(struct devsw *devptr);
 /* rfcntl.c */
 int rfcntl(struct devsw *devptr, int func, char *addr, char *addr2);
 /* rfdump.c */
-int rfdump(void);
+void rfdump(void);
 /* rfgetc.c */
 int rfgetc(struct devsw *devptr);
 /* rfinit.c */
-int rfinit(struct devsw *devptr);
+void rfinit(struct devsw *devptr);
 /* rfio.c */
 int rfio(struct devsw *devptr, int rop, char *buff, int len);
 /* rfmkpac.c */
@@ -327,7 +329,7 @@ int rfwrite(struct devsw *devptr, char *buff, int len);
 /* route.c */
 int route(IPaddr faddr, struct epacket *packet, int totlen);
 /* rwho.c */
-int rwho(void);
+void rwho(void);
 /* rwhod.c */
 PROCESS rwhod(void);
 /* rwhoind.c */
@@ -361,14 +363,14 @@ int sndrarp(void);
 /* sreset.c */
 SYSCALL sreset(int sem, int count);
 /* ssclock.c */
-int stopclk(void);
-int strtclk(void);
+void stopclk(void);
+void strtclk(void);
 /* suspend.c */
 SYSCALL suspend(int pid);
 /* tdump.c */
-int tdump(void);
-int tdumph(void);
-int tdump1(int tnum);
+void tdump(void);
+void tdumph(void);
+void tdump1(int tnum);
 /* test.c */
 int main(void);
 /* ttycntl.c */
@@ -378,7 +380,7 @@ int ttygetc(struct devsw *devptr);
 /* ttyiin.c */
 INTPROC ttyiin(struct tty *iptr);
 /* ttyinit.c */
-int ttyinit(struct devsw *devptr);
+void ttyinit(struct devsw *devptr);
 /* ttyoin.c */
 INTPROC ttyoin(struct tty *iptr);
 /* ttyopen.c */
@@ -400,12 +402,86 @@ SYSCALL unmount(char *prefix);
 /* unsleep.c */
 SYSCALL unsleep(int pid);
 /* userret.c */
-int userret(void);
+void userret(void);
 /* wait.c */
 SYSCALL wait(int sem);
 /* wakeup.c */
 INTPROC wakeup(void);
 /* write.c */
-SYSCALL write(int descrp, void *buff, int count);
+SYSCALL write(int descrp, const void *buff, int count);
 /* xdone.c */
-int xdone(void);
+void xdone(void);
+
+int login(int dev);
+int shell(int dev);
+
+void setclkr(void);
+void panic(const char *);
+void ctxsw(uword *, uword *);
+void restart(void);
+
+// Shell.
+/* addarg.c */
+int addarg(int pid, int nargs, int len);
+/* ascdate.c */
+int ascdate(long time, char *str);
+/* lexan.c */
+int lexan(char *line);
+/* login.c */
+int login(int dev);
+/* shell.c */
+int shell(int dev);
+/* x_bpool.c */
+int x_bpool(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_cat.c */
+int x_cat(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_close.c */
+int x_close(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_cp.c */
+int x_cp(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_create.c */
+int x_creat(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_date.c */
+int x_date(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_devs.c */
+int x_devs(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_dg.c */
+int x_dg(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_echo.c */
+int x_echo(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_exit.c */
+int x_exit(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_help.c */
+int x_help(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_kill.c */
+int x_kill(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_mem.c */
+int x_mem(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_mount.c */
+int x_mount(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_mv.c */
+int x_mv(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_net.c */
+int x_net(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_ps.c */
+int x_ps(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_reboot.c */
+int x_reboot(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_rf.c */
+int x_rf(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_rls.c */
+int x_rls(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_rm.c */
+int x_rm(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_routes.c */
+int x_routes(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_sleep.c */
+int x_sleep(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_snap.c */
+int x_snap(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_unmou.c */
+int x_unmou(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_uptime.c */
+int x_uptime(int stdin, int stdout, int stderr, int nargs, char *args[]);
+/* x_who.c */
+int x_who(int stdin, int stdout, int stderr);

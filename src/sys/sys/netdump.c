@@ -1,13 +1,12 @@
-/* netdump.c - netdump */
+// netdump.c - netdump
 
 #include <conf.h>
 #include <kernel.h>
 #include <network.h>
 
-/*------------------------------------------------------------------------
- *  netdump  -  dump the contents of Net struct and  udp demux queues
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  netdump  -  dump the contents of Net struct and  udp demux queues
+//------------------------------------------------------------------------
 int
 netdump(void)
 {
@@ -27,5 +26,5 @@ netdump(void)
 			     i, nqptr->uport, nqptr->pid, nqptr->xport,
 			     pcount(nqptr->xport));
 	}
-	return (OK);
+	return OK;
 }

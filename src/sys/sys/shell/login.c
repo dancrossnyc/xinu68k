@@ -8,8 +8,8 @@
  *  login  -  log user onto system
  *------------------------------------------------------------------------
  */
-login(dev)
-int	dev;
+int
+login (int dev)
 {
 	int	len;
 

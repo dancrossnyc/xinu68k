@@ -11,9 +11,8 @@ LOCAL	char	st[] = "F?GD";
  *  x_routes  -  (command routes) format and print routing cache entries
  *------------------------------------------------------------------------
  */
-COMMAND	x_routes(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_routes (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	int	arindex;
 	char	str[80];
@@ -31,7 +30,7 @@ char	*args[];
 		if (atabptr->arp_state == AR_FREE)
 			continue;
 		sprintf(str, " %2d. Route=%c, Dev=%2d",
-			arindex,st[atabptr->arp_state],atabptr->arp_dev);
+			arindex,st[(int)atabptr->arp_state],atabptr->arp_dev);
 		sprintf(&str[strlen(str)],
 			" IPaddr=%03d.%03d.%03d.%03d, ",
 				atabptr->arp_Iad[0] & 0377,

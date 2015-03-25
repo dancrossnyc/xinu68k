@@ -16,11 +16,9 @@ ethread(struct devsw *devptr, char *buff, int len)
 	char *wbuff;
 	struct etblk *etptr;
 	struct dcmd *dcmptr;
-	struct dqregs *dqptr;
 
 	etptr = (struct etblk *) devptr->dvioblk;
 	dcmptr = etptr->ercmd;
-	dqptr = etptr->eioaddr;
 	wait(etptr->etrsem);
 	disable(ps);
 	etptr->etrpid = currpid;
@@ -28,7 +26,7 @@ ethread(struct devsw *devptr, char *buff, int len)
 	ethrstrt(etptr, buff, len);
 	while (recvtim(DQ_RTO) == TIMEOUT) {
 		wbuff = (dcmptr = etptr->ewcmd)->dc_buf;
-		ethstrt(etptr, buff);
+		ethstrt(etptr, (struct dqsetup *)buff);
 		ethrstrt(etptr, buff, len);
 		if (etptr->etlen != 0) {
 			ethwstrt(etptr, wbuff, etptr->etlen, DC_NORM);

@@ -9,8 +9,8 @@
  *  x_who  -  (command who) print name user is logged in under
  *------------------------------------------------------------------------
  */
-COMMAND	x_who(stdin, stdout, stderr)
-int	stdin, stdout, stderr;
+COMMAND
+x_who (int stdin, int stdout, int stderr)
 {
 	char	machine[32];
 	char	str[80];

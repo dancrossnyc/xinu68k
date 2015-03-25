@@ -7,9 +7,7 @@
  *  x_cat  -  (command cat) concatenate files and write on stdout
  *------------------------------------------------------------------------
  */
-COMMAND	x_cat(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND	x_cat(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	int	device;
 	char	*buf;
@@ -17,7 +15,7 @@ char	*args[];
 	int	len;
 	int	i;
 
-	if ( (buf = (char *)getmem(512)) == SYSERR) {
+	if ((buf = (char *)getmem(512)) == (char *)SYSERR) {
 		fprintf(stderr, "no memory\n");
 		return(SYSERR);
 	}

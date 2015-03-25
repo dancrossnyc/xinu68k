@@ -7,9 +7,8 @@
  *  x_echo  -  (command echo) echo arguments separated by blanks
  *------------------------------------------------------------------------
  */
-COMMAND	x_echo(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_echo (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	char	str[80];
 	int	i;

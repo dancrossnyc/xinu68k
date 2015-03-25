@@ -31,13 +31,13 @@ dgwrite(struct devsw *devptr, struct xgram *buff, int len)
 			dstport = buff->xg_fport;
 			dstIP = (char *) buff->xg_faddr;
 		}
-		blkcopy(udpptr->u_data, buff->xg_data, len);
+		memmove(udpptr->u_data, buff->xg_data, len);
 	} else {
 		if (dstport == 0) {
 			freebuf(packet);
 			return (SYSERR);
 		}
-		blkcopy(udpptr->u_data, buff, len);
+		memmove(udpptr->u_data, buff, len);
 	}
 	return (udpsend(dstIP, dstport, dgptr->dg_lport, packet, len));
 }

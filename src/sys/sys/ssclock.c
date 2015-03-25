@@ -10,7 +10,7 @@
  *  stopclk  --  put the clock in defer mode
  *------------------------------------------------------------------------
  */
-int
+void
 stopclk(void)
 {
 	defclk++;
@@ -20,7 +20,7 @@ stopclk(void)
  *  strtclk  --  take the clock out of defer mode
  *------------------------------------------------------------------------
  */
-int
+void
 strtclk(void)
 {
 	char ps;

@@ -5,16 +5,14 @@
 #include <core11.h>
 #include <mem.h>
 
-LOCAL	int	snapreg;
 #define	SNAPSIZ	512
 
 /*------------------------------------------------------------------------
  *  x_snap  -  (command snap) write snapshot of memory to a core file
  *------------------------------------------------------------------------
  */
-COMMAND	x_snap(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_snap (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	int	dev;
 	struct	core11	hdr;
@@ -39,6 +37,7 @@ char	*args[];
 
 	/* Capture machine registers */
 
+/*
 	asm("mov r0,_snapreg"); hdr.c_regs[0] = snapreg;
 	asm("mov r1,_snapreg"); hdr.c_regs[1] = snapreg;
 	asm("mov r2,_snapreg"); hdr.c_regs[2] = snapreg;
@@ -48,6 +47,7 @@ char	*args[];
 	asm("mov sp,_snapreg"); hdr.c_regs[6] = snapreg;
 	asm("mov pc,_snapreg"); hdr.c_regs[7] = snapreg;
 	asm("clr _snapreg;mfps _snapreg"); hdr.c_psw = snapreg;
+*/
 	fprintf(stderr, "Writing core image");
 	write(dev, &hdr, sizeof(struct core11));
 

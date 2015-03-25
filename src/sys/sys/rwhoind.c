@@ -20,8 +20,8 @@ rwhoind(void)
 	struct rwhopac *rpacptr;
 	struct rwent *rwptr;
 
-	if ((dev = open(INTERNET, ANYFPORT, URWHO)) == SYSERR ||
-	    control(dev, DG_SETMODE, DG_DMODE, 0) == SYSERR)
+	if ((dev = open(INTERNET, ANYFPORT, (char *)URWHO)) == SYSERR ||
+	    control(dev, DG_SETMODE, DG_DMODE) == SYSERR)
 		panic("rwho_in: cannot open rwho port");
 	while (TRUE) {
 		if ((len = read(dev, Rwho.rbuf, RWMAXP)) == SYSERR)

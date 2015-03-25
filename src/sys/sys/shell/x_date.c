@@ -9,9 +9,8 @@
  *  x_date  -  (command date) print the date and time
  *------------------------------------------------------------------------
  */
-COMMAND	x_date(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_date (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	long	now;
 	char	str[80];

@@ -16,5 +16,6 @@ init(int descrp)
 	if (isbaddev(descrp))
 		return (SYSERR);
 	devptr = &devtab[descrp];
-	return ((*devptr->dvinit) (devptr));
+	(*devptr->dvinit)(devptr);
+	return OK;
 }

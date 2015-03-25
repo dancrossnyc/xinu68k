@@ -7,9 +7,10 @@
  *  x_reboot  -  (builtin command reboot) restart the system from scratch
  *------------------------------------------------------------------------
  */
-BUILTIN	x_reboot(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+BUILTIN
+x_reboot (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	restart();	/* warning! This terminates everything. */
+
+	return OK;
 }

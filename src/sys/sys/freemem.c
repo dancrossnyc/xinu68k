@@ -9,10 +9,10 @@
  *------------------------------------------------------------------------
  */
 SYSCALL
-freemem(struct mblock *block, unsigned size)
+freemem(void *b, unsigned size)
 {
 	char ps;
-	struct mblock *p, *q;
+	struct mblock *p, *q, *block = (struct mblock *)b;
 	unsigned top;
 
 	if (size == 0 || (unsigned) block > (unsigned) maxaddr
@@ -23,7 +23,7 @@ freemem(struct mblock *block, unsigned size)
 	for (p = memlist.mnext, q = &memlist;
 	     (char *) p != NULL && p < block; q = p, p = p->mnext);
 	if ((top = q->mlen + (unsigned) q) > (unsigned) block
-	    && q != &memlist || (char *) p != NULL
+	    && (q != &memlist || (char *) p != NULL)
 	    && (size + (unsigned) block) > (unsigned) p) {
 		restore(ps);
 		return (SYSERR);

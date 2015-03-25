@@ -19,8 +19,8 @@ struct	exec {	/* a.out header */
 
 struct	nlist {				/* symbol table entry		*/
 	char		n_name[8];	/* symbol name			*/
-	short		n_type;		/* type flag			*/
-	unsigned short	n_value;	/* value			*/
+	uword		n_type;		/* type flag			*/
+	uword		n_value;	/* value			*/
 };
 
 /* values for type flag */

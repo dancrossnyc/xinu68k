@@ -1,22 +1,35 @@
 /* kernel.h - disable, enable, halt, restore, isodd, min */
 
+typedef unsigned char  byte;
+
+typedef unsigned char  u8;
+typedef unsigned short u16;
+typedef unsigned int   u32;
+typedef unsigned long  ulong;
+typedef signed char    i8;
+typedef signed short   i16;
+typedef signed int     i32;
+typedef int            word;	// Register word.
+typedef unsigned int   uword;
+typedef unsigned long  size_t;
+
 /* Symbolic constants used throughout Xinu */
 
 typedef	char		Bool;		/* Boolean type			*/
 #define	FALSE		0		/* Boolean constants		*/
 #define	TRUE		1
-#define	NULL		(char *)0	/* Null pointer for linked lists*/
+#define	NULL		0		/* Null pointer for linked lists*/
 #define	NULLCH		'\0'		/* The null character		*/
 #define	NULLSTR		""		/* Pointer to empty string	*/
 #define	SYSCALL		int		/* System call declaration	*/
 #define	LOCAL		static		/* Local procedure declaration	*/
 #define	COMMAND		int		/* Shell command declaration	*/
 #define	BUILTIN		int		/* Shell builtin " "		*/
-#define	INTPROC		int		/* Interrupt procedure  "	*/
+#define	INTPROC		void		/* Interrupt procedure  "	*/
 #define	PROCESS		int		/* Process declaration		*/
 #define	RESCHYES	1		/* tell	ready to reschedule	*/
 #define	RESCHNO		0		/* tell	ready not to resch.	*/
-#define	MININT		0100000		/* minimum integer (-32768)	*/
+#define	MININT		-32768		/* minimum integer (-32768)	*/
 #define	MAXINT		0077777		/* maximum integer		*/
 #define	LOWBYTE		0377		/* mask for low-order 8 bits	*/
 #define	HIBYTE		0177400		/* mask for high 8 of 16 bits	*/
@@ -71,3 +84,4 @@ extern	int	rdyhead, rdytail;
 extern	int	preempt;
 
 #include "fns.h"
+#include "libk.h"

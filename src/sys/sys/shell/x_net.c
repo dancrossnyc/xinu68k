@@ -8,9 +8,8 @@
  *  x_net  -  (command netstat) print network status information
  *------------------------------------------------------------------------
  */
-COMMAND	x_net(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_net (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	struct	netq	*nqptr;
 	char	str[80];

@@ -17,9 +17,9 @@ mount(char *prefix, int dev, char *replace)
 	char ps;
 
 	if (prefix == NULL)
-		prefix == NULLSTR;
+		prefix = NULLSTR;
 	if (replace == NULL)
-		replace == NULLSTR;
+		replace = NULLSTR;
 	if (strlen(prefix) >= NAMPLEN || strlen(replace) >= NAMRLEN)
 		return (SYSERR);
 	disable(ps);

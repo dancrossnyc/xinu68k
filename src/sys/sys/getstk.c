@@ -38,7 +38,7 @@ getstk(unsigned int nbytes)
 	} else {
 		fits->mlen -= nbytes;
 	}
-	fits = ((unsigned) fits) + len - sizeof(int);
+	fits = (struct mblock *)(((uword) fits) + len - sizeof(int));
 	restore(ps);
 	return ((int *) fits);
 }

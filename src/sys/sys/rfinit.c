@@ -1,15 +1,14 @@
-/* rfinit.c - rfinit */
+// rfinit.c - rfinit
 
 #include <conf.h>
 #include <kernel.h>
 #include <fserver.h>
 #include <rfile.h>
 
-/*------------------------------------------------------------------------
- *  rfinit  --  initialize remote file pseudo devices
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  rfinit  --  initialize remote file pseudo devices
+//------------------------------------------------------------------------
+void
 rfinit(struct devsw *devptr)
 {
 	struct rfblk *rfptr;

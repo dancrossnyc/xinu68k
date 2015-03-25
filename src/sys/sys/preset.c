@@ -10,7 +10,7 @@
  *------------------------------------------------------------------------
  */
 SYSCALL
-preset(int portid, int (*dispose) (void))
+preset(int portid, int (*dispose)(void *))
 {
 	char ps;
 	struct pt *ptptr;

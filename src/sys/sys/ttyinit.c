@@ -1,4 +1,4 @@
-/* ttyinit.c - ttyinit */
+// ttyinit.c - ttyinit
 
 #include <conf.h>
 #include <kernel.h>
@@ -7,21 +7,20 @@
 #include <io.h>
 #include <slu.h>
 
-/*------------------------------------------------------------------------
- *  ttyinit - initialize buffers and modes for a tty line
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  ttyinit - initialize buffers and modes for a tty line
+//------------------------------------------------------------------------
+void
 ttyinit(struct devsw *devptr)
 {
 	struct tty *iptr;
 	struct csr *cptr;
-	int junk, isconsole;
+	int isconsole;
 
 	/* set up interrupt vector and interrupt dispatch table */
 
 	iptr = &tty[devptr->dvminor];
-	iosetvec(devptr->dvnum, (int) iptr, (int) iptr);
+	iosetvec(devptr->dvnum, iptr, iptr);
 
 	devptr->dvioblk = (char *) iptr;	/* fill tty control blk */
 	isconsole = (devptr->dvnum == CONSOLE);	/* make console cooked  */
@@ -50,7 +49,6 @@ ttyinit(struct devsw *devptr)
 	iptr->icursor = 0;
 	iptr->ifullc = TFULLC;
 	cptr = (struct csr *) devptr->dvcsr;
-	junk = cptr->crbuf;	/* clear receiver and   */
 	cptr->crstat = SLUENABLE;	/* enable in. interrupts */
 	cptr->ctstat = SLUDISABLE;	/* disable out.   "     */
 }

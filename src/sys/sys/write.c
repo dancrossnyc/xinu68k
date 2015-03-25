@@ -9,12 +9,12 @@
  *------------------------------------------------------------------------
  */
 SYSCALL
-write(int descrp, void *buff, int count)
+write(int descrp, const void *buff, int count)
 {
 	struct devsw *devptr;
 
 	if (isbaddev(descrp))
 		return (SYSERR);
 	devptr = &devtab[descrp];
-	return ((*devptr->dvwrite) (devptr, buff, count));
+	return ((*devptr->dvwrite)(devptr, buff, count));
 }

@@ -10,7 +10,7 @@
  *------------------------------------------------------------------------
  */
 SYSCALL
-psend(int portid, int msg)
+psend(int portid, uword msg)
 {
 	char ps;
 	struct pt *ptptr;

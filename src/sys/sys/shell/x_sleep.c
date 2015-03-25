@@ -7,9 +7,8 @@
  *  x_sleep  -  (command sleep) delay for a given number of seconds
  *------------------------------------------------------------------------
  */
-COMMAND	x_sleep(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_sleep (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	if (nargs != 2) {
 		fprintf(stderr, "usage: sleep delay\n");

@@ -29,7 +29,7 @@ icmp_in(struct epacket *packet, int icmpp, int lim)
 		icmpptr->ic_cksum = 0;
 		icmpptr->ic_cksum = cksum(icmpptr, len >> 1);
 		if (pcount(icmpp) < lim)
-			psend(icmpp, packet);
+			psend(icmpp, (uword)packet);
 		else
 			freebuf(packet);
 	}

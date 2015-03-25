@@ -6,7 +6,7 @@
 DIR	=	/Users/cross/unix/project/xinu68k
 BINDIR	=	$(DIR)/bin
 CC	=	m68k-none-elf-gcc
-CFLAGS	=	-O -c -I../../h -ansi -pedantic -std=c11 -Wall -nostdlib -nostartfiles -ffreestanding
+CFLAGS	=	-O -c -I../../h -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
 AFLAGS	=	-u $(DIR)/include/sys.s
 AS	=	m68k-none-elf-as
 LD	=	m68k-none-elf-ld

@@ -18,7 +18,6 @@ getpath(IPaddr faddr)
 	IPaddr myaddr;		/* my IP address                */
 	char ps;
 	struct arpent *arpptr;
-	struct arppak *apacptr;
 	struct epacket *packet, *mkarp();
 
 	wait(Arp.arpsem);

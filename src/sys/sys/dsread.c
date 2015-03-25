@@ -17,12 +17,12 @@ dsread(struct devsw *devptr, char *buff, DBADDR block)
 	char ps;
 
 	disable(ps);
-	drptr = (struct dreq *) getbuf(dskrbp);
+	drptr = (struct dreq *)getbuf(dskrbp);
 	drptr->drdba = block;
 	drptr->drpid = currpid;
 	drptr->drbuff = buff;
 	drptr->drop = DREAD;
-	if ((stat = dskenq(drptr, devptr->dvioblk)) == DONQ) {
+	if ((stat = dskenq(drptr, (struct dsblk *)devptr->dvioblk)) == DONQ) {
 		suspend(currpid);
 		stat = drptr->drstat;
 	}

@@ -1,13 +1,13 @@
-/* qdump.c - qdump, qdumph, qdumpa */
+// qdump.c - qdump, qdumph, qdumpa
 
 #include <conf.h>
 #include <kernel.h>
 #include <proc.h>
 #include <q.h>
 
-#define	isbadq(i)	( (i)<0 || (i)>=NQENT )
+#define	isbadq(i)	((i) < 0 || (i) >= NQENT)
 
-static
+static void
 qxdump(int all)
 {
 	struct qent *qp;
@@ -16,6 +16,7 @@ qxdump(int all)
 	int pr;
 
 	for (i = 0; i < NQENT; i++) {
+		qp = NULL;
 		if ((pr = all) == 0) {
 			qp = &q[i];
 			if (i < NPROC) {
@@ -43,27 +44,25 @@ qxdump(int all)
 					pr = 1;
 			}
 		}
-		if (pr != 0)
+		if (pr != 0 && qp != NULL)
 			kprintf("q[%4d ] key=%6d,next=%6d,qprev=%6d\n",
 				i, qp->qkey, qp->qnext, qp->qprev);
 	}
 }
 
-/*------------------------------------------------------------------------
- *  qdump  --  dump the contents of the q structure for debugging
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  qdump  --  dump the contents of the q structure for debugging
+//------------------------------------------------------------------------
+void
 qdump(void)
 {
 	qxdump(0);
 }
 
-/*------------------------------------------------------------------------
- *  qdumph  --  dump the contents of the q structure and halt
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  qdumph  --  dump the contents of the q structure and halt
+//------------------------------------------------------------------------
+void
 qdumph(void)
 {
 	qxdump(0);
@@ -71,11 +70,10 @@ qdumph(void)
 	halt();
 }
 
-/*------------------------------------------------------------------------
- *  qdumpa  --  dump the contents of the q structure printing all info
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  qdumpa  --  dump the contents of the q structure printing all info
+//------------------------------------------------------------------------
+void
 qdumpa(void)
 {
 	qxdump(1);

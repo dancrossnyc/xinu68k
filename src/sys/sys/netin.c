@@ -28,8 +28,7 @@ netin(int userpid		/* user process to resume       */
 			Net.ndrop++;
 			continue;
 		}
-		switch (net2hs(packet->ep_hdr.e_ptype)) {
-
+		switch ((int)net2hs(packet->ep_hdr.e_ptype)) {
 		case EP_ARP:
 			arp_in(packet, ETHER);
 			packet = getbuf(Net.netpool);

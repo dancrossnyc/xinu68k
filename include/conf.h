@@ -6,7 +6,7 @@
 struct	devsw	{			/* device table entry */
 	int	dvnum;
 	char	*dvname;
-	int	(*dvinit)();
+	void	(*dvinit)();
 	int	(*dvopen)();
 	int	(*dvclose)();
 	int	(*dvread)();
@@ -18,8 +18,8 @@ struct	devsw	{			/* device table entry */
 	int	dvcsr;
 	int	dvivec;
 	int	dvovec;
-	int	(*dviint)();
-	int	(*dvoint)();
+	void	(*dviint)();
+	void	(*dvoint)();
 	char	*dvioblk;
 	int	dvminor;
 	};
@@ -55,41 +55,6 @@ extern	struct	devsw devtab[];		/* one entry per device */
 
 #define	NDEVS	13
 
-/* Declarations of I/O routines referenced */
-
-extern	int	ttyinit();
-extern	int	ttyopen();
-extern	int	ionull();
-extern	int	ttyread();
-extern	int	ttywrite();
-extern	int	ioerr();
-extern	int	ttycntl();
-extern	int	ttygetc();
-extern	int	ttyputc();
-extern	int	ttyiin();
-extern	int	ttyoin();
-extern	int	ethinit();
-extern	int	ethread();
-extern	int	ethwrite();
-extern	int	ethinter();
-extern	int	dgmopen();
-extern	int	dgmcntl();
-extern	int	dginit();
-extern	int	dgclose();
-extern	int	dgread();
-extern	int	dgwrite();
-extern	int	dgcntl();
-extern	int	rfopen();
-extern	int	rfcntl();
-extern	int	rfinit();
-extern	int	rfclose();
-extern	int	rfread();
-extern	int	rfwrite();
-extern	int	rfseek();
-extern	int	rfgetc();
-extern	int	rfputc();
-extern	int	naminit();
-extern	int	namopen();
 
 
 /* Configuration and Size Constants */

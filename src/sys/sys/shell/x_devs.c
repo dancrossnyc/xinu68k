@@ -12,9 +12,8 @@ LOCAL	char hd2[] =
  *  x_devs  -  (command devs) print main fields of device switch table
  *------------------------------------------------------------------------
  */
-COMMAND	x_devs(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_devs (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	struct	devsw	*devptr;
 	char	str[60];
@@ -30,4 +29,6 @@ char	*args[];
 			devptr->dvioblk);
 		write(stdout, str, strlen(str));
 	}
+
+	return OK;
 }

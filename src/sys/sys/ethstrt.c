@@ -21,7 +21,7 @@ ethstrt(struct etblk *etptr, struct dqsetup *setup)
 
 	dqptr->d_csr |= DQ_REST;
 	dqptr->d_csr &= ~DQ_REST;
-	dqptr->d_vect = (etptr->etdev)->dvivec;
+	dqptr->d_vect = (char *)((etptr->etdev)->dvivec);
 
 	/* build setup packet */
 
@@ -34,9 +34,9 @@ ethstrt(struct etblk *etptr, struct dqsetup *setup)
 			    setup->dq_set[i][j] =
 			    i < EPADLEN ? etptr->etpaddr[i] : 0;
 	}
-	ethrstrt(etptr, setup->dq_echo,
+	ethrstrt(etptr, (char *)setup->dq_echo,
 		 sizeof(setup->dq_echo) + sizeof(setup->dq_crc));
-	ethwstrt(etptr, setup->dq_set, sizeof(setup->dq_set), DC_SETUP);
+	ethwstrt(etptr, (char *)setup->dq_set, sizeof(setup->dq_set), DC_SETUP);
 
 	/* poll device until setup processed */
 

@@ -8,9 +8,8 @@
  *  ascdate  -  print a given date in ascii including hours:mins:secs
  *------------------------------------------------------------------------
  */
-ascdate(time, str)
-long	time;
-char	*str;
+int
+ascdate (long time, char *str)
 {
 	long	tmp;
 	int	year, month, day, hour, minute, second;
@@ -47,6 +46,6 @@ char	*str;
 	return(OK);
 }
 
-struct	datinfo	Dat = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
-			"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-			"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+struct	datinfo	Dat = { {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+			{"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+			"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"} };

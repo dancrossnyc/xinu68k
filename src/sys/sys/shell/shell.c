@@ -8,7 +8,40 @@
 #include <tty.h>
 
 struct	shvars	Shl;			/* globals used by Xinu shell	*/
-struct	cmdent	cmds[]  = {CMDS};	/* shell commands		*/
+struct	cmdent	cmds[]  = {		/* shell commands		*/
+	{"bpool",	FALSE,		x_bpool},
+	{"cat",		FALSE,		x_cat},
+	{"close",	FALSE,		x_close},
+	{"cp",		FALSE,		x_cp},
+	{"create",	FALSE,		x_creat},
+	{"date",	FALSE,		x_date},
+	{"devs",	FALSE,		x_devs},
+	{"dg",		FALSE,		x_dg},
+	{"echo",	FALSE,		x_echo},
+	{"exit",	TRUE,		x_exit},
+	{"help",	FALSE,		x_help},
+	{"kill",	TRUE,		x_kill},
+	{"logout",	TRUE,		x_exit},
+	{"mem",		FALSE,		x_mem},
+	{"mount",	FALSE,		x_mount},
+	{"mv",		FALSE,		x_mv},
+	{"netstat",	FALSE,		x_net},
+	{"ps",		FALSE,		x_ps},
+	{"reboot",	TRUE,		x_reboot},
+	{"rf",		FALSE,		x_rf},
+	{"rls",		FALSE,		x_rls},
+	{"rm",		FALSE,		x_rm},
+	{"routes",	FALSE,		x_routes},
+	{"ruptime",	FALSE,		x_uptime},
+	{"sleep",	FALSE,		x_sleep},
+	{"snap",	FALSE,		x_snap},
+	{"time",	FALSE,		x_date},
+	{"unmount",	FALSE,		x_unmou},
+	{"uptime",	FALSE,		x_uptime},
+	{"who",		FALSE,		x_who},
+	{"?",		FALSE,		x_help}
+};
+//extern	struct	cmdent	cmds[];
 LOCAL	char	errhd[] = "Syntax error\n";/* global error messages	*/
 LOCAL	char	fmt[]   = "Cannot open %s\n";
 LOCAL	char	fmt2[]  = "[%d]\n";
@@ -17,8 +50,8 @@ LOCAL	char	fmt2[]  = "[%d]\n";
  *  shell  -  Xinu shell with file redirection and background processing
  *------------------------------------------------------------------------
  */
-shell(dev)
-int	dev;
+int
+shell(int dev)
 {
 	int	ntokens;
 	int	i, j, len;
@@ -131,7 +164,7 @@ int	dev;
 		len += (ntokens+2) * (sizeof(char *) + sizeof(char));
 		if (isodd(len))
 			len--;
-		control(dev, TCINT, getpid(), 0);
+		control(dev, TCINT, getpid());
 
 		/* create process to execute conventional command */
 

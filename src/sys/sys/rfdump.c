@@ -1,15 +1,14 @@
-/* rfdump.c - rfdump */
+// rfdump.c - rfdump
 
 #include <conf.h>
 #include <kernel.h>
 #include <fserver.h>
 #include <rfile.h>
 
-/*------------------------------------------------------------------------
- *  rfdump  --  dump the contents of the remote file device blocks
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  rfdump  --  dump the contents of the remote file device blocks
+//------------------------------------------------------------------------
+void
 rfdump(void)
 {
 	struct rfblk *rfptr;

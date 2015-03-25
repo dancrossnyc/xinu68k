@@ -16,9 +16,9 @@ udpecho(void)
 {
 	int dev, len;
 
-	if ((dev = open(INTERNET, ANYFPORT, UECHO)) == SYSERR) {
-		printf("udpecho: open fails\n");
-		return (SYSERR);
+	if ((dev = open(INTERNET, ANYFPORT, (void *)UECHO)) == SYSERR) {
+		kprintf("udpecho: open fails\n");
+		return SYSERR;
 	}
 	while (TRUE) {
 		len = read(dev, buff, MAXECHO);

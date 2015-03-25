@@ -1,4 +1,4 @@
-/* ibget.c - ibget */
+// ibget.c - ibget
 
 #include <conf.h>
 #include <kernel.h>
@@ -6,11 +6,10 @@
 #include <lfile.h>
 #include <dir.h>
 
-/*------------------------------------------------------------------------
- *  ibget  --  get an iblock from disk given its number
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  ibget  --  get an iblock from disk given its number
+//------------------------------------------------------------------------
+void
 ibget(int diskdev, IBADDR inum, struct iblk *loc)
 {
 	char *from, *to;

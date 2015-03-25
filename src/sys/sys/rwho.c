@@ -1,15 +1,14 @@
-/* rwho.c - rwho */
+// rwho.c - rwho
 
 #include <conf.h>
 #include <kernel.h>
 #include <network.h>
 #include <rwho.h>
 
-/*------------------------------------------------------------------------
- *  rwho  -  Initialize rwho subsystem and start daemon processes
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  rwho  -  Initialize rwho subsystem and start daemon processes
+//------------------------------------------------------------------------
+void
 rwho(void)
 {
 	resume(create(RWIN, RWISTK, RWIPRIO, RWINAM, RWIARGS));

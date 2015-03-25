@@ -24,9 +24,7 @@ mkpool(int bufsiz, int numbufs)
 	if (bufsiz < BPMINB || bufsiz > BPMAXB
 	    || numbufs < 1 || numbufs > BPMAXN
 	    || nbpools >= NBPOOLS
-	    || (where =
-		(char *) getmem((bufsiz + sizeof(int)) * numbufs)) ==
-	    SYSERR) {
+	    || (where = (char *)getmem((bufsiz + sizeof(int)) * numbufs)) == (char *)SYSERR) {
 		restore(ps);
 		return (SYSERR);
 	}

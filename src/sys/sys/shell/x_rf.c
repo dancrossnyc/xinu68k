@@ -9,9 +9,8 @@
  *  x_rf  -  (command rf) format and print remote file status
  *------------------------------------------------------------------------
  */
-COMMAND	x_rf(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_rf (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	struct	rfblk	*rfptr;
 	char	str[80];

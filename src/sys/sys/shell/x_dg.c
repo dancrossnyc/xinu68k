@@ -8,9 +8,8 @@
  *  x_dg  -  (command dg) print info for currently open datagram devices
  *------------------------------------------------------------------------
  */
-COMMAND	x_dg(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_dg (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	struct	dgblk	*dgptr;
 	char	str[80];

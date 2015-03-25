@@ -9,9 +9,8 @@
  *  x_unmou  -  (command unmount) remove a prefix from the namespace table
  *------------------------------------------------------------------------
  */
-COMMAND	x_unmou(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_unmou (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	if (nargs != 2) {
 		fprintf(stderr, "use: unmount prefix\n");

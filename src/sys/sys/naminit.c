@@ -1,4 +1,4 @@
-/* naminit.c - naminit */
+// naminit.c - naminit
 
 #include <conf.h>
 #include <kernel.h>
@@ -11,11 +11,10 @@
 struct nam Nam;
 #endif
 
-/*------------------------------------------------------------------------
- *  naminit  -  initialize the syntactic namespace pseudo-device
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  naminit  -  initialize the syntactic namespace pseudo-device
+//------------------------------------------------------------------------
+void
 naminit(void)
 {
 	Nam.nnames = 0;

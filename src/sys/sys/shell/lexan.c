@@ -8,8 +8,8 @@
  *  lexan  -  ad hoc lexical analyzer to divide command line into tokens
  *------------------------------------------------------------------------
  */
-lexan(line)
-char	*line;
+int
+lexan(char *line)
 {
 	char	**tokptr;
 	int	ntok;

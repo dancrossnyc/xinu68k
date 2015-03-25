@@ -33,10 +33,10 @@ int clkruns = FALSE;		/* no clock configured; be sure sleep   */
 void
 clkinit(void)
 {
-	int *vector;
+	uword *vector;
 
-	vector = (int *) CVECTOR;	/* set up interrupt vector      */
-	*vector++ = clkint;
+	vector = (uword *) CVECTOR;	/* set up interrupt vector      */
+	*vector++ = (uword)clkint;
 	*vector = DISABLE;
 	setclkr();
 	preempt = QUANTUM;	/* initial time quantum         */

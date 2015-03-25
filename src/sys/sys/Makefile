@@ -8,7 +8,7 @@ BINDIR	=	$(DIR)/bin
 INCDIR	=	$(DIR)/include
 CONFIG	=	./config
 CC	=	m68k-none-elf-gcc -mc68000
-CFLAGS	=	-O -c -I../h -ansi -pedantic -std=c11 -Wall -nostdlib -nostartfiles -ffreestanding
+CFLAGS	=	-O -c -I../h -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
 AFLAGS	=	-u $(INCDIR)/sys.s
 AS	=	m68k-none-elf-as
 LD	=	m68k-none-elf-ld
@@ -203,7 +203,7 @@ sizes:		,sizes ,ssizes
 		./Dosizes
 
 sh.o:
-		(cd shell; make install)
+		cd shell; make install
 
 libx.a:		$(OFILES)
 		/bin/rm -f  libx.a

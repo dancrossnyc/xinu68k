@@ -1,14 +1,13 @@
-/* dswrite.c - dswrite */
+// dswrite.c - dswrite
 
 #include <conf.h>
 #include <kernel.h>
 #include <proc.h>
 #include <disk.h>
 
-/*------------------------------------------------------------------------
- *  dswrite  --  write a block (system buffer) onto a disk device
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dswrite  --  write a block (system buffer) onto a disk device
+//------------------------------------------------------------------------
 int
 dswrite(struct devsw *devptr, char *buff, DBADDR block)
 {
@@ -16,12 +15,12 @@ dswrite(struct devsw *devptr, char *buff, DBADDR block)
 	char ps;
 
 	disable(ps);
-	drptr = (struct dreq *) getbuf(dskrbp);
+	drptr = (struct dreq *)getbuf(dskrbp);
 	drptr->drbuff = buff;
 	drptr->drdba = block;
 	drptr->drpid = currpid;
 	drptr->drop = DWRITE;
-	dskenq(drptr, devptr->dvioblk);
+	dskenq(drptr, (struct dsblk *)devptr->dvioblk);
 	restore(ps);
 	return (OK);
 }

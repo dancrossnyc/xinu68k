@@ -39,7 +39,7 @@ ip_in(struct epacket *packet, int icmpp, int lim)
 					freebuf(packet);
 					return (SYSERR);
 				}
-				psend(nqptr->xport, packet);
+				psend(nqptr->xport, (uword)packet);
 				disable(ps);
 				to = nqptr->pid;
 				if (!isbadpid(to)) {

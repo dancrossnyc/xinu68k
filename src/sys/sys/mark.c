@@ -1,4 +1,4 @@
-/* mark.c - _mkinit, mark */
+// mark.c - _mkinit, mark
 
 #include <conf.h>
 #include <kernel.h>
@@ -9,11 +9,10 @@ int *marks[MAXMARK];
 int nmarks;
 int mkmutex;
 
-/*------------------------------------------------------------------------
- *  _mkinit  --  called once at system startup
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  _mkinit  --  called once at system startup
+//------------------------------------------------------------------------
+void
 _mkinit(void)
 {
 	mkmutex = screate(1);
@@ -22,10 +21,9 @@ _mkinit(void)
 
 
 
-/*------------------------------------------------------------------------
- *  mark  --  mark a location if it hasn't been marked
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  mark  --  mark a location if it hasn't been marked
+//------------------------------------------------------------------------
 SYSCALL
 mark(int *loc)
 {
@@ -36,6 +34,6 @@ mark(int *loc)
 	wait(mkmutex);
 	marks[(*loc) = nmarks++] = loc;
 	signal(mkmutex);
-	return (OK);
+	return OK;
 }
 #endif

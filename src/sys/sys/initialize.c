@@ -19,7 +19,7 @@ struct sentry semaph[NSEM];	/* semaphore table                      */
 int nextsem;			/* next semaphore slot to use in screate */
 struct qent q[NQENT];		/* q table (see queue.c)                */
 int nextqueue;			/* next slot in q structure to use      */
-int *maxaddr;			/* max memory address (set by sizmem)   */
+char *maxaddr;			/* max memory address (set by sizmem)   */
 #ifdef	NDEVS
 struct intmap intmap[NDEVS];	/* interrupt dispatch table             */
 #endif
@@ -56,6 +56,9 @@ char vers[] = VERSION;		/* Xinu version printed at startup      */
 static int
 sysinit(void)
 {
+	static int (*nulluserp)() = &nulluser;
+	static uword *nulluserpp = (uword *)&nulluserp;
+
 	int i;
 	struct pentry *pptr;
 	struct sentry *sptr;
@@ -70,7 +73,7 @@ sysinit(void)
 	    (struct mblock *) roundew(&end);
 	mptr->mnext = (struct mblock *) NULL;
 	mptr->mlen =
-	    truncew((unsigned) maxaddr - NULLSTK - (unsigned) &end);
+	    (unsigned)truncew((unsigned)maxaddr - NULLSTK - (unsigned) &end);
 
 	for (i = 0; i < NPROC; i++)	/* initialize process table */
 		proctab[i].pstate = PRFREE;
@@ -79,10 +82,10 @@ sysinit(void)
 	pptr->pstate = PRCURR;
 	pptr->pprio = 0;
 	strcpy(pptr->pname, "prnull");
-	pptr->plimit = ((int) maxaddr) - NULLSTK - sizeof(int);
-	pptr->pbase = maxaddr;
+	pptr->plimit = ((char *)maxaddr) - NULLSTK - sizeof(int);
+	pptr->pbase = (char *)maxaddr;
 	*((int *) pptr->pbase) = MAGIC;
-	pptr->paddr = nulluser;
+	pptr->paddr = (char *)(*nulluserpp);
 	pptr->phasmsg = FALSE;
 	pptr->pargs = 0;
 	currpid = NULLPROC;
@@ -145,4 +148,6 @@ nulluser(void)
 	while (TRUE) {		/* run forever without actually */
 		pause();	/*  executing instructions      */
 	}
+
+	return SYSERR;
 }

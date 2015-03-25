@@ -15,7 +15,7 @@ ckmode(char *mode)
 	char ch;
 
 	mbits = 0;
-	while (ch = *mode++)
+	while ((ch = *mode++) != 0)
 		switch (ch) {
 
 		case FLRMODE:

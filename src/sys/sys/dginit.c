@@ -1,14 +1,13 @@
-/* dginit.c - dginit */
+// dginit.c - dginit
 
 #include <conf.h>
 #include <kernel.h>
 #include <network.h>
 
-/*------------------------------------------------------------------------
- *  dginit  -  initialize datagram protocol pseudo device marking it free
- *------------------------------------------------------------------------
- */
-int
+//------------------------------------------------------------------------
+//  dginit  -  initialize datagram protocol pseudo device marking it free
+//------------------------------------------------------------------------
+void
 dginit(struct devsw *devptr)
 {
 	struct dgblk *dgptr;
@@ -16,7 +15,6 @@ dginit(struct devsw *devptr)
 	devptr->dvioblk = (char *) (dgptr = &dgtab[devptr->dvminor]);
 	dgptr->dg_dnum = devptr->dvnum;
 	dgptr->dg_state = DG_FREE;
-	return (OK);
 }
 
 #ifdef	Ndg

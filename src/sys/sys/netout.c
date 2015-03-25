@@ -21,7 +21,7 @@ netout(int userpid, int icmpp)
 
 	getaddr(addr);
 	gettime(&tim);
-	getname(&nam);
+	getname(nam);
 	resume(userpid);
 	while (TRUE) {
 		packet = (struct epacket *) preceive(icmpp);

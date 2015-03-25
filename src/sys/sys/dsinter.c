@@ -8,7 +8,7 @@
  *  dsinter  --  process disk interrupt (DTC interface; XEBEC controller)
  *------------------------------------------------------------------------
  */
-INTPROC
+void
 dsinter(struct dsblk *dsptr)
 {
 	struct dtc *dtptr;

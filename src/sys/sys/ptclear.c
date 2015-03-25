@@ -9,8 +9,8 @@
  *  _ptclear  --  used by pdelete and preset to clear a port
  *------------------------------------------------------------------------
  */
-int
-_ptclear(struct pt *ptptr, int newstate, int (*dispose)(int))
+void
+_ptclear(struct pt *ptptr, int newstate, int (*dispose)(void *))
 {
 	struct ptnode *p;
 
@@ -21,7 +21,7 @@ _ptclear(struct pt *ptptr, int newstate, int (*dispose)(int))
 	ptptr->ptseq++;
 	if ((p = ptptr->pthead) != (struct ptnode *) NULL) {
 		for (; p != (struct ptnode *) NULL; p = p->ptnext)
-			(*dispose) (p->ptmsg);
+			(*dispose)((void *)p->ptmsg);
 		(ptptr->pttail)->ptnext = ptfree;
 		ptfree = ptptr->pthead;
 	}

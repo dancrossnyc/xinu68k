@@ -9,9 +9,8 @@ LOCAL	char	errfmt[] = "Cannot open %s\n";
  *  x_cp  -  (copy command) copy one file to another
  *------------------------------------------------------------------------
  */
-COMMAND	x_cp(stdin, stdout, stderr, nargs, args)
-int	stdin, stdout, stderr, nargs;
-char	*args[];
+COMMAND
+x_cp (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	char	*buf;
 	int	from, to;
