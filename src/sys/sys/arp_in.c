@@ -31,7 +31,7 @@ arp_in(struct epacket *packet, int device)
 	switch (arop) {
 
 	case AR_REQ:		/* request - answer if for me */
-		if (!blkequ(Net.myaddr, apacptr->ar_tpa, IPLEN)) {
+		if (memcmp(Net.myaddr, apacptr->ar_tpa, IPLEN) != 0) {
 			freebuf(packet);
 			return (OK);
 		}
@@ -47,8 +47,8 @@ arp_in(struct epacket *packet, int device)
 	case AR_RPLY:		/* reply - awaken requestor if any */
 		disable(ps);
 		pid = Arp.arppid;
-		if (!isbadpid(pid)
-		    && blkequ(Arp.arpwant, apacptr->ar_spa, IPLEN)) {
+		if (!isbadpid(pid) &&
+		    memcmp(Arp.arpwant, apacptr->ar_spa, IPLEN) == 0) {
 			Arp.arppid = BADPID;
 			send(pid, OK);
 		}

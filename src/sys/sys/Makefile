@@ -27,7 +27,7 @@ ODT	=	$(BINDIR)/odt
 
 CFILES=		access.c adump.c arp_in.c arpfind.c	\
 		arpinit.c				\
-		blkequ.c bpdump.c			\
+		bpdump.c				\
 		chprio.c ckmode.c clkinit.c close.c	\
 		conf.c control.c create.c		\
 		devdump.c dfalloc.c dfdsrch.c dgalloc.c	\
@@ -91,7 +91,7 @@ SFILES=		cksum.s clkint.s csv.s ctxsw.s		\
 
 OFILES=		access.o adump.o arp_in.o arpfind.o	\
 		arpinit.o				\
-		blkequ.o bpdump.o			\
+		bpdump.o				\
 		chprio.o ckmode.o cksum.o clkinit.o	\
 		clkint.o close.o control.o create.o	\
 		csv.o ctxsw.o				\
@@ -277,8 +277,6 @@ arpinit.o: ../h/conf.h
 arpinit.o: ../h/kernel.h
 arpinit.o: ../h/proc.h
 arpinit.o: ../h/network.h
-blkcopy.o: ../h/kernel.h
-blkequ.o: ../h/kernel.h
 bpdump.o: ../h/conf.h
 bpdump.o: ../h/kernel.h
 bpdump.o: ../h/mark.h
