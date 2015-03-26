@@ -11,7 +11,6 @@ int
 fprintf(int dev, const char *fmt, ...)
 {
 	va_list args;
-	int putc();
 
 	va_start(args, fmt);
 	_doprnt(fmt, &args, putc, dev);
