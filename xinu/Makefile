@@ -224,8 +224,6 @@ xref:		,xref
 
 ../include/conf.h:	Configuration
 		$(CONFIG)
-		/bin/rm -f $(INCDIR)/conf.h
-		/bin/ln ../include/conf.h $(INCDIR)/conf.h
 
 conf.c:		Configuration
 		$(CONFIG)
