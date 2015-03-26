@@ -16,7 +16,7 @@ ${PROG}:        lexer.c ${OBJS}
 		${RM} lexer.c
 
 install:	${PROG}
-		cp ${PROG} ../sys/config
+		cp ${PROG} ../xinu/config
 
 clean:
 		${RM} ${PROG} ${OBJS} lexer.c *.o y.tab.h

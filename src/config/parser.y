@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include "lexer.c"
 
-#define	CONFIGC		"../sys/conf.c"	// name of .c output
-#define	CONFIGH		"../h/conf.h"	// name of .h output
-#define	CONFHREF	"<conf.h>"	// how conf.h referenced
+#define	CONFIGC		"../xinu/conf.c"	// name of .c output
+#define	CONFIGH		"../include/conf.h"	// name of .h output
+#define	CONFHREF	"\"conf.h\""	// how conf.h referenced
 #define	CONFIGIN	"Configuration"	// name of input file
 
 FILE *confc;
