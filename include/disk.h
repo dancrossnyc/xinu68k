@@ -6,6 +6,8 @@
 #include <xebec.h>			/* disk controller constants	*/
 #include <dtc.h>			/* disk interface constants	*/
 
+struct dir;
+
 typedef	unsigned	DBADDR;		/* disk data block addresses	*/
 #define	DBNULL		(DBADDR)0177777	/* null disk block address	*/
 
@@ -17,7 +19,7 @@ struct	dsblk	{			/* disk driver control block	*/
 	int	dflsem;			/* free list  "        "      "	*/
 	int	ddirsem;		/* directory  "        "      "	*/
 	int	dnfiles;		/* num. of currently open files	*/
-	char	*ddir;			/* address of in-core directory	*/
+	struct	dir	*ddir;		/* address of in-core directory	*/
 	struct	xbdcb	ddcb;		/* holds command that interface */
 					/*   sends to disk controller	*/
 };
@@ -52,8 +54,8 @@ extern	int	dskdbp;			/* disk data block buffer pool	*/
 /* disk control function codes */
 
 #define	DSKSYNC	0			/* synchronize (flush all I/O)	*/
-#define	dssync(ddev)	control((ddev),DSKSYNC);
+#define	dssync(ddev)	control((ddev),DSKSYNC, 0);
 
-#define	dsdirec(ddev)	((struct dir *)devtab[ddev].dvioblk->ddir)
+#define	dsdirec(ddev)	(((struct dsblk *)(devtab[ddev].dvioblk))->ddir)
 
 #endif

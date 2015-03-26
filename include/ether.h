@@ -14,7 +14,7 @@ typedef	char	Eaddr[EPADLEN];	/* length of physical address (48 bits)	*/
 struct	eheader	{		/* format of header in Ethernet packet	*/
 	Eaddr	e_dest;		/* destination host address		*/
 	Eaddr	e_src;		/* source host address			*/
-	short	e_ptype;	/* Ethernet packet type (see below)	*/
+	u16	e_ptype;	/* Ethernet packet type (see below)	*/
 };
 
 #define	EP_LOOP	0x0060		/* packet type: Loopback		*/

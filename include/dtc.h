@@ -5,7 +5,7 @@
 struct	dtc	{			/* controller interface regs.	*/
 	int	dt_ccsr;		/* command completion status	*/
 	int	dt_csr;			/* control and status register	*/
-	char	*dt_dar;		/* data address register	*/
+	void	*dt_dar;		/* data address register	*/
 	struct	xbdcb	*dt_car;	/* command address register	*/
 	int	dt_xdar;		/* extension of dar (not used)	*/
 	int	dt_xcar;		/* extension of car (not used)	*/

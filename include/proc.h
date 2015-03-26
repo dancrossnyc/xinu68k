@@ -19,8 +19,8 @@
 
 /* miscellaneous process definitions */
 
-#define	PNREGS		9		/* size of saved register area	*/
-#define	PNMLEN		8		/* length of process "name"	*/
+#define	PNREGS		16		/* size of saved register area	*/
+#define	PNMLEN		16		/* length of process "name"	*/
 #define	NULLPROC	0		/* id of the null process; it	*/
 					/*  is always eligible to run	*/
 #define	BADPID		-1		/* used when invalid pid needed	*/
@@ -32,17 +32,17 @@
 struct	pentry	{
 	char	pstate;			/* process state: PRCURR, etc.	*/
 	short	pprio;			/* process priority		*/
-	short	pregs[PNREGS];		/* saved regs. R0-R5,SP,PC,PS	*/
-	short	psem;			/* semaphore if process waiting	*/
-	short	pmsg;			/* message sent to this process	*/
+	uword	pregs[PNREGS];		/* saved regs. R0-R5,SP,PC,PS	*/
+	int	psem;			/* semaphore if process waiting	*/
+	int	pmsg;			/* message sent to this process	*/
 	Bool	phasmsg;		/* True iff pmsg is valid	*/
-	short	pbase;			/* base of run time stack	*/
+	char	*pbase;			/* base of run time stack	*/
 	short	pstklen;		/* stack length			*/
-	short	plimit;			/* lowest extent of stack	*/
+	char	*plimit;		/* lowest extent of stack	*/
 	char	pname[PNMLEN];		/* process name			*/
-	short	pargs;			/* initial number of arguments	*/
-	short	paddr;			/* initial code address		*/
-	short	pnxtkin;		/* next-of-kin notified of death*/
+	int	pargs;			/* initial number of arguments	*/
+	char	*paddr;			/* initial code address		*/
+	int	pnxtkin;		/* next-of-kin notified of death*/
 	short	pdevs[2];		/* devices to close upon exit	*/
 };
 

@@ -97,7 +97,7 @@ struct	dcmd	{			/* DEQNA command in memory	*/
 
 #define	DQ_RTO		300		/* maximum time to wait for read*/
 
-struct	dqsetu	{			/* deqna setup packet strructure*/
+struct	dqsetup	{			/* deqna setup packet strructure*/
 	char 	dq_set[DQ_ROWS][DQ_COLS];/* holds one setup packet	*/
 	char	dq_echo[DQ_ROWS][DQ_COLS];/* holds echo of packet	*/
 	char	dq_crc[4];		/* allow deqna extra 4 bytes	*/
