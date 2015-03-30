@@ -125,7 +125,7 @@ _prtl16(long num, char *str)
 //  farg: Argument to func
 //------------------------------------------------------------------------
 void
-_doprnt(char *fmt, va_list args, int (*func)(int, int), int farg)
+_doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 {
 	int c;
 	int i;

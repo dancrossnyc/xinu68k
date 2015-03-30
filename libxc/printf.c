@@ -2,6 +2,9 @@
 
 #include <stdarg.h>
 
+extern void _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg);
+extern int putc(int, int);
+
 #define	OK	1
 #define	CONSOLE	0
 
@@ -12,10 +15,9 @@ int
 printf(const char *fmt, ...)
 {
 	va_list args;
-	int putc();
 
 	va_start(args, fmt);
-	_doprnt(fmt, &args, putc, CONSOLE);
+	_doprnt(fmt, args, putc, CONSOLE);
 	va_end(args);
 
 	return OK;

@@ -14,8 +14,6 @@
 #define	REGULAR	1
 #define	LONG	2
 
-char *_getccl();
-
 char _sctab[128] = {
 	0, 0, 0, 0, 0, 0, 0, 0,
 	0, SPC, SPC, 0, 0, 0, 0, 0,
@@ -156,8 +154,8 @@ _innum(int **ptr, int type, int len, int size, int (*getch)(int, void *),
 	return 1;
 }
 
-char *
-_getccl(char *s)
+const char *
+_getccl(const char *s)
 {
 	int c, t;
 
@@ -177,7 +175,7 @@ _getccl(char *s)
 		else
 			_sctab[c++] &= ~STP;
 		if (c == 0)
-			return --s;
+			return s - 1;
 	}
 	return s;
 }
@@ -193,7 +191,7 @@ _getccl(char *s)
 //   arg2: 2nd argument to getch/ungetch
 //------------------------------------------------------------------------
 int
-_doscan(char *fmt, int **argp, int (*getch)(int, void *),
+_doscan(const char *fmt, int **argp, int (*getch)(int, void *),
 	int (*ungetch)(int, void *), int arg1, void *arg2)
 {
 	int ch;

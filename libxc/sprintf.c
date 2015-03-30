@@ -2,12 +2,15 @@
 
 #include <stdarg.h>
 
+extern void _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg);
+
 //------------------------------------------------------------------------
 //  sprntf  --  routine called by doprnt to handle each character
 //------------------------------------------------------------------------
 static int
-sprntf(char **cpp, int c)
+sprntf(int p, int c)
 {
+	char **cpp = (char **)p;
 	return (*(*cpp)++ = c);
 }
 
@@ -22,7 +25,7 @@ sprintf(char *str, const char *fmt, ...)
 
 	s = str;
 	va_start(args, fmt);
-	_doprnt(fmt, &args, sprntf, &s);
+	_doprnt(fmt, args, sprntf, (int)&s);
 	va_end(args);
 	*s++ = '\0';
 	return (str);
