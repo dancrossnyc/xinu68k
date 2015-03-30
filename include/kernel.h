@@ -1,4 +1,4 @@
-/* kernel.h - disable, enable, halt, restore, isodd, min */
+// kernel.h - disable, enable, halt, restore, isodd, min
 
 #include "u.h"
 

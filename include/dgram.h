@@ -13,7 +13,7 @@ struct	dgblk	{			// Datagram device control block
 	int	dg_mode;		// mode of this interface
 };
 
-/* Datagram psuedo-device state constants */
+// Datagram psuedo-device state constants
 
 #define	DG_FREE		0		// this device is available
 #define	DG_USED		1		// this device is in use
@@ -29,7 +29,7 @@ struct	dgblk	{			// Datagram device control block
 #define	DG_SETMODE	1		// Set mode of device
 #define	DG_CLEAR	2		// clear all waiting datagrams
 
-/* Constants for dg pseudo-device mode bits */
+// Constants for dg pseudo-device mode bits
 
 #define	DG_NMODE	001		// normal (datagram) mode
 #define	DG_DMODE	002		// data-only mode
@@ -44,7 +44,7 @@ struct	xgram	{			// Xinu datagram (not UDP)
 	char	xg_data[UMAXLEN];	// maximum data to/from UDP
 };
 
-#define	XGHLEN	8	// error in ((sizeof(struct xgram)) - UMAXLEN)	
+#define	XGHLEN	8	// error in ((sizeof(struct xgram)) - UMAXLEN)
 
 // Constants for port specifications on INTERNET open call
 

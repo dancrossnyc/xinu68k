@@ -25,7 +25,7 @@ struct	nlist {			// symbol table entry
 	uword	n_value;	// value
 };
 
-/* values for type flag */
+// values for type flag
 
 #define	N_UNDF		0	// undefined
 #define	N_ABS		01	// absolute

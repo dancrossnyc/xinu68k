@@ -1,11 +1,11 @@
 // cmd.h
 
-/* Declarations for all commands known by the shell */
+// Declarations for all commands known by the shell
 
-struct	cmdent	{			/* entry in command table	*/
-	char	*cmdnam;		/* name of command		*/
-	Bool	cbuiltin;		/* Is this a builtin command?	*/
-	int	(*cproc)();		/* procedure that implements cmd*/
+struct	cmdent	{			// entry in command table
+	char	*cmdnam;		// name of command
+	Bool	cbuiltin;		// Is this a builtin command?
+	int	(*cproc)();		// procedure that implements cmd
 };
 
 extern	int
@@ -17,7 +17,7 @@ extern	int
 	x_rm(),		x_routes(),	x_sleep(),	x_snap(),
 	x_unmou(),	x_uptime(),	x_who();
 
-/* Commands:	 name		Builtin?	procedure	*/
+// Commands:	 name		Builtin?	procedure
 
 #define	CMDS 	"bpool",	FALSE,		x_bpool,	\
 		"cat",		FALSE,		x_cat,		\

@@ -1,16 +1,16 @@
-/* io.h -  fgetc, fputc, getchar, isbaddev, putchar */
+// io.h -  fgetc, fputc, getchar, isbaddev, putchar
 
 
-#define	INTVECI	inint		/* input interrupt dispatch routine	*/
-#define	INTVECO	outint		/* output interrupt dispatch routine	*/
+#define	INTVECI	inint		// input interrupt dispatch routine
+#define	INTVECO	outint		// output interrupt dispatch routine
 extern	void	INTVECI();
 extern	void	INTVECO();
 
-struct	intmap	{		/* device-to-interrupt routine mapping	*/
-	void	(*iin)();	/* address of input interrupt routine	*/
-	int	icode;		/* argument passed to input routine	*/
-	void	(*iout)();	/* address of output interrupt routine	*/
-	int	ocode;		/* argument passed to output routine	*/
+struct	intmap	{		// device-to-interrupt routine mapping
+	void	(*iin)();	// address of input interrupt routine
+	int	icode;		// argument passed to input routine
+	void	(*iout)();	// address of output interrupt routine
+	int	ocode;		// argument passed to output routine
 };
 
 #ifdef	NDEVS
@@ -19,7 +19,7 @@ extern	struct	intmap intmap[NDEVS];
 #endif
 #define	BADDEV		-1
 
-/* In-line I/O procedures */
+// In-line I/O procedures
 
 #define	getchar()	getc(CONSOLE)
 #define	putchar(ch)	putc(CONSOLE,(ch))
@@ -27,6 +27,6 @@ extern	struct	intmap intmap[NDEVS];
 #define	fputc(unit,ch)	putc((unit),(ch))
 
 struct	vector	{
-	void	(*vproc)();	/* address of interrupt procedure	*/
-	int	vps;		/* saved process status word		*/
+	void	(*vproc)();	// address of interrupt procedure
+	int	vps;		// saved process status word
 };
