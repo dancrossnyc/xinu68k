@@ -17,15 +17,6 @@ RANLIB	=	m68k-none-elf-ranlib
 .c.o:
 		$(CC) $(CFLAGS) $<
 
-SFILES	=	aldiv.s						\
-		almul.s						\
-		alrem.s						\
-		cerror.s					\
-		csv.s						\
-		ldiv.s						\
-		lmul.s						\
-		lrem.s
-
 CFILES	=	abs.c atoi.c atol.c				\
 		ctype_.c					\
 		doprnt.c doscan.c				\
@@ -37,8 +28,6 @@ CFILES	=	abs.c atoi.c atol.c				\
 		scanf.c sprintf.c				\
 		strcat.c strcmp.c strcpy.c strlen.c		\
 		strncat.c strncmp.c strncpy.c swab.c
-
-#aldiv.o almul.o alrem.o cerror.o csv.o ldiv.o lmul.o lrem.o
 
 OFILES	=	abs.o						\
 		atoi.o atol.o					\

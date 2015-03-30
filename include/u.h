@@ -1,5 +1,8 @@
 /* u.h - disable, enable, halt, restore, isodd, min */
 
+#ifndef U_H__
+#define U_H__
+
 typedef unsigned char  byte;
 
 typedef unsigned char  u8;
@@ -70,3 +73,5 @@ typedef	char		Bool;		/* Boolean type			*/
 #define	enable()
 #define	pause()
 #define	halt()
+
+#endif

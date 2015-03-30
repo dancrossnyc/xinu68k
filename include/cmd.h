@@ -1,4 +1,4 @@
-/* cmd.h */
+// cmd.h
 
 /* Declarations for all commands known by the shell */
 

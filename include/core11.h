@@ -1,4 +1,4 @@
-/* core11.h */
+// core11.h
 
 /* Definitions and constants for LSI 11 core dump files */
 

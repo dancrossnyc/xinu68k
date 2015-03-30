@@ -6,7 +6,7 @@
 #include <bufpool.h>
 
 struct bpool bptab[NBPOOLS];
-int nbpools;
+size_t nbpools;
 #ifdef	MEMMARK
 MARKER bpmark;			/* self initializing mark       */
 #endif

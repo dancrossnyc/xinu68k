@@ -1,6 +1,5 @@
-/* ctype.h - isalpha, isupper, islower, isdigit, isspace, ispunct,	*/
-/*		isalnum, isprshort, isprint, iscntrl, toupper, tolower,	*/
-/*		toascii							*/
+// ctype.h - isalpha, isupper, islower, isdigit, isspace, ispunct, isalnum,
+//	     isprshort, isprint, iscntrl, toupper, tolower, toascii
 
 #define	_U	0001
 #define	_L	0002
@@ -10,7 +9,7 @@
 #define _C	0040
 #define	_X	0100
 
-extern	char	_ctype_[]; /* in {Xinu-directory}/src/libc/gen/ctype_.h	*/
+extern	char	_ctype_[];
 
 #define	isalpha(c)	((_ctype_+1)[c]&(_U|_L))
 #define	isupper(c)	((_ctype_+1)[c]&_U)

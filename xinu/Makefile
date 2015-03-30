@@ -81,7 +81,7 @@ CFILES=		access.c adump.c arp_in.c arpfind.c	\
 		wait.c wakeup.c write.c			\
 		xdone.c
 
-SFILES=		cksum.s clkint.s csv.s ctxsw.s		\
+SFILES=		cksum.s clkint.s ctxsw.s		\
 		ioint.s					\
 		lowcore.s				\
 		netutil.s				\
@@ -93,7 +93,7 @@ OFILES=		access.o adump.o arp_in.o arpfind.o	\
 		bpdump.o				\
 		chprio.o ckmode.o cksum.o clkinit.o	\
 		clkint.o close.o control.o create.o	\
-		csv.o ctxsw.o				\
+		ctxsw.o					\
 		devdump.o dfalloc.o dfdsrch.o dgalloc.o	\
 		dgclose.o dgcntl.o dgdump.o dginit.o	\
 		dgmcntl.o dgmopen.o dgparse.o dgread.o	\
