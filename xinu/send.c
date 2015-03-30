@@ -1,4 +1,4 @@
-/* send.c - send */
+// send.c - send
 
 #include <conf.h>
 #include <kernel.h>
@@ -11,7 +11,7 @@
 SYSCALL
 send(int pid, int msg)
 {
-	struct pentry *pptr;	/* receiver's proc. table addr. */
+	struct pentry *pptr;	// receiver's proc. table addr.
 	char ps;
 
 	disable(ps);
@@ -20,9 +20,9 @@ send(int pid, int msg)
 		restore(ps);
 		return (SYSERR);
 	}
-	pptr->pmsg = msg;	/* deposit message              */
+	pptr->pmsg = msg;	// deposit message
 	pptr->phasmsg = TRUE;
-	if (pptr->pstate == PRRECV)	/* if receiver waits, start it      */
+	if (pptr->pstate == PRRECV)	// if receiver waits, start it
 		ready(pid, RESCHYES);
 	else if (pptr->pstate == PRTRECV) {
 		unsleep(pid);

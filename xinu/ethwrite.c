@@ -1,4 +1,4 @@
-/* ethwrite.c - ethwrite */
+// ethwrite.c - ethwrite
 
 #include <conf.h>
 #include <kernel.h>

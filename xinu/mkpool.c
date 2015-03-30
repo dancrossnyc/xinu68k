@@ -1,4 +1,4 @@
-/* mkpool.c - mkpool */
+// mkpool.c - mkpool
 
 #include <conf.h>
 #include <kernel.h>

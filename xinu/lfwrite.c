@@ -1,4 +1,4 @@
-/* lfwrite.c - lfwrite */
+// lfwrite.c - lfwrite
 
 #include <conf.h>
 #include <kernel.h>

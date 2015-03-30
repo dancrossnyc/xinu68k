@@ -1,4 +1,4 @@
-/* ttycntl.c - ttycntl */
+// ttycntl.c - ttycntl
 
 #include <conf.h>
 #include <kernel.h>

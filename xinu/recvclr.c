@@ -1,4 +1,4 @@
-/* recvclr.c - recvclr */
+// recvclr.c - recvclr
 
 #include <conf.h>
 #include <kernel.h>
@@ -15,7 +15,7 @@ recvclr(void)
 	int msg;
 
 	disable(ps);
-	if (proctab[currpid].phasmsg) {	/* existing message?    */
+	if (proctab[currpid].phasmsg) {	// existing message?
 		proctab[currpid].phasmsg = FALSE;
 		msg = proctab[currpid].pmsg;
 	} else

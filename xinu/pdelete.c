@@ -1,4 +1,4 @@
-/* pdelete.c - pdelete */
+// pdelete.c - pdelete
 
 #include <conf.h>
 #include <kernel.h>

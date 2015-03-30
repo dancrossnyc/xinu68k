@@ -1,4 +1,4 @@
-/* ssclock.c - stopclk, strtclk */
+// ssclock.c - stopclk, strtclk
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* lfseek.c - lfseek */
+// lfseek.c - lfseek
 
 #include <conf.h>
 #include <kernel.h>

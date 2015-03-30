@@ -1,4 +1,4 @@
-/* getpid.c - getpid */
+// getpid.c - getpid
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* ttygetc.c - ttygetc */
+// ttygetc.c - ttygetc
 
 #include <conf.h>
 #include <kernel.h>
@@ -18,7 +18,7 @@ ttygetc(struct devsw *devptr)
 
 	disable(ps);
 	iptr = &tty[devptr->dvminor];
-	wait(iptr->isem);	/* wait for a character in buff */
+	wait(iptr->isem);	// wait for a character in buff
 	ch = LOWBYTE & iptr->ibuff[iptr->itail++];
 	if (iptr->itail >= IBUFLEN)
 		iptr->itail = 0;

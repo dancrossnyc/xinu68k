@@ -1,4 +1,4 @@
-/* dsksync.c - dsksync */
+// dsksync.c - dsksync
 
 #include <conf.h>
 #include <kernel.h>
@@ -24,7 +24,7 @@ dsksync(struct devsw *devptr)
 	drptr->drop = DSYNC;
 	drptr->drnext = DRNULL;
 
-	/* place at end of request list */
+	// place at end of request list
 
 	for (p = q->drnext; p != DRNULL; q = p, p = p->drnext);
 	q->drnext = drptr;

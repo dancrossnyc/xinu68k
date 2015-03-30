@@ -1,4 +1,4 @@
-/* iblfree.c - iblfree */
+// iblfree.c - iblfree
 
 #include <conf.h>
 #include <kernel.h>

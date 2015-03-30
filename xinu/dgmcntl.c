@@ -1,4 +1,4 @@
-/* dgmcntl.c - dgmcntl */
+// dgmcntl.c - dgmcntl
 
 #include <conf.h>
 #include <kernel.h>

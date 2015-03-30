@@ -1,4 +1,4 @@
-/* ethinter.c - ethinter */
+// ethinter.c - ethinter
 
 #include <conf.h>
 #include <kernel.h>
@@ -18,9 +18,9 @@ ethinter(struct etblk *etptr)
 	int pid;
 
 	dqptr = etptr->eioaddr;
-	dqptr->d_csr = csr = dqptr->d_csr;	/* clear RINT, XINT */
+	dqptr->d_csr = csr = dqptr->d_csr;	// clear RINT, XINT
 
-	/* check BOTH receive and xmit interrupts */
+	// check BOTH receive and xmit interrupts
 
 	if (csr & DQ_RINT) {
 		dcmptr = etptr->ercmd;
@@ -28,7 +28,7 @@ ethinter(struct etblk *etptr)
 			pid = etptr->etrpid;
 			etptr->etrpid = BADPID;
 			send(pid, OK);
-		} else {	/* error, so retry operation */
+		} else {	// error, so retry operation
 			dcmptr->dc_st1 = dcmptr->dc_st2 = DC_INIT;
 			dcmptr->dc_flag = DC_NUSED;
 			dqptr->d_rcmd = (char *)dcmptr;
@@ -43,7 +43,7 @@ ethinter(struct etblk *etptr)
 				freebuf(dcmptr->dc_buf);
 				signal(etptr->etwsem);
 			}
-		} else if (etptr->etwtry-- > 0) {	/* retry on error */
+		} else if (etptr->etwtry-- > 0) {	// retry on error
 			while (!(dqptr->d_csr & DQ_XLI));
 			dcmptr->dc_st1 = dcmptr->dc_st2 = DC_INIT;
 			dcmptr->dc_flag = DC_NUSED;

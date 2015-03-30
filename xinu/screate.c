@@ -1,4 +1,4 @@
-/* screate.c - screate, newsem */
+// screate.c - screate, newsem
 
 #include <conf.h>
 #include <kernel.h>
@@ -43,7 +43,7 @@ screate(int count)
 		return SYSERR;
 	}
 	semaph[sem].semcnt = count;
-	/* sqhead and sqtail were initialized at system startup */
+	// sqhead and sqtail were initialized at system startup
 	restore(ps);
 	return sem;
 }

@@ -1,4 +1,4 @@
-/* setnok.c - setnok */
+// setnok.c - setnok
 
 #include <conf.h>
 #include <kernel.h>

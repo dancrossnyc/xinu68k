@@ -1,4 +1,4 @@
-/* namrepl.c - namrepl */
+// namrepl.c - namrepl
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* setdev.c - setdev */
+// setdev.c - setdev
 
 #include <conf.h>
 #include <kernel.h>
@@ -9,8 +9,8 @@
  *------------------------------------------------------------------------
  */
 SYSCALL
-setdev(int pid,			/* process to change            */
-       int dev1, int dev2	/* device descriptors to set    */
+setdev(int pid,			// process to change
+       int dev1, int dev2	// device descriptors to set
     )
 {
 	int *nxtdev;

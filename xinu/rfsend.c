@@ -1,4 +1,4 @@
-/* rfsend.c - rfsend */
+// rfsend.c - rfsend
 
 #include <conf.h>
 #include <kernel.h>
@@ -15,7 +15,7 @@ rfsend(struct fphdr *fptr, int reqlen, int rplylen)
 	int ret;
 	char ps;
 
-	/* Clear server queue, and send packet to it */
+	// Clear server queue, and send packet to it
 
 	if (Rf.device == RCLOSED) {
 		Rf.device = open(INTERNET, RSERVER, ANYLPORT);

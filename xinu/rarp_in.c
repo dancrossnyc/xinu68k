@@ -1,4 +1,4 @@
-/* rarp_in.c - rarp_in */
+// rarp_in.c - rarp_in
 
 #include <conf.h>
 #include <kernel.h>

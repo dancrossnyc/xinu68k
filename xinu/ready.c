@@ -1,4 +1,4 @@
-/* ready.c - ready */
+// ready.c - ready
 
 #include <conf.h>
 #include <kernel.h>
@@ -10,8 +10,8 @@
  *------------------------------------------------------------------------
  */
 int
-ready(int pid,			/* id of process to make ready  */
-      int resch			/* reschedule afterward?        */
+ready(int pid,			// id of process to make ready
+      int resch			// reschedule afterward?
     )
 {
 	struct pentry *pptr;

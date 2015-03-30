@@ -19,7 +19,7 @@ rfinit(struct devsw *devptr)
 	rfptr->rf_state = RFREE;
 	rfptr->rf_mutex = screate(1);
 	rfptr->rf_pos = 0L;
-	if (devptr->dvminor == 0) {	/* done just once */
+	if (devptr->dvminor == 0) {	// done just once
 		Rf.device = RCLOSED;
 		Rf.rmutex = screate(1);
 	}

@@ -1,4 +1,4 @@
-/* kill.c - kill */
+// kill.c - kill
 
 #include <conf.h>
 #include <kernel.h>
@@ -12,10 +12,10 @@
  *------------------------------------------------------------------------
  */
 SYSCALL
-kill(int pid			/* process to kill              */
+kill(int pid			// process to kill
     )
 {
-	struct pentry *pptr;	/* points to proc. table for pid */
+	struct pentry *pptr;	// points to proc. table for pid
 	int dev;
 	char ps;
 
@@ -37,12 +37,12 @@ kill(int pid			/* process to kill              */
 	switch (pptr->pstate) {
 
 	case PRCURR:
-		pptr->pstate = PRFREE;	/* suicide */
+		pptr->pstate = PRFREE;	// suicide
 		resched();
 
 	case PRWAIT:
 		semaph[pptr->psem].semcnt++;
-		/* fall through */
+		// fall through
 	case PRREADY:
 		dequeue(pid);
 		pptr->pstate = PRFREE;
@@ -51,7 +51,7 @@ kill(int pid			/* process to kill              */
 	case PRSLEEP:
 	case PRTRECV:
 		unsleep(pid);
-		/* fall through */
+		// fall through
 	default:
 		pptr->pstate = PRFREE;
 	}

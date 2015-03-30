@@ -1,4 +1,4 @@
-/* rfputc.c - rfputc */
+// rfputc.c - rfputc
 
 #include <conf.h>
 #include <kernel.h>

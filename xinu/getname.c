@@ -1,4 +1,4 @@
-/* getname.c - getname */
+// getname.c - getname
 
 #include <conf.h>
 #include <kernel.h>

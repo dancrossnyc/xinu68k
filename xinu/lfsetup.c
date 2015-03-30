@@ -1,4 +1,4 @@
-/* lfsetup.c - lfsetup */
+// lfsetup.c - lfsetup
 
 #include <conf.h>
 #include <kernel.h>

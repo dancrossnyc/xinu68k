@@ -1,4 +1,4 @@
-/* close.c - close */
+// close.c - close
 
 #include <conf.h>
 #include <kernel.h>

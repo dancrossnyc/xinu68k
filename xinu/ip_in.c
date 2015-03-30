@@ -1,4 +1,4 @@
-/* ip_in.c - ip_in */
+// ip_in.c - ip_in
 
 #include <conf.h>
 #include <kernel.h>
@@ -23,16 +23,16 @@ ip_in(struct epacket *packet, int icmpp, int lim)
 	ipptr = (struct ip *) packet->ep_data;
 	switch (ipptr->i_proto) {
 
-	case IPRO_ICMP:	/* ICMP: pass to icmp input routine */
+	case IPRO_ICMP:	// ICMP: pass to icmp input routine
 		return (icmp_in(packet, icmpp, lim));
 
-	case IPRO_UDP:		/* UDP: demultiplex based on UDP "port" */
+	case IPRO_UDP:		// UDP: demultiplex based on UDP "port"
 		udpptr = (struct udp *) ipptr->i_data;
 		dport = net2hs(udpptr->u_dport);
 		for (i = 0; i < NETQS; i++) {
 			nqptr = &Net.netqs[i];
 			if (nqptr->uport == dport) {
-				/* drop instead of blocking on psend */
+				// drop instead of blocking on psend
 				if (pcount(nqptr->xport) >= NETQLEN) {
 					Net.ndrop++;
 					Net.nover++;

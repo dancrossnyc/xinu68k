@@ -1,4 +1,4 @@
-/* lfgetc.c - lfgetc */
+// lfgetc.c - lfgetc
 
 #include <conf.h>
 #include <kernel.h>

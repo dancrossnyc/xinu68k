@@ -1,4 +1,4 @@
-/* resched.c  -  resched */
+// resched.c  -  resched
 
 #include <conf.h>
 #include <kernel.h>
@@ -16,26 +16,26 @@
 int
 resched(void)
 {
-	struct pentry *optr;	/* pointer to old process entry */
-	struct pentry *nptr;	/* pointer to new process entry */
+	struct pentry *optr;	// pointer to old process entry
+	struct pentry *nptr;	// pointer to new process entry
 
-	/* no switch needed if current process priority higher than next */
+	// no switch needed if current process priority higher than next
 
 	if (((optr = &proctab[currpid])->pstate == PRCURR) &&
 	    (lastkey(rdytail) < optr->pprio))
 		return (OK);
 
-	/* force context switch */
+	// force context switch
 
 	if (optr->pstate == PRCURR) {
 		optr->pstate = PRREADY;
 		insert(currpid, rdyhead, optr->pprio);
 	}
 
-	/* remove highest priority process at end of ready list */
+	// remove highest priority process at end of ready list
 
 	nptr = &proctab[(currpid = getlast(rdytail))];
-	nptr->pstate = PRCURR;	/* mark it currently running    */
+	nptr->pstate = PRCURR;	// mark it currently running
 #ifdef	STKCHK
 	if (*((int *) nptr->pbase) != MAGIC) {
 		kprintf("Bad magic pid=%d, value=%o, at %o\n",
@@ -50,10 +50,10 @@ resched(void)
 	}
 #endif
 #ifdef	RTCLOCK
-	preempt = QUANTUM;	/* reset preemption counter     */
+	preempt = QUANTUM;	// reset preemption counter
 #endif
 	ctxsw(optr->pregs, nptr->pregs);
 
-	/* The OLD process returns here when resumed. */
+	// The OLD process returns here when resumed.
 	return (OK);
 }

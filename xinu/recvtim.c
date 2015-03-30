@@ -1,4 +1,4 @@
-/* recvtim.c - recvtim */
+// recvtim.c - recvtim
 
 #include <conf.h>
 #include <kernel.h>
@@ -21,7 +21,7 @@ recvtim(int maxwait)
 		return (SYSERR);
 	disable(ps);
 	pptr = &proctab[currpid];
-	if (!pptr->phasmsg) {	/* if no message, wait          */
+	if (!pptr->phasmsg) {	// if no message, wait
 		insertd(currpid, clockq, maxwait);
 		slnempty = TRUE;
 		sltop = (int *) &q[q[clockq].qnext].qkey;
@@ -29,9 +29,9 @@ recvtim(int maxwait)
 		resched();
 	}
 	if (pptr->phasmsg) {
-		msg = pptr->pmsg;	/* msg. arrived => retrieve it  */
+		msg = pptr->pmsg;	// msg. arrived => retrieve it
 		pptr->phasmsg = FALSE;
-	} else {		/* still no message => TIMEOUT  */
+	} else {		// still no message => TIMEOUT
 		msg = TIMEOUT;
 	}
 	restore(ps);

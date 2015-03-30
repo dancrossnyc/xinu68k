@@ -1,4 +1,4 @@
-/* getitem.c - getfirst, getlast */
+// getitem.c - getfirst, getlast
 
 #include <conf.h>
 #include <kernel.h>
@@ -9,10 +9,10 @@
  *------------------------------------------------------------------------
  */
 int
-getfirst(int head		/* q index of head of list      */
+getfirst(int head		// q index of head of list
     )
 {
-	int proc;		/* first process on the list    */
+	int proc;		// first process on the list
 
 	if ((proc = q[head].qnext) < NPROC)
 		return (dequeue(proc));
@@ -27,10 +27,10 @@ getfirst(int head		/* q index of head of list      */
  *------------------------------------------------------------------------
  */
 int
-getlast(int tail		/* q index of tail of list      */
+getlast(int tail		// q index of tail of list
     )
 {
-	int proc;		/* last process on the list     */
+	int proc;		// last process on the list
 
 	if ((proc = q[tail].qprev) < NPROC)
 		return (dequeue(proc));

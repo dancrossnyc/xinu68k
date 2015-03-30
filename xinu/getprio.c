@@ -1,4 +1,4 @@
-/* getprio.c - getprio */
+// getprio.c - getprio
 
 #include <conf.h>
 #include <kernel.h>

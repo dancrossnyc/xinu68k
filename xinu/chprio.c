@@ -1,4 +1,4 @@
-/* chprio.c - chprio */
+// chprio.c - chprio
 
 #include <conf.h>
 #include <kernel.h>

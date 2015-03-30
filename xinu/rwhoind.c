@@ -1,4 +1,4 @@
-/* rwhoind.c - rwhoind */
+// rwhoind.c - rwhoind
 
 #include <conf.h>
 #include <kernel.h>

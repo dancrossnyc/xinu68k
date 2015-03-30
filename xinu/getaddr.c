@@ -1,4 +1,4 @@
-/* getaddr.c - getaddr */
+// getaddr.c - getaddr
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* getnet.c - getnet */
+// getnet.c - getnet
 
 #include <conf.h>
 #include <kernel.h>

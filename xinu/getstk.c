@@ -1,4 +1,4 @@
-/* getstk.c - getstk */
+// getstk.c - getstk
 
 #include <conf.h>
 #include <kernel.h>
@@ -12,7 +12,7 @@ SYSCALL *
 getstk(unsigned int nbytes)
 {
 	char ps;
-	struct mblock *p, *q;	/* q follows p along memlist            */
+	struct mblock *p, *q;	// q follows p along memlist
 	struct mblock *fits, *fitsq;
 	unsigned len;
 

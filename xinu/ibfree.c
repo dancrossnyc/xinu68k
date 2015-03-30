@@ -1,4 +1,4 @@
-/* ibfree.c - ibfree */
+// ibfree.c - ibfree
 
 #include <conf.h>
 #include <kernel.h>

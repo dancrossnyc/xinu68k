@@ -1,4 +1,4 @@
-/* seek.c seek */
+// seek.c seek
 
 #include <conf.h>
 #include <kernel.h>

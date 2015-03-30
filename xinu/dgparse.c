@@ -1,4 +1,4 @@
-/* dgparse.c - dgparse */
+// dgparse.c - dgparse
 
 #include <conf.h>
 #include <kernel.h>
@@ -21,7 +21,7 @@ dgparse(struct dgblk *dgptr, char *fspec)
 		return (OK);
 	}
 
-	/* parse forms like 192.5.48.30:3 into (ip-address,udp-port) */
+	// parse forms like 192.5.48.30:3 into (ip-address,udp-port)
 
 	ipptr = (char *) dgptr->dg_faddr;
 	for (i = 0; i < 4; i++) {

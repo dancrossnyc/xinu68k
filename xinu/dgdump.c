@@ -1,4 +1,4 @@
-/* dgdump.c - dgdump */
+// dgdump.c - dgdump
 
 #include <conf.h>
 #include <kernel.h>

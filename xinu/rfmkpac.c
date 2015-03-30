@@ -1,4 +1,4 @@
-/* rfmkpac.c - rfmkpac */
+// rfmkpac.c - rfmkpac
 
 #include <conf.h>
 #include <kernel.h>
@@ -42,7 +42,7 @@ rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 	case FS_RMDIR:
 	case FS_ACCESS:
 		rplylen = FPHLEN;
-		/* fall through */
+		// fall through
 
 	case FS_READ:
 		if (len > RDATLEN) {
@@ -64,7 +64,7 @@ rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 
 	case FS_READ:
 		memmove(buff, packet.fpdata, len);
-		/* fall through */
+		// fall through
 
 	case FS_WRITE:
 		*rpos = net2hl(fptr->f_pos);

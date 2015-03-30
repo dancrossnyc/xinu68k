@@ -1,4 +1,4 @@
-/* dsread.c - dsread */
+// dsread.c - dsread
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* getmem.c - getmem */
+// getmem.c - getmem
 
 #include <conf.h>
 #include <kernel.h>

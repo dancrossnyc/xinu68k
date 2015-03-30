@@ -1,4 +1,4 @@
-/* lfclose.c - lfclose */
+// lfclose.c - lfclose
 
 #include <conf.h>
 #include <kernel.h>

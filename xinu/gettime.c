@@ -1,4 +1,4 @@
-/* gettime.c - gettime */
+// gettime.c - gettime
 
 #include <conf.h>
 #include <kernel.h>
@@ -15,6 +15,6 @@ gettime(long *timvar)
 
 	if (getutim(&now) == SYSERR)
 		return (SYSERR);
-	*timvar = ut2ltim(now);	/* adjust for timezone  */
+	*timvar = ut2ltim(now);	// adjust for timezone
 	return (OK);
 }

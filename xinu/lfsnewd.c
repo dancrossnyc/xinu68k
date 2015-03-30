@@ -1,4 +1,4 @@
-/* lfsnewd.c - lfsnewd */
+// lfsnewd.c - lfsnewd
 
 #include <conf.h>
 #include <kernel.h>

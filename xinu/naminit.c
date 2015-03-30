@@ -19,7 +19,7 @@ naminit(void)
 {
 	Nam.nnames = 0;
 
-	/* Xinu namespace definition */
+	// Xinu namespace definition
 
 	mount("", NAMESPACE, "Xinu/storage/");
 	mount("Xinu/", RFILSYS, "/usr/Xinu/");

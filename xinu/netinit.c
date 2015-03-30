@@ -1,4 +1,4 @@
-/* netinit.c - netinit */
+// netinit.c - netinit
 
 #include <conf.h>
 #include <kernel.h>
@@ -15,7 +15,7 @@ netinit(void)
 	struct netq *nqptr;
 	int i;
 
-	/* Initialize pool of network buffers and rest of Net structure */
+	// Initialize pool of network buffers and rest of Net structure
 
 	if (clkruns == FALSE)
 		panic("net: no clock");

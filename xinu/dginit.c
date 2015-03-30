@@ -18,5 +18,5 @@ dginit(struct devsw *devptr)
 }
 
 #ifdef	Ndg
-struct dgblk dgtab[Ndg];	/* dg device control blocks     */
+struct dgblk dgtab[Ndg];	// dg device control blocks
 #endif

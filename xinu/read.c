@@ -1,4 +1,4 @@
-/* read.c - read */
+// read.c - read
 
 #include <conf.h>
 #include <kernel.h>

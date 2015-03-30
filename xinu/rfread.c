@@ -1,4 +1,4 @@
-/* rfread.c - rfread */
+// rfread.c - rfread
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* udpnxtp.c - udpnxtp */
+// udpnxtp.c - udpnxtp
 
 #include <conf.h>
 #include <kernel.h>

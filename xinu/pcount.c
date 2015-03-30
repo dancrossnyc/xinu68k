@@ -1,4 +1,4 @@
-/* pcount.c - pcount */
+// pcount.c - pcount
 
 #include <conf.h>
 #include <kernel.h>
@@ -28,7 +28,7 @@ pcount(int portid)
 	}
 	count = scount(ptptr->ptrsem);
 	if ((scnt = scount(ptptr->ptssem)) < 0)
-		count -= scnt;	/* add number waiting   */
+		count -= scnt;	// add number waiting
 	restore(ps);
 	return (count);
 }

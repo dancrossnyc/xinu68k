@@ -1,4 +1,4 @@
-/* dgclose.c - dgclose */
+// dgclose.c - dgclose
 
 #include <conf.h>
 #include <kernel.h>

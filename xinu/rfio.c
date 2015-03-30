@@ -1,4 +1,4 @@
-/* rfio.c - rfio */
+// rfio.c - rfio
 
 #include <conf.h>
 #include <kernel.h>

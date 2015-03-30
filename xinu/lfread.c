@@ -1,4 +1,4 @@
-/* lfread.c - lfread */
+// lfread.c - lfread
 
 #include <conf.h>
 #include <kernel.h>
@@ -21,7 +21,7 @@ lfread(struct devsw *devptr, char *buff, int count)
 	for (done = 0; done < count; done++)
 		if ((ichar = lfgetc(devptr)) == SYSERR)
 			return (SYSERR);
-		else if (ichar == EOF) {	/* EOF before finished */
+		else if (ichar == EOF) {	// EOF before finished
 			if (done == 0)
 				return (EOF);
 			else

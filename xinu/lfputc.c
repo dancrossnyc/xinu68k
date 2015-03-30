@@ -1,4 +1,4 @@
-/* lfputc.c - lfputc */
+// lfputc.c - lfputc
 
 #include <conf.h>
 #include <kernel.h>

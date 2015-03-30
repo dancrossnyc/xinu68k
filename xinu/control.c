@@ -1,4 +1,4 @@
-/* control.c - control */
+// control.c - control
 
 #include <conf.h>
 #include <kernel.h>

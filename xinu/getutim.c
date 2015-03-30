@@ -1,4 +1,4 @@
-/* getutim.c - getutim */
+// getutim.c - getutim
 
 #include <conf.h>
 #include <kernel.h>
@@ -20,13 +20,13 @@ getutim(long *timvar)
 
 	wait(clmutex);
 	ret = OK;
-	if (clktime < SECPERHR) {	/* assume small numbers invalid */
+	if (clktime < SECPERHR) {	// assume small numbers invalid
 		if ((dev = open(INTERNET, TSERVER, ANYLPORT)) == SYSERR ||
 		    control(dev, DG_SETMODE, DG_TMODE | DG_DMODE) == SYSERR) {
 			panic(msg);
 			ret = SYSERR;
 		}
-		write(dev, msg, 2);	/* send junk packet to prompt */
+		write(dev, msg, 2);	// send junk packet to prompt
 		if (read(dev, &utnow, 4) != 4) {
 			panic(msg);
 			ret = SYSERR;

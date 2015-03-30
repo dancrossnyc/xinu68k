@@ -1,4 +1,4 @@
-/* sendf.c - sendf */
+// sendf.c - sendf
 
 #include <conf.h>
 #include <kernel.h>

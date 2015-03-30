@@ -15,4 +15,4 @@ rwho(void)
 	resume(create(RWOUT, RWOSTK, RWOPRIO, RWONAM, RWOARGS));
 }
 
-struct rwinfo Rwho;		/* all globals used by rwho subsystem   */
+struct rwinfo Rwho;		// all globals used by rwho subsystem

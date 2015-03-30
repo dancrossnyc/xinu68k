@@ -1,4 +1,4 @@
-/* ibnew.c - ibnew */
+// ibnew.c - ibnew
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* arpinit.c - arpinit */
+// arpinit.c - arpinit
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* pinit.c - pinit */
+// pinit.c - pinit
 
 #include <conf.h>
 #include <kernel.h>
@@ -8,7 +8,7 @@
 #ifdef	MEMMARK
 MARKER ptmark;
 #endif
-struct ptnode *ptfree;		/* list of free queue nodes     */
+struct ptnode *ptfree;		// list of free queue nodes
 struct pt ports[NPORTS];
 int ptnextp;
 
@@ -31,7 +31,7 @@ pinit(int maxmsgs)
 	}
 	ptnextp = NPORTS - 1;
 
-	/* link up free list of message pointer nodes */
+	// link up free list of message pointer nodes
 
 	for (prev = next = ptfree; --maxmsgs > 0; prev = next)
 		prev->ptnext = ++next;

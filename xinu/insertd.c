@@ -1,4 +1,4 @@
-/* insertd.c - insertd */
+// insertd.c - insertd
 
 #include <conf.h>
 #include <kernel.h>
@@ -11,8 +11,8 @@
 int
 insertd(int pid, int head, int key)
 {
-	int next;		/* runs through list            */
-	int prev;		/* follows next through list    */
+	int next;		// runs through list
+	int prev;		// follows next through list
 
 	for (prev = head, next = q[head].qnext;
 	     q[next].qkey < key; prev = next, next = q[next].qnext)

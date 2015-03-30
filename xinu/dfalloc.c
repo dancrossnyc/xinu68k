@@ -1,4 +1,4 @@
-/* dfalloc.c - dfalloc */
+// dfalloc.c - dfalloc
 
 #include <conf.h>
 #include <kernel.h>
@@ -12,7 +12,7 @@
 #ifdef	Ndf
 int
 dfalloc(void)
-{				/* assume exclusion for dir. provided by caller   */
+{				// assume exclusion for dir. provided by caller
 	for (int i = 0; i < Ndf; i++)
 		if (fltab[i].fl_pid == 0) {
 			fltab[i].fl_pid = getpid();

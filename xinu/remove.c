@@ -1,4 +1,4 @@
-/* remove.c - remove */
+// remove.c - remove
 
 #include <conf.h>
 #include <kernel.h>

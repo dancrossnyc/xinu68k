@@ -1,4 +1,4 @@
-/* signaln.c - signaln */
+// signaln.c - signaln
 
 #include <conf.h>
 #include <kernel.h>

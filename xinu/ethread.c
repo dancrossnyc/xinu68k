@@ -1,4 +1,4 @@
-/* ethread.c - ethread */
+// ethread.c - ethread
 
 #include <conf.h>
 #include <kernel.h>

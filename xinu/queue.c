@@ -1,4 +1,4 @@
-/* queue.c - dequeue, enqueue */
+// queue.c - dequeue, enqueue
 
 #include <conf.h>
 #include <kernel.h>
@@ -9,12 +9,12 @@
  *------------------------------------------------------------------------
  */
 int
-enqueue(int item,		/* item to enqueue on a list    */
-	int tail		/* index in q of list tail      */
+enqueue(int item,		// item to enqueue on a list
+	int tail		// index in q of list tail
     )
 {
-	struct qent *tptr;	/* points to tail entry         */
-	struct qent *mptr;	/* points to item entry         */
+	struct qent *tptr;	// points to tail entry
+	struct qent *mptr;	// points to item entry
 
 	tptr = &q[tail];
 	mptr = &q[item];
@@ -33,7 +33,7 @@ enqueue(int item,		/* item to enqueue on a list    */
 int
 dequeue(int item)
 {
-	struct qent *mptr;	/* pointer to q entry for item  */
+	struct qent *mptr;	// pointer to q entry for item
 
 	mptr = &q[item];
 	q[mptr->qprev].qnext = mptr->qnext;

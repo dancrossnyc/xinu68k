@@ -1,4 +1,4 @@
-/* dgread.c - dgread */
+// dgread.c - dgread
 
 #include <conf.h>
 #include <kernel.h>
@@ -39,7 +39,7 @@ dgread(struct devsw *devptr, struct xgram *buff, int len)
 	}
 	packet = (struct epacket *) preceive(dgptr->dg_xport);
 
-	/* copy data into user's buffer & set length */
+	// copy data into user's buffer & set length
 
 	ipptr = (struct ip *) packet->ep_data;
 	udpptr = (struct udp *) ipptr->i_data;

@@ -1,4 +1,4 @@
-/* scount.c - scount */
+// scount.c - scount
 
 #include <conf.h>
 #include <kernel.h>

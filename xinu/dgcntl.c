@@ -1,4 +1,4 @@
-/* dgcntl.c - dgcntl */
+// dgcntl.c - dgcntl
 
 #include <conf.h>
 #include <kernel.h>
@@ -21,11 +21,11 @@ dgcntl(struct devsw *devptr, int func, int arg)
 	ret = OK;
 	switch (func) {
 
-	case DG_SETMODE:	/* set mode bits */
+	case DG_SETMODE:	// set mode bits
 		dgptr->dg_mode = arg;
 		break;
 
-	case DG_CLEAR:		/* clear queued packets */
+	case DG_CLEAR:		// clear queued packets
 		preset(dgptr->dg_xport, freebuf);
 		break;
 

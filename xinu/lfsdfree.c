@@ -1,4 +1,4 @@
-/* lfsdfree.c - lfsdfree */
+// lfsdfree.c - lfsdfree
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* open.c - open */
+// open.c - open
 
 #include <conf.h>
 #include <kernel.h>

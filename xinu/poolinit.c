@@ -1,4 +1,4 @@
-/* poolinit.c - poolinit */
+// poolinit.c - poolinit
 
 #include <conf.h>
 #include <kernel.h>
@@ -8,7 +8,7 @@
 struct bpool bptab[NBPOOLS];
 size_t nbpools;
 #ifdef	MEMMARK
-MARKER bpmark;			/* self initializing mark       */
+MARKER bpmark;			// self initializing mark
 #endif
 
 /*------------------------------------------------------------------------

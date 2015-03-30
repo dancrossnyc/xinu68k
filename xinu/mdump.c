@@ -20,7 +20,7 @@ mdump(void)
 
 	disable(ps);
 
-	/* calculate current size of free memory and stack memory */
+	// calculate current size of free memory and stack memory
 
 	for (free = 0, mptr = memlist.mnext;
 	     mptr != (struct mblock *) NULL; mptr = mptr->mnext)

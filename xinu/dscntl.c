@@ -1,4 +1,4 @@
-/* dscntl.c - dscntl */
+// dscntl.c - dscntl
 
 #include <conf.h>
 #include <kernel.h>

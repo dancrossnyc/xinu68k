@@ -1,4 +1,4 @@
-/* ethrstrt.c - ethrstrt */
+// ethrstrt.c - ethrstrt
 
 #include <conf.h>
 #include <kernel.h>

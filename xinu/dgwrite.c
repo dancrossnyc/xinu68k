@@ -1,4 +1,4 @@
-/* dgwrite.c - dgwrite */
+// dgwrite.c - dgwrite
 
 #include <conf.h>
 #include <kernel.h>

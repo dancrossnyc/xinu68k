@@ -1,4 +1,4 @@
-/* sndrarp.c - sndrarp */
+// sndrarp.c - sndrarp
 
 #include <conf.h>
 #include <kernel.h>
@@ -16,7 +16,7 @@ sndrarp(void)
 	int i;
 	int mypid;
 	int resp;
-	IPaddr junk;		/* needed for argument to mkarp; not ever used */
+	IPaddr junk;		// needed for argument to mkarp; not ever used
 	char ps;
 
 	mypid = getpid();

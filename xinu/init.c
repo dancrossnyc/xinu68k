@@ -1,4 +1,4 @@
-/* init.c - init */
+// init.c - init
 
 #include <conf.h>
 #include <kernel.h>

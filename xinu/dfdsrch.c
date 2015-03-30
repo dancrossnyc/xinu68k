@@ -1,4 +1,4 @@
-/* dfdsrch.c - dfdsrch */
+// dfdsrch.c - dfdsrch
 
 #include <conf.h>
 #include <kernel.h>

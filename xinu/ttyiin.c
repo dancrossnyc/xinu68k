@@ -1,4 +1,4 @@
-/* ttyiin.c ttyiin, erase1, eputc, echoch */
+// ttyiin.c ttyiin, erase1, eputc, echoch
 
 #include <conf.h>
 #include <kernel.h>
@@ -68,7 +68,7 @@ echoch(int ch, struct tty *iptr, struct csr *cptr)
 		eputc(NEWLINE, iptr, cptr);
 	} else if ((ch < BLANK || ch == 0177) && iptr->evis) {
 		eputc(UPARROW, iptr, cptr);
-		eputc(ch + 0100, iptr, cptr);	/* make it printable    */
+		eputc(ch + 0100, iptr, cptr);	// make it printable
 	} else {
 		eputc(ch, iptr, cptr);
 	}
@@ -86,17 +86,17 @@ ttyiin(struct tty *iptr)
 	int ct;
 
 	cptr = iptr->ioaddr;
-	if ((ch = cptr->crbuf) & SLUERMASK)	/* read char from device */
-		return;		/* discard if error     */
+	if ((ch = cptr->crbuf) & SLUERMASK)	// read char from device
+		return;		// discard if error
 	if (iptr->imode == IMRAW) {
 		if (scount(iptr->isem) >= IBUFLEN) {
-			return;	/* discard if no space  */
+			return;	// discard if no space
 		}
 		iptr->ibuff[iptr->ihead++] = ch & SLUCHMASK;
-		if (iptr->ihead >= IBUFLEN)	/* wrap buffer pointer      */
+		if (iptr->ihead >= IBUFLEN)	// wrap buffer pointer
 			iptr->ihead = 0;
 		signal(iptr->isem);
-	} else {		/* cbreak | cooked mode */
+	} else {		// cbreak | cooked mode
 		ch &= SLUCHMASK;
 		if (ch == RETURN && iptr->icrlf)
 			ch = NEWLINE;
@@ -117,7 +117,7 @@ ttyiin(struct tty *iptr)
 			}
 		}
 		iptr->oheld = FALSE;
-		if (iptr->imode == IMCBREAK) {	/* cbreak mode  */
+		if (iptr->imode == IMCBREAK) {	// cbreak mode
 			if (scount(iptr->isem) >= IBUFLEN) {
 				eputc(iptr->ifullc, iptr, cptr);
 				return;
@@ -129,7 +129,7 @@ ttyiin(struct tty *iptr)
 				echoch(ch, iptr, cptr);
 			if (scount(iptr->isem) < IBUFLEN)
 				signal(iptr->isem);
-		} else {	/* cooked mode  */
+		} else {	// cooked mode
 			if (ch == iptr->ikillc && iptr->ikill) {
 				iptr->ihead -= iptr->icursor;
 				if (iptr->ihead < 0)
@@ -157,7 +157,7 @@ ttyiin(struct tty *iptr)
 				iptr->ibuff[iptr->ihead++] = ch;
 				if (iptr->ihead >= IBUFLEN)
 					iptr->ihead = 0;
-				ct = iptr->icursor + 1;	/* +1 for \n or \r */
+				ct = iptr->icursor + 1;	// +1 for \n or \r
 				iptr->icursor = 0;
 				signaln(iptr->isem, ct);
 				return;

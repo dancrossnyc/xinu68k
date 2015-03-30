@@ -26,7 +26,7 @@ getpath(IPaddr faddr)
 		return arindex;
 	}
 
-	/* Use ARP to obtain and record IP-to-Ether binding */
+	// Use ARP to obtain and record IP-to-Ether binding
 
 	getaddr(myaddr);
 	mypid = getpid();

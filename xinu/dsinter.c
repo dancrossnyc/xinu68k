@@ -1,4 +1,4 @@
-/* dsinter.c - dsinter */
+// dsinter.c - dsinter
 
 #include <conf.h>
 #include <kernel.h>
@@ -35,7 +35,7 @@ dsinter(struct dsblk *dsptr)
 
 	case DWRITE:
 		freebuf(drptr->drbuff);
-		/* fall through */
+		// fall through
 	case DSEEK:
 		freebuf(drptr);
 	}

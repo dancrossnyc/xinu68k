@@ -1,4 +1,4 @@
-/* sleep10.c - sleep10 */
+// sleep10.c - sleep10
 
 #include <conf.h>
 #include <kernel.h>
@@ -18,7 +18,7 @@ sleep10(int n)
 	if (n < 0 || clkruns == 0)
 		return (SYSERR);
 	disable(ps);
-	if (n == 0) {		/* sleep10(0) -> end time slice */
+	if (n == 0) {		// sleep10(0) -> end time slice
 		;
 	} else {
 		insertd(currpid, clockq, n);

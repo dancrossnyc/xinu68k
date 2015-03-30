@@ -1,4 +1,4 @@
-/* rfseek.c - rfseek */
+// rfseek.c - rfseek
 
 #include <conf.h>
 #include <kernel.h>

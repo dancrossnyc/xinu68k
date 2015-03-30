@@ -1,4 +1,4 @@
-/* preset.c - preset */
+// preset.c - preset
 
 #include <conf.h>
 #include <kernel.h>

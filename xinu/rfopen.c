@@ -1,4 +1,4 @@
-/* rfopen.c - rfopen */
+// rfopen.c - rfopen
 
 #include <conf.h>
 #include <kernel.h>
@@ -29,7 +29,7 @@ rfopen(struct devsw *devptr, char *name, char *mode)
 	rfptr->rf_mode = mbits;
 	rfptr->rf_pos = 0L;
 
-	/* send remote file open request */
+	// send remote file open request
 
 	if (rfio(&devtab[devnum], FS_OPEN, NULLSTR, mbits) == SYSERR) {
 		rfptr->rf_state = RFREE;

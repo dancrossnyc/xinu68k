@@ -1,4 +1,4 @@
-/* dot2ip.c - dot2ip */
+// dot2ip.c - dot2ip
 
 #include <conf.h>
 #include <kernel.h>

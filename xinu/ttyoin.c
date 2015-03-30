@@ -1,4 +1,4 @@
-/* ttyoin.c - ttyoin */
+// ttyoin.c - ttyoin
 
 #include <conf.h>
 #include <kernel.h>
@@ -23,7 +23,7 @@ ttyoin(struct tty *iptr)
 			iptr->etail = 0;
 		return;
 	}
-	if (iptr->oheld) {	/* honor flow control   */
+	if (iptr->oheld) {	// honor flow control
 		cptr->ctstat = SLUDISABLE;
 		return;
 	}

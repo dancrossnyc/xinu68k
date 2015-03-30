@@ -1,4 +1,4 @@
-/* receive.c - receive */
+// receive.c - receive
 
 #include <conf.h>
 #include <kernel.h>
@@ -17,11 +17,11 @@ receive(void)
 
 	disable(ps);
 	pptr = &proctab[currpid];
-	if (!pptr->phasmsg) {	/* if no message, wait for one  */
+	if (!pptr->phasmsg) {	// if no message, wait for one
 		pptr->pstate = PRRECV;
 		resched();
 	}
-	msg = pptr->pmsg;	/* retrieve message             */
+	msg = pptr->pmsg;	// retrieve message
 	pptr->phasmsg = FALSE;
 	restore(ps);
 	return (msg);

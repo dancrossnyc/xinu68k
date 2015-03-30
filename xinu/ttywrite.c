@@ -1,4 +1,4 @@
-/* ttywrite.c - ttywrite, writecopy */
+// ttywrite.c - ttywrite, writecopy
 
 #include <conf.h>
 #include <kernel.h>
@@ -30,9 +30,9 @@ writecopy(char *buff, struct tty * ttyp, int count)
 		*qhead++ = *cp++;
 		if (qhead >= qend)
 			qhead = ttyp->obuff;
-	}			/* avail decremented one */
-	ttyp->ohead = qhead - ttyp->obuff;	/* extra time when loop */
-	sreset(ttyp->osem, ++avail);	/* condition fails.     */
+	}			// avail decremented one
+	ttyp->ohead = qhead - ttyp->obuff;	// extra time when loop
+	sreset(ttyp->osem, ++avail);	// condition fails.
 	(ttyp->ioaddr)->ctstat = SLUENABLE;
 
 	return(cp - buff);

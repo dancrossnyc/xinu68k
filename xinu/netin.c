@@ -1,4 +1,4 @@
-/* netin.c */
+// netin.c
 
 #include <conf.h>
 #include <kernel.h>
@@ -10,7 +10,7 @@
  *------------------------------------------------------------------------
  */
 PROCESS
-netin(int userpid		/* user process to resume       */
+netin(int userpid		// user process to resume
     )
 {
 	struct epacket *packet;
@@ -44,7 +44,7 @@ netin(int userpid		/* user process to resume       */
 			packet = getbuf(Net.netpool);
 			break;
 
-		default:	/* just drop packet */
+		default:	// just drop packet
 			Net.ndrop++;
 		}
 	}

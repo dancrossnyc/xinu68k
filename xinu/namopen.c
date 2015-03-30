@@ -1,4 +1,4 @@
-/* namopen.c - namopen */
+// namopen.c - namopen
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* sreset.c - sreset */
+// sreset.c - sreset
 
 #include <conf.h>
 #include <kernel.h>

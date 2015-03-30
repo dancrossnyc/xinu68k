@@ -1,4 +1,4 @@
-/* ttyputc.c - ttyputc */
+// ttyputc.c - ttyputc
 
 #include <conf.h>
 #include <kernel.h>
@@ -20,7 +20,7 @@ ttyputc(struct devsw *devptr, int ch)
 	if (ch == NEWLINE && iptr->ocrlf)
 		ttyputc(devptr, RETURN);
 	disable(ps);
-	wait(iptr->osem);	/* wait for space in queue      */
+	wait(iptr->osem);	// wait for space in queue
 	iptr->obuff[iptr->ohead++] = ch;
 	if (iptr->ohead >= OBUFLEN)
 		iptr->ohead = 0;

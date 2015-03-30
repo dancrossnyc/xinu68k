@@ -1,4 +1,4 @@
-/* dsinit.c - dsinit */
+// dsinit.c - dsinit
 
 #include <conf.h>
 #include <kernel.h>
@@ -33,7 +33,7 @@ dsinit(struct devsw *devptr)
 	dsptr->ddir = getbuf(dskdbp);
 	iosetvec(devptr->dvnum, dsptr, dsptr);
 
-	/* read directory block: setup read command then start interface */
+	// read directory block: setup read command then start interface
 
 	dsptr->ddcb.xop = (char) XOREAD;
 	dsptr->ddcb.xunit = (char) 0;

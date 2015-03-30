@@ -1,4 +1,4 @@
-/* unsleep.c - unsleep */
+// unsleep.c - unsleep
 
 #include <conf.h>
 #include <kernel.h>

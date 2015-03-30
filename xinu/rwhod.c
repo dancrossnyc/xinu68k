@@ -1,4 +1,4 @@
-/* rwhod.c - rwhod */
+// rwhod.c - rwhod
 
 #include <conf.h>
 #include <kernel.h>
@@ -24,7 +24,7 @@ rwhod(void)
 	int len;
 	char ps;
 
-	/* Initialize rwho information */
+	// Initialize rwho information
 
 	Rwho.rwnent = 1;
 	Rwho.rwsend = TRUE;

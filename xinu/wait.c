@@ -1,4 +1,4 @@
-/* wait.c - wait */
+// wait.c - wait
 
 #include <conf.h>
 #include <kernel.h>

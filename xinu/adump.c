@@ -1,4 +1,4 @@
-/* adump.c - adump */
+// adump.c - adump
 
 #include <conf.h>
 #include <kernel.h>

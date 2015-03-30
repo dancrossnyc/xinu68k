@@ -1,4 +1,4 @@
-/* rename.c - rename */
+// rename.c - rename
 
 #include <conf.h>
 #include <kernel.h>
@@ -17,7 +17,7 @@ rename(char *old, char *new)
 	struct devsw *devptr;
 	int dev, dev2;
 
-	/* map names through namespace and restrict to single device */
+	// map names through namespace and restrict to single device
 
 	if ((dev = nammap(old, fullold)) == SYSERR ||
 	    (dev2 = nammap(new, fullnew)) == SYSERR || dev != dev2)

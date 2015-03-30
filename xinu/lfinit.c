@@ -1,4 +1,4 @@
-/* lfinit.c - lfinit */
+// lfinit.c - lfinit
 
 #include <conf.h>
 #include <kernel.h>

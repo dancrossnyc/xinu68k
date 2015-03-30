@@ -1,4 +1,4 @@
-/* dsopen.c - dsopen */
+// dsopen.c - dsopen
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* netnum.c - netnum */
+// netnum.c - netnum
 
 #include <conf.h>
 #include <kernel.h>
@@ -14,9 +14,9 @@ netnum(IPaddr netpart, IPaddr address)
 	memmove(netpart, address, IPLEN);
 	switch (netpart[0] & IPTMASK) {
 	case IPATYP:
-		netpart[1] = '\0';	/* fall through */
+		netpart[1] = '\0';	// fall through
 	case IPBTYP:
-		netpart[2] = '\0';	/* fall through */
+		netpart[2] = '\0';	// fall through
 	case IPCTYP:
 		netpart[3] = '\0';
 	}

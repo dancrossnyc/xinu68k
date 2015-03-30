@@ -1,4 +1,4 @@
-/* unmount.c - unmount */
+// unmount.c - unmount
 
 #include <conf.h>
 #include <kernel.h>

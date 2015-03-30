@@ -1,4 +1,4 @@
-/* ip2name.c - ip2name */
+// ip2name.c - ip2name
 
 #include <conf.h>
 #include <kernel.h>
@@ -11,8 +11,8 @@
 SYSCALL
 ip2name(IPaddr ip, char *nam)
 {
-	char tmpstr[20];	/* temporary string buffer      */
-	char *buf;		/* buffer to hold domain query  */
+	char tmpstr[20];	// temporary string buffer
+	char *buf;		// buffer to hold domain query
 	int dg, i;
 	char *p;
 	struct dn_mesg *dnptr;
@@ -25,7 +25,7 @@ ip2name(IPaddr ip, char *nam)
 	dnptr->dn_acount = dnptr->dn_ncount = dnptr->dn_dcount = 0;
 	p = dnptr->dn_qaaa;
 
-	/* Fill in question with  ip[3].ip[2].ip[1].ip[0].in-addr.arpa  */
+	// Fill in question with  ip[3].ip[2].ip[1].ip[0].in-addr.arpa
 
 	for (i = 3; i >= 0; i--) {
 		sprintf(tmpstr, "%d", ip[i] & LOWBYTE);
@@ -33,15 +33,15 @@ ip2name(IPaddr ip, char *nam)
 	}
 	dn_cat(p, "in-addr");
 	dn_cat(p, "arpa");
-	*p++ = NULLCH;		/* terminate name */
+	*p++ = NULLCH;		// terminate name
 
-	/* Add query type and query class fields to name */
+	// Add query type and query class fields to name
 
 	((struct dn_qsuf *) p)->dn_type = hs2net(DN_QTPR);
 	((struct dn_qsuf *) p)->dn_clas = hs2net(DN_QCIN);
 	p += sizeof(struct dn_qsuf);
 
-	/* Broadcast query */
+	// Broadcast query
 
 	dg = open(INTERNET, NSERVER, ANYLPORT);
 	control(dg, DG_SETMODE, DG_DMODE | DG_TMODE);
@@ -55,16 +55,16 @@ ip2name(IPaddr ip, char *nam)
 		return (SYSERR);
 	}
 
-	/* In answer, skip name and remainder of resource record header */
+	// In answer, skip name and remainder of resource record header
 
 	while (*p != NULLCH)
-		if (*p & DN_CMPRS)	/* compressed section of name       */
+		if (*p & DN_CMPRS)	// compressed section of name
 			*++p = NULLCH;
 		else
 			p += *p + 1;
 	p += DN_RLEN + 1;
 
-	/* Copy name to user */
+	// Copy name to user
 
 	*nam = NULLCH;
 
@@ -77,7 +77,7 @@ ip2name(IPaddr ip, char *nam)
 			p += *p + 1;
 		}
 	}
-	if (strlen(nam))	/* remove trailing dot */
+	if (strlen(nam))	// remove trailing dot
 		nam[strlen(nam) - 1] = NULLCH;
 	freemem(buf, DN_MLEN);
 	return (OK);

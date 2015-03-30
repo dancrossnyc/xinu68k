@@ -1,4 +1,4 @@
-/* rfalloc.c - rfalloc */
+// rfalloc.c - rfalloc
 
 #include <conf.h>
 #include <kernel.h>

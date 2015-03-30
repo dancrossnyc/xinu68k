@@ -1,4 +1,4 @@
-/* ttyread.c - ttyread, readcopy */
+// ttyread.c - ttyread, readcopy
 
 #include <conf.h>
 #include <kernel.h>
@@ -23,7 +23,7 @@ ttyread(struct devsw *devptr, char *buff, int count)
 	disable(ps);
 	if ((avail = scount((iptr = &tty[devptr->dvminor])->isem)) < 0)
 		avail = 0;
-	if (count == 0) {	/* read whatever is available */
+	if (count == 0) {	// read whatever is available
 		if (avail == 0) {
 			restore(ps);
 			return (0);

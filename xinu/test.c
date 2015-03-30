@@ -1,4 +1,4 @@
-/* test.c - main */
+// test.c - main
 
 #include <conf.h>
 #include <kernel.h>
@@ -13,11 +13,11 @@ main(void)
 {
 	int udpecho();
 
-	/* start rwho daemon and input processes */
+	// start rwho daemon and input processes
 
 	rwho();
 
-	/* start UDP echo server */
+	// start UDP echo server
 
 	resume(create(udpecho, 380, 30, "UDPecho", 0));
 

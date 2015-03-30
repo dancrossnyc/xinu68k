@@ -1,4 +1,4 @@
-/* resume.c - resume */
+// resume.c - resume
 
 #include <conf.h>
 #include <kernel.h>
@@ -11,9 +11,9 @@
 SYSCALL
 resume(int pid)
 {
-	char ps;		/* saved processor status       */
-	struct pentry *pptr;	/* pointer to proc. tab. entry  */
-	int prio;		/* priority to return           */
+	char ps;		// saved processor status
+	struct pentry *pptr;	// pointer to proc. tab. entry
+	int prio;		// priority to return
 
 	disable(ps);
 	if (isbadpid(pid) || (pptr = &proctab[pid])->pstate != PRSUSP) {

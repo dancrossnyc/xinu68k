@@ -1,4 +1,4 @@
-/* ibput.c - ibput */
+// ibput.c - ibput
 
 #include <conf.h>
 #include <kernel.h>

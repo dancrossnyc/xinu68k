@@ -23,7 +23,7 @@ qxdump(int all)
 				pptr = &proctab[i];
 				if (pptr->pstate != PRFREE)
 					pr = 1;
-			} else {	/* normal queue - could be head or tail */
+			} else {	// normal queue - could be head or tail
 				if ((qp->qnext < NPROC && qp->qnext >= 0)
 				    || (qp->qprev < NPROC
 					&& qp->qprev >= 0))

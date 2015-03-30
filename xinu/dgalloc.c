@@ -1,4 +1,4 @@
-/* dgalloc.c - dgalloc */
+// dgalloc.c - dgalloc
 
 #include <conf.h>
 #include <kernel.h>

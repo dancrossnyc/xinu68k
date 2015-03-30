@@ -1,4 +1,4 @@
-/* freemem.c - freemem */
+// freemem.c - freemem
 
 #include <conf.h>
 #include <kernel.h>

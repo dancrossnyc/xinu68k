@@ -1,4 +1,4 @@
-/* dgmopen.c - dgmopen */
+// dgmopen.c - dgmopen
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* udpsend.c - udpsend */
+// udpsend.c - udpsend
 
 #include <conf.h>
 #include <kernel.h>
@@ -15,7 +15,7 @@ udpsend(IPaddr faddr, int fport, int lport, struct epacket *packet,
 	struct udp *udpptr;
 	struct ip *ipptr;
 
-	/* Fill in UDP header; pass to ipsend to fill in IP header */
+	// Fill in UDP header; pass to ipsend to fill in IP header
 
 	ipptr = (struct ip *) packet->ep_data;
 	ipptr->i_proto = IPRO_UDP;

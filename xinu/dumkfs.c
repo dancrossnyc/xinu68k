@@ -1,4 +1,4 @@
-/* dumkfs.c - dumkfs, dumkdl, dumkil */
+// dumkfs.c - dumkfs, dumkdl, dumkil
 
 #include <conf.h>
 #include <kernel.h>

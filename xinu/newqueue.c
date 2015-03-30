@@ -1,4 +1,4 @@
-/* newqueue.c  -  newqueue */
+// newqueue.c  -  newqueue
 
 #include <conf.h>
 #include <kernel.h>
@@ -11,12 +11,12 @@
 int
 newqueue(void)
 {
-	struct qent *hptr;	/* address of new list head     */
-	struct qent *tptr;	/* address of new list tail     */
-	int hindex, tindex;	/* head and tail indexes        */
+	struct qent *hptr;	// address of new list head
+	struct qent *tptr;	// address of new list tail
+	int hindex, tindex;	// head and tail indexes
 
-	hptr = &q[hindex = nextqueue++];	/* nextqueue is global variable */
-	tptr = &q[tindex = nextqueue++];	/*  giving next used q pos.     */
+	hptr = &q[hindex = nextqueue++];	// nextqueue is global variable
+	tptr = &q[tindex = nextqueue++];	// giving next used q pos.
 	hptr->qnext = tindex;
 	hptr->qprev = EMPTY;
 	hptr->qkey = MININT;

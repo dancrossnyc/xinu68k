@@ -1,4 +1,4 @@
-/* ptclear.c - _ptclear */
+// ptclear.c - _ptclear
 
 #include <conf.h>
 #include <kernel.h>
@@ -15,7 +15,7 @@ _ptclear(struct pt *ptptr, int newstate, int (*dispose)(void *))
 	struct ptnode *p;
 
 
-	/* put port in limbo until done freeing processes */
+	// put port in limbo until done freeing processes
 
 	ptptr->ptstate = PTLIMBO;
 	ptptr->ptseq++;

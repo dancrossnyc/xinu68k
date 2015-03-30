@@ -1,4 +1,4 @@
-/* rfwrite.c - rfwrite */
+// rfwrite.c - rfwrite
 
 #include <conf.h>
 #include <kernel.h>

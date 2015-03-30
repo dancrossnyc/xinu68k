@@ -1,4 +1,4 @@
-/* rfgetc.c - rfgetc */
+// rfgetc.c - rfgetc
 
 #include <conf.h>
 #include <kernel.h>

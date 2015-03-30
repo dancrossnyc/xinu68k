@@ -1,4 +1,4 @@
-/* arp_in.c - arp_in */
+// arp_in.c - arp_in
 
 #include <conf.h>
 #include <kernel.h>
@@ -30,7 +30,7 @@ arp_in(struct epacket *packet, int device)
 	arop = net2hs(apacptr->ar_op);
 	switch (arop) {
 
-	case AR_REQ:		/* request - answer if for me */
+	case AR_REQ:		// request - answer if for me
 		if (memcmp(Net.myaddr, apacptr->ar_tpa, IPLEN) != 0) {
 			freebuf(packet);
 			return (OK);
@@ -44,7 +44,7 @@ arp_in(struct epacket *packet, int device)
 		write(device, packet, EMINPAK);
 		return (OK);
 
-	case AR_RPLY:		/* reply - awaken requestor if any */
+	case AR_RPLY:		// reply - awaken requestor if any
 		disable(ps);
 		pid = Arp.arppid;
 		if (!isbadpid(pid) &&

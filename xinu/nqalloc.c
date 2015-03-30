@@ -1,4 +1,4 @@
-/* nqalloc.c - nqalloc */
+// nqalloc.c - nqalloc
 
 #include <conf.h>
 #include <kernel.h>

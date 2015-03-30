@@ -1,4 +1,4 @@
-/* write.c - write */
+// write.c - write
 
 #include <conf.h>
 #include <kernel.h>

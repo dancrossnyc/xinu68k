@@ -1,4 +1,4 @@
-/* mount.c - mount */
+// mount.c - mount
 
 #include <conf.h>
 #include <kernel.h>
@@ -37,7 +37,7 @@ mount(char *prefix, int dev, char *replace)
 		return (SYSERR);
 	}
 	nptr = last = &Nam.nametab[Nam.nnames++];
-	if (Nam.nnames > 1) {	/* preserve last name prefix */
+	if (Nam.nnames > 1) {	// preserve last name prefix
 		nptr = last - 1;
 		*last = *nptr;
 	}

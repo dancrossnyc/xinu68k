@@ -1,4 +1,4 @@
-/* kprintf.c - kprintf, kputc, savestate, rststate */
+// kprintf.c - kprintf, kputc, savestate, rststate
 
 #include <conf.h>
 #include <kernel.h>
@@ -18,30 +18,30 @@ kputc(int device, int c)
 {
 	struct csr *csrptr;
 	struct tty *ttyptr;
-	int slowdown;		/* added to delay polling, because      */
-	/*   polling immediately after a        */
-	/*   transmit seems to cause trouble    */
+	int slowdown;		// added to delay polling, because
+	// polling immediately after a
+	// transmit seems to cause trouble
 	if (c == 0)
 		return;
 	if (c == NEWLINE)
 		kputc(device, RETURN);
-	csrptr = (struct csr *) devtab[device].dvcsr;	/* dev. address */
-	ttyptr = (struct tty *) devtab[device].dvioblk;	/* control block */
+	csrptr = (struct csr *) devtab[device].dvcsr;	// dev. address
+	ttyptr = (struct tty *) devtab[device].dvioblk;	// control block
 
-	if (ttyptr && (ttyptr->oheld || (ttyptr->oflow &&	/* flow control */
+	if (ttyptr && (ttyptr->oheld || (ttyptr->oflow &&	// flow control
 					 (csrptr->crstat & SLUREADY) &&
 					 (csrptr->crbuf & SLUCHMASK) ==
 					 ttyptr->ostop))) {
 		do {
-			while (!(csrptr->crstat & SLUREADY));	/* wait for char */
+			while (!(csrptr->crstat & SLUREADY));	// wait for char
 		} while ((csrptr->crbuf & SLUCHMASK) == ttyptr->ostop);
 		ttyptr->oheld = FALSE;
 	}
 
-	while (!(csrptr->ctstat & SLUREADY));	/* poll for idle */
-	csrptr->ctbuf = c;	/* transmit char */
-	for (slowdown = 0; slowdown < DELAY; slowdown++);	/* wait a bit   */
-	while (!(csrptr->ctstat & SLUREADY));	/* poll for idle */
+	while (!(csrptr->ctstat & SLUREADY));	// poll for idle
+	csrptr->ctbuf = c;	// transmit char
+	for (slowdown = 0; slowdown < DELAY; slowdown++);	// wait a bit
+	while (!(csrptr->ctstat & SLUREADY));	// poll for idle
 }
 
 static int savedev, savecrstat, savectstat;

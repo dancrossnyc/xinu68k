@@ -1,4 +1,4 @@
-/* dskenq.c - dskenq */
+// dskenq.c - dskenq
 
 #include <conf.h>
 #include <kernel.h>
@@ -11,7 +11,7 @@
 int
 dskenq(struct dreq *drptr, struct dsblk *dsptr)
 {
-	struct dreq *p, *q;	/* q follows p through requests */
+	struct dreq *p, *q;	// q follows p through requests
 	DBADDR block;
 	int st;
 

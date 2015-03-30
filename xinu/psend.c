@@ -1,4 +1,4 @@
-/* psend.c - psend */
+// psend.c - psend
 
 #include <conf.h>
 #include <kernel.h>
@@ -28,7 +28,7 @@ psend(int portid, uword msg)
 		return (SYSERR);
 	}
 
-	/* wait for space and verify port is still allocated */
+	// wait for space and verify port is still allocated
 
 	seq = ptptr->ptseq;
 	if (wait(ptptr->ptssem) == SYSERR
@@ -42,7 +42,7 @@ psend(int portid, uword msg)
 	ptfree = freenode->ptnext;
 	freenode->ptnext = (struct ptnode *) NULL;
 	freenode->ptmsg = msg;
-	if (ptptr->pttail == (struct ptnode *) NULL)	/* empty queue */
+	if (ptptr->pttail == (struct ptnode *) NULL)	// empty queue
 		ptptr->pttail = ptptr->pthead = freenode;
 	else {
 		(ptptr->pttail)->ptnext = freenode;

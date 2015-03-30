@@ -1,4 +1,4 @@
-/* wakeup.c - wakeup */
+// wakeup.c - wakeup
 
 #include <conf.h>
 #include <kernel.h>

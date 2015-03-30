@@ -1,4 +1,4 @@
-/* devdump.c - devdump */
+// devdump.c - devdump
 
 #include <conf.h>
 #include <kernel.h>

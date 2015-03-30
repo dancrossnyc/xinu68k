@@ -1,4 +1,4 @@
-/* ckmode.c - ckmode */
+// ckmode.c - ckmode
 
 #include <conf.h>
 #include <kernel.h>
@@ -45,7 +45,7 @@ ckmode(char *mode)
 		default:
 			return (SYSERR);
 		}
-	if ((mbits & FLREAD) == (mbits & FLWRITE))	/* default: allow R + W     */
+	if ((mbits & FLREAD) == (mbits & FLWRITE))	// default: allow R + W
 		mbits |= FLRW;
 	return (mbits);
 }

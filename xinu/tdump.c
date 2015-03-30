@@ -1,4 +1,4 @@
-/* tdump.c - tdump, tdumph, tdump1 */
+// tdump.c - tdump, tdumph, tdump1
 
 #include <conf.h>
 #include <kernel.h>
@@ -7,7 +7,7 @@
 /*
  * routines to dump contents of tty control block
  */
-static char *unctrl[] = {	/* unctrl codes for ttys        */
+static char *unctrl[] = {	// unctrl codes for ttys
 	"^@", "^A", "^B", "^C", "^D", "^E", "^F", "^G", "^H", "^I", "^J", "^K",
 	"^L", "^M", "^N", "^O", "^P", "^Q", "^R", "^S", "^T", "^U", "^V", "^W",
 	"^X", "^Y", "^Z", "^[", "^\\", "^]", "^~", "^_",

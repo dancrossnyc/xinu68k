@@ -1,4 +1,4 @@
-/* putc.c - putc */
+// putc.c - putc
 
 #include <conf.h>
 #include <kernel.h>

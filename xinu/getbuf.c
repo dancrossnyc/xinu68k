@@ -1,4 +1,4 @@
-/* getbuf.c - getbuf */
+// getbuf.c - getbuf
 
 #include <conf.h>
 #include <kernel.h>

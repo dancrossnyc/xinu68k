@@ -1,4 +1,4 @@
-/* create.c - create, newpid */
+// create.c - create, newpid
 
 #include <conf.h>
 #include <kernel.h>
@@ -14,10 +14,10 @@
 static int
 newpid(void)
 {
-	int pid;		/* process id to return         */
+	int pid;		// process id to return
 	int i;
 
-	for (i = 0; i < NPROC; i++) {	/* check all NPROC slots        */
+	for (i = 0; i < NPROC; i++) {	// check all NPROC slots
 		if ((pid = nextproc--) <= 0)
 			nextproc = NPROC - 1;
 		if (proctab[pid].pstate == PRFREE)
@@ -41,11 +41,11 @@ SYSCALL
 create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ...)
 {
 	va_list args;
-	int pid;		/* stores new process id        */
-	struct pentry *pptr;	/* pointer to proc. table entry */
+	int pid;		// stores new process id
+	struct pentry *pptr;	// pointer to proc. table entry
 	int i;
-	int *saddr;		/* stack address                */
-	char ps;		/* saved processor status       */
+	int *saddr;		// stack address
+	char ps;		// saved processor status
 	uword *procaddrp = (uword *)&procaddr;
 
 	disable(ps);
@@ -77,11 +77,11 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	pptr->pdevs[0] = pptr->pdevs[1] = BADDEV;
 	va_start(args, nargs);
 	saddr -= nargs;
-	for (; nargs > 0; nargs--)	/* machine dependent; copy args     */
-		*++saddr = va_arg(args, int);	/* onto created process's stack  */
+	for (; nargs > 0; nargs--)	// machine dependent; copy args
+		*++saddr = va_arg(args, int);	// onto created process's stack
 	va_end(args);
 	saddr -= nargs;
-	*saddr = (int) INITRET;	/* push on return address       */
+	*saddr = (int) INITRET;	// push on return address
 	pptr->pregs[SP] = (int) saddr;
 	restore(ps);
 

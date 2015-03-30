@@ -1,4 +1,4 @@
-/* lfsflush.c - lfsflush */
+// lfsflush.c - lfsflush
 
 #include <conf.h>
 #include <kernel.h>

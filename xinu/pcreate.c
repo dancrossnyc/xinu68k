@@ -1,4 +1,4 @@
-/* pcreate.c - pcreate */
+// pcreate.c - pcreate
 
 #include <conf.h>
 #include <kernel.h>

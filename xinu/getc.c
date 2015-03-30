@@ -1,4 +1,4 @@
-/* getc.c - getc */
+// getc.c - getc
 
 #include <conf.h>
 #include <kernel.h>
