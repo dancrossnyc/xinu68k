@@ -1,4 +1,4 @@
-/* x_sleep.c - x_sleep */
+// x_sleep.c - x_sleep
 
 #include <conf.h>
 #include <kernel.h>

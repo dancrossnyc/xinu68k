@@ -1,4 +1,4 @@
-/* x_cat.c - x_cat */
+// x_cat.c - x_cat
 
 #include <conf.h>
 #include <kernel.h>

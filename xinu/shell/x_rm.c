@@ -1,4 +1,4 @@
-/* x_rm.c - x_rm */
+// x_rm.c - x_rm
 
 #include <conf.h>
 #include <kernel.h>

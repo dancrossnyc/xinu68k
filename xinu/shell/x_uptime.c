@@ -1,4 +1,4 @@
-/* x_uptime.c - x_uptime */
+// x_uptime.c - x_uptime
 
 #include <conf.h>
 #include <kernel.h>
@@ -29,9 +29,9 @@ x_uptime (int stdin, int stdout, int stderr, int nargs, char *args[])
 			all = TRUE;
 			break;
 		}
-		getname(mach); /* called as "uptime" */
+		getname(mach); // called as "uptime"
 		args[1] = mach;
-		/* fall through */
+		// fall through
 	case 2:
 		all = FALSE;
 		break;

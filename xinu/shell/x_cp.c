@@ -1,4 +1,4 @@
-/* x_cp.c - x_cp */
+// x_cp.c - x_cp
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* x_unmou.c -  x_unmou */
+// x_unmou.c -  x_unmou
 
 #include <conf.h>
 #include <kernel.h>

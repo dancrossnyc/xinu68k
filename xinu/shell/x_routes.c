@@ -1,4 +1,4 @@
-/* x_routes.c - x_routes */
+// x_routes.c - x_routes
 
 #include <conf.h>
 #include <kernel.h>

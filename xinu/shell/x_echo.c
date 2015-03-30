@@ -1,4 +1,4 @@
-/* x_echo.c - x_echo */
+// x_echo.c - x_echo
 
 #include <conf.h>
 #include <kernel.h>

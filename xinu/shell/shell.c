@@ -1,4 +1,4 @@
-/* shell.c - shell */
+// shell.c - shell
 
 #include <conf.h>
 #include <kernel.h>
@@ -7,8 +7,8 @@
 #include <cmd.h>
 #include <tty.h>
 
-struct	shvars	Shl;			/* globals used by Xinu shell	*/
-struct	cmdent	cmds[]  = {		/* shell commands		*/
+struct	shvars	Shl;			// globals used by Xinu shell
+struct	cmdent	cmds[]  = {		// shell commands
 	{"bpool",	FALSE,		x_bpool},
 	{"cat",		FALSE,		x_cat},
 	{"close",	FALSE,		x_close},
@@ -42,7 +42,7 @@ struct	cmdent	cmds[]  = {		/* shell commands		*/
 	{"?",		FALSE,		x_help}
 };
 //extern	struct	cmdent	cmds[];
-LOCAL	char	errhd[] = "Syntax error\n";/* global error messages	*/
+LOCAL	char	errhd[] = "Syntax error\n";// global error messages
 LOCAL	char	fmt[]   = "Cannot open %s\n";
 LOCAL	char	fmt2[]  = "[%d]\n";
 
@@ -79,14 +79,14 @@ shell(int dev)
 		outnam = innam = NULL;
 		backgnd = FALSE;
 
-		/* handle '&' */
+		// handle '&'
 
 		if (Shl.shtktyp[ntokens-1] == '&') {
 			ntokens-- ;
 			backgnd = TRUE;
 		}
 
-		/* scan tokens, accumulating length;  handling redirect	*/
+		// scan tokens, accumulating length;  handling redirect
 
 		for (len=0,i=0 ; i<ntokens ; ) {
 			if ((ch = Shl.shtktyp[i]) == '&') {
@@ -124,7 +124,7 @@ shell(int dev)
 		}
 		stdin = stdout = stderr = dev;
 
-		/* Look up command in table */
+		// Look up command in table
 
 		for (com=0 ; com<Shl.shncmds ; com++) {
 			if (strcmp(cmds[com].cmdnam,Shl.shtok[0]) == 0)
@@ -135,7 +135,7 @@ shell(int dev)
 			continue;
 		}
 
-		/* handle built-in commands with procedure call */
+		// handle built-in commands with procedure call
 
 		if (cmds[com].cbuiltin) {
 			if (innam != NULL || outnam != NULL || backgnd)
@@ -146,7 +146,7 @@ shell(int dev)
 			continue;
 		}
 
-		/* Open files and redirect I/O if specified */
+		// Open files and redirect I/O if specified
 
 		if (innam != NULL && (stdin=open(NAMESPACE,innam,"ro"))
 			== SYSERR) {
@@ -159,14 +159,14 @@ shell(int dev)
 			continue;
 		}
 
-		/* compute space needed for string args. (in bytes) */
+		// compute space needed for string args. (in bytes)
 
 		len += (ntokens+2) * (sizeof(char *) + sizeof(char));
 		if (isodd(len))
 			len--;
 		control(dev, TCINT, getpid());
 
-		/* create process to execute conventional command */
+		// create process to execute conventional command
 
 		if ( (child = create(cmds[com].cproc, SHCMDSTK, SHCMDPRI,
 				Shl.shtok[0],(len/sizeof(int)) + 4,

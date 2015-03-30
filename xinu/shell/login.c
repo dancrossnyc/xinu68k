@@ -1,4 +1,4 @@
-/* login.c - login */
+// login.c - login
 
 #include <conf.h>
 #include <kernel.h>

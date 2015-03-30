@@ -1,11 +1,11 @@
-/* x_help.c - x_help */
+// x_help.c - x_help
 
 #include <conf.h>
 #include <kernel.h>
 #include <shell.h>
 #include <cmd.h>
 
-#define	COLUMNS	4			/* number of columns to print	*/
+#define	COLUMNS	4			// number of columns to print
 
 /*------------------------------------------------------------------------
  *  x_help  -  (command help) print possible command names for user
@@ -14,9 +14,9 @@
 COMMAND
 x_help (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
-	int	inc;			/* command names per column	*/
-	int	i;			/* move through printed rows	*/
-	int	j;			/* move across printed columns	*/
+	int	inc;			// command names per column
+	int	i;			// move through printed rows
+	int	j;			// move across printed columns
 
 
 	if ( (inc=(Shl.shncmds+COLUMNS-1)/COLUMNS) <= 0)

@@ -1,4 +1,4 @@
-/* x_devs.c - x_devs */
+// x_devs.c - x_devs
 
 #include <conf.h>
 #include <kernel.h>

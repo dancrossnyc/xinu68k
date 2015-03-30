@@ -1,4 +1,4 @@
-/* x_mount.c - x_mount, mprint */
+// x_mount.c - x_mount, mprint
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* x_reboot.c - x_reboot */
+// x_reboot.c - x_reboot
 
 #include <conf.h>
 #include <kernel.h>
@@ -10,7 +10,7 @@
 BUILTIN
 x_reboot (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
-	restart();	/* warning! This terminates everything. */
+	restart();	// warning! This terminates everything.
 
 	return OK;
 }

@@ -1,4 +1,4 @@
-/* x_who.c - x_who */
+// x_who.c - x_who
 
 #include <conf.h>
 #include <kernel.h>

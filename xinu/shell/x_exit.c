@@ -1,4 +1,4 @@
-/* x_exit.c - x_exit */
+// x_exit.c - x_exit
 
 #include <conf.h>
 #include <kernel.h>

@@ -1,4 +1,4 @@
-/* x_rls.c - x_rls */
+// x_rls.c - x_rls
 
 #include <conf.h>
 #include <kernel.h>
@@ -14,11 +14,11 @@ x_rls (int stdin, int stdout, int stderr, int nargs, char *args[])
 	char	*p, *buf;
 	int	dev, len;
 	char	str[32];
-	struct	dirent	{		/* UNIX directory entry		*/
-		long	d_inum;		/* file's inode number		*/
-		short	d_rlen;		/* length of this record	*/
-		short	d_nlen;		/* length of this file's name	*/
-		char	d_nam[1];	/* start of file name		*/
+	struct	dirent	{		// UNIX directory entry
+		long	d_inum;		// file's inode number
+		short	d_rlen;		// length of this record
+		short	d_nlen;		// length of this file's name
+		char	d_nam[1];	// start of file name
 	};
 	struct	dirent	*d;
 	Bool	aflag;

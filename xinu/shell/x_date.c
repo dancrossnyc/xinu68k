@@ -1,4 +1,4 @@
-/* x_date.c - x_date */
+// x_date.c - x_date
 
 #include <conf.h>
 #include <kernel.h>

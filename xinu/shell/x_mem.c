@@ -1,4 +1,4 @@
-/* x_mem.c - x_mem */
+// x_mem.c - x_mem
 
 #include <conf.h>
 #include <kernel.h>
@@ -19,7 +19,7 @@ x_mem (int stdin, int stdout, int stderr, int nargs, char *args[])
 	unsigned avail;
 	unsigned stkmem;
 
-	/* calculate current size of free memory and stack memory */
+	// calculate current size of free memory and stack memory
 
 	for( free=0,mptr=memlist.mnext ; mptr!=(struct mblock *)NULL ;
 	     mptr=mptr->mnext)

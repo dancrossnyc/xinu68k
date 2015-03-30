@@ -1,4 +1,4 @@
-/* x_kill.c - x_kill */
+// x_kill.c - x_kill
 
 #include <conf.h>
 #include <kernel.h>

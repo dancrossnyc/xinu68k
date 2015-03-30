@@ -1,4 +1,4 @@
-/* lexan.c - lexan */
+// lexan.c - lexan
 
 #include <conf.h>
 #include <kernel.h>
@@ -18,31 +18,31 @@ lexan(char *line)
 	char	*to;
 	char	quote;
 
-	to = Shl.shargst;		/* area to place token strings */
-	tokptr = &Shl.shtok[ntok = 0];	/* array of ptrs to tokens */
+	to = Shl.shargst;		// area to place token strings
+	tokptr = &Shl.shtok[ntok = 0];	// array of ptrs to tokens
 	for  (p = line ; *p!='\0' && *p!='\n' && ntok < SHMAXTOK ;) {
-		while ( (ch = *p) == ' ')	/* skip leading blanks	*/
+		while ( (ch = *p) == ' ')	// skip leading blanks
 			p++;
-		if (ch == '\0' || ch == '\n')	/* end of line or string*/
+		if (ch == '\0' || ch == '\n')	// end of line or string
 			return(ntok);
-		*tokptr++ = to;			/* save start of token	*/
+		*tokptr++ = to;			// save start of token
 		Shl.shtktyp[ntok++] = ch;
-		if (ch == '"' || ch == '\'') {	/* check for quoted str.*/
+		if (ch == '"' || ch == '\'') {	// check for quoted str.
 			quote = ch;
 			for (p++ ; (ch = *p++) != quote && ch != '\n'
 				&& ch != '\0' ; )
 				*to++ = ch;
 			if (ch != quote)
 				return(SYSERR);
-		} else {		/* other possible tokens	*/
+		} else {		// other possible tokens
 			*to++ = *p++;
 			if (ch!='>' && ch!='<' && ch!='&')
 				while ((ch = *p)!='\n' && ch !='\0' &&
 					ch!='<' && ch!='>' && ch!=' ' &&
 					ch!='"' && ch!='\'' && ch !='&')
-					*to++= *p++; /* copy alphamerics*/
+					*to++= *p++; // copy alphamerics
 		}
-		*to++ = NULLCH;		/* terminate token string	*/
+		*to++ = NULLCH;		// terminate token string
 	}
 	return(ntok);
 }

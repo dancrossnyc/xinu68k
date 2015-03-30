@@ -1,4 +1,4 @@
-/* x_dg.c - x_dg */
+// x_dg.c - x_dg
 
 #include <conf.h>
 #include <kernel.h>

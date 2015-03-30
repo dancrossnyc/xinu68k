@@ -1,4 +1,4 @@
-/* x_ps.c - x_ps */
+// x_ps.c - x_ps
 
 #include <conf.h>
 #include <kernel.h>
@@ -24,7 +24,7 @@ x_ps (int stdin, int stdout, int stderr, int nargs, char *args[])
 	struct	pentry	*pptr;
 	unsigned currstk;
 
-	//asm("mov sp,_psavsp");	/* capture current stack pointer */
+	//asm("mov sp,_psavsp");	// capture current stack pointer
 	proctab[currpid].pregs[SP] = psavsp;
 	write(stdout, hd1, strlen(hd1));
 	write(stdout, hd2, strlen(hd2));

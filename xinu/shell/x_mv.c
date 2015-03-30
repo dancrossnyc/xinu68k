@@ -1,4 +1,4 @@
-/* x_mv.c - x_mv */
+// x_mv.c - x_mv
 
 #include <conf.h>
 #include <kernel.h>

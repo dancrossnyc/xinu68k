@@ -1,4 +1,4 @@
-/* x_net.c - x_net */
+// x_net.c - x_net
 
 #include <conf.h>
 #include <kernel.h>

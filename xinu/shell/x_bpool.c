@@ -1,4 +1,4 @@
-/* x_bpool.c - x_bpool */
+// x_bpool.c - x_bpool
 
 #include <conf.h>
 #include <kernel.h>

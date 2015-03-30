@@ -1,4 +1,4 @@
-/* x_close.c - x_close */
+// x_close.c - x_close
 
 #include <conf.h>
 #include <kernel.h>

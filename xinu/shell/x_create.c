@@ -1,10 +1,10 @@
-/* x_create.c - x_creat */
+// x_create.c - x_creat
 
 #include <conf.h>
 #include <kernel.h>
 #include <a.out.h>
 
-LOCAL	char	symfile[] = "a.out";	/* name of object file to search*/
+LOCAL	char	symfile[] = "a.out";	// name of object file to search
 
 /*------------------------------------------------------------------------
  *  x_creat  -  (command create) create a process given a starting address

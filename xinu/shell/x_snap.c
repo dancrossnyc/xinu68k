@@ -1,4 +1,4 @@
-/* x_snap.c - x_snap */
+// x_snap.c - x_snap
 
 #include <conf.h>
 #include <kernel.h>
@@ -29,13 +29,13 @@ x_snap (int stdin, int stdout, int stderr, int nargs, char *args[])
 		return(SYSERR);
 	}
 
-	/* make up a core image using core11 structure heading format */
+	// make up a core image using core11 structure heading format
 
 	hdr.c_magic = COREMAGIC;
 	hdr.c_size = hdr.c_zero1 = hdr.c_zero2 = hdr.c_zero3 =
 		hdr.c_zero4 = hdr.c_zero5 = 0;
 
-	/* Capture machine registers */
+	// Capture machine registers
 
 /*
 	asm("mov r0,_snapreg"); hdr.c_regs[0] = snapreg;
@@ -51,7 +51,7 @@ x_snap (int stdin, int stdout, int stderr, int nargs, char *args[])
 	fprintf(stderr, "Writing core image");
 	write(dev, &hdr, sizeof(struct core11));
 
-	/* Add contents of real memory to core image */
+	// Add contents of real memory to core image
 
 	limit = (char *) ( 1 + (unsigned)maxaddr );
 	for (p=NULL ; p <= limit ; p += SNAPSIZ) {

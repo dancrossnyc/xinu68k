@@ -1,4 +1,4 @@
-/* addarg.c - addarg */
+// addarg.c - addarg
 
 #include <conf.h>
 #include <kernel.h>
@@ -9,9 +9,9 @@
  *  addarg  -  copy arguments to area reserved on process stack
  *------------------------------------------------------------------------
  */
-/* pid: process to receive arguments	*/
-/* nargs: number of arguments to copy	*/
-/* len: size of arg. area (in bytes)	*/
+// pid: process to receive arguments
+// nargs: number of arguments to copy
+// len: size of arg. area (in bytes)
 int
 addarg(int pid, int nargs, int len)
 {

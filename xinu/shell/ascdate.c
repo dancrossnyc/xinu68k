@@ -1,4 +1,4 @@
-/* ascdate.c - ascdate */
+// ascdate.c - ascdate
 
 #include <conf.h>
 #include <kernel.h>
@@ -15,7 +15,7 @@ ascdate (long time, char *str)
 	int	year, month, day, hour, minute, second;
 	long	days;
 
-	/* set year (1970-1999) */
+	// set year (1970-1999)
 	for (year=1970 ; TRUE ; year++) {
 		days = isleap(year) ? 366 : 365;
 		tmp = days * SECPERDY;
@@ -23,23 +23,23 @@ ascdate (long time, char *str)
 			break;
 		time -= tmp;
 	}
-	/* set month (0-11) */
+	// set month (0-11)
 	for (month=0 ; month<12 ; month++) {
 		tmp = Dat.dt_msize[month] * SECPERDY;
 		if (tmp > time)
 			break;
 		time -= tmp;
 	}
-	/* set day of month (1-31) */
+	// set day of month (1-31)
 	day = (int)( time/SECPERDY ) + 1;
 	time %= SECPERDY;
-	/* set hour (0-23) */
+	// set hour (0-23)
 	hour = (int) ( time/SECPERHR );
 	time %= SECPERHR;
-	/* set minute (0-59) */
+	// set minute (0-59)
 	minute = time / SECPERMN;
 	time %= SECPERMN;
-	/* set second (0-59) */
+	// set second (0-59)
 	second = (int) time;
 	sprintf(str, "%3s %2d %4d %2d:%02d:%02d", Dat.dt_mnam[month],
 		day, year, hour, minute, second);
