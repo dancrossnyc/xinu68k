@@ -60,7 +60,7 @@ dvptr lastdv = NULL;
 dvptr currtype = NULL;
 
 char *ftout[] = {
-	"struct\tdevsw\t{\t\t\t/* device table entry */\n",
+	"struct\tdevsw\t{\t\t\t// device table entry\n",
 	"\tint\tdvnum;\n",
 	"\tchar\t*dvname;\n",
 	"\tvoid\t(*dvinit)();\n",
@@ -81,7 +81,7 @@ char *ftout[] = {
 	"\tint\tdvminor;\n",
 	"\t};\n\n",
 	"extern\tstruct\tdevsw devtab[];",
-	"\t\t/* one entry per device */\n\n",
+	"\t\t// one entry per device\n",
 	NULL
 };
 
@@ -230,28 +230,28 @@ main(int argc, char *argv[])
 		fprintf(stderr, "Can't write on %s\n", CONFIGH);
 		exit(1);
 	}
-	fprintf(confh, "/* conf.h (GENERATED FILE; DO NOT EDIT) */\n");
-	fprintf(confc, "/* conf.c (GENERATED FILE; DO NOT EDIT) */\n");
+	fprintf(confh, "// conf.h (GENERATED FILE; DO NOT EDIT)\n");
+	fprintf(confc, "// conf.c (GENERATED FILE; DO NOT EDIT)\n");
 	fprintf(confc, "\n#include <kernel.h>\n");
 	fprintf(confc, "\n#include %s\n", CONFHREF);
 	fprintf(confh, "\n#define\tNULLPTR\t(char *)0\n");
 
 	if (verbose)
 		printf("Writing output...\n");
-	fprintf(confh, "\n/* Device table declarations */\n");
+	fprintf(confh, "\n// Device table declarations\n");
 	for (i = 0; (p = ftout[i]) != NULL; i++)
 		fprintf(confh, "%s", p);
 
 	// write device declarations and definitions; count type refs.
-	fprintf(confh, "\n/* Device name definitions */\n\n");
+	fprintf(confh, "\n// Device name definitions\n");
 	for (i = 0, s = devs; s != NULL; s = s->dvnext, i++) {
-		fprintf(confh, "#define\t%-12s%d\t\t\t/* type %-8s */\n",
+		fprintf(confh, "#define\t%-12s%d\t\t\t// type %-8s\n",
 			s->dvname, i, s->dvtname);
 		s->dvminor = symtab[s->dvtnum].symoccurs++;
 	}
 
 	// write count of device types
-	fprintf(confh, "\n/* Control block sizes */\n\n");
+	fprintf(confh, "\n// Control block sizes\n");
 	for (i = 0; i < nsym; i++)
 		if (symtab[i].symoccurs > 0) {
 			fprintf(confh, "#define\tN%s\t%d\n",
@@ -276,28 +276,22 @@ main(int argc, char *argv[])
 		lookup(s->dvoint, strlen(s->dvoint));
 
 	}
-	//fprintf(confh,
-	//	"/* Declarations of I/O routines referenced */\n\n");
-	//for (i = 0; i < nsym; i++)
-	//	fprintf(confh, "extern\tint\t%s();\n", symtab[i].symname);
-
 
 	// produce devtab (giant I/O switch table)
-	fprintf(confc, "\n/* device independent I/O switch */\n\n");
+	fprintf(confc, "\n// device independent I/O switch\n");
 	if (ndevs > 0) {
 		fprintf(confc, "struct\tdevsw\tdevtab[NDEVS] = {\n");
-		fprintf(confc, "\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
-			"/*  Format of entries is:",
-			"device-number, device-name,",
-			"init, open, close,",
-			"read, write, seek,",
-			"getc, putc, cntl,",
-			"device-csr-address, input-vector, output-vector,",
-			"iint-handler, oint-handler, control-block, minor-device,",
-			"*/");
+		fprintf(confc, "%s",
+			"// Format of entries is:\n"
+			"// device-number, device-name,\n"
+			"// init, open, close,\n"
+			"// read, write, seek,\n"
+			"// getc, putc, cntl,\n"
+			"// device-csr-address, input-vector, output-vector,\n"
+			"// iint-handler, oint-handler, control-block, minor-device,\n");
 	}
 	for (fcount = 0, s = devs; s != NULL; s = s->dvnext, fcount++) {
-		fprintf(confc, "\n/*  %s  is %s  */\n\n", s->dvname,
+		fprintf(confc, "\n//  %s  is %s\n", s->dvname,
 			s->dvtname);
 		fprintf(confc, "{ %d, \"%s\",\n", fcount, s->dvname);
 		fprintf(confc, "%s, %s, %s,\n",

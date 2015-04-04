@@ -5,6 +5,7 @@ int skipping;
 A		[a-z_A-Z]
 M		[a-z_A-Z0-9]
 %%
+"//".*			;
 "/*"			{skipping = 1;}
 "*/"			{skipping = 0;}
 "%"			{extern	int brkcount;
