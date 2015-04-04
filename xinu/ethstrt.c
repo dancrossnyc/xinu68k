@@ -46,5 +46,5 @@ ethstrt(struct etblk *etptr, struct dqsetup *setup)
 	dqptr->d_csr &= ~DQ_REST;
 	dqptr->d_csr &= ~DQ_ELOP;
 	dqptr->d_csr |= (DQ_ENBL | DQ_IEN | DQ_ILOP);
-	return (OK);
+	return OK;
 }

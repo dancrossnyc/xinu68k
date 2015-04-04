@@ -18,21 +18,21 @@ rfsend(struct fphdr *fptr, int reqlen, int rplylen)
 		Rf.device = open(INTERNET, RSERVER, ANYLPORT);
 		if (Rf.device == SYSERR ||
 		    control(Rf.device, DG_SETMODE, DG_DMODE | DG_TMODE) == SYSERR)
-			return (SYSERR);
+			return SYSERR;
 	}
 	disable(ps);
 	control(Rf.device, DG_CLEAR, 0);
 	for (trys = 0; trys < RMAXTRY; trys++) {
 		if (write(Rf.device, fptr, reqlen) == SYSERR) {
 			restore(ps);
-			return (SYSERR);
+			return SYSERR;
 		}
 		if ((ret = read(Rf.device, fptr, rplylen)) != SYSERR && ret != TIMEOUT) {
 			restore(ps);
-			return (ret);
+			return ret;
 		}
 	}
 	restore(ps);
 
-	return (SYSERR);
+	return SYSERR;
 }

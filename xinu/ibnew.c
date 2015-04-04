@@ -28,5 +28,5 @@ ibnew(int diskdev, int writedir)
 	signal(sem);
 	ibclear(&iblock, 0L);
 	ibput(diskdev, inum, &iblock);
-	return (inum);
+	return inum;
 }

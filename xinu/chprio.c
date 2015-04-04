@@ -19,7 +19,7 @@ chprio(int pid, int newprio)
 	if (isbadpid(pid) || newprio <= 0 ||
 	    (pptr = &proctab[pid])->pstate == PRFREE) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	oldprio = pptr->pprio;
 	pptr->pprio = newprio;

@@ -107,7 +107,7 @@ sysinit(void)
 #endif
 	for (i = 0; i < NDEVS; i++)	// initialize devices
 		init(i);
-	return (OK);
+	return OK;
 }
 
 //------------------------------------------------------------------------

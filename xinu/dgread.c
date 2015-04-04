@@ -24,14 +24,14 @@ dgread(struct devsw *devptr, struct xgram *buff, int len)
 		nqptr = &Net.netqs[dgptr->dg_netq];
 		if (!isbadpid(nqptr->pid)) {
 			restore(ps);
-			return (SYSERR);
+			return SYSERR;
 		}
 		if (pcount(dgptr->dg_xport) <= 0) {
 			nqptr->pid = getpid();
 			if (recvtim(DG_TIME) == TIMEOUT) {
 				nqptr->pid = BADPID;
 				restore(ps);
-				return (TIMEOUT);
+				return TIMEOUT;
 			}
 		}
 	}
@@ -46,7 +46,7 @@ dgread(struct devsw *devptr, struct xgram *buff, int len)
 		if ((datalen + XGHLEN) > len) {
 			freebuf(packet);
 			restore(ps);
-			return (SYSERR);
+			return SYSERR;
 		}
 		memmove(buff->xg_faddr, ipptr->i_src, IPLEN);
 		buff->xg_fport = net2hs(udpptr->u_sport);
@@ -59,5 +59,5 @@ dgread(struct devsw *devptr, struct xgram *buff, int len)
 	}
 	freebuf(packet);
 	restore(ps);
-	return (datalen);
+	return datalen;
 }

@@ -24,5 +24,5 @@ ttygetc(struct devsw *devptr)
 		ch = EOF;
 	restore(ps);
 
-	return (ch);
+	return ch;
 }

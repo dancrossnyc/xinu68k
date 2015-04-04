@@ -15,7 +15,7 @@ remove(char *name, int key)
 	int dev;
 
 	if ((dev = nammap(name, fullnam)) == SYSERR)
-		return (SYSERR);
+		return SYSERR;
 	devptr = &devtab[dev];
 	return ((*devptr->dvcntl) (devptr, FLREMOVE, fullnam, key));
 }

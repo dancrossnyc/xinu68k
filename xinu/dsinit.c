@@ -49,5 +49,5 @@ dsinit(struct devsw *devptr)
 	if (status & DTERROR)
 		panic("Disk error");
 	restore(ps);
-	return (OK);
+	return OK;
 }

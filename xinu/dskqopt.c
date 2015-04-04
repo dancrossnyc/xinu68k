@@ -18,18 +18,18 @@ dskqopt(struct dreq *p, struct dreq *q, struct dreq *drptr)
 
 	if (drptr->drop == DSYNC
 	    || (drptr->drop == DREAD && p->drop == DREAD))
-		return (SYSERR);
+		return SYSERR;
 
 	if (drptr->drop == DSEEK) {	// ignore extraneous seeks
 		freebuf(drptr);
-		return (OK);
+		return OK;
 	}
 
 	if (p->drop == DSEEK) {	// replace existing seeks
 		drptr->drnext = p->drnext;
 		q->drnext = drptr;
 		freebuf(p);
-		return (OK);
+		return OK;
 	}
 
 	if (p->drop == DWRITE && drptr->drop == DWRITE) {	// dup write
@@ -37,7 +37,7 @@ dskqopt(struct dreq *p, struct dreq *q, struct dreq *drptr)
 		q->drnext = drptr;
 		freebuf(p->drbuff);
 		freebuf(p);
-		return (OK);
+		return OK;
 	}
 
 	if (drptr->drop == DREAD && p->drop == DWRITE) {	// satisfy read
@@ -45,7 +45,7 @@ dskqopt(struct dreq *p, struct dreq *q, struct dreq *drptr)
 		from = p->drbuff;
 		for (i = 0; i < DBUFSIZ; i++)
 			*to++ = *from++;
-		return (OK);
+		return OK;
 	}
 
 	if (drptr->drop == DWRITE && p->drop == DREAD) {	// sat. old read
@@ -62,7 +62,7 @@ dskqopt(struct dreq *p, struct dreq *q, struct dreq *drptr)
 		drptr->drnext = p;
 		q->drnext = drptr;
 		resched();
-		return (OK);
+		return OK;
 	}
-	return (SYSERR);
+	return SYSERR;
 }

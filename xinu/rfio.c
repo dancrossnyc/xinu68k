@@ -16,10 +16,10 @@ rfio(struct devsw *devptr, int rop, char *buff, int len)
 	wait(rfptr->rf_mutex);
 	if (len < 0 || rfptr->rf_state == RFREE) {
 		signal(rfptr->rf_mutex);
-		return (SYSERR);
+		return SYSERR;
 	}
 	retcode = rfmkpac(rop, rfptr->rf_name, &rfptr->rf_pos, buff, len);
 	signal(rfptr->rf_mutex);
 
-	return (retcode);
+	return retcode;
 }

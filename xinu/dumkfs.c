@@ -30,7 +30,7 @@ dumkfs(int diskdev, int niblks, unsigned int nblocks, int diskid,
 	dumkdl(diskdev, firstdb, lastdb, verbose);
 	if (verbose)
 		kprintf("Done initializing disk...\n");
-	return (OK);
+	return OK;
 }
 
 
@@ -63,7 +63,7 @@ dumkdl(int diskdev, DBADDR firstfb, DBADDR lastfb, Bool verbose)
 	write(diskdev, buff, dba);
 	if (verbose)
 		kprintf("\nDone linking data blocks...\n");
-	return (OK);
+	return OK;
 }
 
 
@@ -89,5 +89,5 @@ dumkil(int diskdev, int niblks, Bool verbose)
 	ibput(diskdev, 0, &iblock);
 	if (verbose)
 		kprintf("Done linking i-blocks...\n");
-	return (OK);
+	return OK;
 }

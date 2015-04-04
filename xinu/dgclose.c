@@ -24,5 +24,5 @@ dgclose(struct devsw *devptr)
 	nqptr->pid = BADPID;
 	dgptr->dg_state = DG_FREE;
 	restore(ps);
-	return (OK);
+	return OK;
 }

@@ -18,9 +18,9 @@ rfalloc(void)
 		if (Rf.rftab[i].rf_state == RFREE) {
 			Rf.rftab[i].rf_state = RUSED;
 			restore(ps);
-			return (i);
+			return i;
 		}
 	restore(ps);
 
-	return (SYSERR);
+	return SYSERR;
 }

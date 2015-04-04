@@ -35,7 +35,7 @@ ip_in(struct epacket *packet, int icmpp, int lim)
 					Net.ndrop++;
 					Net.nover++;
 					freebuf(packet);
-					return (SYSERR);
+					return SYSERR;
 				}
 				psend(nqptr->xport, (uword)packet);
 				disable(ps);
@@ -45,7 +45,7 @@ ip_in(struct epacket *packet, int icmpp, int lim)
 					send(to, OK);
 				}
 				restore(ps);
-				return (OK);
+				return OK;
 			}
 		}
 		break;
@@ -55,5 +55,5 @@ ip_in(struct epacket *packet, int icmpp, int lim)
 	}
 	Net.ndrop++;
 	freebuf(packet);
-	return (OK);
+	return OK;
 }

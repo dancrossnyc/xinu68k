@@ -19,7 +19,7 @@ lfputc(struct devsw *devptr, int ch)
 	flptr = (struct flblk *) devptr->dvioblk;
 	if (flptr->fl_pid != currpid || !(flptr->fl_mode & FLWRITE)) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	if (flptr->fl_bptr >= &flptr->fl_buff[DBUFSIZ]) {
 		if (flptr->fl_dch)
@@ -32,5 +32,5 @@ lfputc(struct devsw *devptr, int ch)
 	*(flptr->fl_bptr)++ = ch;
 	flptr->fl_dch = TRUE;
 	restore(ps);
-	return (OK);
+	return OK;
 }

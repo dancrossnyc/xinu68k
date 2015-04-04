@@ -7,7 +7,7 @@
 int
 ioerr(void)
 {
-	return (SYSERR);
+	return SYSERR;
 }
 
 INTPROC

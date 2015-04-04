@@ -22,5 +22,5 @@ receive(void)
 	msg = pptr->pmsg;	// retrieve message
 	pptr->phasmsg = FALSE;
 	restore(ps);
-	return (msg);
+	return msg;
 }

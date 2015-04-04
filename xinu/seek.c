@@ -12,7 +12,7 @@ seek(int descrp, long pos)
 	struct devsw *devptr;
 
 	if (isbaddev(descrp))
-		return (SYSERR);
+		return SYSERR;
 	devptr = &devtab[descrp];
 
 	return (*devptr->dvseek)(devptr, pos);

@@ -12,7 +12,7 @@ read(int descrp, void *buff, int count)
 	struct devsw *devptr;
 
 	if (isbaddev(descrp))
-		return (SYSERR);
+		return SYSERR;
 	devptr = &devtab[descrp];
 	return ((*devptr->dvread) (devptr, buff, count));
 }

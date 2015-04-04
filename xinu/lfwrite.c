@@ -11,9 +11,9 @@ lfwrite(struct devsw *devptr, char *buff, int count)
 	int i;
 
 	if (count < 0)
-		return (SYSERR);
+		return SYSERR;
 	for (i = count; i > 0; i--)
 		if (lfputc(devptr, *buff++) == SYSERR)
-			return (SYSERR);
-	return (count);
+			return SYSERR;
+	return count;
 }

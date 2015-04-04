@@ -19,10 +19,10 @@ dgalloc(void)
 		if (dgptr->dg_state == DG_FREE) {
 			dgptr->dg_state = DG_USED;
 			restore(ps);
-			return (i);
+			return i;
 		}
 	}
 	restore(ps);
 
-	return (SYSERR);
+	return SYSERR;
 }

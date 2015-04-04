@@ -20,11 +20,11 @@ lfgetc(struct devsw *devptr)
 	flptr = (struct flblk *) devptr->dvioblk;
 	if (flptr->fl_pid != currpid || !(flptr->fl_mode & FLREAD)) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	if (flptr->fl_pos >= (flptr->fl_dent)->fdlen) {
 		restore(ps);
-		return (EOF);
+		return EOF;
 	}
 	if (flptr->fl_bptr >= &flptr->fl_buff[DBUFSIZ]) {
 		if (flptr->fl_dch)
@@ -34,5 +34,5 @@ lfgetc(struct devsw *devptr)
 	nextch = *(flptr->fl_bptr)++;
 	flptr->fl_pos++;
 	restore(ps);
-	return (nextch);
+	return nextch;
 }

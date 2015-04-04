@@ -9,5 +9,5 @@
 SYSCALL
 getpid(void)
 {
-	return (currpid);
+	return currpid;
 }

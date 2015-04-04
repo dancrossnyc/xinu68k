@@ -47,9 +47,9 @@ ttywrite(struct devsw *devptr, char *buff, int count)
 	char ps;
 
 	if (count < 0)
-		return (SYSERR);
+		return SYSERR;
 	if (count == 0)
-		return (OK);
+		return OK;
 	disable(ps);
 	ttyp = &tty[devptr->dvminor];
 	count -= (ncopied = writecopy(buff, ttyp, count));

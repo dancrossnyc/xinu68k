@@ -7,7 +7,7 @@
 int
 ionull(void)
 {
-	return (OK);
+	return OK;
 }
 
 void

@@ -47,6 +47,6 @@ dsopen(struct devsw *devptr, char *filenam, char *mode)
 		retcode = flptr->fl_id;
 	}
 	restore(ps);
-	return (retcode);
+	return retcode;
 }
 #endif

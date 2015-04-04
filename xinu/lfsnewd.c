@@ -32,5 +32,5 @@ lfsnewd(int diskdev, struct flblk *flptr)
 	for (i = 0; i < DBUFSIZ; i++)
 		*buf++ = DFILLER;
 	write(diskdev, dskbcpy(fbptr), dba);
-	return (dba);
+	return dba;
 }

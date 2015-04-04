@@ -15,8 +15,8 @@ getprio(int pid)
 	disable(ps);
 	if (isbadpid(pid) || (pptr = &proctab[pid])->pstate == PRFREE) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	restore(ps);
-	return (pptr->pprio);
+	return pptr->pprio;
 }

@@ -21,5 +21,5 @@ dgmcntl(struct devsw *devptr, int func, char *addr)
 	default:
 		status = SYSERR;
 	}
-	return (status);
+	return status;
 }

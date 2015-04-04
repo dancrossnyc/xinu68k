@@ -50,7 +50,7 @@ ip2name(IPaddr ip, char *nam)
 	if (net2hs(dnptr->dn_opparm) & DN_RESP ||
 	    net2hs(dnptr->dn_acount) <= 0) {
 		freemem(buf, DN_MLEN);
-		return (SYSERR);
+		return SYSERR;
 	}
 
 	// In answer, skip name and remainder of resource record header
@@ -78,5 +78,5 @@ ip2name(IPaddr ip, char *nam)
 	if (strlen(nam))	// remove trailing dot
 		nam[strlen(nam) - 1] = NULLCH;
 	freemem(buf, DN_MLEN);
-	return (OK);
+	return OK;
 }

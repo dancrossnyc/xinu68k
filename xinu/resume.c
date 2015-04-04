@@ -16,10 +16,10 @@ resume(int pid)
 	disable(ps);
 	if (isbadpid(pid) || (pptr = &proctab[pid])->pstate != PRSUSP) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	prio = pptr->pprio;
 	ready(pid, RESCHYES);
 	restore(ps);
-	return (prio);
+	return prio;
 }

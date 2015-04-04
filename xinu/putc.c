@@ -12,7 +12,7 @@ putc(int descrp, int ch)
 	struct devsw *devptr;
 
 	if (isbaddev(descrp))
-		return (SYSERR);
+		return SYSERR;
 	devptr = &devtab[descrp];
 
 	return (*devptr->dvputc)(devptr, ch);

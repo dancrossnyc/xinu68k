@@ -17,7 +17,7 @@ send(int pid, int msg)
             ((pptr = &proctab[pid])->pstate == PRFREE) ||
             pptr->phasmsg) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	pptr->pmsg = msg;	// deposit message
 	pptr->phasmsg = TRUE;
@@ -29,5 +29,5 @@ send(int pid, int msg)
 	}
 	restore(ps);
 
-	return (OK);
+	return OK;
 }

@@ -17,21 +17,21 @@ dskenq(struct dreq *drptr, struct dsblk *dsptr)
 		dsptr->dreqlst = drptr;
 		drptr->drnext = DRNULL;
 		dskstrt(dsptr);
-		return (DONQ);
+		return DONQ;
 	}
 	block = drptr->drdba;
 	for (p = q->drnext; p != DRNULL; q = p, p = p->drnext) {
 		if (p->drdba == block
 		    && (st = dskqopt(p, q, drptr) != SYSERR))
-			return (st);
+			return st;
 		if ((q->drdba <= block && block < p->drdba) ||
 		    (q->drdba >= block && block > p->drdba)) {
 			drptr->drnext = p;
 			q->drnext = drptr;
-			return (DONQ);
+			return DONQ;
 		}
 	}
 	drptr->drnext = DRNULL;
 	q->drnext = drptr;
-	return (DONQ);
+	return DONQ;
 }

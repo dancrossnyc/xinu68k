@@ -15,7 +15,7 @@ getfirst(int head		// q index of head of list
 	if ((proc = q[head].qnext) < NPROC)
 		return (dequeue(proc));
 	else
-		return (EMPTY);
+		return EMPTY;
 }
 
 
@@ -33,5 +33,5 @@ getlast(int tail		// q index of tail of list
 	if ((proc = q[tail].qprev) < NPROC)
 		return (dequeue(proc));
 	else
-		return (EMPTY);
+		return EMPTY;
 }

@@ -31,5 +31,5 @@ dgcntl(struct devsw *devptr, int func, int arg)
 		ret = SYSERR;
 	}
 	restore(ps);
-	return (ret);
+	return ret;
 }

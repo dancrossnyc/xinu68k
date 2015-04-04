@@ -16,7 +16,7 @@ dgparse(struct dgblk *dgptr, char *fspec)
 
 	if (fspec == ANYFPORT) {
 		dgptr->dg_fport = 0;
-		return (OK);
+		return OK;
 	}
 
 	// parse forms like 192.5.48.30:3 into (ip-address,udp-port)
@@ -27,17 +27,17 @@ dgparse(struct dgblk *dgptr, char *fspec)
 		while (isdigit((ch = *fspec++)))
 			byte = 10 * byte + (ch - '0');
 		if (byte > 256 || (i < 3 && ch != '.'))
-			return (SYSERR);
+			return SYSERR;
 		*ipptr++ = (char) byte;
 	}
 	if (ch != ':')
-		return (SYSERR);
+		return SYSERR;
 	i = 0;
 	while (isdigit((ch = *fspec++)))
 		i = 10 * i + (ch - '0');
 	if (i == 0 || ch != '\0')
-		return (SYSERR);
+		return SYSERR;
 	dgptr->dg_fport = i;
 
-	return (OK);
+	return OK;
 }

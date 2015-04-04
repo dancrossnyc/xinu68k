@@ -25,5 +25,5 @@ ttyputc(struct devsw *devptr, int ch)
 	(iptr->ioaddr)->ctstat = SLUENABLE;
 	restore(ps);
 
-	return (OK);
+	return OK;
 }

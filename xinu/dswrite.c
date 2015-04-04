@@ -20,5 +20,5 @@ dswrite(struct devsw *devptr, char *buff, DBADDR block)
 	drptr->drop = DWRITE;
 	dskenq(drptr, (struct dsblk *)devptr->dvioblk);
 	restore(ps);
-	return (OK);
+	return OK;
 }

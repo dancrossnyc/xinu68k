@@ -15,5 +15,5 @@ dskbcpy(void *oldbuf)
 	newbuf = to = getbuf(dskdbp);
 	for (i = 0; i < DBUFSIZ; i++)
 		*to++ = *from++;
-	return (newbuf);
+	return newbuf;
 }

@@ -18,7 +18,7 @@ sdelete(int sem)
 	disable(ps);
 	if (isbadsem(sem) || semaph[sem].sstate == SFREE) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	sptr = &semaph[sem];
 	sptr->sstate = SFREE;
@@ -29,5 +29,5 @@ sdelete(int sem)
 	}
 	restore(ps);
 
-	return (OK);
+	return OK;
 }

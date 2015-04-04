@@ -17,7 +17,7 @@ signaln(int sem, int count)
 	disable(ps);
 	if (isbadsem(sem) || semaph[sem].sstate == SFREE || count <= 0) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	sptr = &semaph[sem];
 	for (; count > 0; count--)
@@ -26,5 +26,5 @@ signaln(int sem, int count)
 	resched();
 	restore(ps);
 
-	return (OK);
+	return OK;
 }

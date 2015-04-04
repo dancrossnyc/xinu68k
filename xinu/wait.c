@@ -18,7 +18,7 @@ wait(int sem)
 	disable(ps);
 	if (isbadsem(sem) || (sptr = &semaph[sem])->sstate == SFREE) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	if (--(sptr->semcnt) < 0) {
 		(pptr = &proctab[currpid])->pstate = PRWAIT;
@@ -28,5 +28,5 @@ wait(int sem)
 	}
 	restore(ps);
 
-	return (OK);
+	return OK;
 }

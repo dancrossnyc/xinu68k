@@ -12,7 +12,7 @@ getc(int descrp)
 	struct devsw *devptr;
 
 	if (isbaddev(descrp))
-		return (SYSERR);
+		return SYSERR;
 	devptr = &devtab[descrp];
 	return ((*devptr->dvgetc) (devptr));
 }

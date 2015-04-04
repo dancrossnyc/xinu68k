@@ -25,9 +25,9 @@ SYSCALL
 mark(int *loc)
 {
 	if (*loc >= 0 && *loc < nmarks && marks[*loc] == loc)
-		return (0);
+		return 0;
 	if (nmarks >= MAXMARK)
-		return (SYSERR);
+		return SYSERR;
 	wait(mkmutex);
 	marks[(*loc) = nmarks++] = loc;
 	signal(mkmutex);

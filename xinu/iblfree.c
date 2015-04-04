@@ -20,7 +20,7 @@ iblfree(int diskdev, IBADDR iblist)
 	int j;
 
 	if (iblist == IBNULL)
-		return (OK);
+		return OK;
 	dirptr = dsdirec(diskdev);
 	ibget(diskdev, iblist, &iblock);
 	for (ilast = iblist; iblock.ib_next != IBNULL;) {
@@ -40,5 +40,5 @@ iblfree(int diskdev, IBADDR iblist)
 	ibput(diskdev, ilast, &iblock);
 	write(diskdev, dskbcpy(dirptr), DIRBLK);
 	signal(sem);
-	return (OK);
+	return OK;
 }

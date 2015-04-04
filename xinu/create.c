@@ -19,9 +19,9 @@ newpid(void)
 		if ((pid = nextproc--) <= 0)
 			nextproc = NPROC - 1;
 		if (proctab[pid].pstate == PRFREE)
-			return (pid);
+			return pid;
 	}
-	return (SYSERR);
+	return SYSERR;
 }
 
 /*------------------------------------------------------------------------
@@ -52,7 +52,7 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	    (pid = newpid()) == SYSERR || isodd(procaddr) ||
 	    priority < 1) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	numproc++;
 	pptr = &proctab[pid];
@@ -83,5 +83,5 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	pptr->pregs[SP] = (int) saddr;
 	restore(ps);
 
-	return (pid);
+	return pid;
 }

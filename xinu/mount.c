@@ -18,7 +18,7 @@ mount(char *prefix, int dev, char *replace)
 	if (replace == NULL)
 		replace = NULLSTR;
 	if (strlen(prefix) >= NAMPLEN || strlen(replace) >= NAMRLEN)
-		return (SYSERR);
+		return SYSERR;
 	disable(ps);
 	for (i = 0; i < Nam.nnames; i++) {
 		nptr = &Nam.nametab[i];
@@ -26,12 +26,12 @@ mount(char *prefix, int dev, char *replace)
 			strcpy(nptr->nrepl, replace);
 			nptr->ndev = dev;
 			restore(ps);
-			return (OK);
+			return OK;
 		}
 	}
 	if (Nam.nnames >= NNAMES) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	nptr = last = &Nam.nametab[Nam.nnames++];
 	if (Nam.nnames > 1) {	// preserve last name prefix

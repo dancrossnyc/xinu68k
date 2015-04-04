@@ -27,7 +27,7 @@ rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 	case FS_RENAME:
 		if (len > RDATLEN) {
 			signal(Rf.rmutex);
-			return (SYSERR);
+			return SYSERR;
 		}
 		memmove(packet.fpdata, buff, len);
 		rplylen = FPHLEN;
@@ -45,7 +45,7 @@ rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 	case FS_READ:
 		if (len > RDATLEN) {
 			signal(Rf.rmutex);
-			return (SYSERR);
+			return SYSERR;
 		}
 		reqlen = FPHLEN;
 		break;
@@ -56,7 +56,7 @@ rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 	if (rfsend(fptr, reqlen, rplylen) == SYSERR ||
 	    net2hs(fptr->f_op) == FS_ERROR) {
 		signal(Rf.rmutex);
-		return (SYSERR);
+		return SYSERR;
 	}
 	switch (rop) {
 
@@ -74,5 +74,5 @@ rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 	}
 	signal(Rf.rmutex);
 
-	return (len);
+	return len;
 }

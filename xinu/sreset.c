@@ -19,7 +19,7 @@ sreset(int sem, int count)
 	disable(ps);
 	if (isbadsem(sem) || count < 0 || semaph[sem].sstate == SFREE) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	sptr = &semaph[sem];
 	slist = sptr->sqhead;
@@ -29,5 +29,5 @@ sreset(int sem, int count)
 	resched();
 	restore(ps);
 
-	return (OK);
+	return OK;
 }

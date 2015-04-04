@@ -18,9 +18,9 @@ preset(int portid, int (*dispose)(void *))
 	    unmarked(ptmark) ||
 	    (ptptr = &ports[portid])->ptstate != PTALLOC) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	_ptclear(ptptr, PTALLOC, dispose);
 	restore(ps);
-	return (OK);
+	return OK;
 }

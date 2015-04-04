@@ -22,7 +22,7 @@ unsleep(int pid)
 	    ((pptr = &proctab[pid])->pstate != PRSLEEP &&
 	     pptr->pstate != PRTRECV)) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	qptr = &q[pid];
 	remain = qptr->qkey;
@@ -35,5 +35,5 @@ unsleep(int pid)
 		slnempty = FALSE;
 	restore(ps);
 
-	return (OK);
+	return OK;
 }

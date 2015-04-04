@@ -24,5 +24,5 @@ dgdump(void)
 			dgptr->dg_faddr[2] & 0377,
 			dgptr->dg_faddr[3] & 0377);
 	}
-	return (OK);
+	return OK;
 }

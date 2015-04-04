@@ -19,7 +19,7 @@ rfopen(struct devsw *devptr, char *name, char *mode)
 	if (strlen(name) > RNAMLEN || (mbits = ckmode(mode)) == SYSERR
 	    || (i = rfalloc()) == SYSERR) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	rfptr = &Rf.rftab[i];
 	devnum = rfptr->rf_dnum;
@@ -32,9 +32,9 @@ rfopen(struct devsw *devptr, char *name, char *mode)
 	if (rfio(&devtab[devnum], FS_OPEN, NULLSTR, mbits) == SYSERR) {
 		rfptr->rf_state = RFREE;
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	restore(ps);
 
-	return (devnum);
+	return devnum;
 }

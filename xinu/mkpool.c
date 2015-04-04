@@ -21,7 +21,7 @@ mkpool(int bufsiz, int numbufs)
 	    || nbpools >= NBPOOLS
 	    || (where = (char *)getmem((bufsiz + sizeof(int)) * numbufs)) == (char *)SYSERR) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	poolid = nbpools++;
 	bptab[poolid].bpnext = where;

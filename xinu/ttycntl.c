@@ -29,7 +29,7 @@ ttycntl(struct devsw *devptr, int func)
 		ch = ttyp->ibuff[ttyp->itail];
 		restore(ps);
 		signal(ttyp->isem);
-		return (ch);
+		return ch;
 	case TCMODER:
 		ttyp->imode = IMRAW;
 		break;
@@ -55,8 +55,8 @@ ttycntl(struct devsw *devptr, int func)
 		ttyp->iintr = FALSE;
 		break;
 	default:
-		return (SYSERR);
+		return SYSERR;
 	}
 
-	return (OK);
+	return OK;
 }

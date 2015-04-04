@@ -25,5 +25,5 @@ dscntl(struct devsw *devptr, int func)
 		break;
 	}
 	restore(ps);
-	return (stat);
+	return stat;
 }

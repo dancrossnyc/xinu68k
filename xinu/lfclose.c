@@ -22,7 +22,7 @@ lfclose(struct devsw *devptr)
 	flptr = (struct flblk *) devptr->dvioblk;
 	if (flptr->fl_pid != currpid) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	diskdev = flptr->fl_dev;
 	dsptr = (struct dsblk *) devtab[diskdev].dvioblk;
@@ -33,5 +33,5 @@ lfclose(struct devsw *devptr)
 	dsptr->dnfiles--;
 	write(diskdev, dskbcpy(dirptr), DIRBLK);
 	restore(ps);
-	return (OK);
+	return OK;
 }

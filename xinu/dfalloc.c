@@ -14,9 +14,9 @@ dfalloc(void)
 	for (int i = 0; i < Ndf; i++)
 		if (fltab[i].fl_pid == 0) {
 			fltab[i].fl_pid = getpid();
-			return (i);
+			return i;
 		}
 
-	return (SYSERR);
+	return SYSERR;
 }
 #endif

@@ -20,5 +20,5 @@ newqueue(void)
 	tptr->qnext = EMPTY;
 	tptr->qprev = hindex;
 	tptr->qkey = MAXINT;
-	return (hindex);
+	return hindex;
 }

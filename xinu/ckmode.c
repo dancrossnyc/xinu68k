@@ -17,32 +17,32 @@ ckmode(char *mode)
 
 		case FLRMODE:
 			if (mbits & FLREAD)
-				return (SYSERR);
+				return SYSERR;
 			mbits |= FLREAD;
 			break;
 
 		case FLWMODE:
 			if (mbits & FLWRITE)
-				return (SYSERR);
+				return SYSERR;
 			mbits |= FLWRITE;
 			break;
 
 		case FLOMODE:
 			if (mbits & FLOLD || mbits & FLNEW)
-				return (SYSERR);
+				return SYSERR;
 			mbits |= FLOLD;
 			break;
 
 		case FLNMODE:
 			if (mbits & FLOLD || mbits & FLNEW)
-				return (SYSERR);
+				return SYSERR;
 			mbits |= FLNEW;
 			break;
 
 		default:
-			return (SYSERR);
+			return SYSERR;
 		}
 	if ((mbits & FLREAD) == (mbits & FLWRITE))	// default: allow R + W
 		mbits |= FLRW;
-	return (mbits);
+	return mbits;
 }

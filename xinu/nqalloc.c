@@ -19,7 +19,7 @@ nqalloc(void)
 			nqptr->uport = -1;
 			nqptr->pid = BADPID;
 			restore(ps);
-			return (i);
+			return i;
 		}
 	}
 	restore(ps);

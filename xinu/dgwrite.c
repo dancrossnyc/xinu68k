@@ -17,7 +17,7 @@ dgwrite(struct devsw *devptr, struct xgram *buff, int len)
 	char *dstIP;
 
 	if (len < 0 || len > UMAXLEN)
-		return (SYSERR);
+		return SYSERR;
 	dgptr = (struct dgblk *) devptr->dvioblk;
 	packet = (struct epacket *) getbuf(Net.netpool);
 	ipptr = (struct ip *) packet->ep_data;
@@ -33,7 +33,7 @@ dgwrite(struct devsw *devptr, struct xgram *buff, int len)
 	} else {
 		if (dstport == 0) {
 			freebuf(packet);
-			return (SYSERR);
+			return SYSERR;
 		}
 		memmove(udpptr->u_data, buff, len);
 	}

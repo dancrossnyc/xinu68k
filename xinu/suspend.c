@@ -19,7 +19,7 @@ suspend(int pid)
 	    ((pptr = &proctab[pid])->pstate != PRCURR
 	     && pptr->pstate != PRREADY)) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	if (pptr->pstate == PRREADY) {
 		dequeue(pid);
@@ -31,5 +31,5 @@ suspend(int pid)
 	prio = pptr->pprio;
 	restore(ps);
 
-	return (prio);
+	return prio;
 }

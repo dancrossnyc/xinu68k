@@ -14,12 +14,12 @@ sleep(int n)
 	char ps;
 
 	if (n < 0 || clkruns == 0)
-		return (SYSERR);
+		return SYSERR;
 	if (n == 0) {
 		disable(ps);
 		resched();
 		restore(ps);
-		return (OK);
+		return OK;
 	}
 	while (n >= 1000) {
 		sleep10(10000);
@@ -28,5 +28,5 @@ sleep(int n)
 	if (n > 0)
 		sleep10(10 * n);
 
-	return (OK);
+	return OK;
 }

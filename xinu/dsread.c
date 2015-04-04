@@ -26,5 +26,5 @@ dsread(struct devsw *devptr, char *buff, DBADDR block)
 	}
 	freebuf(drptr);
 	restore(ps);
-	return (stat);
+	return stat;
 }

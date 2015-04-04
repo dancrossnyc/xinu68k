@@ -19,7 +19,7 @@ rename(char *old, char *new)
 
 	if ((dev = nammap(old, fullold)) == SYSERR ||
 	    (dev2 = nammap(new, fullnew)) == SYSERR || dev != dev2)
-		return (SYSERR);
+		return SYSERR;
 	devptr = &devtab[dev];
 	return ((*devptr->dvcntl) (devptr, FLRENAME, fullold, fullnew));
 }

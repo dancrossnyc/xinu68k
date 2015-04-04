@@ -14,7 +14,7 @@ sleep10(int n)
 	char ps;
 
 	if (n < 0 || clkruns == 0)
-		return (SYSERR);
+		return SYSERR;
 	disable(ps);
 	if (n == 0) {		// sleep10(0) -> end time slice
 	} else {
@@ -26,5 +26,5 @@ sleep10(int n)
 	resched();
 	restore(ps);
 
-	return (OK);
+	return OK;
 }

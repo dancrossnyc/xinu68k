@@ -28,9 +28,9 @@ sndrarp(void)
 		resp = recvtim(AR_TIME);
 		restore(ps);
 		if (resp != TIMEOUT)
-			return (OK);
+			return OK;
 	}
 	panic("No response to RARP");
 
-	return (SYSERR);
+	return SYSERR;
 }

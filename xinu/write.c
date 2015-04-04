@@ -12,7 +12,7 @@ write(int descrp, const void *buff, int count)
 	struct devsw *devptr;
 
 	if (isbaddev(descrp))
-		return (SYSERR);
+		return SYSERR;
 	devptr = &devtab[descrp];
 
 	return (*devptr->dvwrite)(devptr, buff, count);

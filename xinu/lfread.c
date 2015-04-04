@@ -15,16 +15,16 @@ lfread(struct devsw *devptr, char *buff, int count)
 	int ichar;
 
 	if (count < 0)
-		return (SYSERR);
+		return SYSERR;
 	for (done = 0; done < count; done++)
 		if ((ichar = lfgetc(devptr)) == SYSERR)
-			return (SYSERR);
+			return SYSERR;
 		else if (ichar == EOF) {	// EOF before finished
 			if (done == 0)
-				return (EOF);
+				return EOF;
 			else
-				return (done);
+				return done;
 		} else
 			*buff++ = (char) ichar;
-	return (done);
+	return done;
 }

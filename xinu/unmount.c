@@ -16,7 +16,7 @@ unmount(char *prefix)
 	if (prefix == NULL)
 		prefix = NULLSTR;
 	else if (strlen(prefix) >= NAMPLEN)
-		return (SYSERR);
+		return SYSERR;
 	disable(ps);
 	for (i = 0; i < Nam.nnames; i++) {
 		nptr = &Nam.nametab[i];
@@ -24,10 +24,10 @@ unmount(char *prefix)
 			for (Nam.nnames--; i < Nam.nnames; i++)
 				Nam.nametab[i] = Nam.nametab[i + 1];
 			restore(ps);
-			return (OK);
+			return OK;
 		}
 	}
 	restore(ps);
 
-	return (SYSERR);
+	return SYSERR;
 }

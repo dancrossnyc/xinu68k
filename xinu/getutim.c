@@ -34,5 +34,5 @@ getutim(long *timvar)
 	}
 	*timvar = clktime;
 	signal(clmutex);
-	return (ret);
+	return ret;
 }

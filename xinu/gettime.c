@@ -12,7 +12,7 @@ gettime(long *timvar)
 	long now;
 
 	if (getutim(&now) == SYSERR)
-		return (SYSERR);
+		return SYSERR;
 	*timvar = ut2ltim(now);	// adjust for timezone
-	return (OK);
+	return OK;
 }

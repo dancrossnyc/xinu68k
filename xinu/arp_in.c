@@ -31,7 +31,7 @@ arp_in(struct epacket *packet, int device)
 	case AR_REQ:		// request - answer if for me
 		if (memcmp(Net.myaddr, apacptr->ar_tpa, IPLEN) != 0) {
 			freebuf(packet);
-			return (OK);
+			return OK;
 		}
 		apacptr->ar_op = hs2net(AR_RPLY);
 		memmove(apacptr->ar_tpa, apacptr->ar_spa, IPLEN);
@@ -40,7 +40,7 @@ arp_in(struct epacket *packet, int device)
 		memmove(apacptr->ar_sha, etptr->etpaddr, EPADLEN);
 		memmove(apacptr->ar_spa, Net.myaddr, IPLEN);
 		write(device, packet, EMINPAK);
-		return (OK);
+		return OK;
 
 	case AR_RPLY:		// reply - awaken requestor if any
 		disable(ps);
@@ -52,11 +52,11 @@ arp_in(struct epacket *packet, int device)
 		}
 		freebuf(packet);
 		restore(ps);
-		return (OK);
+		return OK;
 
 	default:
 		Net.ndrop++;
 		freebuf(packet);
-		return (SYSERR);
+		return SYSERR;
 	}
 }

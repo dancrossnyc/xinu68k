@@ -15,7 +15,7 @@ sendf(int pid, int msg)
 	disable(ps);
 	if (isbadpid(pid) || ((pptr = &proctab[pid])->pstate == PRFREE)) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	pptr->pmsg = msg;
 	pptr->phasmsg = TRUE;
@@ -27,5 +27,5 @@ sendf(int pid, int msg)
 	}
 	restore(ps);
 
-	return (OK);
+	return OK;
 }

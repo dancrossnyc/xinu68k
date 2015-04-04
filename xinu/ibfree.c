@@ -33,5 +33,5 @@ ibfree(int diskdev, IBADDR inum)
 	write(diskdev, buff, dba);
 	write(diskdev, dskbcpy(dirptr), DIRBLK);
 	signal(sem);
-	return (OK);
+	return OK;
 }

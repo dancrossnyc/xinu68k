@@ -22,5 +22,5 @@ ethrstrt(struct etblk *etptr, char *buf, int len)
 	dqptr = etptr->eioaddr;
 	dqptr->d_rcmd = (char *)dcmptr;
 	dqptr->d_rcmdh = NULL;
-	return (OK);
+	return OK;
 }

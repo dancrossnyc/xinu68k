@@ -22,5 +22,5 @@ dsseek(struct devsw *devptr, DBADDR block)
 	// enqueued with normal policy like other read/write requests
 	dskenq(drptr, (struct dsblk *)devptr->dvioblk);
 	restore(ps);
-	return (OK);
+	return OK;
 }

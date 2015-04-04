@@ -40,5 +40,5 @@ ethread(struct devsw *devptr, char *buff, int len)
 	}
 	signal(etptr->etrsem);
 	restore(ps);
-	return (len);
+	return len;
 }

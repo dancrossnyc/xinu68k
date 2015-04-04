@@ -21,7 +21,7 @@ resched(void)
 
 	if (((optr = &proctab[currpid])->pstate == PRCURR) &&
 	    (lastkey(rdytail) < optr->pprio))
-		return (OK);
+		return OK;
 
 	// force context switch
 
@@ -53,5 +53,5 @@ resched(void)
 	ctxsw(optr->pregs, nptr->pregs);
 
 	// The OLD process returns here when resumed.
-	return (OK);
+	return OK;
 }

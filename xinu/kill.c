@@ -19,7 +19,7 @@ kill(int pid)
 	disable(ps);
 	if (isbadpid(pid) || (pptr = &proctab[pid])->pstate == PRFREE) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	if (--numproc == 0)
 		xdone();

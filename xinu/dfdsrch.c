@@ -25,7 +25,7 @@ dfdsrch(struct dsblk *dsptr, char *filenam, int mbits)
 			if ((mbits & FLNEW) != 0)
 				return ((struct fdes *) SYSERR);
 			else
-				return (&dirptr->d_files[i]);
+				return &dirptr->d_files[i];
 		}
 	}
 	wait(dsptr->ddirsem);
@@ -41,5 +41,5 @@ dfdsrch(struct dsblk *dsptr, char *filenam, int mbits)
 	write(dsptr->dnum, dskbcpy(dirptr), DIRBLK);
 	signal(dsptr->ddirsem);
 
-	return (fdptr);
+	return fdptr;
 }

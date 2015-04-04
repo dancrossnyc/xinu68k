@@ -15,12 +15,12 @@ freebuf(void *buf)
 
 #ifdef	MEMMARK
 	if (unmarked(bpmark))
-		return (SYSERR);
+		return SYSERR;
 #endif
 	bp = (int *)buf;
 	poolid = *(--bp);
 	if (poolid < 0 || poolid >= nbpools)
-		return (SYSERR);
+		return SYSERR;
 	disable(ps);
 	*bp = (int)bptab[poolid].bpnext;
 	bptab[poolid].bpnext = (void *)buf;

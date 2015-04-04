@@ -16,7 +16,7 @@ recvtim(int maxwait)
 	char ps;
 
 	if (maxwait < 0 || clkruns == 0)
-		return (SYSERR);
+		return SYSERR;
 	disable(ps);
 	pptr = &proctab[currpid];
 	if (!pptr->phasmsg) {	// if no message, wait

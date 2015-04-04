@@ -24,5 +24,5 @@ lfsdfree(int diskdev, DBADDR dba)
 	write(diskdev, buf, dba);
 	write(diskdev, dskbcpy(dirptr), DIRBLK);
 	signal(dirsem);
-	return (OK);
+	return OK;
 }

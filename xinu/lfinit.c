@@ -20,5 +20,5 @@ lfinit(struct devsw *devptr)
 	devptr->dvioblk = (char *)(flptr = &fltab[devptr->dvminor]);
 	flptr->fl_pid = 0;
 	flptr->fl_id = devptr->dvnum;
-	return (OK);
+	return OK;
 }

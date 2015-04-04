@@ -11,10 +11,10 @@ ioinit(int descrp)
 	int minor;
 
 	if (isbaddev(descrp))
-		return (SYSERR);
+		return SYSERR;
 	minor = devtab[descrp].dvminor;
 	iosetvec(descrp, (void *)minor, (void *)minor);
-	return (OK);
+	return OK;
 }
 
 //------------------------------------------------------------------------
@@ -28,7 +28,7 @@ iosetvec(int descrp, void *incode, void *outcode)
 	struct vector *vptr;
 
 	if (isbaddev(descrp))
-		return (SYSERR);
+		return SYSERR;
 	devptr = &devtab[descrp];
 	map = &intmap[devptr->dvnum];	// fill in interrupt dispatch
 	map->iin = devptr->dviint;	//   map with addresses of high-

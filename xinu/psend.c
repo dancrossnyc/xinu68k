@@ -21,7 +21,7 @@ psend(int portid, uword msg)
 	    unmarked(ptmark) ||
 	    (ptptr = &ports[portid])->ptstate != PTALLOC) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 
 	// wait for space and verify port is still allocated
@@ -30,7 +30,7 @@ psend(int portid, uword msg)
 	if (wait(ptptr->ptssem) == SYSERR
 	    || ptptr->ptstate != PTALLOC || ptptr->ptseq != seq) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	if (ptfree == (struct ptnode *) NULL)
 		panic("psend: out of nodes");
@@ -47,5 +47,5 @@ psend(int portid, uword msg)
 	signal(ptptr->ptrsem);
 	restore(ps);
 
-	return (OK);
+	return OK;
 }

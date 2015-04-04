@@ -12,7 +12,7 @@ init(int descrp)
 	struct devsw *devptr;
 
 	if (isbaddev(descrp))
-		return (SYSERR);
+		return SYSERR;
 	devptr = &devtab[descrp];
 	(*devptr->dvinit)(devptr);
 	return OK;

@@ -29,5 +29,5 @@ ibput(int diskdev, IBADDR inum, struct iblk *loc)
 		*to++ = *from++;
 	write(diskdev, buff, dba);
 	signal(ibsem);
-	return (OK);
+	return OK;
 }

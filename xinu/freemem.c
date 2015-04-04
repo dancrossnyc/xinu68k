@@ -15,7 +15,7 @@ freemem(void *b, unsigned size)
 
 	if (size == 0 || (unsigned) block > (unsigned) maxaddr
 	    || ((unsigned) block) < ((unsigned) &end))
-		return (SYSERR);
+		return SYSERR;
 	size = (unsigned) roundew(size);
 	disable(ps);
 	for (p = memlist.mnext, q = &memlist;
@@ -24,7 +24,7 @@ freemem(void *b, unsigned size)
 	    && (q != &memlist || (char *) p != NULL)
 	    && (size + (unsigned) block) > (unsigned) p) {
 		restore(ps);
-		return (SYSERR);
+		return SYSERR;
 	}
 	if (q != &memlist && top == (unsigned) block)
 		q->mlen += size;
@@ -39,5 +39,5 @@ freemem(void *b, unsigned size)
 		q->mnext = p->mnext;
 	}
 	restore(ps);
-	return (OK);
+	return OK;
 }
