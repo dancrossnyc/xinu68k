@@ -35,7 +35,7 @@ preceive(int portid)
 	nxtnode = ptptr->pthead;
 	msg = nxtnode->ptmsg;
 	if (ptptr->pthead == ptptr->pttail)	// delete last item
-		ptptr->pthead = ptptr->pttail = (struct ptnode *) NULL;
+		ptptr->pthead = ptptr->pttail = (struct ptnode *)NULL;
 	else
 		ptptr->pthead = nxtnode->ptnext;
 	nxtnode->ptnext = ptfree;		// return to free list

@@ -12,7 +12,7 @@ rfio(struct devsw *devptr, int rop, char *buff, int len)
 	struct rfblk *rfptr;
 	int retcode;
 
-	rfptr = (struct rfblk *) devptr->dvioblk;
+	rfptr = (struct rfblk *)devptr->dvioblk;
 	wait(rfptr->rf_mutex);
 	if (len < 0 || rfptr->rf_state == RFREE) {
 		signal(rfptr->rf_mutex);

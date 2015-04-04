@@ -29,8 +29,8 @@ mkpool(int bufsiz, int numbufs)
 	bptab[poolid].bpsem = screate(numbufs);
 	bufsiz += sizeof(int);
 	for (numbufs--; numbufs > 0; numbufs--, where += bufsiz)
-		*((int *) where) = (int) (where + bufsiz);
-	*((int *) where) = (int) NULL;
+		*((int *)where) = (int) (where + bufsiz);
+	*((int *)where) = (int) NULL;
 	restore(ps);
 
 	return poolid;

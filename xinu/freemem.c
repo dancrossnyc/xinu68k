@@ -19,9 +19,9 @@ freemem(void *b, unsigned size)
 	size = (unsigned) roundew(size);
 	disable(ps);
 	for (p = memlist.mnext, q = &memlist;
-	     (char *) p != NULL && p < block; q = p, p = p->mnext);
+	     (char *)p != NULL && p < block; q = p, p = p->mnext);
 	if ((top = q->mlen + (unsigned) q) > (unsigned) block
-	    && (q != &memlist || (char *) p != NULL)
+	    && (q != &memlist || (char *)p != NULL)
 	    && (size + (unsigned) block) > (unsigned) p) {
 		restore(ps);
 		return SYSERR;

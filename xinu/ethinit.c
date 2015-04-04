@@ -16,9 +16,9 @@ ethinit(struct devsw *devptr)
 	struct dqsetup setup;
 
 	etptr = &eth[devptr->dvminor];
-	devptr->dvioblk = (char *) etptr;
+	devptr->dvioblk = (char *)etptr;
 	iosetvec(devptr->dvnum, etptr, etptr);
-	etptr->eioaddr = dqptr = (struct dqregs *) devptr->dvcsr;
+	etptr->eioaddr = dqptr = (struct dqregs *)devptr->dvcsr;
 	etptr->etdev = devptr;
 	etptr->etrsem = screate(1);
 	etptr->etwsem = screate(1);
@@ -39,7 +39,7 @@ ethinit(struct devsw *devptr)
 
 	// extract physical ethernet address
 
-	for (iptr = (short *) dqptr, i = 0; i < EPADLEN; i++)
+	for (iptr = (short *)dqptr, i = 0; i < EPADLEN; i++)
 		etptr->etpaddr[i] = LOWBYTE & *iptr++;
 
 	ethstrt(etptr, &setup);

@@ -17,7 +17,7 @@ ibnew(int diskdev, int writedir)
 	IBADDR inum;
 	int sem;
 
-	sem = ((struct dsblk *) devtab[diskdev].dvioblk)->dflsem;
+	sem = ((struct dsblk *)devtab[diskdev].dvioblk)->dflsem;
 	dirptr = dsdirec(diskdev);
 	wait(sem);
 	inum = dirptr->d_filst;

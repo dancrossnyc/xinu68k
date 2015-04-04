@@ -18,12 +18,12 @@ ip_in(struct epacket *packet, int icmpp, int lim)
 	int to;
 	char ps;
 
-	ipptr = (struct ip *) packet->ep_data;
+	ipptr = (struct ip *)packet->ep_data;
 	switch (ipptr->i_proto) {
 	case IPRO_ICMP:	// ICMP: pass to icmp input routine
 		return icmp_in(packet, icmpp, lim);
 	case IPRO_UDP:		// UDP: demultiplex based on UDP "port"
-		udpptr = (struct udp *) ipptr->i_data;
+		udpptr = (struct udp *)ipptr->i_data;
 		dport = net2hs(udpptr->u_dport);
 		for (i = 0; i < NETQS; i++) {
 			nqptr = &Net.netqs[i];

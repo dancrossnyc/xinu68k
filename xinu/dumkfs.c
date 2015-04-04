@@ -49,7 +49,7 @@ dumkdl(int diskdev, DBADDR firstfb, DBADDR lastfb, Bool verbose)
 	if (verbose)
 		kprintf("Linking %u free blocks from %u through %u...\n",
 			lastfb - firstfb + (DBADDR) 1, firstfb, lastfb);
-	buff = (struct freeblk *) getbuf(dskdbp);
+	buff = (struct freeblk *)getbuf(dskdbp);
 	bptr = (char *)buff;
 	for (i = 0; i < DBUFSIZ; i++)
 		*bptr++ = '\000';

@@ -35,9 +35,9 @@ resched(void)
 	nptr = &proctab[(currpid = getlast(rdytail))];
 	nptr->pstate = PRCURR;	// mark it currently running
 #ifdef	STKCHK
-	if (*((int *) nptr->pbase) != MAGIC) {
+	if (*((int *)nptr->pbase) != MAGIC) {
 		kprintf("Bad magic pid=%d, value=%o, at %o\n",
-			currpid, *((int *) nptr->pbase), nptr->pbase);
+			currpid, *((int *)nptr->pbase), nptr->pbase);
 		panic("stack corrupted");
 	}
 	if (((unsigned) nptr->pregs[SP]) < ((unsigned) nptr->plimit)) {

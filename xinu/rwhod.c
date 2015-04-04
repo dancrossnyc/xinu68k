@@ -51,10 +51,10 @@ rwhod(void)
 		restore(ps);
 		if (!Rwho.rwsend)
 			continue;
-		packet = (struct epacket *) getbuf(Net.netpool);
+		packet = (struct epacket *)getbuf(Net.netpool);
 		rpacptr = (struct rwhopac *)
 		    ((struct udp *)
-		     (((struct ip *) packet->ep_data)->i_data))->u_data;
+		     (((struct ip *)packet->ep_data)->i_data))->u_data;
 		rpacptr->rw_vers = RWVERSION;
 		rpacptr->rw_type = RWSTATUS;
 		rpacptr->rw_sndtim = hl2net(now);

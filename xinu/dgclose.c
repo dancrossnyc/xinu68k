@@ -15,7 +15,7 @@ dgclose(struct devsw *devptr)
 	struct netq *nqptr;
 	int nq;
 
-	dgptr = (struct dgblk *) devptr->dvioblk;
+	dgptr = (struct dgblk *)devptr->dvioblk;
 	disable(ps);
 	nq = dgptr->dg_netq;
 	nqptr = &Net.netqs[nq];

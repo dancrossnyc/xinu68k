@@ -10,7 +10,7 @@ dginit(struct devsw *devptr)
 {
 	struct dgblk *dgptr;
 
-	devptr->dvioblk = (char *) (dgptr = &dgtab[devptr->dvminor]);
+	devptr->dvioblk = (char *)(dgptr = &dgtab[devptr->dvminor]);
 	dgptr->dg_dnum = devptr->dvnum;
 	dgptr->dg_state = DG_FREE;
 }

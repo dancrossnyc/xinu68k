@@ -20,7 +20,7 @@ rfcntl(struct devsw *devptr, int func, char *addr, char *addr2)
 
 	// Universal file manipulation functions
 	case FLACCESS:
-		return rfmkpac(FS_ACCESS, addr, &junk, (char *) &junk, 0);
+		return rfmkpac(FS_ACCESS, addr, &junk, (char *)&junk, 0);
 	case FLREMOVE:
 		return rfmkpac(FS_UNLINK, addr, &junk, NULLSTR, 0);
 	case FLRENAME:

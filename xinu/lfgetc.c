@@ -17,7 +17,7 @@ lfgetc(struct devsw *devptr)
 	char ps;
 
 	disable(ps);
-	flptr = (struct flblk *) devptr->dvioblk;
+	flptr = (struct flblk *)devptr->dvioblk;
 	if (flptr->fl_pid != currpid || !(flptr->fl_mode & FLREAD)) {
 		restore(ps);
 		return SYSERR;

@@ -18,16 +18,16 @@ dgwrite(struct devsw *devptr, struct xgram *buff, int len)
 
 	if (len < 0 || len > UMAXLEN)
 		return SYSERR;
-	dgptr = (struct dgblk *) devptr->dvioblk;
-	packet = (struct epacket *) getbuf(Net.netpool);
-	ipptr = (struct ip *) packet->ep_data;
-	udpptr = (struct udp *) ipptr->i_data;
+	dgptr = (struct dgblk *)devptr->dvioblk;
+	packet = (struct epacket *)getbuf(Net.netpool);
+	ipptr = (struct ip *)packet->ep_data;
+	udpptr = (struct udp *)ipptr->i_data;
 	dstport = dgptr->dg_fport;
-	dstIP = (char *) dgptr->dg_faddr;
+	dstIP = (char *)dgptr->dg_faddr;
 	if ((dgptr->dg_mode & DG_NMODE) != 0) {
 		if (dstport == 0) {
 			dstport = buff->xg_fport;
-			dstIP = (char *) buff->xg_faddr;
+			dstIP = (char *)buff->xg_faddr;
 		}
 		memmove(udpptr->u_data, buff->xg_data, len);
 	} else {

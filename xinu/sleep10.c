@@ -20,7 +20,7 @@ sleep10(int n)
 	} else {
 		insertd(currpid, clockq, n);
 		slnempty = TRUE;
-		sltop = (int *) &q[q[clockq].qnext].qkey;
+		sltop = (int *)&q[q[clockq].qnext].qkey;
 		proctab[currpid].pstate = PRSLEEP;
 	}
 	resched();

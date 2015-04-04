@@ -68,8 +68,8 @@ sysinit(void)
 	nextqueue = NPROC;	// q[0..NPROC-1] are processes
 
 	memlist.mnext = mptr =	// initialize free memory list
-	    (struct mblock *) roundew(&end);
-	mptr->mnext = (struct mblock *) NULL;
+	    (struct mblock *)roundew(&end);
+	mptr->mnext = (struct mblock *)NULL;
 	mptr->mlen =
 	    (unsigned)truncew((unsigned)maxaddr - NULLSTK - (unsigned) &end);
 
@@ -82,7 +82,7 @@ sysinit(void)
 	strcpy(pptr->pname, "prnull");
 	pptr->plimit = ((char *)maxaddr) - NULLSTK - sizeof(int);
 	pptr->pbase = (char *)maxaddr;
-	*((int *) pptr->pbase) = MAGIC;
+	*((int *)pptr->pbase) = MAGIC;
 	pptr->paddr = (char *)(*nulluserpp);
 	pptr->phasmsg = FALSE;
 	pptr->pargs = 0;

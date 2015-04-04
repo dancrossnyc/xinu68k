@@ -15,7 +15,7 @@ dsksync(struct devsw *devptr)
 
 	if ((q = ((struct dsblk *)(devptr->dvioblk))->dreqlst) == DRNULL)
 		return OK;
-	drptr = (struct dreq *) getbuf(dskrbp);
+	drptr = (struct dreq *)getbuf(dskrbp);
 	drptr->drdba = 0;
 	drptr->drpid = currpid;
 	drptr->drbuff = NULL;

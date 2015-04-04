@@ -20,11 +20,11 @@ ibput(int diskdev, IBADDR inum, struct iblk *loc)
 
 	dba = ibtodb(inum);
 	buff = getbuf(dskdbp);
-	ibsem = ((struct dsblk *) devtab[diskdev].dvioblk)->dibsem;
+	ibsem = ((struct dsblk *)devtab[diskdev].dvioblk)->dibsem;
 	wait(ibsem);
 	read(diskdev, buff, dba);
 	to = buff + ibdisp(inum);
-	from = (char *) loc;
+	from = (char *)loc;
 	for (i = 0; i < sizeof(struct iblk); i++)
 		*to++ = *from++;
 	write(diskdev, buff, dba);

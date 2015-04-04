@@ -21,7 +21,7 @@ dgparse(struct dgblk *dgptr, char *fspec)
 
 	// parse forms like 192.5.48.30:3 into (ip-address,udp-port)
 
-	ipptr = (char *) dgptr->dg_faddr;
+	ipptr = (char *)dgptr->dg_faddr;
 	for (i = 0; i < 4; i++) {
 		byte = 0;
 		while (isdigit((ch = *fspec++)))

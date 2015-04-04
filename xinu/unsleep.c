@@ -30,7 +30,7 @@ unsleep(int pid)
 		q[next].qkey += remain;
 	dequeue(pid);
 	if ((next = q[clockq].qnext) < NPROC)
-		sltop = (int *) &q[next].qkey;
+		sltop = (int *)&q[next].qkey;
 	else
 		slnempty = FALSE;
 	restore(ps);

@@ -20,9 +20,9 @@ lfsnewd(int diskdev, struct flblk *flptr)
 	DBADDR dba;
 	int i;
 
-	dirptr = (struct dir *) dsdirec(diskdev);
-	fbptr = (struct freeblk *) (buf = flptr->fl_buff);
-	sem = ((struct dsblk *) devtab[diskdev].dvioblk)->dflsem;
+	dirptr = (struct dir *)dsdirec(diskdev);
+	fbptr = (struct freeblk *)(buf = flptr->fl_buff);
+	sem = ((struct dsblk *)devtab[diskdev].dvioblk)->dflsem;
 	wait(sem);
 	dba = dirptr->d_fblst;
 	read(diskdev, fbptr, dba);

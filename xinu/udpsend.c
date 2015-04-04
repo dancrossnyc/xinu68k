@@ -15,9 +15,9 @@ udpsend(IPaddr faddr, int fport, int lport, struct epacket *packet,
 
 	// Fill in UDP header; pass to ipsend to fill in IP header
 
-	ipptr = (struct ip *) packet->ep_data;
+	ipptr = (struct ip *)packet->ep_data;
 	ipptr->i_proto = IPRO_UDP;
-	udpptr = (struct udp *) ipptr->i_data;
+	udpptr = (struct udp *)ipptr->i_data;
 	udpptr->u_sport = hs2net(lport);
 	udpptr->u_dport = hs2net(fport);
 	udpptr->u_udplen = hs2net(UHLEN + datalen);

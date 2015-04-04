@@ -12,8 +12,8 @@ icmp_in(struct epacket *packet, int icmpp, int lim)
 	struct icmp *icmpptr;
 	int len;
 
-	ipptr = (struct ip *) packet->ep_data;
-	icmpptr = (struct icmp *) ipptr->i_data;
+	ipptr = (struct ip *)packet->ep_data;
+	icmpptr = (struct icmp *)ipptr->i_data;
 	if (!Net.mavalid || icmpptr->ic_typ != ICRQECH) {
 		freebuf(packet);
 	} else {

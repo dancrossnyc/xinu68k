@@ -17,8 +17,8 @@ arp_in(struct epacket *packet, int device)
 	struct arpent *atabptr;
 	struct etblk *etptr;
 
-	etptr = (struct etblk *) devtab[device].dvioblk;
-	apacptr = (struct arppak *) packet->ep_data;
+	etptr = (struct etblk *)devtab[device].dvioblk;
+	apacptr = (struct arppak *)packet->ep_data;
 	atabptr = &Arp.arptab[arpfind(apacptr->ar_spa)];
 	if (atabptr->arp_state != AR_RSLVD) {
 		memmove(atabptr->arp_Ead, apacptr->ar_sha, EPADLEN);

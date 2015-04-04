@@ -24,7 +24,7 @@ pxdump(int all)
 			kprintf(",prio=%d,sem=%d,stk:base=%o,limit=%o,",
 				pptr->pprio, pptr->psem, pptr->pbase,
 				pptr->plimit);
-			kprintf("MAGIC=%o\n", *((int *) pptr->pbase));
+			kprintf("MAGIC=%o\n", *((int *)pptr->pbase));
 			for (j = 0; j < PNREGS; j++)
 				kprintf("(R%c)%o ", "01234567S"[j],
 					pptr->pregs[j]);

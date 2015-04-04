@@ -22,11 +22,11 @@ ibfree(int diskdev, IBADDR inum)
 	buff = getbuf(dskdbp);
 	dba = ibtodb(inum);
 	read(diskdev, buff, dba);
-	ibptr = (struct iblk *) (buff + ibdisp(inum));
+	ibptr = (struct iblk *)(buff + ibdisp(inum));
 	for (i = 0; i < IBLEN; i++)
 		if ((dba = ibptr->ib_dba[i]) != DBNULL)
 			lfsdfree(diskdev, dba);
-	sem = ((struct dsblk *) devtab[diskdev].dvioblk)->dflsem;
+	sem = ((struct dsblk *)devtab[diskdev].dvioblk)->dflsem;
 	wait(sem);
 	ibptr->ib_next = dirptr->d_filst;
 	dirptr->d_filst = inum;

@@ -22,7 +22,7 @@ recvtim(int maxwait)
 	if (!pptr->phasmsg) {	// if no message, wait
 		insertd(currpid, clockq, maxwait);
 		slnempty = TRUE;
-		sltop = (int *) &q[q[clockq].qnext].qkey;
+		sltop = (int *)&q[q[clockq].qnext].qkey;
 		pptr->pstate = PRTRECV;
 		resched();
 	}

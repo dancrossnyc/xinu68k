@@ -25,6 +25,6 @@ ethwstrt(struct etblk *etptr, char *buf, int len, int setup)
 	dcmptr->dc_len = dqlen(len);
 	dcmptr->dc_st1 = dcmptr->dc_st2 = DC_INIT;
 	dcmptr->dc_flag = DC_NUSED;
-	dqptr->d_wcmd = (char *) dcmptr;
+	dqptr->d_wcmd = (char *)dcmptr;
 	dqptr->d_wcmdh = NULL;
 }

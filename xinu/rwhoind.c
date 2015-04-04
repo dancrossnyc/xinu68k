@@ -24,7 +24,7 @@ rwhoind(void)
 	while (TRUE) {
 		if ((len = read(dev, Rwho.rbuf, RWMAXP)) == SYSERR)
 			continue;
-		rpacptr = (struct rwhopac *) Rwho.rbuf;
+		rpacptr = (struct rwhopac *)Rwho.rbuf;
 		for (i = 0; i < Rwho.rwnent; i++) {
 			rwptr = &Rwho.rwcache[i];
 			if (strncmp(rpacptr->rw_host, rwptr->rwmach,

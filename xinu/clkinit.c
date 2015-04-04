@@ -33,7 +33,7 @@ clkinit(void)
 {
 	uword *vector;
 
-	vector = (uword *) CVECTOR;	// set up interrupt vector
+	vector = (uword *)CVECTOR;	// set up interrupt vector
 	*vector++ = (uword)clkint;
 	*vector = DISABLE;
 	setclkr();

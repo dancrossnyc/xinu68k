@@ -19,7 +19,7 @@ dgread(struct devsw *devptr, struct xgram *buff, int len)
 	char ps;
 
 	disable(ps);
-	dgptr = (struct dgblk *) devptr->dvioblk;
+	dgptr = (struct dgblk *)devptr->dvioblk;
 	if (dgptr->dg_mode & DG_TMODE) {
 		nqptr = &Net.netqs[dgptr->dg_netq];
 		if (!isbadpid(nqptr->pid)) {
@@ -35,12 +35,12 @@ dgread(struct devsw *devptr, struct xgram *buff, int len)
 			}
 		}
 	}
-	packet = (struct epacket *) preceive(dgptr->dg_xport);
+	packet = (struct epacket *)preceive(dgptr->dg_xport);
 
 	// copy data into user's buffer & set length
 
-	ipptr = (struct ip *) packet->ep_data;
-	udpptr = (struct udp *) ipptr->i_data;
+	ipptr = (struct ip *)packet->ep_data;
+	udpptr = (struct udp *)ipptr->i_data;
 	datalen = net2hs(udpptr->u_udplen) - UHLEN;
 	if (dgptr->dg_mode & DG_NMODE) {
 		if ((datalen + XGHLEN) > len) {

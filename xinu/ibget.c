@@ -17,7 +17,7 @@ ibget(int diskdev, IBADDR inum, struct iblk *loc)
 	buff = getbuf(dskdbp);
 	read(diskdev, buff, ibtodb(inum));
 	from = buff + ibdisp(inum);
-	to = (char *) loc;
+	to = (char *)loc;
 	for (i = 0; i < sizeof(struct iblk); i++)
 		*to++ = *from++;
 	freebuf(buff);

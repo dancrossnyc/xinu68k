@@ -15,7 +15,7 @@ ip2name(IPaddr ip, char *nam)
 	char *p;
 	struct dn_mesg *dnptr;
 
-	dnptr = (struct dn_mesg *) (buf = (char *) getmem(DN_MLEN));
+	dnptr = (struct dn_mesg *)(buf = (char *)getmem(DN_MLEN));
 	*nam = NULLCH;
 	dnptr->dn_id = 0;
 	dnptr->dn_opparm = hs2net(DN_RD);
@@ -35,8 +35,8 @@ ip2name(IPaddr ip, char *nam)
 
 	// Add query type and query class fields to name
 
-	((struct dn_qsuf *) p)->dn_type = hs2net(DN_QTPR);
-	((struct dn_qsuf *) p)->dn_clas = hs2net(DN_QCIN);
+	((struct dn_qsuf *)p)->dn_type = hs2net(DN_QTPR);
+	((struct dn_qsuf *)p)->dn_clas = hs2net(DN_QCIN);
 	p += sizeof(struct dn_qsuf);
 
 	// Broadcast query
@@ -68,7 +68,7 @@ ip2name(IPaddr ip, char *nam)
 
 	while (*p != NULLCH) {
 		if (*p & DN_CMPRS)
-			p = buf + (net2hs(*(int *) p) & DN_CPTR);
+			p = buf + (net2hs(*(int *)p) & DN_CPTR);
 		else {
 			strncat(nam, p + 1, *p);
 			strcat(nam, ".");

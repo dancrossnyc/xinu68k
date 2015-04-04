@@ -21,7 +21,7 @@ mdump(void)
 	// calculate current size of free memory and stack memory
 
 	for (free = 0, mptr = memlist.mnext;
-	     mptr != (struct mblock *) NULL; mptr = mptr->mnext)
+	     mptr != (struct mblock *)NULL; mptr = mptr->mnext)
 		free += mptr->mlen;
 	for (stkmem = 0, i = 0; i < NPROC; i++) {
 		if (proctab[i].pstate != PRFREE)
@@ -36,7 +36,7 @@ mdump(void)
 	kprintf(" presently: %5u avail, %5u stack, %5u heap\n",
 		free, stkmem, avail - stkmem - free);
 	kprintf(" free list:\n");
-	for (mptr = memlist.mnext; mptr != (struct mblock *) NULL;
+	for (mptr = memlist.mnext; mptr != (struct mblock *)NULL;
 	     mptr = mptr->mnext)
 		kprintf("   block at %6o, length %5u (0%o)\n",
 			mptr, mptr->mlen, mptr->mlen);

@@ -32,13 +32,13 @@ psend(int portid, uword msg)
 		restore(ps);
 		return SYSERR;
 	}
-	if (ptfree == (struct ptnode *) NULL)
+	if (ptfree == (struct ptnode *)NULL)
 		panic("psend: out of nodes");
 	freenode = ptfree;
 	ptfree = freenode->ptnext;
-	freenode->ptnext = (struct ptnode *) NULL;
+	freenode->ptnext = (struct ptnode *)NULL;
 	freenode->ptmsg = msg;
-	if (ptptr->pttail == (struct ptnode *) NULL)	// empty queue
+	if (ptptr->pttail == (struct ptnode *)NULL)	// empty queue
 		ptptr->pttail = ptptr->pthead = freenode;
 	else {
 		(ptptr->pttail)->ptnext = freenode;

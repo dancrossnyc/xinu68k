@@ -15,7 +15,7 @@ rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 	int reqlen, rplylen;
 
 	wait(Rf.rmutex);
-	fptr = (struct fphdr *) &packet;
+	fptr = (struct fphdr *)&packet;
 	fptr->f_op = hs2net(rop);
 	fptr->f_pos = hl2net(*rpos);
 	fptr->f_count = hs2net(len);

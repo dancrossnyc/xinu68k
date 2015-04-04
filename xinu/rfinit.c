@@ -13,7 +13,7 @@ rfinit(struct devsw *devptr)
 {
 	struct rfblk *rfptr;
 
-	devptr->dvioblk = (char *) (rfptr = &Rf.rftab[devptr->dvminor]);
+	devptr->dvioblk = (char *)(rfptr = &Rf.rftab[devptr->dvminor]);
 	rfptr->rf_dnum = devptr->dvnum;
 	rfptr->rf_name[0] = NULLCH;
 	rfptr->rf_state = RFREE;
