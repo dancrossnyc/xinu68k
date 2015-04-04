@@ -1,13 +1,10 @@
-// ckmode.c - ckmode
-
 #include <conf.h>
 #include <kernel.h>
 #include <file.h>
 
-/*------------------------------------------------------------------------
- *  ckmode  --  parse open's mode argument and generate actual mode bits
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ckmode  --  parse open's mode argument and generate actual mode bits
+//------------------------------------------------------------------------
 int
 ckmode(char *mode)
 {

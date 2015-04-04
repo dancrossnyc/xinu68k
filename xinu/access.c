@@ -1,5 +1,3 @@
-// access.c - access
-
 #include <kernel.h>
 #include <conf.h>
 #include <file.h>

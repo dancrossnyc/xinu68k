@@ -1,5 +1,3 @@
-// chprio.c - chprio
-
 #include <conf.h>
 #include <kernel.h>
 #include <proc.h>
@@ -34,5 +32,6 @@ chprio(int pid, int newprio)
 		break;
 	}
 	restore(ps);
-	return (oldprio);
+
+	return oldprio;
 }

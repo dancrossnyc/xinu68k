@@ -1,5 +1,3 @@
-// arpinit.c - arpinit
-
 #include <conf.h>
 #include <kernel.h>
 #include <proc.h>

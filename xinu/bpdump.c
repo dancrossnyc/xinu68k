@@ -1,5 +1,3 @@
-// bpdump.c - bpdump
-
 #include <conf.h>
 #include <kernel.h>
 #include <mark.h>

@@ -1,5 +1,3 @@
-// arpfind.c - arpfind
-
 #include <conf.h>
 #include <kernel.h>
 #include <proc.h>

@@ -1,5 +1,3 @@
-// arp_in.c - arp_in
-
 #include <conf.h>
 #include <kernel.h>
 #include <proc.h>
