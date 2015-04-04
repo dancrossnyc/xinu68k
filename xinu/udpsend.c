@@ -22,8 +22,8 @@ udpsend(IPaddr faddr, int fport, int lport, struct epacket *packet,
 	udpptr->u_dport = hs2net(fport);
 	udpptr->u_udplen = hs2net(UHLEN + datalen);
 	if (isodd(datalen))
-		udpptr->u_data[datalen] = (char) 0;
+		udpptr->u_data[datalen] = (char)0;
 	udpptr->u_ucksum = 0;
 
-	return (ipsend(faddr, packet, UHLEN + datalen));
+	return ipsend(faddr, packet, UHLEN + datalen);
 }

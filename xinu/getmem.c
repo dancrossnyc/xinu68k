@@ -15,7 +15,7 @@ getmem(unsigned nbytes)
 	disable(ps);
 	if (nbytes == 0 || memlist.mnext == NULL) {
 		restore(ps);
-		return ((int *) SYSERR);
+		return (int *)SYSERR;
 	}
 	nbytes = (unsigned) roundew(nbytes);
 	for (q = &memlist, p = memlist.mnext; p != NULL;
@@ -23,16 +23,16 @@ getmem(unsigned nbytes)
 		if (p->mlen == nbytes) {
 			q->mnext = p->mnext;
 			restore(ps);
-			return ((int *) p);
+			return (int *)p;
 		} else if (p->mlen > nbytes) {
-			leftover =
-			    (struct mblock *) ((unsigned) p + nbytes);
+			leftover = (struct mblock *)((unsigned)p + nbytes);
 			q->mnext = leftover;
 			leftover->mnext = p->mnext;
 			leftover->mlen = p->mlen - nbytes;
 			restore(ps);
-			return ((int *) p);
+			return (int *)p;
 		}
 	restore(ps);
-	return ((int *) SYSERR);
+
+	return (int *)SYSERR;
 }

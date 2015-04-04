@@ -17,9 +17,9 @@ getstk(unsigned int nbytes)
 	disable(ps);
 	if (nbytes == 0) {
 		restore(ps);
-		return ((int *) SYSERR);
+		return (int *)SYSERR;
 	}
-	nbytes = (unsigned) roundew(nbytes);
+	nbytes = (unsigned)roundew(nbytes);
 	fits = NULL;
 	q = &memlist;
 	for (p = q->mnext; p != NULL; q = p, p = p->mnext)
@@ -29,14 +29,15 @@ getstk(unsigned int nbytes)
 		}
 	if (fits == NULL) {
 		restore(ps);
-		return ((int *) SYSERR);
+		return (int *)SYSERR;
 	}
 	if (nbytes == (len = fits->mlen)) {
 		fitsq->mnext = fits->mnext;
 	} else {
 		fits->mlen -= nbytes;
 	}
-	fits = (struct mblock *)(((uword) fits) + len - sizeof(int));
+	fits = (struct mblock *)((uword)fits + len - sizeof(int));
 	restore(ps);
-	return ((int *) fits);
+
+	return (int *)fits;
 }

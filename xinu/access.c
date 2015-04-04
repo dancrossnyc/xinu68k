@@ -16,5 +16,6 @@ access(char *name, int mode)
 	if ((dev = nammap(name, fullnam)) == SYSERR)
 		return SYSERR;
 	devptr = &devtab[dev];
+
 	return (*devptr->dvcntl)(devptr, FLACCESS, fullnam, mode);
 }

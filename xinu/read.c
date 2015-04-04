@@ -14,5 +14,6 @@ read(int descrp, void *buff, int count)
 	if (isbaddev(descrp))
 		return SYSERR;
 	devptr = &devtab[descrp];
-	return ((*devptr->dvread) (devptr, buff, count));
+
+	return (*devptr->dvread)(devptr, buff, count);
 }

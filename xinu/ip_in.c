@@ -20,10 +20,8 @@ ip_in(struct epacket *packet, int icmpp, int lim)
 
 	ipptr = (struct ip *) packet->ep_data;
 	switch (ipptr->i_proto) {
-
 	case IPRO_ICMP:	// ICMP: pass to icmp input routine
-		return (icmp_in(packet, icmpp, lim));
-
+		return icmp_in(packet, icmpp, lim);
 	case IPRO_UDP:		// UDP: demultiplex based on UDP "port"
 		udpptr = (struct udp *) ipptr->i_data;
 		dport = net2hs(udpptr->u_dport);
@@ -49,11 +47,11 @@ ip_in(struct epacket *packet, int icmpp, int lim)
 			}
 		}
 		break;
-
 	default:
 		break;
 	}
 	Net.ndrop++;
 	freebuf(packet);
+
 	return OK;
 }

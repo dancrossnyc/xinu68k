@@ -14,5 +14,6 @@ control(int descrp, int func, int addr)
 	if (isbaddev(descrp))
 		return SYSERR;
 	devptr = &devtab[descrp];
+
 	return (*devptr->dvcntl)(devptr, func, addr, NULL);
 }

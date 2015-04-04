@@ -46,7 +46,7 @@ ttycntl(struct devsw *devptr, int func)
 		ttyp->iecho = FALSE;
 		break;
 	case TCICHARS:
-		return (scount(ttyp->isem));
+		return scount(ttyp->isem);
 	case TCINT:
 		ttyp->iintr = TRUE;
 		ttyp->iintpid = getpid();

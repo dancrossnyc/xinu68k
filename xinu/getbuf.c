@@ -13,10 +13,8 @@ getbuf(int poolid)
 	char ps;
 	int *buf;
 
-#ifdef	MEMMARK
 	if (unmarked(bpmark))
 		return (void *)SYSERR;
-#endif
 	if (poolid < 0 || poolid >= nbpools)
 		return (void *)SYSERR;
 	wait(bptab[poolid].bpsem);
@@ -25,5 +23,6 @@ getbuf(int poolid)
 	bptab[poolid].bpnext = (char *)(*buf);
 	restore(ps);
 	*buf++ = poolid;
+
 	return (void *)buf;
 }

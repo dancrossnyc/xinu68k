@@ -14,5 +14,6 @@ getc(int descrp)
 	if (isbaddev(descrp))
 		return SYSERR;
 	devptr = &devtab[descrp];
-	return ((*devptr->dvgetc) (devptr));
+
+	return (*devptr->dvgetc)(devptr);
 }

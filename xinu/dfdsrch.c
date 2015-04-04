@@ -18,12 +18,12 @@ dfdsrch(struct dsblk *dsptr, char *filenam, int mbits)
 	int inum;
 
 	if ((len = strlen(filenam)) <= 0 || len >= FDNLEN)
-		return ((struct fdes *) SYSERR);
+		return (struct fdes *)SYSERR;
 	dirptr = dsdirec(dsptr->dnum);
 	for (i = 0; i < dirptr->d_nfiles; i++) {
 		if (strcmp(filenam, dirptr->d_files[i].fdname) == 0) {
 			if ((mbits & FLNEW) != 0)
-				return ((struct fdes *) SYSERR);
+				return (struct fdes *)SYSERR;
 			else
 				return &dirptr->d_files[i];
 		}
@@ -31,7 +31,7 @@ dfdsrch(struct dsblk *dsptr, char *filenam, int mbits)
 	wait(dsptr->ddirsem);
 	if ((mbits & FLOLD) || dirptr->d_nfiles >= NFDES) {
 		signal(dsptr->ddirsem);
-		return ((struct fdes *) SYSERR);
+		return (struct fdes *)SYSERR;
 	}
 	inum = ibnew(dsptr->dnum, IBNWDIR);
 	fdptr = &(dirptr->d_files[dirptr->d_nfiles++]);

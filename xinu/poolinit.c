@@ -17,7 +17,8 @@ poolinit(void)
 	char ps;
 
 	disable(ps);
-	if ((status = mark(bpmark)) == OK) {
+	status = mark(bpmark);
+	if (status == OK) {
 		nbpools = 0;
 	}
 	restore(ps);

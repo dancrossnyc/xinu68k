@@ -14,5 +14,6 @@ close(int descrp)
 	if (isbaddev(descrp))
 		return SYSERR;
 	devptr = &devtab[descrp];
-	return ((*devptr->dvclose) (devptr));
+
+	return (*devptr->dvclose)(devptr);
 }

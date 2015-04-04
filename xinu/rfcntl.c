@@ -27,6 +27,8 @@ rfcntl(struct devsw *devptr, int func, char *addr, char *addr2)
 		len = strlen(addr2) + 1;
 		return rfmkpac(FS_RENAME, addr, &junk, addr2, len);
 	default:
-		return SYSERR;
+		break;
 	}
+
+	return SYSERR;
 }

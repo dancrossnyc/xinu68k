@@ -37,5 +37,6 @@ dgwrite(struct devsw *devptr, struct xgram *buff, int len)
 		}
 		memmove(udpptr->u_data, buff, len);
 	}
-	return (udpsend(dstIP, dstport, dgptr->dg_lport, packet, len));
+
+	return udpsend(dstIP, dstport, dgptr->dg_lport, packet, len);
 }

@@ -9,5 +9,5 @@
 int
 rfread(struct devsw *devptr, char *buff, int len)
 {
-	return (rfio(devptr, FS_READ, buff, min(len, RDATLEN)));
+	return rfio(devptr, FS_READ, buff, min(len, RDATLEN));
 }

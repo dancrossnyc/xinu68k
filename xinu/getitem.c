@@ -4,34 +4,38 @@
 
 /*------------------------------------------------------------------------
  * getfirst  --	 remove and return the first process on a list
+ *
+ *   head: q index of head of list
  *------------------------------------------------------------------------
  */
 int
-getfirst(int head		// q index of head of list
-    )
+getfirst(int head)
 {
 	int proc;		// first process on the list
 
-	if ((proc = q[head].qnext) < NPROC)
-		return (dequeue(proc));
-	else
+	proc = q[head].qnext;
+	if (proc >= NPROC)
 		return EMPTY;
+
+	return dequeue(proc);
 }
 
 
 
 /*------------------------------------------------------------------------
  * getlast  --  remove and return the last process from a list
+ *
+ *   tail: q index of tail of list
  *------------------------------------------------------------------------
  */
 int
-getlast(int tail		// q index of tail of list
-    )
+getlast(int tail)
 {
 	int proc;		// last process on the list
 
-	if ((proc = q[tail].qprev) < NPROC)
-		return (dequeue(proc));
-	else
+	proc = q[tail].qprev;
+	if (proc >= NPROC)
 		return EMPTY;
+
+	return dequeue(proc);
 }
