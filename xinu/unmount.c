@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "name.h"
 
-/*------------------------------------------------------------------------
- *  unmount  -  remove an entry from the name prefix mapping table
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  unmount  -  remove an entry from the name prefix mapping table
+//------------------------------------------------------------------------
 SYSCALL
 unmount(char *prefix)
 {

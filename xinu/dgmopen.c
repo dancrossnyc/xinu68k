@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  dgmopen  -  open a fresh datagram pseudo device and return descriptor
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dgmopen  -  open a fresh datagram pseudo device and return descriptor
+//------------------------------------------------------------------------
 int
 dgmopen(struct devsw *devptr, char *forport, int locport)
 {

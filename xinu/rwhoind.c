@@ -3,10 +3,9 @@
 #include "network.h"
 #include "rwho.h"
 
-/*------------------------------------------------------------------------
- *  rwhoind  -  rwho daemon to record info from incoming rwho packets
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  rwhoind  -  rwho daemon to record info from incoming rwho packets
+//------------------------------------------------------------------------
 PROCESS
 rwhoind(void)
 {

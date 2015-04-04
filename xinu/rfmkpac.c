@@ -4,10 +4,9 @@
 
 static struct fpacket packet;
 
-/*------------------------------------------------------------------------
- *  rfmkpac  --  make a remote file request packet and send it
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  rfmkpac  --  make a remote file request packet and send it
+//------------------------------------------------------------------------
 int
 rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 {

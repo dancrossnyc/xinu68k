@@ -3,10 +3,9 @@
 #include "proc.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  ethwrite - write a single packet to the ethernet
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ethwrite - write a single packet to the ethernet
+//------------------------------------------------------------------------
 
 int
 ethwrite(struct devsw *devptr, char *buff, int len)

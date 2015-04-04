@@ -4,10 +4,9 @@
 #include "lfile.h"
 #include "dir.h"
 
-/*------------------------------------------------------------------------
- *  dumkfs  --  make a fresh file system on a disk
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dumkfs  --  make a fresh file system on a disk
+//------------------------------------------------------------------------
 int
 dumkfs(int diskdev, int niblks, unsigned int nblocks, int diskid,
        Bool verbose)
@@ -34,10 +33,9 @@ dumkfs(int diskdev, int niblks, unsigned int nblocks, int diskid,
 }
 
 
-/*------------------------------------------------------------------------
- *  dumkdl  --  link all data blocks into free list to init. file system
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dumkdl  --  link all data blocks into free list to init. file system
+//------------------------------------------------------------------------
 int
 dumkdl(int diskdev, DBADDR firstfb, DBADDR lastfb, Bool verbose)
 {
@@ -68,10 +66,9 @@ dumkdl(int diskdev, DBADDR firstfb, DBADDR lastfb, Bool verbose)
 
 
 
-/*------------------------------------------------------------------------
- *  dumkil  --  link ALL i-blocks onto a free list
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dumkil  --  link ALL i-blocks onto a free list
+//------------------------------------------------------------------------
 int
 dumkil(int diskdev, int niblks, Bool verbose)
 {

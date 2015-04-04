@@ -5,10 +5,9 @@
 #include "lfile.h"
 #include "dir.h"
 
-/*------------------------------------------------------------------------
- *  ibfree.c  --  deallocate an iblock and return to the free list
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ibfree.c  --  deallocate an iblock and return to the free list
+//------------------------------------------------------------------------
 int
 ibfree(int diskdev, IBADDR inum)
 {

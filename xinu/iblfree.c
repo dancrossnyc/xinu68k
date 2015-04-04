@@ -5,10 +5,9 @@
 #include "lfile.h"
 #include "dir.h"
 
-/*------------------------------------------------------------------------
- *  iblfree  --  free a list of iblocks given the number of the first
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  iblfree  --  free a list of iblocks given the number of the first
+//------------------------------------------------------------------------
 int
 iblfree(int diskdev, IBADDR iblist)
 {

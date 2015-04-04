@@ -5,10 +5,9 @@
 #define	MAXECHO	600		// maximum size of echoed datagram
 static char buff[MAXECHO];	// here because the stack may be small
 
-/*------------------------------------------------------------------------
- *  udpecho  -  UDP echo server process (runs forever in background)
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  udpecho  -  UDP echo server process (runs forever in background)
+//------------------------------------------------------------------------
 PROCESS
 udpecho(void)
 {

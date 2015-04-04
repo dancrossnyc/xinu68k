@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  dgwrite  -  write one datagram to a datagram protocol pseudo-device
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dgwrite  -  write one datagram to a datagram protocol pseudo-device
+//------------------------------------------------------------------------
 int
 dgwrite(struct devsw *devptr, struct xgram *buff, int len)
 {

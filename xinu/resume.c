@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "proc.h"
 
-/*------------------------------------------------------------------------
- * resume  --  unsuspend a process, making it ready; return the priority
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// resume  --  unsuspend a process, making it ready; return the priority
+//------------------------------------------------------------------------
 SYSCALL
 resume(int pid)
 {

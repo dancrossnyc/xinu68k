@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  dgalloc  -  allocate a datagram psuedo device and return descriptor
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dgalloc  -  allocate a datagram psuedo device and return descriptor
+//------------------------------------------------------------------------
 int
 dgalloc(void)
 {

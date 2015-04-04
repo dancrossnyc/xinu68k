@@ -3,10 +3,9 @@
 #include "proc.h"
 #include "disk.h"
 
-/*------------------------------------------------------------------------
- *  dsksync  --  wait for all outstanding disk requests before returning
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dsksync  --  wait for all outstanding disk requests before returning
+//------------------------------------------------------------------------
 int
 dsksync(struct devsw *devptr)
 {

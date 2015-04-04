@@ -3,10 +3,9 @@
 #include "proc.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  ethwstrt - start an ethernet write operation on the DEQNA
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ethwstrt - start an ethernet write operation on the DEQNA
+//------------------------------------------------------------------------
 
 void
 ethwstrt(struct etblk *etptr, char *buf, int len, int setup)

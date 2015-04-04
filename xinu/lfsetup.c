@@ -4,10 +4,9 @@
 #include "lfile.h"
 #include "dir.h"
 
-/*------------------------------------------------------------------------
- *  lfsetup  --  set up appropriate iblock and data block in memory
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  lfsetup  --  set up appropriate iblock and data block in memory
+//------------------------------------------------------------------------
 void
 lfsetup(int diskdev, struct flblk *flptr)
 {

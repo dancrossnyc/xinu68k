@@ -3,14 +3,13 @@
 #include "proc.h"
 #include "q.h"
 
-/*------------------------------------------------------------------------
- * resched  --  reschedule processor to highest priority ready process
- *
- * Notes:	Upon entry, currpid gives current process id.
- *		Proctab[currpid].pstate gives correct NEXT state for
- *			current process if other than PRCURR.
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// resched  --  reschedule processor to highest priority ready process
+//
+// Notes:	Upon entry, currpid gives current process id.
+//		Proctab[currpid].pstate gives correct NEXT state for
+//			current process if other than PRCURR.
+//------------------------------------------------------------------------
 int
 resched(void)
 {

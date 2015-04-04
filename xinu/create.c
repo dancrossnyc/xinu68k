@@ -5,10 +5,9 @@
 #include "io.h"
 #include "stdarg.h"
 
-/*------------------------------------------------------------------------
- * newpid  --  obtain a new (free) process id
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// newpid  --  obtain a new (free) process id
+//------------------------------------------------------------------------
 static int
 newpid(void)
 {
@@ -24,17 +23,16 @@ newpid(void)
 	return SYSERR;
 }
 
-/*------------------------------------------------------------------------
- *  create  -  create a process to start running a procedure
- *
- *	int	*procaddr;	procedure address
- *	int	ssize;		stack size in words
- *	int	priority;	process priority > 0
- *	char	*name;		name (for debugging)
- *	int	nargs;		number of args that follow
- *	...;			arguments (treated like an array in the code)
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  create  -  create a process to start running a procedure
+//
+//	int	*procaddr;	procedure address
+//	int	ssize;		stack size in words
+//	int	priority;	process priority > 0
+//	char	*name;		name (for debugging)
+//	int	nargs;		number of args that follow
+//	...;			arguments (treated like an array in the code)
+//------------------------------------------------------------------------
 SYSCALL
 create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ...)
 {

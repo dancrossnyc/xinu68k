@@ -3,10 +3,9 @@
 #include "fserver.h"
 #include "rfile.h"
 
-/*------------------------------------------------------------------------
- *  rfseek  --  seek to a specified position of a remote file
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  rfseek  --  seek to a specified position of a remote file
+//------------------------------------------------------------------------
 int
 rfseek(struct devsw *devptr, long offset)
 {

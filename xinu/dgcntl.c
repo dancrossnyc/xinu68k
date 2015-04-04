@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  dgcntl  -  control function for datagram pseudo-devices
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dgcntl  -  control function for datagram pseudo-devices
+//------------------------------------------------------------------------
 int
 dgcntl(struct devsw *devptr, int func, int arg)
 {

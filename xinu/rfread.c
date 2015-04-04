@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  rfread  --  read one or more bytes from a remote file
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  rfread  --  read one or more bytes from a remote file
+//------------------------------------------------------------------------
 int
 rfread(struct devsw *devptr, char *buff, int len)
 {

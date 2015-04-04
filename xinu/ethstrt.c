@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  ethstrt  -  reset DEQNA Ethernet hardware and leave it operating
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ethstrt  -  reset DEQNA Ethernet hardware and leave it operating
+//------------------------------------------------------------------------
 int
 ethstrt(struct etblk *etptr, struct dqsetup *setup)
 {

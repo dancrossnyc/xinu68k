@@ -2,13 +2,12 @@
 #include "kernel.h"
 #include "q.h"
 
-/*------------------------------------------------------------------------
- * enqueue  --	insert an item at the tail of a list
- *
- *   item: item to enqueue on a list
- *   tail: index in q of list tail
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// enqueue  --	insert an item at the tail of a list
+//
+//   item: item to enqueue on a list
+//   tail: index in q of list tail
+//------------------------------------------------------------------------
 int
 enqueue(int item, int tail)
 {
@@ -25,10 +24,9 @@ enqueue(int item, int tail)
 }
 
 
-/*------------------------------------------------------------------------
- *  dequeue  --  remove an item from a list and return it
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dequeue  --  remove an item from a list and return it
+//------------------------------------------------------------------------
 int
 dequeue(int item)
 {

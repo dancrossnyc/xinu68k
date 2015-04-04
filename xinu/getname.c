@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  getname  -  get name of this host and place it where specified
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  getname  -  get name of this host and place it where specified
+//------------------------------------------------------------------------
 SYSCALL
 getname(char *nam)
 {

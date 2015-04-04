@@ -4,10 +4,9 @@
 #include "rwho.h"
 #include "shell.h"
 
-/*------------------------------------------------------------------------
- *  rwhod  -  Periodically clean cache and (optionally) send rwho packets
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  rwhod  -  Periodically clean cache and (optionally) send rwho packets
+//------------------------------------------------------------------------
 PROCESS
 rwhod(void)
 {

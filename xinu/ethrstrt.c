@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  ethrstrt - start an ethernet read operation on the DEQNA
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ethrstrt - start an ethernet read operation on the DEQNA
+//------------------------------------------------------------------------
 
 int
 ethrstrt(struct etblk *etptr, char *buf, int len)

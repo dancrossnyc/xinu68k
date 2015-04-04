@@ -2,11 +2,10 @@
 #include "kernel.h"
 #include "proc.h"
 
-/*------------------------------------------------------------------------
- * suspend  --  suspend a process, placing it in hibernation
- *   pid: id of process to suspend
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// suspend  --  suspend a process, placing it in hibernation
+//   pid: id of process to suspend
+//------------------------------------------------------------------------
 SYSCALL
 suspend(int pid)
 {

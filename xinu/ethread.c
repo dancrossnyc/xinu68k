@@ -3,10 +3,9 @@
 #include "proc.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  ethread - read a single packet from the ethernet
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ethread - read a single packet from the ethernet
+//------------------------------------------------------------------------
 int
 ethread(struct devsw *devptr, char *buff, int len)
 {

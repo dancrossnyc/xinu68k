@@ -3,10 +3,9 @@
 #include "proc.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  dgclose  -  close a datagram pseudo device, making it available again
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dgclose  -  close a datagram pseudo device, making it available again
+//------------------------------------------------------------------------
 int
 dgclose(struct devsw *devptr)
 {

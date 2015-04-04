@@ -3,10 +3,9 @@
 #include "proc.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  ip_in  -  handle IP packet coming in from the network
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ip_in  -  handle IP packet coming in from the network
+//------------------------------------------------------------------------
 int
 ip_in(struct epacket *packet, int icmpp, int lim)
 {

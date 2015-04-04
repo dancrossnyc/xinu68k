@@ -3,13 +3,12 @@
 #include "proc.h"
 #include "q.h"
 
-/*------------------------------------------------------------------------
- * ready  --  make a process eligible for CPU service
- *
- *   pid: id of process to make ready
- *   resch: reschedule afterward?
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// ready  --  make a process eligible for CPU service
+//
+//   pid: id of process to make ready
+//   resch: reschedule afterward?
+//------------------------------------------------------------------------
 int
 ready(int pid, int resch)
 {

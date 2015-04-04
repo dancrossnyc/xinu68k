@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "disk.h"
 
-/*------------------------------------------------------------------------
- *  dsinter  --  process disk interrupt (DTC interface; XEBEC controller)
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dsinter  --  process disk interrupt (DTC interface; XEBEC controller)
+//------------------------------------------------------------------------
 void
 dsinter(struct dsblk *dsptr)
 {

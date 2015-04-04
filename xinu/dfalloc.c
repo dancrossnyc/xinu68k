@@ -3,10 +3,9 @@
 #include "disk.h"
 #include "lfile.h"
 
-/*------------------------------------------------------------------------
- *  dfalloc  --  allocate a device table entry for a disk file; return id
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dfalloc  --  allocate a device table entry for a disk file; return id
+//------------------------------------------------------------------------
 #ifdef	Ndf
 int
 dfalloc(void)

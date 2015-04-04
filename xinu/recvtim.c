@@ -4,10 +4,9 @@
 #include "q.h"
 #include "sleep.h"
 
-/*------------------------------------------------------------------------
- *  recvtim  -  wait to receive a message or timeout and return result
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  recvtim  -  wait to receive a message or timeout and return result
+//------------------------------------------------------------------------
 SYSCALL
 recvtim(int maxwait)
 {

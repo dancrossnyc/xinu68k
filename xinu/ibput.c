@@ -5,10 +5,9 @@
 #include "lfile.h"
 #include "dir.h"
 
-/*------------------------------------------------------------------------
- *  ibput  --  write an iblock back to disk given its number
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ibput  --  write an iblock back to disk given its number
+//------------------------------------------------------------------------
 int
 ibput(int diskdev, IBADDR inum, struct iblk *loc)
 {

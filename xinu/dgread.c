@@ -3,10 +3,9 @@
 #include "proc.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  dgread  -  read one datagram from a datagram protocol pseudo-device
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dgread  -  read one datagram from a datagram protocol pseudo-device
+//------------------------------------------------------------------------
 int
 dgread(struct devsw *devptr, struct xgram *buff, int len)
 {

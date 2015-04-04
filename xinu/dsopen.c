@@ -4,10 +4,9 @@
 #include "lfile.h"
 #include "dir.h"
 
-/*------------------------------------------------------------------------
- *  dsopen  --  open/create a file on the specified disk device
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dsopen  --  open/create a file on the specified disk device
+//------------------------------------------------------------------------
 #ifdef	Ndf
 int
 dsopen(struct devsw *devptr, char *filenam, char *mode)

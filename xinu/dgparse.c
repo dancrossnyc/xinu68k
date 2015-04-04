@@ -3,10 +3,9 @@
 #include "network.h"
 #include "ctype.h"
 
-/*------------------------------------------------------------------------
- *  dgparse  -  parse foreign address specification; get IP and port #s
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dgparse  -  parse foreign address specification; get IP and port #s
+//------------------------------------------------------------------------
 int
 dgparse(struct dgblk *dgptr, char *fspec)
 {

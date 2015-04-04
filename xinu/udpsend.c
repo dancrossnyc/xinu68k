@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  udpsend  -  send one UDP datagram to a given (foreign) IP address
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  udpsend  -  send one UDP datagram to a given (foreign) IP address
+//------------------------------------------------------------------------
 int
 udpsend(IPaddr faddr, int fport, int lport, struct epacket *packet,
 	int datalen)

@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "proc.h"
 
-/*------------------------------------------------------------------------
- *  setnok  -  set next-of-kin (notified at death) for a given process
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  setnok  -  set next-of-kin (notified at death) for a given process
+//------------------------------------------------------------------------
 SYSCALL
 setnok(int nok, int pid)
 {

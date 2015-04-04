@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  getnet  -  obtain the network portion of this system's IP address
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  getnet  -  obtain the network portion of this system's IP address
+//------------------------------------------------------------------------
 SYSCALL
 getnet(IPaddr address)
 {

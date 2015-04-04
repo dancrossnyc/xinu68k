@@ -3,10 +3,9 @@
 #include "mark.h"
 #include "ports.h"
 
-/*------------------------------------------------------------------------
- *  preset  --  reset a port, freeing waiting processes and messages
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  preset  --  reset a port, freeing waiting processes and messages
+//------------------------------------------------------------------------
 SYSCALL
 preset(int portid, int (*dispose)(void *))
 {

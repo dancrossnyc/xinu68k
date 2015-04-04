@@ -4,10 +4,9 @@
 #include "q.h"
 #include "sleep.h"
 
-/*------------------------------------------------------------------------
- * wakeup  --  called by clock interrupt dispatcher to awaken processes
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// wakeup  --  called by clock interrupt dispatcher to awaken processes
+//------------------------------------------------------------------------
 INTPROC
 wakeup(void)
 {

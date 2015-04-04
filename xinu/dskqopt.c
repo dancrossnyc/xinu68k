@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "disk.h"
 
-/*------------------------------------------------------------------------
- *  dskqopt  --  optimize requests to read/write/seek to the same block
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dskqopt  --  optimize requests to read/write/seek to the same block
+//------------------------------------------------------------------------
 int
 dskqopt(struct dreq *p, struct dreq *q, struct dreq *drptr)
 {

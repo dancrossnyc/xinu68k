@@ -3,10 +3,9 @@
 #include "proc.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  rarp_in  -  handle RARP packet coming in from Ethernet network
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  rarp_in  -  handle RARP packet coming in from Ethernet network
+//------------------------------------------------------------------------
 int
 rarp_in(struct epacket *packet, int device)
 {

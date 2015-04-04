@@ -8,10 +8,9 @@
 #endif
 struct flblk fltab[Ndf];
 
-/*------------------------------------------------------------------------
- *  lfinit  --  mark disk file 'device' available at system startup
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  lfinit  --  mark disk file 'device' available at system startup
+//------------------------------------------------------------------------
 int
 lfinit(struct devsw *devptr)
 {

@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  rfclose  --  close a remote file by deallocating pseudo device
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  rfclose  --  close a remote file by deallocating pseudo device
+//------------------------------------------------------------------------
 int
 rfclose(struct devsw *devptr)
 {

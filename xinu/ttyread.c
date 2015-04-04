@@ -3,10 +3,9 @@
 #include "tty.h"
 #include "io.h"
 
-/*------------------------------------------------------------------------
- *  ttyread - read one or more characters from a tty device
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ttyread - read one or more characters from a tty device
+//------------------------------------------------------------------------
 int
 ttyread(struct devsw *devptr, char *buff, int count)
 {

@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  ip2name  -  return DARPA Domain name for a host given its IP address
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ip2name  -  return DARPA Domain name for a host given its IP address
+//------------------------------------------------------------------------
 SYSCALL
 ip2name(IPaddr ip, char *nam)
 {

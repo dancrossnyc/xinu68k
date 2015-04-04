@@ -5,10 +5,9 @@
 #include "lfile.h"
 #include "dir.h"
 
-/*------------------------------------------------------------------------
- *  lfclose  --  close a file by flushing output and freeing device slot
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  lfclose  --  close a file by flushing output and freeing device slot
+//------------------------------------------------------------------------
 int
 lfclose(struct devsw *devptr)
 {

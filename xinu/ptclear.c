@@ -3,10 +3,9 @@
 #include "mark.h"
 #include "ports.h"
 
-/*------------------------------------------------------------------------
- *  _ptclear  --  used by pdelete and preset to clear a port
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  _ptclear  --  used by pdelete and preset to clear a port
+//------------------------------------------------------------------------
 void
 _ptclear(struct pt *ptptr, int newstate, int (*dispose)(void *))
 {

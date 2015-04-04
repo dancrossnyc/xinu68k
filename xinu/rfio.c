@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  rfio  --  perform input or output using remote file server
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  rfio  --  perform input or output using remote file server
+//------------------------------------------------------------------------
 int
 rfio(struct devsw *devptr, int rop, char *buff, int len)
 {

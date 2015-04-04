@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  rfsend  --  send message to remote server and await reply
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  rfsend  --  send message to remote server and await reply
+//------------------------------------------------------------------------
 int
 rfsend(struct fphdr *fptr, int reqlen, int rplylen)
 {

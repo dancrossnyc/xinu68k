@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  dot2ip  -  convert network address from "decimal dot" form to IPaddr
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dot2ip  -  convert network address from "decimal dot" form to IPaddr
+//------------------------------------------------------------------------
 void
 dot2ip(char *ip, int nad1, int nad2, int nad3, int nad4)
 {

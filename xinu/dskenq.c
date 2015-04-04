@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "disk.h"
 
-/*------------------------------------------------------------------------
- *  dskenq  --  enqueue a disk request and start I/O if disk not busy
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dskenq  --  enqueue a disk request and start I/O if disk not busy
+//------------------------------------------------------------------------
 int
 dskenq(struct dreq *drptr, struct dsblk *dsptr)
 {

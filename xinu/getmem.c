@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "mem.h"
 
-/*------------------------------------------------------------------------
- * getmem  --  allocate heap storage, returning lowest integer address
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// getmem  --  allocate heap storage, returning lowest integer address
+//------------------------------------------------------------------------
 SYSCALL *
 getmem(unsigned nbytes)
 {

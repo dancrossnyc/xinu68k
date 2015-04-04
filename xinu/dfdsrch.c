@@ -4,10 +4,9 @@
 #include "lfile.h"
 #include "dir.h"
 
-/*------------------------------------------------------------------------
- *  dfdsrch  --  search disk directory for position of given file name
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  dfdsrch  --  search disk directory for position of given file name
+//------------------------------------------------------------------------
 struct fdes *
 dfdsrch(struct dsblk *dsptr, char *filenam, int mbits)
 {

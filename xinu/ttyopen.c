@@ -1,10 +1,9 @@
 #include "conf.h"
 #include "kernel.h"
 
-/*------------------------------------------------------------------------
- *  ttyopen - open tty device and return descriptor (for namespace)
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ttyopen - open tty device and return descriptor (for namespace)
+//------------------------------------------------------------------------
 int
 ttyopen(struct devsw *devptr, char *nam, char *mode)
 {

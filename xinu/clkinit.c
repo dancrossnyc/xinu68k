@@ -23,11 +23,9 @@ int clkruns;			// set TRUE iff clock exists by setclkr
 int clkruns = FALSE;		// no clock configured; be sure sleep
 #endif				// doesn't wait forever
 
-/*
- *------------------------------------------------------------------------
- * clkinit - initialize the clock and sleep queue (called at startup)
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// clkinit - initialize the clock and sleep queue (called at startup)
+//------------------------------------------------------------------------
 void
 clkinit(void)
 {

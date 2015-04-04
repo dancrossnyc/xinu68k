@@ -1,10 +1,9 @@
 #include "conf.h"
 #include "kernel.h"
 
-/*------------------------------------------------------------------------
- *  lfwrite  --  write 'count' bytes onto a local disk file
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  lfwrite  --  write 'count' bytes onto a local disk file
+//------------------------------------------------------------------------
 int
 lfwrite(struct devsw *devptr, char *buff, int count)
 {

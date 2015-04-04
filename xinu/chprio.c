@@ -2,12 +2,11 @@
 #include "kernel.h"
 #include "proc.h"
 
-/*------------------------------------------------------------------------
- * chprio  --  change the scheduling priority of a process
- *
- * newprio > 0.
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// chprio  --  change the scheduling priority of a process
+//
+// newprio > 0.
+//------------------------------------------------------------------------
 SYSCALL
 chprio(int pid, int newprio)
 {

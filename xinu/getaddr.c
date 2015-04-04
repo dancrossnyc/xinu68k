@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  getaddr  -  obtain this system's complete address (IP address)
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  getaddr  -  obtain this system's complete address (IP address)
+//------------------------------------------------------------------------
 SYSCALL
 getaddr(IPaddr address)
 {

@@ -3,10 +3,9 @@
 #include "proc.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  ethinter - ethernet interrupt processing procedure
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ethinter - ethernet interrupt processing procedure
+//------------------------------------------------------------------------
 INTPROC
 ethinter(struct etblk *etptr)
 {

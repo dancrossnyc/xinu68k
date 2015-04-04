@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "proc.h"
 
-/*------------------------------------------------------------------------
- *  sendf  --  sendf a message to another process, forcing delivery
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  sendf  --  sendf a message to another process, forcing delivery
+//------------------------------------------------------------------------
 SYSCALL
 sendf(int pid, int msg)
 {

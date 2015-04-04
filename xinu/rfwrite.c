@@ -2,10 +2,9 @@
 #include "kernel.h"
 #include "network.h"
 
-/*------------------------------------------------------------------------
- *  rfwrite  --  write one or more bytes to a remote file
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  rfwrite  --  write one or more bytes to a remote file
+//------------------------------------------------------------------------
 int
 rfwrite(struct devsw *devptr, char *buff, int len)
 {
