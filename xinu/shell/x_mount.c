@@ -7,10 +7,9 @@
 
 #define	PADTO	24
 
-/*------------------------------------------------------------------------
- *  mprint  -  print the current contents of the namespace prefix table
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  mprint  -  print the current contents of the namespace prefix table
+//------------------------------------------------------------------------
 static int
 mprint(int stdin, int stdout, int stderr)
 {
@@ -33,10 +32,9 @@ mprint(int stdin, int stdout, int stderr)
 	return OK;
 }
 
-/*------------------------------------------------------------------------
- *  x_mount  -  (command mount) change or display namespace table
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_mount  -  (command mount) change or display namespace table
+//------------------------------------------------------------------------
 COMMAND
 x_mount(int stdin, int stdout, int stderr, int nargs, char *args[])
 {

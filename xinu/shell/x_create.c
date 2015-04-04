@@ -6,10 +6,9 @@
 
 LOCAL	char	symfile[] = "a.out";	// name of object file to search
 
-/*------------------------------------------------------------------------
- *  x_creat  -  (command create) create a process given a starting address
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_creat  -  (command create) create a process given a starting address
+//------------------------------------------------------------------------
 COMMAND
 x_creat (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

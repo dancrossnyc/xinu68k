@@ -129,38 +129,38 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 {
 	int c;
 	int i;
-	int f;			/* The format character (comes after %) */
-	char *str;		/* Running pointer in string            */
-	char string[20];	/* The string str points to this output */
-	/*  from number conversion              */
-	int length;		/* Length of string "str"               */
-	char fill;		/* Fill character (' ' or '0')          */
-	int leftjust;		/* 0 = right-justified, else left-just. */
-	int longflag;		/* != 0 for long numerics - not used    */
-	int fmax, fmin;		/* Field specifications % MIN . MAX s   */
-	int leading;		/* No. of leading/trailing fill chars.  */
-	char sign;		/* Set to '-' for negative decimals     */
-	char digit1;		/* Offset to add to first numeric digit */
+	int f;			// The format character (comes after %)
+	char *str;		// Running pointer in string
+	char string[20];	// The string str points to this output
+	//  from number conversion
+	int length;		// Length of string "str"
+	char fill;		// Fill character (' ' or '0')
+	int leftjust;		// 0 = right-justified, else left-just.
+	int longflag;		// != 0 for long numerics - not used
+	int fmax, fmin;		// Field specifications % MIN . MAX s
+	int leading;		// No. of leading/trailing fill chars.
+	char sign;		// Set to '-' for negative decimals
+	char digit1;		// Offset to add to first numeric digit
 
 	for (;;) {
-		/* Echo characters until '%' or end of fmt string */
+		// Echo characters until '%' or end of fmt string
 		while ((c = *fmt++) != '%') {
 			if (c == '\0')
 				return;
 			(*func) (farg, c);
 		}
-		/* Echo "...%%..." as '%' */
+		// Echo "...%%..." as '%'
 		if (*fmt == '%') {
 			(*func) (farg, *fmt++);
 			continue;
 		}
-		/* Check for "%-..." == Left-justified output */
+		// Check for "%-..." == Left-justified output
 		if ((leftjust = ((*fmt == '-') ? 1 : 0)) != 0)
 			fmt++;
-		/* Allow for zero-filled numeric outputs ("%0...") */
+		// Allow for zero-filled numeric outputs ("%0...")
 		fill = (*fmt == '0') ? *fmt++ : ' ';
-		/* Allow for minimum field width specifier for %d,u,x,o,c,s */
-		/* Also allow %* for variable width (%0* as well)       */
+		// Allow for minimum field width specifier for %d,u,x,o,c,s
+		// Also allow %* for variable width (%0* as well)
 		fmin = 0;
 		if (*fmt == '*') {
 			fmin = va_arg(args, int);
@@ -169,7 +169,7 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 			while ('0' <= *fmt && *fmt <= '9') {
 				fmin = fmin * 10 + *fmt++ - '0';
 			}
-		/* Allow for maximum string width for %s */
+		// Allow for maximum string width for %s
 		fmax = 0;
 		if (*fmt == '.') {
 			if (*(++fmt) == '*') {
@@ -180,7 +180,7 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 					fmax = fmax * 10 + *fmt++ - '0';
 				}
 		}
-		/* Check for the 'l' option to force long numeric */
+		// Check for the 'l' option to force long numeric
 		if ((longflag = ((*fmt == 'l') ? 1 : 0)) != 0)
 			fmt++;
 		str = string;
@@ -188,7 +188,7 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 			(*func) (farg, '%');
 			return;
 		}
-		sign = '\0';	/* sign == '-' for negative decimal */
+		sign = '\0';	// sign == '-' for negative decimal
 
 		switch (f) {
 		case 'c':
@@ -223,10 +223,10 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 		case 'u':
 			if (longflag) {
 				digit1 = '\0';
-				/* "negative" longs in unsigned format  */
-				/* can't be computed with long division */
-				/* convert *args to "positive", digit1  */
-				/* = how much to add back afterwards    */
+				// "negative" longs in unsigned format
+				// can't be computed with long division
+				// convert *args to "positive", digit1
+				// = how much to add back afterwards
 				while (*(long *) args < 0) {
 					*(long *) args -= 1000000000L;
 					++digit1;

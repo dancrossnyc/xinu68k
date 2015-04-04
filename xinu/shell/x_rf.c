@@ -5,10 +5,9 @@
 #include <fserver.h>
 #include <rfile.h>
 
-/*------------------------------------------------------------------------
- *  x_rf  -  (command rf) format and print remote file status
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_rf  -  (command rf) format and print remote file status
+//------------------------------------------------------------------------
 COMMAND
 x_rf (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

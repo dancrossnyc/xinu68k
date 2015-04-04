@@ -3,10 +3,9 @@
 #include <conf.h>
 #include <kernel.h>
 
-/*------------------------------------------------------------------------
- *  x_reboot  -  (builtin command reboot) restart the system from scratch
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_reboot  -  (builtin command reboot) restart the system from scratch
+//------------------------------------------------------------------------
 BUILTIN
 x_reboot (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

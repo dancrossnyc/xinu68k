@@ -4,10 +4,9 @@
 #include <kernel.h>
 #include <date.h>
 
-/*------------------------------------------------------------------------
- *  ascdate  -  print a given date in ascii including hours:mins:secs
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  ascdate  -  print a given date in ascii including hours:mins:secs
+//------------------------------------------------------------------------
 int
 ascdate (long time, char *str)
 {

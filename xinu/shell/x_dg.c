@@ -4,10 +4,9 @@
 #include <kernel.h>
 #include <network.h>
 
-/*------------------------------------------------------------------------
- *  x_dg  -  (command dg) print info for currently open datagram devices
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_dg  -  (command dg) print info for currently open datagram devices
+//------------------------------------------------------------------------
 COMMAND
 x_dg (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

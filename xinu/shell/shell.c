@@ -46,10 +46,9 @@ LOCAL	char	errhd[] = "Syntax error\n";// global error messages
 LOCAL	char	fmt[]   = "Cannot open %s\n";
 LOCAL	char	fmt2[]  = "[%d]\n";
 
-/*------------------------------------------------------------------------
- *  shell  -  Xinu shell with file redirection and background processing
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  shell  -  Xinu shell with file redirection and background processing
+//------------------------------------------------------------------------
 int
 shell(int dev)
 {

@@ -4,10 +4,9 @@
 #include <kernel.h>
 #include <shell.h>
 
-/*------------------------------------------------------------------------
- *  x_rls  -  (command rls) list contents of remote file system directory
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_rls  -  (command rls) list contents of remote file system directory
+//------------------------------------------------------------------------
 COMMAND
 x_rls (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

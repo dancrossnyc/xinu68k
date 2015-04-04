@@ -7,10 +7,9 @@
 
 LOCAL	char	st[] = "F?GD";
 
-/*------------------------------------------------------------------------
- *  x_routes  -  (command routes) format and print routing cache entries
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_routes  -  (command routes) format and print routing cache entries
+//------------------------------------------------------------------------
 COMMAND
 x_routes (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

@@ -5,10 +5,9 @@
 #include <network.h>
 #include <rwho.h>
 
-/*------------------------------------------------------------------------
- *  x_uptime  -  (command uptime or ruptime) print remote machine status
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_uptime  -  (command uptime or ruptime) print remote machine status
+//------------------------------------------------------------------------
 COMMAND
 x_uptime (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

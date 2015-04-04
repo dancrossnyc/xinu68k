@@ -12,10 +12,9 @@ LOCAL	char	*pstnams[] = {"curr ","free ","ready","recv ",
 			    "sleep","susp ","wait ","rtim "};
 LOCAL	int	psavsp;
 
-/*------------------------------------------------------------------------
- *  x_ps  -  (command ps) format and print process table information
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_ps  -  (command ps) format and print process table information
+//------------------------------------------------------------------------
 COMMAND
 x_ps (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

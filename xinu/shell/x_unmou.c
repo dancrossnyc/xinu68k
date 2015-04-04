@@ -5,10 +5,9 @@
 #include <io.h>
 #include <name.h>
 
-/*------------------------------------------------------------------------
- *  x_unmou  -  (command unmount) remove a prefix from the namespace table
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_unmou  -  (command unmount) remove a prefix from the namespace table
+//------------------------------------------------------------------------
 COMMAND
 x_unmou (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

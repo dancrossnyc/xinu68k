@@ -7,10 +7,9 @@
 
 #define	COLUMNS	4			// number of columns to print
 
-/*------------------------------------------------------------------------
- *  x_help  -  (command help) print possible command names for user
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_help  -  (command help) print possible command names for user
+//------------------------------------------------------------------------
 COMMAND
 x_help (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

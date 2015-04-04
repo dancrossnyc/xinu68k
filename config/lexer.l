@@ -1,6 +1,7 @@
 %{
 #include "y.tab.h"
 int skipping;
+extern int brkcount, linectr;
 %}
 A		[a-z_A-Z]
 M		[a-z_A-Z0-9]
@@ -8,9 +9,8 @@ M		[a-z_A-Z0-9]
 "//".*			;
 "/*"			{skipping = 1;}
 "*/"			{skipping = 0;}
-"%"			{extern	int brkcount;
-			 if (!skipping) {
-				/* end-of-file or DEFBRK */
+"%"			{if (!skipping) {
+				// end-of-file or DEFBRK
 				return (++brkcount == 2) ? 0 : DEFBRK;
 			 }
 			}
@@ -49,8 +49,6 @@ on			{if (!skipping) return(ON);}
 "-n"			{if (!skipping) return(CNTL);}
 "n"			{if (!skipping) return(CNTL);}
 [ \t]+			;
-"\n"			{extern int linectr;
-			 linectr++;
-			}
+"\n"			{linectr++;}
 {A}{M}*			{if (!skipping) return(IDENT);}
 .			{if (!skipping) return(yytext[0]);}

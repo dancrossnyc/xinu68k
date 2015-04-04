@@ -4,10 +4,9 @@
 #include <kernel.h>
 #include <network.h>
 
-/*------------------------------------------------------------------------
- *  x_net  -  (command netstat) print network status information
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_net  -  (command netstat) print network status information
+//------------------------------------------------------------------------
 COMMAND
 x_net (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

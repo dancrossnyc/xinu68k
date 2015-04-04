@@ -5,10 +5,9 @@
 #include <mark.h>
 #include <bufpool.h>
 
-/*------------------------------------------------------------------------
- *  x_bpool  -  (command bpool) format and print buffer pool information
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_bpool  -  (command bpool) format and print buffer pool information
+//------------------------------------------------------------------------
 COMMAND
 x_bpool (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

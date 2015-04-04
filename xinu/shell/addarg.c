@@ -5,10 +5,9 @@
 #include <proc.h>
 #include <shell.h>
 
-/*------------------------------------------------------------------------
- *  addarg  -  copy arguments to area reserved on process stack
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  addarg  -  copy arguments to area reserved on process stack
+//------------------------------------------------------------------------
 // pid: process to receive arguments
 // nargs: number of arguments to copy
 // len: size of arg. area (in bytes)

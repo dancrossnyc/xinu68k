@@ -95,9 +95,7 @@ sysinit(void)
 
 	rdytail = 1 + (rdyhead = newqueue());	// initialize ready list
 
-#ifdef	MEMMARK
 	_mkinit();		// initialize memory marking
-#endif
 #ifdef	RTCLOCK
 	clkinit();		// initialize r.t.clock
 #endif

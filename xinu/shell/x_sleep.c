@@ -3,10 +3,9 @@
 #include <conf.h>
 #include <kernel.h>
 
-/*------------------------------------------------------------------------
- *  x_sleep  -  (command sleep) delay for a given number of seconds
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_sleep  -  (command sleep) delay for a given number of seconds
+//------------------------------------------------------------------------
 COMMAND
 x_sleep (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

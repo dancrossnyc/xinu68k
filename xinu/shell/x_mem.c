@@ -5,10 +5,9 @@
 #include <proc.h>
 #include <mem.h>
 
-/*------------------------------------------------------------------------
- *  x_mem  -  (command mem) print memory use and free list information
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_mem  -  (command mem) print memory use and free list information
+//------------------------------------------------------------------------
 COMMAND
 x_mem (int stdin, int stdout, int stderr, int nargs, char *args[])
 {

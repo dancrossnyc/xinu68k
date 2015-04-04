@@ -7,12 +7,11 @@
 
 #define	SNAPSIZ	512
 
-/*------------------------------------------------------------------------
- *  x_snap  -  (command snap) write snapshot of memory to a core file
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_snap  -  (command snap) write snapshot of memory to a core file
+//------------------------------------------------------------------------
 COMMAND
-x_snap (int stdin, int stdout, int stderr, int nargs, char *args[])
+x_snap(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	int	dev;
 	struct	core11	hdr;

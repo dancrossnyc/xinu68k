@@ -4,10 +4,9 @@
 #include <kernel.h>
 #include <shell.h>
 
-/*------------------------------------------------------------------------
- *  lexan  -  ad hoc lexical analyzer to divide command line into tokens
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  lexan  -  ad hoc lexical analyzer to divide command line into tokens
+//------------------------------------------------------------------------
 int
 lexan(char *line)
 {

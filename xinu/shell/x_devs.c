@@ -8,10 +8,9 @@ LOCAL	char hd1[] =
 LOCAL	char hd2[] =
 	"--- --------  ----- ------- ------- ------- ---------\n";
 
-/*------------------------------------------------------------------------
- *  x_devs  -  (command devs) print main fields of device switch table
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  x_devs  -  (command devs) print main fields of device switch table
+//------------------------------------------------------------------------
 COMMAND
 x_devs (int stdin, int stdout, int stderr, int nargs, char *args[])
 {
