@@ -1,9 +1,7 @@
-// prdump.c - prdump, prdumph, prdumpa
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <q.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "q.h"
 
 static void
 pxdump(int all)

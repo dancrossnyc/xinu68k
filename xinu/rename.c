@@ -1,9 +1,7 @@
-// rename.c - rename
-
-#include <conf.h>
-#include <kernel.h>
-#include <file.h>
-#include <name.h>
+#include "conf.h"
+#include "kernel.h"
+#include "file.h"
+#include "name.h"
 
 /*------------------------------------------------------------------------
  *  rename  -  rename a file (key is optional)

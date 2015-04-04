@@ -1,9 +1,7 @@
-// ethwstrt.c - ethwstrt
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  ethwstrt - start an ethernet write operation on the DEQNA

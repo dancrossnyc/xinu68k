@@ -1,7 +1,7 @@
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  arpinit  -  initialize data structures for ARP processing

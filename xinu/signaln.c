@@ -1,10 +1,8 @@
-// signaln.c - signaln
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <q.h>
-#include <sem.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "q.h"
+#include "sem.h"
 
 /*------------------------------------------------------------------------
  *  signaln -- signal a semaphore n times
@@ -27,5 +25,6 @@ signaln(int sem, int count)
 			ready(getfirst(sptr->sqhead), RESCHNO);
 	resched();
 	restore(ps);
+
 	return (OK);
 }

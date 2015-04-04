@@ -1,9 +1,7 @@
-// ndump.c - ndump
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
-#include <name.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
+#include "name.h"
 
 #define	PADTO	24
 

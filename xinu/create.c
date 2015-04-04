@@ -1,11 +1,9 @@
-// create.c - create, newpid
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <mem.h>
-#include <io.h>
-#include <stdarg.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "mem.h"
+#include "io.h"
+#include "stdarg.h"
 
 /*------------------------------------------------------------------------
  * newpid  --  obtain a new (free) process id

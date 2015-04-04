@@ -1,8 +1,6 @@
-// dgmcntl.c - dgmcntl
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  dgmcntl  -  control the network and datagram interface pseudo devices

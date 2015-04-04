@@ -1,8 +1,6 @@
-// naminit.c - naminit
-
-#include <conf.h>
-#include <kernel.h>
-#include <name.h>
+#include "conf.h"
+#include "kernel.h"
+#include "name.h"
 
 #ifndef	RFILSYS
 #define	RFILSYS	SYSERR

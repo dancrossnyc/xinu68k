@@ -1,8 +1,6 @@
-// freemem.c - freemem
-
-#include <conf.h>
-#include <kernel.h>
-#include <mem.h>
+#include "conf.h"
+#include "kernel.h"
+#include "mem.h"
 
 /*------------------------------------------------------------------------
  *  freemem  --  free a memory block, returning it to memlist

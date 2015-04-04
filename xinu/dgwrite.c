@@ -1,8 +1,6 @@
-// dgwrite.c - dgwrite
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  dgwrite  -  write one datagram to a datagram protocol pseudo-device

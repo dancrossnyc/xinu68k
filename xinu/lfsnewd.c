@@ -1,10 +1,8 @@
-// lfsnewd.c - lfsnewd
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 #define  DFILLER  '+'
 

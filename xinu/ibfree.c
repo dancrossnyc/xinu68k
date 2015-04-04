@@ -1,11 +1,9 @@
-// ibfree.c - ibfree
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 /*------------------------------------------------------------------------
  *  ibfree.c  --  deallocate an iblock and return to the free list

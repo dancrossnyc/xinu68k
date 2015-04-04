@@ -1,9 +1,7 @@
-// lfinit.c - lfinit
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
-#include <lfile.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
+#include "lfile.h"
 
 #ifndef	Ndf
 #define	Ndf	1

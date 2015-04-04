@@ -1,8 +1,6 @@
-// dginit.c - dginit
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 //------------------------------------------------------------------------
 //  dginit  -  initialize datagram protocol pseudo device marking it free

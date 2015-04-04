@@ -1,8 +1,6 @@
-// putc.c - putc
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
 
 /*------------------------------------------------------------------------
  *  putc  -  write a single character to a device
@@ -16,5 +14,6 @@ putc(int descrp, int ch)
 	if (isbaddev(descrp))
 		return (SYSERR);
 	devptr = &devtab[descrp];
-	return ((*devptr->dvputc) (devptr, ch));
+
+	return (*devptr->dvputc)(devptr, ch);
 }

@@ -1,9 +1,7 @@
-// getpath.c - getpath
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 //------------------------------------------------------------------------
 //  getpath  -  find a path (route table entry) for a given IP address

@@ -1,17 +1,14 @@
-// netin.c
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
-
-/*------------------------------------------------------------------------
- *  netin - initialize net, start output side, and become input daemon
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  netin - initialize net, start output side, and become input daemon
+//   userpid: user process to resume
+//------------------------------------------------------------------------
 PROCESS
-netin(int userpid		// user process to resume
-    )
+netin(int userpid)
 {
 	struct epacket *packet;
 	int icmpp;
@@ -33,17 +30,14 @@ netin(int userpid		// user process to resume
 			arp_in(packet, ETHER);
 			packet = getbuf(Net.netpool);
 			break;
-
 		case EP_RARP:
 			rarp_in(packet, ETHER);
 			packet = getbuf(Net.netpool);
 			break;
-
 		case EP_IP:
 			ip_in(packet, icmpp, NETFQ);
 			packet = getbuf(Net.netpool);
 			break;
-
 		default:	// just drop packet
 			Net.ndrop++;
 		}

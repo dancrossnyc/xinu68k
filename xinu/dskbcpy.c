@@ -1,8 +1,6 @@
-// dskbcpy.c - dskbcpy
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
 
 //------------------------------------------------------------------------
 //  dskbcpy  --  copy data into a new disk buffer and return its address

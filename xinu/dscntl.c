@@ -1,9 +1,7 @@
-// dscntl.c - dscntl
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <disk.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "disk.h"
 
 /*------------------------------------------------------------------------
  *  dscntl  --  control disk driver/device

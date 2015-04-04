@@ -1,11 +1,9 @@
-// lfgetc.c - lfgetc
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 /*------------------------------------------------------------------------
  *  lfgetc  --  get next character from (buffered) disk file

@@ -1,11 +1,9 @@
-// dudir.c - dudir
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 //------------------------------------------------------------------------
 //  dudir  --  print file system directory in readable form on CONSOLE

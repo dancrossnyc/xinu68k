@@ -1,9 +1,7 @@
-// freebuf.c - freebuf
-
-#include <conf.h>
-#include <kernel.h>
-#include <mark.h>
-#include <bufpool.h>
+#include "conf.h"
+#include "kernel.h"
+#include "mark.h"
+#include "bufpool.h"
 
 //------------------------------------------------------------------------
 //  freebuf  --  free a buffer that was allocated from a pool by getbuf

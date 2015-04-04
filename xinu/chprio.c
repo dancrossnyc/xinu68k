@@ -1,6 +1,6 @@
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
 
 /*------------------------------------------------------------------------
  * chprio  --  change the scheduling priority of a process

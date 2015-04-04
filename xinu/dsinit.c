@@ -1,8 +1,6 @@
-// dsinit.c - dsinit
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
 
 #ifdef	Ndsk
 struct dsblk dstab[Ndsk];

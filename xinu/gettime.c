@@ -1,8 +1,6 @@
-// gettime.c - gettime
-
-#include <conf.h>
-#include <kernel.h>
-#include <date.h>
+#include "conf.h"
+#include "kernel.h"
+#include "date.h"
 
 /*------------------------------------------------------------------------
  *  gettime  -  get local time in seconds past Jan 1, 1970

@@ -1,8 +1,6 @@
-// route.c - route
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 //------------------------------------------------------------------------
 //  route  -  route a datagram to a given IP address

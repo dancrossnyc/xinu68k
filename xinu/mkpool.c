@@ -1,14 +1,11 @@
-// mkpool.c - mkpool
+#include "conf.h"
+#include "kernel.h"
+#include "mark.h"
+#include "bufpool.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <mark.h>
-#include <bufpool.h>
-
-/*------------------------------------------------------------------------
- *  mkpool  --  allocate memory for a buffer pool and link together
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  mkpool  --  allocate memory for a buffer pool and link together
+//------------------------------------------------------------------------
 SYSCALL
 mkpool(int bufsiz, int numbufs)
 {
@@ -16,10 +13,8 @@ mkpool(int bufsiz, int numbufs)
 	int poolid;
 	char *where;
 
-#ifdef	MEMMARK
 	if (unmarked(bpmark))
 		poolinit();
-#endif
 	disable(ps);
 	if (bufsiz < BPMINB || bufsiz > BPMAXB
 	    || numbufs < 1 || numbufs > BPMAXN
@@ -37,5 +32,6 @@ mkpool(int bufsiz, int numbufs)
 		*((int *) where) = (int) (where + bufsiz);
 	*((int *) where) = (int) NULL;
 	restore(ps);
-	return (poolid);
+
+	return poolid;
 }

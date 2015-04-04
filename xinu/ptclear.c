@@ -1,9 +1,7 @@
-// ptclear.c - _ptclear
-
-#include <conf.h>
-#include <kernel.h>
-#include <mark.h>
-#include <ports.h>
+#include "conf.h"
+#include "kernel.h"
+#include "mark.h"
+#include "ports.h"
 
 /*------------------------------------------------------------------------
  *  _ptclear  --  used by pdelete and preset to clear a port
@@ -16,7 +14,6 @@ _ptclear(struct pt *ptptr, int newstate, int (*dispose)(void *))
 
 
 	// put port in limbo until done freeing processes
-
 	ptptr->ptstate = PTLIMBO;
 	ptptr->ptseq++;
 	if ((p = ptptr->pthead) != (struct ptnode *) NULL) {

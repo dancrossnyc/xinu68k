@@ -1,10 +1,8 @@
-// dsopen.c - dsopen
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 /*------------------------------------------------------------------------
  *  dsopen  --  open/create a file on the specified disk device

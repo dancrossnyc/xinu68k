@@ -1,8 +1,6 @@
-// seek.c seek
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
 
 /*------------------------------------------------------------------------
  *  seek  --  position a device (very common special case of control)
@@ -16,5 +14,6 @@ seek(int descrp, long pos)
 	if (isbaddev(descrp))
 		return (SYSERR);
 	devptr = &devtab[descrp];
-	return ((*devptr->dvseek) (devptr, pos));
+
+	return (*devptr->dvseek)(devptr, pos);
 }

@@ -1,8 +1,6 @@
-// rfcntl.c - rfcntl
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 //------------------------------------------------------------------------
 //  rfcntl  --  control the remote file server access system
@@ -15,7 +13,6 @@ rfcntl(struct devsw *devptr, int func, char *addr, char *addr2)
 
 	junk = 0L;
 	switch (func) {
-
 	case RFCLEAR:
 		// clear port associated with rfserver
 		control(Rf.device, DG_CLEAR, 0);
@@ -24,14 +21,11 @@ rfcntl(struct devsw *devptr, int func, char *addr, char *addr2)
 	// Universal file manipulation functions
 	case FLACCESS:
 		return rfmkpac(FS_ACCESS, addr, &junk, (char *) &junk, 0);
-
 	case FLREMOVE:
 		return rfmkpac(FS_UNLINK, addr, &junk, NULLSTR, 0);
-
 	case FLRENAME:
 		len = strlen(addr2) + 1;
 		return rfmkpac(FS_RENAME, addr, &junk, addr2, len);
-
 	default:
 		return SYSERR;
 	}

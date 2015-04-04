@@ -1,24 +1,18 @@
-// poolinit.c - poolinit
-
-#include <conf.h>
-#include <kernel.h>
-#include <mark.h>
-#include <bufpool.h>
+#include "conf.h"
+#include "kernel.h"
+#include "mark.h"
+#include "bufpool.h"
 
 struct bpool bptab[NBPOOLS];
 size_t nbpools;
-#ifdef	MEMMARK
 MARKER bpmark;			// self initializing mark
-#endif
 
-/*------------------------------------------------------------------------
- *  poolinit  --  initialize the buffer pool routines
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  poolinit  --  initialize the buffer pool routines
+//------------------------------------------------------------------------
 int
 poolinit(void)
 {
-#ifdef	MEMMARK
 	int status;
 	char ps;
 
@@ -27,9 +21,6 @@ poolinit(void)
 		nbpools = 0;
 	}
 	restore(ps);
-	return ((status == OK) ? OK : SYSERR);
-#else
-	nbpools = 0;
-	return (OK);
-#endif
+
+	return (status == OK) ? OK : SYSERR;
 }

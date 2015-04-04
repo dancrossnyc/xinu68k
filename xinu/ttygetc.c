@@ -1,9 +1,7 @@
-// ttygetc.c - ttygetc
-
-#include <conf.h>
-#include <kernel.h>
-#include <tty.h>
-#include <io.h>
+#include "conf.h"
+#include "kernel.h"
+#include "tty.h"
+#include "io.h"
 
 /*------------------------------------------------------------------------
  *  ttygetc - read one character from a tty device
@@ -25,5 +23,6 @@ ttygetc(struct devsw *devptr)
 	if (iptr->ieof && (iptr->ieofc == ch))
 		ch = EOF;
 	restore(ps);
+
 	return (ch);
 }

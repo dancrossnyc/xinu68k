@@ -1,10 +1,8 @@
-// getutim.c - getutim
-
-#include <conf.h>
-#include <kernel.h>
-#include <sleep.h>
-#include <date.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "sleep.h"
+#include "date.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  * getutim  --  obtain time in seconds past Jan 1, 1970, ut (gmt)

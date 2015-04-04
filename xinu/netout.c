@@ -1,8 +1,7 @@
-// netout.c - netout
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
 #define  MNAMLEN  24		// maximum size of this machine's name
 
 //------------------------------------------------------------------------
@@ -23,8 +22,8 @@ netout(int userpid, int icmpp)
 	getname(nam);
 	resume(userpid);
 	while (TRUE) {
-		packet = (struct epacket *) preceive(icmpp);
-		ipptr = (struct ip *) packet->ep_data;
+		packet = (struct epacket *)preceive(icmpp);
+		ipptr = (struct ip *)packet->ep_data;
 		memmove(addr, ipptr->i_dest, IPLEN);
 		len = net2hs(ipptr->i_paclen) - IPHLEN;
 		ipsend(addr, packet, len);

@@ -1,9 +1,5 @@
-/*
- * Libk.
- */
-
-#include <u.h>
-#include <libk.h>
+#include "u.h"
+#include "libk.h"
 
 void *
 memmove(void *dst, const void *src, size_t len)

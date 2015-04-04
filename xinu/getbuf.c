@@ -1,9 +1,7 @@
-// getbuf.c - getbuf
-
-#include <conf.h>
-#include <kernel.h>
-#include <mark.h>
-#include <bufpool.h>
+#include "conf.h"
+#include "kernel.h"
+#include "mark.h"
+#include "bufpool.h"
 
 /*------------------------------------------------------------------------
  *  getbuf  --  get a buffer from a preestablished buffer pool

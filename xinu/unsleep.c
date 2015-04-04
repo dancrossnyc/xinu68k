@@ -1,10 +1,8 @@
-// unsleep.c - unsleep
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <q.h>
-#include <sleep.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "q.h"
+#include "sleep.h"
 
 /*------------------------------------------------------------------------
  * unsleep  --  remove  process from the sleep queue prematurely
@@ -36,5 +34,6 @@ unsleep(int pid)
 	else
 		slnempty = FALSE;
 	restore(ps);
+
 	return (OK);
 }

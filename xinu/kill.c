@@ -1,19 +1,16 @@
-// kill.c - kill
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "sem.h"
+#include "mem.h"
+#include "io.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <sem.h>
-#include <mem.h>
-#include <io.h>
-
-/*------------------------------------------------------------------------
- * kill  --  kill a process and remove it from the system
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// kill  --  kill a process and remove it from the system
+//  pid: process to kill
+//------------------------------------------------------------------------
 SYSCALL
-kill(int pid			// process to kill
-    )
+kill(int pid)
 {
 	struct pentry *pptr;	// points to proc. table for pid
 	int dev;
@@ -56,5 +53,6 @@ kill(int pid			// process to kill
 		pptr->pstate = PRFREE;
 	}
 	restore(ps);
-	return (OK);
+
+	return OK;
 }

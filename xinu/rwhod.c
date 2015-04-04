@@ -1,10 +1,8 @@
-// rwhod.c - rwhod
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
-#include <rwho.h>
-#include <shell.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
+#include "rwho.h"
+#include "shell.h"
 
 /*------------------------------------------------------------------------
  *  rwhod  -  Periodically clean cache and (optionally) send rwho packets

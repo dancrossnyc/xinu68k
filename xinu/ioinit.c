@@ -1,8 +1,6 @@
-// ioinit.c - ioinit, iosetvec
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
 
 //------------------------------------------------------------------------
 //  ioinit --  standard interrupt vector and dispatch initialization

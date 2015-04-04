@@ -1,9 +1,7 @@
-// qdump.c - qdump, qdumph, qdumpa
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <q.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "q.h"
 
 #define	isbadq(i)	((i) < 0 || (i) >= NQENT)
 

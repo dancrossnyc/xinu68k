@@ -1,9 +1,7 @@
-// preset.c - preset
-
-#include <conf.h>
-#include <kernel.h>
-#include <mark.h>
-#include <ports.h>
+#include "conf.h"
+#include "kernel.h"
+#include "mark.h"
+#include "ports.h"
 
 /*------------------------------------------------------------------------
  *  preset  --  reset a port, freeing waiting processes and messages
@@ -17,9 +15,7 @@ preset(int portid, int (*dispose)(void *))
 
 	disable(ps);
 	if (isbadport(portid) ||
-#ifdef	MEMMARK
 	    unmarked(ptmark) ||
-#endif
 	    (ptptr = &ports[portid])->ptstate != PTALLOC) {
 		restore(ps);
 		return (SYSERR);

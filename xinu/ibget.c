@@ -1,10 +1,8 @@
-// ibget.c - ibget
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 //------------------------------------------------------------------------
 //  ibget  --  get an iblock from disk given its number

@@ -1,8 +1,6 @@
-// ethstrt.c - ethstrt.c
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  ethstrt  -  reset DEQNA Ethernet hardware and leave it operating

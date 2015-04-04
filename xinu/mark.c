@@ -1,10 +1,7 @@
-// mark.c - _mkinit, mark
+#include "conf.h"
+#include "kernel.h"
+#include "mark.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <mark.h>
-
-#ifdef	MEMMARK
 int *marks[MAXMARK];
 int nmarks;
 int mkmutex;
@@ -36,4 +33,3 @@ mark(int *loc)
 	signal(mkmutex);
 	return OK;
 }
-#endif

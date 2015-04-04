@@ -1,8 +1,6 @@
-// ipsend.c - ipsend
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 //------------------------------------------------------------------------
 //  ipsend  -  fill in IP header and send datagram to specified address

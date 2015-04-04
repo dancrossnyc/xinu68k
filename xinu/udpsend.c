@@ -1,8 +1,6 @@
-// udpsend.c - udpsend
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  udpsend  -  send one UDP datagram to a given (foreign) IP address
@@ -26,5 +24,6 @@ udpsend(IPaddr faddr, int fport, int lport, struct epacket *packet,
 	if (isodd(datalen))
 		udpptr->u_data[datalen] = (char) 0;
 	udpptr->u_ucksum = 0;
+
 	return (ipsend(faddr, packet, UHLEN + datalen));
 }

@@ -1,8 +1,6 @@
-// ethinit.c - ethinit
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 //------------------------------------------------------------------------
 //  ethinit  -  initialize ethernet I/O device and buffers

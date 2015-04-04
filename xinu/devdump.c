@@ -1,7 +1,5 @@
-// devdump.c - devdump
-
-#include <conf.h>
-#include <kernel.h>
+#include "conf.h"
+#include "kernel.h"
 
 /*------------------------------------------------------------------------
  *  devdump  -  dump device names from the device switch table

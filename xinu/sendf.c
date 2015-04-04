@@ -1,8 +1,6 @@
-// sendf.c - sendf
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
 
 /*------------------------------------------------------------------------
  *  sendf  --  sendf a message to another process, forcing delivery
@@ -28,5 +26,6 @@ sendf(int pid, int msg)
 		ready(pid, RESCHYES);
 	}
 	restore(ps);
+
 	return (OK);
 }

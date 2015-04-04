@@ -1,8 +1,6 @@
-// dskenq.c - dskenq
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
 
 /*------------------------------------------------------------------------
  *  dskenq  --  enqueue a disk request and start I/O if disk not busy

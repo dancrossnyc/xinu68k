@@ -1,8 +1,6 @@
-// dgalloc.c - dgalloc
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  dgalloc  -  allocate a datagram psuedo device and return descriptor

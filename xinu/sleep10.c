@@ -1,10 +1,8 @@
-// sleep10.c - sleep10
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <q.h>
-#include <sleep.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "q.h"
+#include "sleep.h"
 
 /*------------------------------------------------------------------------
  * sleep10  --  delay the caller for a time specified in tenths of seconds
@@ -19,7 +17,6 @@ sleep10(int n)
 		return (SYSERR);
 	disable(ps);
 	if (n == 0) {		// sleep10(0) -> end time slice
-		;
 	} else {
 		insertd(currpid, clockq, n);
 		slnempty = TRUE;
@@ -28,5 +25,6 @@ sleep10(int n)
 	}
 	resched();
 	restore(ps);
+
 	return (OK);
 }

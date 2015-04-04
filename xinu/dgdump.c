@@ -1,8 +1,6 @@
-// dgdump.c - dgdump
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  dgdump  -  dump the datagram pseudo device control blocks

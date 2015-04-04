@@ -1,8 +1,6 @@
-// getitem.c - getfirst, getlast
-
-#include <conf.h>
-#include <kernel.h>
-#include <q.h>
+#include "conf.h"
+#include "kernel.h"
+#include "q.h"
 
 /*------------------------------------------------------------------------
  * getfirst  --	 remove and return the first process on a list

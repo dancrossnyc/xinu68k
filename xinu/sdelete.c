@@ -1,10 +1,8 @@
-// sdelete.c - sdelete
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <q.h>
-#include <sem.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "q.h"
+#include "sem.h"
 
 /*------------------------------------------------------------------------
  * sdelete  --  delete a semaphore by releasing its table entry
@@ -30,5 +28,6 @@ sdelete(int sem)
 		resched();
 	}
 	restore(ps);
+
 	return (OK);
 }

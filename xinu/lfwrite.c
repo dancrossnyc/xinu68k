@@ -1,7 +1,5 @@
-// lfwrite.c - lfwrite
-
-#include <conf.h>
-#include <kernel.h>
+#include "conf.h"
+#include "kernel.h"
 
 /*------------------------------------------------------------------------
  *  lfwrite  --  write 'count' bytes onto a local disk file

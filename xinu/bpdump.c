@@ -1,7 +1,7 @@
-#include <conf.h>
-#include <kernel.h>
-#include <mark.h>
-#include <bufpool.h>
+#include "conf.h"
+#include "kernel.h"
+#include "mark.h"
+#include "bufpool.h"
 
 //------------------------------------------------------------------------
 //  bpdump  -  dump the buffer pool table

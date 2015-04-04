@@ -1,8 +1,6 @@
-// dgmopen.c - dgmopen
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  dgmopen  -  open a fresh datagram pseudo device and return descriptor

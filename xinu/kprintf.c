@@ -1,11 +1,9 @@
-// kprintf.c - kprintf, kputc, savestate, rststate
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
-#include <slu.h>
-#include <tty.h>
-#include <stdarg.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
+#include "slu.h"
+#include "tty.h"
+#include "stdarg.h"
 
 #define DELAY	100
 //------------------------------------------------------------------------

@@ -1,11 +1,9 @@
-// ibput.c - ibput
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 /*------------------------------------------------------------------------
  *  ibput  --  write an iblock back to disk given its number

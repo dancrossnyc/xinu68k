@@ -1,13 +1,10 @@
-// namrepl.c - namrepl
+#include "conf.h"
+#include "kernel.h"
+#include "name.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <name.h>
-
-/*------------------------------------------------------------------------
- *  namrepl  -  using namespace, replace name with (newname,device)
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  namrepl  -  using namespace, replace name with (newname,device)
+//------------------------------------------------------------------------
 SYSCALL
 namrepl(char *name, char *newname)
 {
@@ -27,10 +24,11 @@ namrepl(char *name, char *newname)
 			strcpy(newname, nptr->nrepl);
 			strcat(newname, name + plen);
 			restore(ps);
-			return (nptr->ndev);
+			return nptr->ndev;
 		}
 	}
 	strcpy(newname, "");
 	restore(ps);
-	return (SYSERR);
+
+	return SYSERR;
 }

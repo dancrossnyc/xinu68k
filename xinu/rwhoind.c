@@ -1,9 +1,7 @@
-// rwhoind.c - rwhoind
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
-#include <rwho.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
+#include "rwho.h"
 
 /*------------------------------------------------------------------------
  *  rwhoind  -  rwho daemon to record info from incoming rwho packets

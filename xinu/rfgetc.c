@@ -1,8 +1,6 @@
-// rfgetc.c - rfgetc
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  rfgetc  --  get a character from a remote file
@@ -15,9 +13,9 @@ rfgetc(struct devsw *devptr)
 	int retcode;
 
 	if ((retcode = read(devptr->dvnum, &ch, 1)) == 1)
-		return (ch);
-	else if (retcode == 0)
-		return (EOF);
-	else
-		return (SYSERR);
+		return ch;
+	if (retcode == 0)
+		return EOF;
+
+	return SYSERR;
 }

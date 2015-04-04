@@ -1,11 +1,9 @@
-// iblfree.c - iblfree
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 /*------------------------------------------------------------------------
  *  iblfree  --  free a list of iblocks given the number of the first

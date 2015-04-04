@@ -1,8 +1,6 @@
-// tdump.c - tdump, tdumph, tdump1
-
-#include <conf.h>
-#include <kernel.h>
-#include <tty.h>
+#include "conf.h"
+#include "kernel.h"
+#include "tty.h"
 
 /*
  * routines to dump contents of tty control block

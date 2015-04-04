@@ -1,9 +1,7 @@
-// ethinter.c - ethinter
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  ethinter - ethernet interrupt processing procedure

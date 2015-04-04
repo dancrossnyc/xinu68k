@@ -1,10 +1,8 @@
-// screate.c - screate, newsem
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <q.h>
-#include <sem.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "q.h"
+#include "sem.h"
 
 //------------------------------------------------------------------------
 // newsem  --  allocate an unused semaphore and return its index
@@ -12,11 +10,9 @@
 static int
 newsem(void)
 {
-	int sem;
-	int i;
 
-	for (i = 0; i < NSEM; i++) {
-		sem = nextsem--;
+	for (int i = 0; i < NSEM; i++) {
+		int sem = nextsem--;
 		if (nextsem < 0)
 			nextsem = NSEM - 1;
 		if (semaph[sem].sstate == SFREE) {
@@ -24,6 +20,7 @@ newsem(void)
 			return sem;
 		}
 	}
+
 	return SYSERR;
 }
 
@@ -45,5 +42,6 @@ screate(int count)
 	semaph[sem].semcnt = count;
 	// sqhead and sqtail were initialized at system startup
 	restore(ps);
+
 	return sem;
 }

@@ -1,8 +1,6 @@
-// dot2ip.c - dot2ip
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  dot2ip  -  convert network address from "decimal dot" form to IPaddr

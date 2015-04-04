@@ -1,9 +1,7 @@
-// dgclose.c - dgclose
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  dgclose  -  close a datagram pseudo device, making it available again

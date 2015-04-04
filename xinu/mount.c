@@ -1,13 +1,10 @@
-// mount.c - mount
+#include "conf.h"
+#include "kernel.h"
+#include "name.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <name.h>
-
-/*------------------------------------------------------------------------
- *  mount  -  give meaning to a prefix in the abstract name space
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+//  mount  -  give meaning to a prefix in the abstract name space
+//------------------------------------------------------------------------
 SYSCALL
 mount(char *prefix, int dev, char *replace)
 {
@@ -45,5 +42,6 @@ mount(char *prefix, int dev, char *replace)
 	strcpy(nptr->nrepl, replace);
 	nptr->ndev = dev;
 	restore(ps);
-	return (OK);
+
+	return OK;
 }

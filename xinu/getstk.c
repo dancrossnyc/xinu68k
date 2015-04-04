@@ -1,8 +1,6 @@
-// getstk.c - getstk
-
-#include <conf.h>
-#include <kernel.h>
-#include <mem.h>
+#include "conf.h"
+#include "kernel.h"
+#include "mem.h"
 
 /*------------------------------------------------------------------------
  * getstk  --  allocate stack memory, returning address of topmost int

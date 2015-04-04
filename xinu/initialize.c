@@ -1,16 +1,14 @@
-// initialize.c - nulluser, sysinit
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <sem.h>
-#include <sleep.h>
-#include <mem.h>
-#include <tty.h>
-#include <q.h>
-#include <io.h>
-#include <disk.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "sem.h"
+#include "sleep.h"
+#include "mem.h"
+#include "tty.h"
+#include "q.h"
+#include "io.h"
+#include "disk.h"
+#include "network.h"
 
 // Declarations of major kernel variables
 struct pentry proctab[NPROC];	// process table

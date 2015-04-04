@@ -1,8 +1,6 @@
-// mkarp.c - mkarp
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 //------------------------------------------------------------------------
 //  mkarp  -  allocate and fill in an ARP or RARP packet
@@ -28,5 +26,6 @@ mkarp(int typ, int op, IPaddr spaddr, IPaddr tpaddr)
 	memmove(apacptr->ar_spa, spaddr, AR_PLEN);
 	memmove(apacptr->ar_tha, eth[0].etpaddr, AR_HLEN);
 	memmove(apacptr->ar_tpa, tpaddr, AR_PLEN);
+
 	return packet;
 }

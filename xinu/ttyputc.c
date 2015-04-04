@@ -1,10 +1,8 @@
-// ttyputc.c - ttyputc
-
-#include <conf.h>
-#include <kernel.h>
-#include <tty.h>
-#include <io.h>
-#include <slu.h>
+#include "conf.h"
+#include "kernel.h"
+#include "tty.h"
+#include "io.h"
+#include "slu.h"
 
 /*------------------------------------------------------------------------
  *  ttyputc - write one character to a tty device
@@ -26,5 +24,6 @@ ttyputc(struct devsw *devptr, int ch)
 		iptr->ohead = 0;
 	(iptr->ioaddr)->ctstat = SLUENABLE;
 	restore(ps);
+
 	return (OK);
 }

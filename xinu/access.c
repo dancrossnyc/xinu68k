@@ -1,7 +1,7 @@
-#include <kernel.h>
-#include <conf.h>
-#include <file.h>
-#include <name.h>
+#include "kernel.h"
+#include "conf.h"
+#include "file.h"
+#include "name.h"
 
 //------------------------------------------------------------------------
 //  access  -  determine accessability given file name and desired mode

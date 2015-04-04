@@ -1,9 +1,7 @@
-// mdump.c - mdump
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <mem.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "mem.h"
 
 //------------------------------------------------------------------------
 //  mdump  --  dump free memory list

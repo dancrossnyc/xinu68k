@@ -1,9 +1,7 @@
-// dgparse.c - dgparse
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
-#include <ctype.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
+#include "ctype.h"
 
 /*------------------------------------------------------------------------
  *  dgparse  -  parse foreign address specification; get IP and port #s

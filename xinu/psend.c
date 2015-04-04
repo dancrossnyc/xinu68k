@@ -1,9 +1,7 @@
-// psend.c - psend
-
-#include <conf.h>
-#include <kernel.h>
-#include <mark.h>
-#include <ports.h>
+#include "conf.h"
+#include "kernel.h"
+#include "mark.h"
+#include "ports.h"
 
 /*------------------------------------------------------------------------
  *  psend  --  send a message to a port by enqueuing it
@@ -20,9 +18,7 @@ psend(int portid, uword msg)
 
 	disable(ps);
 	if (isbadport(portid) ||
-#ifdef	MEMMARK
 	    unmarked(ptmark) ||
-#endif
 	    (ptptr = &ports[portid])->ptstate != PTALLOC) {
 		restore(ps);
 		return (SYSERR);
@@ -50,5 +46,6 @@ psend(int portid, uword msg)
 	}
 	signal(ptptr->ptrsem);
 	restore(ps);
+
 	return (OK);
 }

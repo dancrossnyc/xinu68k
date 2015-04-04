@@ -1,9 +1,7 @@
-// ttyread.c - ttyread, readcopy
-
-#include <conf.h>
-#include <kernel.h>
-#include <tty.h>
-#include <io.h>
+#include "conf.h"
+#include "kernel.h"
+#include "tty.h"
+#include "io.h"
 
 /*------------------------------------------------------------------------
  *  ttyread - read one or more characters from a tty device
@@ -89,5 +87,6 @@ ttyread(struct devsw *devptr, char *buff, int count)
 			break;
 	}
 	restore(ps);
-	return (donow + nread);
+
+	return donow + nread;
 }

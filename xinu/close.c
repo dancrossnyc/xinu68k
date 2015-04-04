@@ -1,8 +1,6 @@
-// close.c - close
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
 
 /*------------------------------------------------------------------------
  *  close  -  close a device

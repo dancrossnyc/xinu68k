@@ -1,16 +1,14 @@
-// suspend.c - suspend
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
 
 /*------------------------------------------------------------------------
- *  suspend  --  suspend a process, placing it in hibernation
+ * suspend  --  suspend a process, placing it in hibernation
+ *   pid: id of process to suspend
  *------------------------------------------------------------------------
  */
 SYSCALL
-suspend(int pid			// id of process to suspend
-    )
+suspend(int pid)
 {
 	struct pentry *pptr;	// pointer to proc. tab. entry
 	char ps;		// saved processor status
@@ -32,5 +30,6 @@ suspend(int pid			// id of process to suspend
 	}
 	prio = pptr->pprio;
 	restore(ps);
+
 	return (prio);
 }

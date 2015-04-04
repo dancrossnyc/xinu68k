@@ -1,8 +1,6 @@
-// rfmkpac.c - rfmkpac
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 static struct fpacket packet;
 
@@ -75,5 +73,6 @@ rfmkpac(int rop, char *rname, long *rpos, char *buff, int len)
 		len = OK;
 	}
 	signal(Rf.rmutex);
+
 	return (len);
 }

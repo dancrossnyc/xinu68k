@@ -1,9 +1,7 @@
-// dsksync.c - dsksync
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <disk.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "disk.h"
 
 /*------------------------------------------------------------------------
  *  dsksync  --  wait for all outstanding disk requests before returning

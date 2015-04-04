@@ -1,8 +1,6 @@
-// getaddr.c - getaddr
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  getaddr  -  obtain this system's complete address (IP address)

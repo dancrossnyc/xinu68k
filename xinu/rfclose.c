@@ -1,8 +1,6 @@
-// rfclose.c - rfclose
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  rfclose  --  close a remote file by deallocating pseudo device
@@ -22,5 +20,6 @@ rfclose(struct devsw *devptr)
 	rfmkpac(FS_CLOSE, rfptr->rf_name, &junk, (char *) &junk, 0);
 	rfptr->rf_state = RFREE;
 	signal(rfptr->rf_mutex);
+
 	return (OK);
 }

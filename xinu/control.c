@@ -1,8 +1,6 @@
-// control.c - control
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
 
 /*------------------------------------------------------------------------
  *  control  -  control a device (e.g., set the mode)

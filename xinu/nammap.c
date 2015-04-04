@@ -1,8 +1,6 @@
-// nammap.c - nammap
-
-#include <conf.h>
-#include <kernel.h>
-#include <name.h>
+#include "conf.h"
+#include "kernel.h"
+#include "name.h"
 
 //------------------------------------------------------------------------
 //  nammap  -  using namespace, iteratively map name onto (newname,device)
@@ -21,5 +19,6 @@ nammap(char *name, char *newname)
 		dev = namrepl(tmpnam, newname);
 	}
 	restore(ps);
-	return (dev);
+
+	return dev;
 }

@@ -1,8 +1,6 @@
-// dsinter.c - dsinter
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
 
 /*------------------------------------------------------------------------
  *  dsinter  --  process disk interrupt (DTC interface; XEBEC controller)

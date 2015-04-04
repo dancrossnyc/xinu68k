@@ -1,10 +1,8 @@
-// recvtim.c - recvtim
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <q.h>
-#include <sleep.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "q.h"
+#include "sleep.h"
 
 /*------------------------------------------------------------------------
  *  recvtim  -  wait to receive a message or timeout and return result
@@ -35,5 +33,6 @@ recvtim(int maxwait)
 		msg = TIMEOUT;
 	}
 	restore(ps);
-	return (msg);
+
+	return msg;
 }

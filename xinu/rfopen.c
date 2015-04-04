@@ -1,8 +1,6 @@
-// rfopen.c - rfopen
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  rfopen  --  open a remote file
@@ -37,5 +35,6 @@ rfopen(struct devsw *devptr, char *name, char *mode)
 		return (SYSERR);
 	}
 	restore(ps);
+
 	return (devnum);
 }

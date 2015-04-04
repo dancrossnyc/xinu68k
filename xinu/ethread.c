@@ -1,9 +1,7 @@
-// ethread.c - ethread
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  ethread - read a single packet from the ethernet

@@ -1,9 +1,7 @@
-// rarp_in.c - rarp_in
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  rarp_in  -  handle RARP packet coming in from Ethernet network

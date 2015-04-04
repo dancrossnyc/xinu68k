@@ -1,11 +1,9 @@
-// lfclose.c - lfclose
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 /*------------------------------------------------------------------------
  *  lfclose  --  close a file by flushing output and freeing device slot

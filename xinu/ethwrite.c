@@ -1,9 +1,7 @@
-// ethwrite.c - ethwrite
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  ethwrite - write a single packet to the ethernet

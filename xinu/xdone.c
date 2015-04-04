@@ -1,6 +1,4 @@
-// xdone.c - xdone
-
-#include <kernel.h>
+#include "kernel.h"
 
 //------------------------------------------------------------------------
 // xdone  --  print system completion message as last process exits

@@ -1,8 +1,6 @@
-// rfread.c - rfread
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  rfread  --  read one or more bytes from a remote file

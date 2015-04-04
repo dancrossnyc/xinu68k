@@ -1,10 +1,8 @@
-// sleep.c - sleep
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <q.h>
-#include <sleep.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "q.h"
+#include "sleep.h"
 
 /*------------------------------------------------------------------------
  * sleep  --  delay the calling process n seconds
@@ -29,5 +27,6 @@ sleep(int n)
 	}
 	if (n > 0)
 		sleep10(10 * n);
+
 	return (OK);
 }

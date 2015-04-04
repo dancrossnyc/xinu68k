@@ -1,8 +1,6 @@
-// getname.c - getname
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  getname  -  get name of this host and place it where specified

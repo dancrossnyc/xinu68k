@@ -1,9 +1,9 @@
-// rfinit.c - rfinit
+#include "conf.h"
+#include "kernel.h"
+#include "fserver.h"
+#include "rfile.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <fserver.h>
-#include <rfile.h>
+struct rfinfo Rf;
 
 //------------------------------------------------------------------------
 //  rfinit  --  initialize remote file pseudo devices
@@ -24,5 +24,3 @@ rfinit(struct devsw *devptr)
 		Rf.rmutex = screate(1);
 	}
 }
-
-struct rfinfo Rf;

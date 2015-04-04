@@ -1,11 +1,9 @@
-// ibnew.c - ibnew
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 /*------------------------------------------------------------------------
  *  ibnew  --  allocate a new iblock from free list on disk

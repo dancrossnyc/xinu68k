@@ -1,9 +1,7 @@
-// remove.c - remove
-
-#include <conf.h>
-#include <kernel.h>
-#include <file.h>
-#include <name.h>
+#include "conf.h"
+#include "kernel.h"
+#include "file.h"
+#include "name.h"
 
 /*------------------------------------------------------------------------
  *  remove  -  remove a file given its name (key is optional)

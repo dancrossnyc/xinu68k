@@ -1,11 +1,9 @@
-// lfputc.c - lfputc
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 /*------------------------------------------------------------------------
  *  lfputc  --  put a character onto a (buffered) disk file

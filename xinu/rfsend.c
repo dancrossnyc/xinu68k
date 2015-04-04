@@ -1,8 +1,6 @@
-// rfsend.c - rfsend
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  rfsend  --  send message to remote server and await reply
@@ -16,7 +14,6 @@ rfsend(struct fphdr *fptr, int reqlen, int rplylen)
 	char ps;
 
 	// Clear server queue, and send packet to it
-
 	if (Rf.device == RCLOSED) {
 		Rf.device = open(INTERNET, RSERVER, ANYLPORT);
 		if (Rf.device == SYSERR ||
@@ -36,5 +33,6 @@ rfsend(struct fphdr *fptr, int reqlen, int rplylen)
 		}
 	}
 	restore(ps);
+
 	return (SYSERR);
 }

@@ -1,8 +1,6 @@
-// dgcntl.c - dgcntl
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  dgcntl  -  control function for datagram pseudo-devices

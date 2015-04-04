@@ -1,8 +1,6 @@
-// send.c - send
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
 
 /*------------------------------------------------------------------------
  *  send  --  send a message to another process
@@ -15,8 +13,9 @@ send(int pid, int msg)
 	char ps;
 
 	disable(ps);
-	if (isbadpid(pid) || ((pptr = &proctab[pid])->pstate == PRFREE)
-	    || pptr->phasmsg) {
+	if (isbadpid(pid) ||
+            ((pptr = &proctab[pid])->pstate == PRFREE) ||
+            pptr->phasmsg) {
 		restore(ps);
 		return (SYSERR);
 	}
@@ -29,5 +28,6 @@ send(int pid, int msg)
 		ready(pid, RESCHYES);
 	}
 	restore(ps);
+
 	return (OK);
 }

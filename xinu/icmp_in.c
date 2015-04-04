@@ -1,8 +1,6 @@
-// icmp_in.c - icmp_in
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 //------------------------------------------------------------------------
 //  icmp_in  -  handle ICMP packet coming in from the network

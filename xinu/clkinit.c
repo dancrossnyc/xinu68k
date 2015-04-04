@@ -1,8 +1,6 @@
-// clkinit.c - clkinit
-
-#include <conf.h>
-#include <kernel.h>
-#include <sleep.h>
+#include "conf.h"
+#include "kernel.h"
+#include "sleep.h"
 
 // real-time clock variables and sleeping process queue pointers
 

@@ -1,10 +1,8 @@
-// ibclear.c - ibclear
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 //------------------------------------------------------------------------
 //  ibclear  --  clear in-core copy of an iblock

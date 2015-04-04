@@ -1,10 +1,8 @@
-// ttyiin.c ttyiin, erase1, eputc, echoch
-
-#include <conf.h>
-#include <kernel.h>
-#include <tty.h>
-#include <io.h>
-#include <slu.h>
+#include "conf.h"
+#include "kernel.h"
+#include "tty.h"
+#include "io.h"
+#include "slu.h"
 
 //------------------------------------------------------------------------
 //  eputc - put one character in the echo queue

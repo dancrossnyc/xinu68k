@@ -1,8 +1,6 @@
-// getnet.c - getnet
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  getnet  -  obtain the network portion of this system's IP address

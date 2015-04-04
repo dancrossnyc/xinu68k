@@ -1,8 +1,6 @@
-// ip2name.c - ip2name
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  ip2name  -  return DARPA Domain name for a host given its IP address

@@ -1,9 +1,7 @@
-// rfalloc.c - rfalloc
-
-#include <conf.h>
-#include <kernel.h>
-#include <fserver.h>
-#include <rfile.h>
+#include "conf.h"
+#include "kernel.h"
+#include "fserver.h"
+#include "rfile.h"
 
 /*------------------------------------------------------------------------
  *  rfalloc  --  allocate pseudo device for a remote file; return id
@@ -23,5 +21,6 @@ rfalloc(void)
 			return (i);
 		}
 	restore(ps);
+
 	return (SYSERR);
 }

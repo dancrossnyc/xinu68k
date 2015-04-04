@@ -1,8 +1,6 @@
-// ethrstrt.c - ethrstrt
-
-#include <conf.h>
-#include <kernel.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  ethrstrt - start an ethernet read operation on the DEQNA

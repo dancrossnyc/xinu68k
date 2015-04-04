@@ -1,8 +1,6 @@
-// dskstrt.c - dskstrt
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
 
 /*------------------------------------------------------------------------
  *  dskstrt  --  start an I/O operation on a disk device

@@ -1,8 +1,6 @@
-// read.c - read
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
 
 /*------------------------------------------------------------------------
  *  read  -  read one or more bytes from a device

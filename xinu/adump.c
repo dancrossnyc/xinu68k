@@ -1,7 +1,7 @@
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 static char *st[4] = { "free", "???", "gateway", "direct" };
 

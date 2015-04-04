@@ -1,10 +1,8 @@
-// ttywrite.c - ttywrite, writecopy
-
-#include <conf.h>
-#include <kernel.h>
-#include <tty.h>
-#include <io.h>
-#include <slu.h>
+#include "conf.h"
+#include "kernel.h"
+#include "tty.h"
+#include "io.h"
+#include "slu.h"
 
 //------------------------------------------------------------------------
 //  writecopy - high-speed copy from user's buffer into system buffer
@@ -35,7 +33,7 @@ writecopy(char *buff, struct tty * ttyp, int count)
 	sreset(ttyp->osem, ++avail);	// condition fails.
 	(ttyp->ioaddr)->ctstat = SLUENABLE;
 
-	return(cp - buff);
+	return cp - buff;
 }
 
 //------------------------------------------------------------------------

@@ -1,9 +1,7 @@
-// ip_in.c - ip_in
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  ip_in  -  handle IP packet coming in from the network

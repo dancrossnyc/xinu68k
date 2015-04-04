@@ -1,20 +1,17 @@
-// insert.c  -  insert
+#include "conf.h"
+#include "kernel.h"
+#include "q.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <q.h>
-
-/*------------------------------------------------------------------------
- * insert.c  --  insert an process into a q list in key order
- *------------------------------------------------------------------------
- */
+//------------------------------------------------------------------------
+// insert.c  --  insert an process into a q list in key order
+//   proc: process to insert
+//   head: q index of head of list
+//   key: key to use for this process
+//------------------------------------------------------------------------
 int
-insert(int proc,		// process to insert
-       int head,		// q index of head of list
-       int key			// key to use for this process
-    )
+insert(int proc, int head, int key)
 {
-	int next;		// runs through list
+	int next;			// runs through list
 	int prev;
 
 	next = q[head].qnext;
@@ -25,5 +22,6 @@ insert(int proc,		// process to insert
 	q[proc].qkey = key;
 	q[prev].qnext = proc;
 	q[next].qprev = proc;
-	return (OK);
+
+	return OK;
 }

@@ -1,9 +1,7 @@
-// dgread.c - dgread
-
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <network.h>
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "network.h"
 
 /*------------------------------------------------------------------------
  *  dgread  -  read one datagram from a datagram protocol pseudo-device

@@ -1,8 +1,6 @@
-// unmount.c - unmount
-
-#include <conf.h>
-#include <kernel.h>
-#include <name.h>
+#include "conf.h"
+#include "kernel.h"
+#include "name.h"
 
 /*------------------------------------------------------------------------
  *  unmount  -  remove an entry from the name prefix mapping table
@@ -30,5 +28,6 @@ unmount(char *prefix)
 		}
 	}
 	restore(ps);
+
 	return (SYSERR);
 }

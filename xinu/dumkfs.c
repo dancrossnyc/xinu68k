@@ -1,10 +1,8 @@
-// dumkfs.c - dumkfs, dumkdl, dumkil
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
-#include <lfile.h>
-#include <dir.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
+#include "lfile.h"
+#include "dir.h"
 
 /*------------------------------------------------------------------------
  *  dumkfs  --  make a fresh file system on a disk

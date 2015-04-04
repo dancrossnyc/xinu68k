@@ -1,10 +1,8 @@
-// ttyoin.c - ttyoin
-
-#include <conf.h>
-#include <kernel.h>
-#include <tty.h>
-#include <io.h>
-#include <slu.h>
+#include "conf.h"
+#include "kernel.h"
+#include "tty.h"
+#include "io.h"
+#include "slu.h"
 
 /*------------------------------------------------------------------------
  *  ttyoin  --  lower-half tty device driver for output interrupts

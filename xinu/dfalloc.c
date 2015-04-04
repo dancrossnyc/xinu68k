@@ -1,9 +1,7 @@
-// dfalloc.c - dfalloc
-
-#include <conf.h>
-#include <kernel.h>
-#include <disk.h>
-#include <lfile.h>
+#include "conf.h"
+#include "kernel.h"
+#include "disk.h"
+#include "lfile.h"
 
 /*------------------------------------------------------------------------
  *  dfalloc  --  allocate a device table entry for a disk file; return id
