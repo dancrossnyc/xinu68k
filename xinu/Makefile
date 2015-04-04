@@ -27,8 +27,8 @@ ODT	=	$(BINDIR)/odt
 CFILES=		access.c adump.c arp_in.c arpfind.c	\
 		arpinit.c				\
 		bpdump.c				\
-		chprio.c ckmode.c clkinit.c close.c	\
-		conf.c control.c create.c		\
+		chprio.c ckmode.c cksum.c clkinit.c	\
+		close.c conf.c control.c create.c	\
 		devdump.c dfalloc.c dfdsrch.c dgalloc.c	\
 		dgclose.c dgcntl.c dgdump.c dginit.c	\
 		dgmcntl.c dgmopen.c dgparse.c dgread.c	\
@@ -81,7 +81,7 @@ CFILES=		access.c adump.c arp_in.c arpfind.c	\
 		wait.c wakeup.c write.c			\
 		xdone.c
 
-SFILES=		cksum.s clkint.s ctxsw.s		\
+SFILES=		clkint.s ctxsw.s		\
 		ioint.s					\
 		lowcore.s				\
 		netutil.s				\
