@@ -6,7 +6,7 @@
  *  main  --  start UDP echo server and then run Xinu pseudo-shell
  *------------------------------------------------------------------------
  */
-void
+int
 main(void)
 {
 	int udpecho();
