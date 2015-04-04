@@ -67,11 +67,10 @@ sysinit(void)
 	nextsem = NSEM - 1;
 	nextqueue = NPROC;	// q[0..NPROC-1] are processes
 
-	memlist.mnext = mptr =	// initialize free memory list
-	    (struct mblock *)roundew(&end);
+	// initialize free memory list
+	memlist.mnext = mptr = (struct mblock *)roundew(&end);
 	mptr->mnext = (struct mblock *)NULL;
-	mptr->mlen =
-	    (unsigned)truncew((unsigned)maxaddr - NULLSTK - (unsigned) &end);
+	mptr->mlen = (uword)truncew((uword)maxaddr - NULLSTK - (uword)&end);
 
 	for (i = 0; i < NPROC; i++)	// initialize process table
 		proctab[i].pstate = PRFREE;
@@ -105,6 +104,7 @@ sysinit(void)
 #endif
 	for (i = 0; i < NDEVS; i++)	// initialize devices
 		init(i);
+
 	return OK;
 }
 
@@ -117,21 +117,17 @@ nulluser(void)
 	int userpid;
 
 	kprintf("\n\nXinu Version %s", vers);
-	if (reboot++ < 1)
-		kprintf("\n");
-	else
-		kprintf("   (reboot %d)\n", reboot);
+	if (reboot++ > 0)
+		kprintf("   (reboot %d)", reboot);
+	kprintf("\n");
 	sysinit();		// initialize all of Xinu
-	kprintf("%u real mem\n",
-		(unsigned) maxaddr + (unsigned) sizeof(int));
-	kprintf("%u avail mem\n",
-		(unsigned) maxaddr - (unsigned) (&end) +
-		(unsigned) sizeof(int));
+
+	kprintf("%lu real mem\n", (uword)maxaddr + sizeof(int));
+	kprintf("%lu avail mem\n", (uword)maxaddr - (uword)&end + sizeof(int));
 	kprintf("clock %sabled\n\n", clkruns == 1 ? "en" : "dis");
 	enable();		// enable interrupts
 
 	// create a process to execute the user's main program
-
 	userpid = create(main, INITSTK, INITPRIO, INITNAME, INITARGS);
 
 #ifdef	NETDAEMON
