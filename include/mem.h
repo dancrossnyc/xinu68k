@@ -1,16 +1,14 @@
 // mem.h - freestk, roundew, truncew
 
-/*----------------------------------------------------------------------
- * roundew, truncew - round or truncate address to next even word
- *----------------------------------------------------------------------
- */
+//----------------------------------------------------------------------
+// roundew, truncew - round or truncate address to next even word
+//----------------------------------------------------------------------
 #define	roundew(x)	(void *)((3 + (uword)(x)) & (~3) )
 #define	truncew(x)	(void *)(((uword)(x)) & (~3))
 
-/*----------------------------------------------------------------------
- *  freestk  --  free stack memory allocated by getstk
- *----------------------------------------------------------------------
- */
+//----------------------------------------------------------------------
+//  freestk  --  free stack memory allocated by getstk
+//----------------------------------------------------------------------
 #define freestk(p,len)	freemem((char *)(p)			\
 				- (unsigned)(roundew(len))	\
 				+ (unsigned)sizeof(int),	\

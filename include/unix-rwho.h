@@ -1,8 +1,8 @@
 // unix-rwho.h
 
-/*
- * rwho protocol packet format.
- */
+//
+// rwho protocol packet format.
+//
 struct	outmp {
 	char	out_line[8];		// tty name
 	char	out_name[8];		// user id
