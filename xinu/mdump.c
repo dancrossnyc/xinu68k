@@ -9,14 +9,14 @@
 void
 mdump(void)
 {
-	char ps;
+	int ps;
 	int i;
 	struct mblock *mptr;
 	unsigned free;
 	unsigned avail;
 	unsigned stkmem;
 
-	disable(ps);
+	ps = disable();
 
 	// calculate current size of free memory and stack memory
 

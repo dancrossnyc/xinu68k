@@ -9,9 +9,9 @@
 int
 nqalloc(void)
 {
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	for (int i = 0; i < NETQS; i++) {
 		struct netq *nqptr = &Net.netqs[i];
 		if (!nqptr->valid) {

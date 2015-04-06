@@ -13,9 +13,9 @@ dgmopen(struct devsw *devptr, char *forport, int locport)
 	int slot;
 	int nq;
 	int i;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	if ((slot = dgalloc()) == SYSERR) {
 		restore(ps);
 		return SYSERR;

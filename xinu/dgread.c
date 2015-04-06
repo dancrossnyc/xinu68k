@@ -15,9 +15,9 @@ dgread(struct devsw *devptr, struct xgram *buff, int len)
 	struct ip *ipptr;
 	struct netq *nqptr;
 	int datalen;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	dgptr = (struct dgblk *)devptr->dvioblk;
 	if (dgptr->dg_mode & DG_TMODE) {
 		nqptr = &Net.netqs[dgptr->dg_netq];

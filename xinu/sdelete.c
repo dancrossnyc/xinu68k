@@ -10,11 +10,11 @@
 SYSCALL
 sdelete(int sem)
 {
-	char ps;
+	int ps;
 	int pid;
 	struct sentry *sptr;	// address of sem to free
 
-	disable(ps);
+	ps = disable();
 	if (isbadsem(sem) || semaph[sem].sstate == SFREE) {
 		restore(ps);
 		return SYSERR;

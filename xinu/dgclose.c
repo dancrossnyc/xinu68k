@@ -9,13 +9,13 @@
 int
 dgclose(struct devsw *devptr)
 {
-	char ps;
+	int ps;
 	struct dgblk *dgptr;
 	struct netq *nqptr;
 	int nq;
 
 	dgptr = (struct dgblk *)devptr->dvioblk;
-	disable(ps);
+	ps = disable();
 	nq = dgptr->dg_netq;
 	nqptr = &Net.netqs[nq];
 	nqptr->valid = FALSE;

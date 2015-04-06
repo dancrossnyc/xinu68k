@@ -9,13 +9,13 @@
 SYSCALL
 preceive(int portid)
 {
-	char ps;
+	int ps;
 	struct pt *ptptr;
 	int seq;
 	int msg;
 	struct ptnode *nxtnode;
 
-	disable(ps);
+	ps = disable();
 	if (isbadport(portid) ||
 	    unmarked(ptmark) ||
 	    (ptptr = &ports[portid])->ptstate != PTALLOC) {

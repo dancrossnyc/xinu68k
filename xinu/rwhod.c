@@ -19,7 +19,7 @@ rwhod(void)
 	IPaddr mynet;
 	long now;
 	int len;
-	char ps;
+	int ps;
 
 	// Initialize rwho information
 
@@ -37,7 +37,7 @@ rwhod(void)
 	for (; TRUE; sleep(RWDELAY)) {
 		getutim(&now);
 		myptr->rwlast = myptr->rwslast = now;
-		disable(ps);
+		ps = disable();
 		for (i = 0; i < Rwho.rwnent; i++) {
 			rwptr = &Rwho.rwcache[i];
 			if (now - rwptr->rwlast > RWMAXDT) {

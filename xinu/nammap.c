@@ -8,11 +8,11 @@
 SYSCALL
 nammap(char *name, char *newname)
 {
-	char ps;
+	int ps;
 	int dev;
 	char tmpnam[NAMLEN];
 
-	disable(ps);
+	ps = disable();
 	dev = namrepl(name, newname);
 	while (dev == NAMESPACE) {
 		strcpy(tmpnam, newname);

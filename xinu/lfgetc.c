@@ -13,9 +13,9 @@ lfgetc(struct devsw *devptr)
 {
 	struct flblk *flptr;
 	char nextch;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	flptr = (struct flblk *)devptr->dvioblk;
 	if (flptr->fl_pid != currpid || !(flptr->fl_mode & FLREAD)) {
 		restore(ps);

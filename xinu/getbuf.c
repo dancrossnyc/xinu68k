@@ -9,7 +9,7 @@
 void *
 getbuf(int poolid)
 {
-	char ps;
+	int ps;
 	int *buf;
 
 	if (unmarked(bpmark))
@@ -17,7 +17,7 @@ getbuf(int poolid)
 	if (poolid < 0 || poolid >= nbpools)
 		return (void *)SYSERR;
 	wait(bptab[poolid].bpsem);
-	disable(ps);
+	ps = disable();
 	buf = (int *)bptab[poolid].bpnext;
 	bptab[poolid].bpnext = (char *)(*buf);
 	restore(ps);

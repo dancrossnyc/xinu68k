@@ -16,9 +16,9 @@ dsinit(struct devsw *devptr)
 	struct dsblk *dsptr;
 	struct dtc *dtptr;
 	int status;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	devptr->dvioblk = (char *)(dsptr = &dstab[devptr->dvminor]);
 	dsptr->dcsr = (struct dtc *)devptr->dvcsr;
 	dsptr->dreqlst = DRNULL;

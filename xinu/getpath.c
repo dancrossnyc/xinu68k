@@ -13,7 +13,7 @@ getpath(IPaddr faddr)
 	int arindex;		// route table entry index
 	int mypid;		// local copy of my process id
 	IPaddr myaddr;		// my IP address
-	char ps;
+	int ps;
 	struct arpent *arpptr;
 	struct epacket *packet;
 
@@ -31,7 +31,7 @@ getpath(IPaddr faddr)
 	for (i = 0; i < AR_RTRY; i++) {
 		packet = mkarp(EP_ARP, AR_REQ, myaddr, faddr);
 		memmove(Arp.arpwant, faddr, AR_PLEN);
-		disable(ps);
+		ps = disable();
 		Arp.arppid = mypid;
 		recvclr();
 		write(ETHER, packet, EMINPAK);

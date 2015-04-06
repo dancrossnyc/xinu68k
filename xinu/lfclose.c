@@ -15,9 +15,9 @@ lfclose(struct devsw *devptr)
 	struct dir *dirptr;
 	struct flblk *flptr;
 	int diskdev;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	flptr = (struct flblk *)devptr->dvioblk;
 	if (flptr->fl_pid != currpid) {
 		restore(ps);

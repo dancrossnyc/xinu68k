@@ -14,9 +14,9 @@ unsleep(int pid)
 	struct qent *qptr;
 	int remain;
 	int next;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	if (isbadpid(pid) ||
 	    ((pptr = &proctab[pid])->pstate != PRSLEEP &&
 	     pptr->pstate != PRTRECV)) {

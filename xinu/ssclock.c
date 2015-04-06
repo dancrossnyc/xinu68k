@@ -19,11 +19,11 @@ stopclk(void)
 void
 strtclk(void)
 {
-	char ps;
+	int ps;
 	int makeup;
 	int next;
 
-	disable(ps);
+	ps = disable();
 	if (defclk <= 0 || --defclk > 0) {
 		restore(ps);
 		return;

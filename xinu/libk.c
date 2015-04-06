@@ -52,14 +52,3 @@ void inint() { }
 void outint() { }
 void restart() { }
 void ctxsw() { }
-
-void
-panic(const char *msg)
-{
-	int ps;
-
-	disable(ps);
-	printf("%s", msg);
-	for (;;) { ; }
-	restore(ps);
-}

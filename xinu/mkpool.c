@@ -9,13 +9,13 @@
 SYSCALL
 mkpool(int bufsiz, int numbufs)
 {
-	char ps;
+	int ps;
 	int poolid;
 	char *where;
 
 	if (unmarked(bpmark))
 		poolinit();
-	disable(ps);
+	ps = disable();
 	if (bufsiz < BPMINB || bufsiz > BPMAXB
 	    || numbufs < 1 || numbufs > BPMAXN
 	    || nbpools >= NBPOOLS

@@ -8,10 +8,10 @@
 SYSCALL
 setnok(int nok, int pid)
 {
-	char ps;
+	int ps;
 	struct pentry *pptr;
 
-	disable(ps);
+	ps = disable();
 	if (isbadpid(pid)) {
 		restore(ps);
 		return SYSERR;

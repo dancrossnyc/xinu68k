@@ -9,9 +9,9 @@ SYSCALL
 send(int pid, int msg)
 {
 	struct pentry *pptr;	// receiver's proc. table addr.
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	if (isbadpid(pid) ||
             ((pptr = &proctab[pid])->pstate == PRFREE) ||
             pptr->phasmsg) {

@@ -13,14 +13,14 @@ sndrarp(void)
 	int mypid;
 	int resp;
 	IPaddr junk;		// needed for argument to mkarp; not ever used
-	char ps;
+	int ps;
 
 	mypid = getpid();
 	for (int i = 0; i < AR_RTRY; i++) {
 		packet = mkarp(EP_RARP, AR_RREQ, junk, junk);
 		if (((int) packet) == SYSERR)
 			break;
-		disable(ps);
+		ps = disable();
 		Arp.rarppid = mypid;
 		recvclr();
 		write(ETHER, packet, EMINPAK);

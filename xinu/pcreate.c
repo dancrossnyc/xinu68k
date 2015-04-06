@@ -9,11 +9,11 @@
 SYSCALL
 pcreate(int count)
 {
-	char ps;
+	int ps;
 
 	if (count < 0)
 		return SYSERR;
-	disable(ps);
+	ps = disable();
 	if (mark(ptmark) == OK)
 		pinit(MAXMSGS);
 	for (int i = 0; i < NPORTS; i++) {

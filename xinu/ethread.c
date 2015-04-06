@@ -9,7 +9,7 @@
 int
 ethread(struct devsw *devptr, char *buff, int len)
 {
-	char ps;
+	int ps;
 	char *wbuff;
 	struct etblk *etptr;
 	struct dcmd *dcmptr;
@@ -17,7 +17,7 @@ ethread(struct devsw *devptr, char *buff, int len)
 	etptr = (struct etblk *)devptr->dvioblk;
 	dcmptr = etptr->ercmd;
 	wait(etptr->etrsem);
-	disable(ps);
+	ps = disable();
 	etptr->etrpid = currpid;
 	recvclr();
 	ethrstrt(etptr, buff, len);

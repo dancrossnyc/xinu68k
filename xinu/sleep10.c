@@ -10,11 +10,11 @@
 SYSCALL
 sleep10(int n)
 {
-	char ps;
+	int ps;
 
 	if (n < 0 || clkruns == 0)
 		return SYSERR;
-	disable(ps);
+	ps = disable();
 	if (n == 0) {		// sleep10(0) -> end time slice
 	} else {
 		insertd(currpid, clockq, n);

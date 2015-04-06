@@ -41,10 +41,10 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	struct pentry *pptr;	// pointer to proc. table entry
 	int i;
 	int *saddr;		// stack address
-	char ps;		// saved processor status
+	uword ps;		// saved processor status
 	uword *procaddrp = (uword *)&procaddr;
 
-	disable(ps);
+	ps = disable();
 	ssize = (int)roundew(ssize);
 	if (ssize < MINSTK || ((saddr = getstk(ssize)) == (int *)SYSERR) ||
 	    (pid = newpid()) == SYSERR || isodd(procaddr) ||

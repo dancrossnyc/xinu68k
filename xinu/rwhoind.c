@@ -13,7 +13,7 @@ rwhoind(void)
 	int len;
 	int i;
 	long now;
-	char ps;
+	int ps;
 	struct rwhopac *rpacptr;
 	struct rwent *rwptr;
 
@@ -31,7 +31,7 @@ rwhoind(void)
 				break;
 		}
 		if (i >= Rwho.rwnent) {
-			disable(ps);
+			ps = disable();
 			if (Rwho.rwnent >= RWCSIZ) {
 				restore(ps);
 				continue;

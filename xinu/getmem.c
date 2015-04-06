@@ -8,10 +8,10 @@
 SYSCALL *
 getmem(unsigned nbytes)
 {
-	char ps;
+	int ps;
 	struct mblock *p, *q, *leftover;
 
-	disable(ps);
+	ps = disable();
 	if (nbytes == 0 || memlist.mnext == NULL) {
 		restore(ps);
 		return (int *)SYSERR;

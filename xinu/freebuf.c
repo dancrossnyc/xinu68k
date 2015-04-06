@@ -9,7 +9,7 @@
 SYSCALL
 freebuf(void *buf)
 {
-	char ps;
+	int ps;
 	int poolid;
 	int *bp;
 
@@ -19,7 +19,7 @@ freebuf(void *buf)
 	poolid = *(--bp);
 	if (poolid < 0 || poolid >= nbpools)
 		return SYSERR;
-	disable(ps);
+	ps = disable();
 	*bp = (int)bptab[poolid].bpnext;
 	bptab[poolid].bpnext = (void *)buf;
 	restore(ps);

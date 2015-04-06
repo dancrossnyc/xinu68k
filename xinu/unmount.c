@@ -9,14 +9,14 @@ SYSCALL
 unmount(char *prefix)
 {
 	struct nament *nptr;
-	char ps;
+	int ps;
 	int i;
 
 	if (prefix == NULL)
 		prefix = NULLSTR;
 	else if (strlen(prefix) >= NAMPLEN)
 		return SYSERR;
-	disable(ps);
+	ps = disable();
 	for (i = 0; i < Nam.nnames; i++) {
 		nptr = &Nam.nametab[i];
 		if (strcmp(prefix, nptr->npre) == 0) {

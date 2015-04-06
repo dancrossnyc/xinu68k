@@ -10,12 +10,12 @@
 SYSCALL
 sleep(int n)
 {
-	char ps;
+	int ps;
 
 	if (n < 0 || clkruns == 0)
 		return SYSERR;
 	if (n == 0) {
-		disable(ps);
+		ps = disable();
 		resched();
 		restore(ps);
 		return OK;

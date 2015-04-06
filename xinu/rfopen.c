@@ -12,9 +12,9 @@ rfopen(struct devsw *devptr, char *name, char *mode)
 	int i;
 	int mbits;
 	int devnum;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	if (strlen(name) > RNAMLEN || (mbits = ckmode(mode)) == SYSERR
 	    || (i = rfalloc()) == SYSERR) {
 		restore(ps);

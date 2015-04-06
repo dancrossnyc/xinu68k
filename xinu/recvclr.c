@@ -8,10 +8,10 @@
 SYSCALL
 recvclr(void)
 {
-	char ps;
+	int ps;
 	int msg = OK;
 
-	disable(ps);
+	ps = disable();
 	if (proctab[currpid].phasmsg) {	// existing message?
 		proctab[currpid].phasmsg = FALSE;
 		msg = proctab[currpid].pmsg;

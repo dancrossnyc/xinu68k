@@ -50,9 +50,9 @@ static char saveps;
 static void
 savestate(int device)
 {
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	saveps = ps;
 	savedev = device;
 	savecrstat = ((struct csr *)devtab[device].dvcsr)->crstat
@@ -69,7 +69,7 @@ savestate(int device)
 static void
 rststate(void)
 {
-	char ps;
+	int ps;
 
 	((struct csr *)devtab[savedev].dvcsr)->crstat = savecrstat;
 	((struct csr *)devtab[savedev].dvcsr)->ctstat = savectstat;

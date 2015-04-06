@@ -81,8 +81,8 @@ CFILES=		access.c adump.c arp_in.c arpfind.c	\
 		wait.c wakeup.c write.c			\
 		xdone.c
 
-SFILES=		clkint.s ctxsw.s		\
-		ioint.s					\
+SFILES=		clkint.s ctxsw.s			\
+		intr.s ioint.s				\
 		lowcore.s				\
 		netutil.s				\
 		panic.s					\
@@ -110,9 +110,9 @@ OFILES=		access.o adump.o arp_in.o arpfind.o	\
 		getutim.o				\
 		ibclear.o ibfree.o ibget.o iblfree.o	\
 		ibnew.o ibput.o icmp_in.o init.o	\
-		insert.o insertd.o ioerr.o ioinit.o	\
-		ioint.o ionull.o ip2name.o ip_in.o	\
-		ipsend.o				\
+		insert.o insertd.o intr.o ioerr.o	\
+		ioinit.o ioint.o ionull.o ip2name.o	\
+		ip_in.o	ipsend.o			\
 		kill.o kprintf.o			\
 		lfclose.o lfgetc.o lfinit.o lfputc.o	\
 		lfread.o lfsdfree.o lfseek.o lfsetup.o	\

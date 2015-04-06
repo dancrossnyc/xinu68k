@@ -11,9 +11,9 @@ namrepl(char *name, char *newname)
 	struct nament *nptr;
 	struct nament *nlast;
 	int plen, rlen;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	nlast = &Nam.nametab[Nam.nnames];
 	for (nptr = Nam.nametab; nptr < nlast; nptr++) {
 		plen = strlen(nptr->npre);

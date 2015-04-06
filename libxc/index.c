@@ -4,7 +4,7 @@
 #define	NULL	0
 
 char *
-index(char *sp, int c)
+index(const char *sp, int c)
 {
 	do {
 		if (*sp == c)

@@ -9,7 +9,7 @@
 int
 ttyread(struct devsw *devptr, char *buff, int count)
 {
-	char ps;
+	int ps;
 	struct tty *iptr;
 	int avail, nread;
 	char ch, eofch;
@@ -17,7 +17,7 @@ ttyread(struct devsw *devptr, char *buff, int count)
 
 	if (count < 0)
 		return SYSERR;
-	disable(ps);
+	ps = disable();
 	if ((avail = scount((iptr = &tty[devptr->dvminor])->isem)) < 0)
 		avail = 0;
 	if (count == 0) {	// read whatever is available

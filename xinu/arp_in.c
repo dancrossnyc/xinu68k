@@ -9,7 +9,7 @@
 int
 arp_in(struct epacket *packet, int device)
 {
-	char ps;
+	uword ps;
 	int pid;
 	short arop;
 	struct arppak *apacptr;
@@ -42,7 +42,7 @@ arp_in(struct epacket *packet, int device)
 		return OK;
 
 	case AR_RPLY:		// reply - awaken requestor if any
-		disable(ps);
+		ps = disable();
 		pid = Arp.arppid;
 		if (!isbadpid(pid) &&
 		    memcmp(Arp.arpwant, apacptr->ar_spa, IPLEN) == 0) {

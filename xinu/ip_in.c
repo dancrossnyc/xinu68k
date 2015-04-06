@@ -15,7 +15,7 @@ ip_in(struct epacket *packet, int icmpp, int lim)
 	int dport;
 	int i;
 	int to;
-	char ps;
+	int ps;
 
 	ipptr = (struct ip *)packet->ep_data;
 	switch (ipptr->i_proto) {
@@ -35,7 +35,7 @@ ip_in(struct epacket *packet, int icmpp, int lim)
 					return SYSERR;
 				}
 				psend(nqptr->xport, (uword)packet);
-				disable(ps);
+				ps = disable();
 				to = nqptr->pid;
 				if (!isbadpid(to)) {
 					nqptr->pid = BADPID;

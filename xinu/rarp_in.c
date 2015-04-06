@@ -9,7 +9,7 @@
 int
 rarp_in(struct epacket *packet, int device)
 {
-	char ps;
+	int ps;
 	int pid;
 	int ret;
 	struct arppak *apacptr;
@@ -22,7 +22,7 @@ rarp_in(struct epacket *packet, int device)
 		if (memcmp(apacptr->ar_tha, etptr->etpaddr, EPADLEN) == 0) {
 			memmove(Net.myaddr, apacptr->ar_tpa, IPLEN);
 			netnum(Net.mynet, Net.myaddr);
-			disable(ps);
+			ps = disable();
 			Net.mavalid = TRUE;
 			pid = Arp.rarppid;
 			if (!isbadpid(pid)) {

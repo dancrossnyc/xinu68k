@@ -11,9 +11,9 @@ SYSCALL
 signal(int sem)
 {
 	struct sentry *sptr;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	if (isbadsem(sem) || (sptr = &semaph[sem])->sstate == SFREE) {
 		restore(ps);
 		return SYSERR;

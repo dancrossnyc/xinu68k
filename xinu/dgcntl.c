@@ -10,10 +10,10 @@ dgcntl(struct devsw *devptr, int func, int arg)
 {
 	struct dgblk *dgptr;
 	int freebuf();
-	char ps;
+	int ps;
 	int ret;
 
-	disable(ps);
+	ps = disable();
 	dgptr = (struct dgblk *)devptr->dvioblk;
 	ret = OK;
 	switch (func) {

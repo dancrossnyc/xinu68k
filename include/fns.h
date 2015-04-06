@@ -169,6 +169,10 @@ int nulluser(void);
 int insert(int proc, int head, int key);
 // insertd.c
 int insertd(int pid, int head, int key);
+// intr.s
+int disable(void);
+void enable(void);
+void restore(int sr);
 // ioerr.c
 int ioerr(void);
 INTPROC interr(void);

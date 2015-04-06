@@ -17,9 +17,9 @@ dsopen(struct devsw *devptr, char *filenam, char *mode)
 	DBADDR dba;
 	int mbits, findex;
 	int retcode;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	dirptr = dsdirec(devptr->dvnum);
 	if ((mbits = ckmode(mode)) == SYSERR)
 		retcode = SYSERR;

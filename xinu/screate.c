@@ -31,10 +31,10 @@ newsem(void)
 SYSCALL
 screate(int count)
 {
-	char ps;
+	int ps;
 	int sem;
 
-	disable(ps);
+	ps = disable();
 	if (count < 0 || (sem = newsem()) == SYSERR) {
 		restore(ps);
 		return SYSERR;

@@ -11,11 +11,11 @@ SYSCALL
 sreset(int sem, int count)
 {
 	struct sentry *sptr;
-	char ps;
+	int ps;
 	int pid;
 	int slist;
 
-	disable(ps);
+	ps = disable();
 	if (isbadsem(sem) || count < 0 || semaph[sem].sstate == SFREE) {
 		restore(ps);
 		return SYSERR;

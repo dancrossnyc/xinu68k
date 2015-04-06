@@ -9,11 +9,11 @@
 int
 ttygetc(struct devsw *devptr)
 {
-	char ps;
+	int ps;
 	int ch;
 	struct tty *iptr;
 
-	disable(ps);
+	ps = disable();
 	iptr = &tty[devptr->dvminor];
 	wait(iptr->isem);	// wait for a character in buff
 	ch = LOWBYTE & iptr->ibuff[iptr->itail++];

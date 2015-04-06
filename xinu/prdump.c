@@ -7,9 +7,9 @@ static void
 pxdump(int all)
 {
 	int i, j, ctr;
-	char ps;
+	int ps;
 	struct pentry *pptr;
-	disable(ps);
+	ps = disable();
 	kprintf("\nProctab at loc %o\ncurrpid is %d\n", proctab, currpid);
 	for (i = 0; i < NPROC; i++) {
 		pptr = &proctab[i];

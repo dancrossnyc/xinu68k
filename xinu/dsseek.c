@@ -10,9 +10,9 @@ int
 dsseek(struct devsw *devptr, DBADDR block)
 {
 	struct dreq *drptr;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	drptr = (struct dreq *)getbuf(dskrbp);
 	drptr->drdba = block;
 	drptr->drpid = currpid;

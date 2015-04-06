@@ -10,9 +10,9 @@ int
 dscntl(struct devsw *devptr, int func)
 {
 	int stat;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	switch (func) {
 
 	case DSKSYNC:

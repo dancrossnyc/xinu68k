@@ -10,11 +10,11 @@
 SYSCALL
 wait(int sem)
 {
-	char ps;
+	int ps;
 	struct sentry *sptr;
 	struct pentry *pptr;
 
-	disable(ps);
+	ps = disable();
 	if (isbadsem(sem) || (sptr = &semaph[sem])->sstate == SFREE) {
 		restore(ps);
 		return SYSERR;

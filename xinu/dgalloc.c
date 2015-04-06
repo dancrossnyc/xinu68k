@@ -10,9 +10,9 @@ dgalloc(void)
 {
 	struct dgblk *dgptr;
 	int i;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	for (i = 0; i < Ndg; i++) {
 		dgptr = &dgtab[i];
 		if (dgptr->dg_state == DG_FREE) {

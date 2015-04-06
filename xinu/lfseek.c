@@ -11,9 +11,9 @@ int
 lfseek(struct devsw *devptr, long offset)
 {
 	struct flblk *flptr;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	flptr = (struct flblk *)devptr->dvioblk;
 	if (flptr->fl_mode & FLWRITE) {
 		if (flptr->fl_dch)

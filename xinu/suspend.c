@@ -10,10 +10,10 @@ SYSCALL
 suspend(int pid)
 {
 	struct pentry *pptr;	// pointer to proc. tab. entry
-	char ps;		// saved processor status
+	int ps;		// saved processor status
 	int prio;		// priority returned
 
-	disable(ps);
+	ps = disable();
 	if (isbadpid(pid) || pid == NULLPROC ||
 	    ((pptr = &proctab[pid])->pstate != PRCURR
 	     && pptr->pstate != PRREADY)) {

@@ -12,9 +12,9 @@ chprio(int pid, int newprio)
 {
 	int oldprio;
 	struct pentry *pptr;
-	char ps;
+	uword ps;
 
-	disable(ps);
+	ps = disable();
 	if (isbadpid(pid) || newprio <= 0 ||
 	    (pptr = &proctab[pid])->pstate == PRFREE) {
 		restore(ps);

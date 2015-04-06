@@ -11,7 +11,7 @@ mount(char *prefix, int dev, char *replace)
 	struct nament *nptr;
 	struct nament *last;
 	int i;
-	char ps;
+	int ps;
 
 	if (prefix == NULL)
 		prefix = NULLSTR;
@@ -19,7 +19,7 @@ mount(char *prefix, int dev, char *replace)
 		replace = NULLSTR;
 	if (strlen(prefix) >= NAMPLEN || strlen(replace) >= NAMRLEN)
 		return SYSERR;
-	disable(ps);
+	ps = disable();
 	for (i = 0; i < Nam.nnames; i++) {
 		nptr = &Nam.nametab[i];
 		if (strcmp(prefix, nptr->npre) == 0) {

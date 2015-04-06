@@ -11,7 +11,7 @@ int
 ethwrite(struct devsw *devptr, char *buff, int len)
 {
 	struct etblk *etptr;
-	char ps;
+	int ps;
 
 	if (len > EMAXPAK)
 		return SYSERR;
@@ -19,7 +19,7 @@ ethwrite(struct devsw *devptr, char *buff, int len)
 		len = EMINPAK;
 	etptr = (struct etblk *)devptr->dvioblk;
 	memmove(((struct eheader *)buff)->e_src, etptr->etpaddr, EPADLEN);
-	disable(ps);
+	ps = disable();
 	wait(etptr->etwsem);
 	ethwstrt(etptr, buff, etptr->etlen = len, DC_NORM);
 	restore(ps);

@@ -12,11 +12,11 @@ recvtim(int maxwait)
 {
 	struct pentry *pptr;
 	int msg;
-	char ps;
+	int ps;
 
 	if (maxwait < 0 || clkruns == 0)
 		return SYSERR;
-	disable(ps);
+	ps = disable();
 	pptr = &proctab[currpid];
 	if (!pptr->phasmsg) {	// if no message, wait
 		insertd(currpid, clockq, maxwait);

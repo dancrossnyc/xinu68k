@@ -10,9 +10,9 @@ receive(void)
 {
 	struct pentry *pptr;
 	int msg;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	pptr = &proctab[currpid];
 	if (!pptr->phasmsg) {	// if no message, wait for one
 		pptr->pstate = PRRECV;

@@ -10,9 +10,9 @@ int
 dswrite(struct devsw *devptr, char *buff, DBADDR block)
 {
 	struct dreq *drptr;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	drptr = (struct dreq *)getbuf(dskrbp);
 	drptr->drbuff = buff;
 	drptr->drdba = block;

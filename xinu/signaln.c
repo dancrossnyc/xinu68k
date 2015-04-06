@@ -11,9 +11,9 @@ SYSCALL
 signaln(int sem, int count)
 {
 	struct sentry *sptr;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	if (isbadsem(sem) || semaph[sem].sstate == SFREE || count <= 0) {
 		restore(ps);
 		return SYSERR;

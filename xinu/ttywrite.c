@@ -44,13 +44,13 @@ ttywrite(struct devsw *devptr, char *buff, int count)
 {
 	struct tty *ttyp;
 	int ncopied;
-	char ps;
+	int ps;
 
 	if (count < 0)
 		return SYSERR;
 	if (count == 0)
 		return OK;
-	disable(ps);
+	ps = disable();
 	ttyp = &tty[devptr->dvminor];
 	count -= (ncopied = writecopy(buff, ttyp, count));
 	buff += ncopied;

@@ -11,9 +11,9 @@ dsread(struct devsw *devptr, char *buff, DBADDR block)
 {
 	struct dreq *drptr;
 	int stat;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	drptr = (struct dreq *)getbuf(dskrbp);
 	drptr->drdba = block;
 	drptr->drpid = currpid;

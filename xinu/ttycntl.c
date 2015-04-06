@@ -12,7 +12,7 @@ ttycntl(struct devsw *devptr, int func)
 {
 	struct tty *ttyp;
 	char ch;
-	char ps;
+	int ps;
 
 	ttyp = &tty[devptr->dvminor];
 	switch (func) {
@@ -23,7 +23,7 @@ ttycntl(struct devsw *devptr, int func)
 		ttyp->ioaddr->ctstat &= ~SLUTBREAK;
 		break;
 	case TCNEXTC:
-		disable(ps);
+		ps = disable();
 		wait(ttyp->isem);
 		ch = ttyp->ibuff[ttyp->itail];
 		restore(ps);

@@ -8,7 +8,7 @@
 SYSCALL
 freemem(void *b, unsigned size)
 {
-	char ps;
+	int ps;
 	struct mblock *p, *q, *block = (struct mblock *)b;
 	unsigned top;
 
@@ -16,7 +16,7 @@ freemem(void *b, unsigned size)
 	    || ((unsigned) block) < ((unsigned) &end))
 		return SYSERR;
 	size = (unsigned) roundew(size);
-	disable(ps);
+	ps = disable();
 	for (p = memlist.mnext, q = &memlist;
 	     (char *)p != NULL && p < block; q = p, p = p->mnext);
 	if ((top = q->mlen + (unsigned) q) > (unsigned) block

@@ -12,9 +12,9 @@ udpnxtp(void)
 	int try;
 	Bool inuse;
 	struct netq *nqptr;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	for (inuse = TRUE; inuse;) {
 		inuse = FALSE;
 		try = Net.nxtprt++;

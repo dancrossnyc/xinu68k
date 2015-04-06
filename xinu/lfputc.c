@@ -12,9 +12,9 @@ int
 lfputc(struct devsw *devptr, int ch)
 {
 	struct flblk *flptr;
-	char ps;
+	int ps;
 
-	disable(ps);
+	ps = disable();
 	flptr = (struct flblk *)devptr->dvioblk;
 	if (flptr->fl_pid != currpid || !(flptr->fl_mode & FLWRITE)) {
 		restore(ps);

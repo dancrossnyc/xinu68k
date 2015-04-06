@@ -70,9 +70,6 @@ typedef	char		Bool;		// Boolean type
 
 #define	isodd(x)	(01&(int)(x))
 #define	min(a,b)	( (a) < (b) ? (a) : (b) )
-#define	disable(ps) ((ps) = 0)
-#define	restore(ps) ((ps) = ((ps) == 0) ? 0 : 1)
-#define	enable()
 #define	pause()
 #define	halt()
 

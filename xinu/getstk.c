@@ -8,12 +8,12 @@
 SYSCALL *
 getstk(unsigned int nbytes)
 {
-	char ps;
+	int ps;
 	struct mblock *p, *q;	// q follows p along memlist
 	struct mblock *fits, *fitsq;
 	unsigned len;
 
-	disable(ps);
+	ps = disable();
 	if (nbytes == 0) {
 		restore(ps);
 		return (int *)SYSERR;

@@ -60,10 +60,10 @@ void
 tdump1(int tnum)
 {
 	struct tty *iptr;
-	char ps;
+	int ps;
 	int i;
 
-	disable(ps);
+	ps = disable();
 	iptr = &tty[tnum];
 	kprintf("Tty %d CSR at %o\n", tnum, iptr->ioaddr);
 	kprintf("INPUT -- tail at %d head at %d sem # %d value %d\n",

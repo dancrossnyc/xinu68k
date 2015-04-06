@@ -19,6 +19,6 @@ install:	${PROG}
 		cp ${PROG} ../xinu/config
 
 clean:
-		${RM} ${PROG} ${OBJ} lexer.c *.o y.tab.h
+		${RM} ${PROG} ${OBJ} parser.c lexer.c *.o y.tab.h
 
 parser.c:	lexer.c

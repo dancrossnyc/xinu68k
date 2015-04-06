@@ -10,7 +10,7 @@ rfsend(struct fphdr *fptr, int reqlen, int rplylen)
 {
 	int trys;
 	int ret;
-	char ps;
+	int ps;
 
 	// Clear server queue, and send packet to it
 	if (Rf.device == RCLOSED) {
@@ -19,7 +19,7 @@ rfsend(struct fphdr *fptr, int reqlen, int rplylen)
 		    control(Rf.device, DG_SETMODE, DG_DMODE | DG_TMODE) == SYSERR)
 			return SYSERR;
 	}
-	disable(ps);
+	ps = disable();
 	control(Rf.device, DG_CLEAR, 0);
 	for (trys = 0; trys < RMAXTRY; trys++) {
 		if (write(Rf.device, fptr, reqlen) == SYSERR) {
