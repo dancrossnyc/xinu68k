@@ -84,7 +84,6 @@ CFILES=		access.c adump.c arp_in.c arpfind.c	\
 SFILES=		clkint.s ctxsw.s			\
 		intr.s ioint.s				\
 		lowcore.s				\
-		netutil.s				\
 		panic.s					\
 		setclkr.s sizmem.s startup.s
 
@@ -121,7 +120,7 @@ OFILES=		access.o adump.o arp_in.o arpfind.o	\
 		mark.o mdump.o mkarp.o mkpool.o mount.o	\
 		naminit.o nammap.o namopen.o namrepl.o	\
 		ndump.o netdump.o netin.o netinit.o	\
-		netnum.o netout.o netutil.o newqueue.o	\
+		netnum.o netout.o newqueue.o		\
 		nqalloc.o				\
 		open.o					\
 		panic.o pcount.o pcreate.o pdelete.o	\
