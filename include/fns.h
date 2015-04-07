@@ -119,7 +119,7 @@ void ethwstrt(struct etblk *etptr, char *buf, int len, int setup);
 // freebuf.c
 SYSCALL freebuf(void *buf);
 // freemem.c
-SYSCALL freemem(void *block, unsigned size);
+SYSCALL freemem(void *block, size_t size);
 // getaddr.c
 SYSCALL getaddr(IPaddr address);
 // getbuf.c
@@ -130,7 +130,7 @@ SYSCALL getc(int descrp);
 int getfirst(int head);
 int getlast(int tail);
 // getmem.c
-SYSCALL *getmem(unsigned nbytes);
+SYSCALL *getmem(size_t nbytes);
 // getname.c
 SYSCALL getname(char *nam);
 // getnet.c
@@ -142,7 +142,7 @@ SYSCALL getpid(void);
 // getprio.c
 SYSCALL getprio(int pid);
 // getstk.c
-SYSCALL *getstk(unsigned int nbytes);
+SYSCALL *getstk(size_t nbytes);
 // gettime.c
 SYSCALL gettime(long *timvar);
 // getutim.c
