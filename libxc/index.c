@@ -8,7 +8,7 @@ index(const char *sp, int c)
 {
 	do {
 		if (*sp == c)
-			return (sp);
+			return (char *)sp;
 	} while (*sp++);
 
 	return NULL;

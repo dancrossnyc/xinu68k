@@ -3,40 +3,41 @@
 #include "mem.h"
 
 //------------------------------------------------------------------------
-// getstk  --  allocate stack memory, returning address of topmost int
+// getstk  --  allocate stack memory, returning address of topmost uword
 //------------------------------------------------------------------------
 SYSCALL *
-getstk(unsigned int nbytes)
+getstk(size_t nbytes)
 {
+	struct mblock *p, *prev;	// prev follows p along memlist
+	struct mblock *fits, *fitsprev;
+	size_t len;
 	int ps;
-	struct mblock *p, *q;	// q follows p along memlist
-	struct mblock *fits, *fitsq;
-	unsigned len;
 
 	ps = disable();
 	if (nbytes == 0) {
 		restore(ps);
-		return (int *)SYSERR;
+		return (void *)SYSERR;
 	}
-	nbytes = (unsigned)roundew(nbytes);
+	nbytes = (size_t)roundew(nbytes);
 	fits = NULL;
-	q = &memlist;
-	for (p = q->mnext; p != NULL; q = p, p = p->mnext)
+	prev = &memlist;
+	for (p = prev->mnext; p != NULL; prev = p, p = p->mnext)
 		if (p->mlen >= nbytes) {
-			fitsq = q;
+			fitsprev = prev;
 			fits = p;
 		}
 	if (fits == NULL) {
 		restore(ps);
-		return (int *)SYSERR;
+		return (void *)SYSERR;
 	}
-	if (nbytes == (len = fits->mlen)) {
-		fitsq->mnext = fits->mnext;
+	len = fits->mlen;
+	if (nbytes == len) {
+		fitsprev->mnext = fits->mnext;
 	} else {
 		fits->mlen -= nbytes;
 	}
-	fits = (struct mblock *)((uword)fits + len - sizeof(int));
+	fits = (struct mblock *)((intptr_t)fits + len - sizeof(uword));
 	restore(ps);
 
-	return (int *)fits;
+	return (void *)fits;
 }

@@ -14,6 +14,7 @@ typedef signed int     i32;
 typedef int            word;	// Register word.
 typedef unsigned int   uword;
 typedef unsigned long  size_t;
+typedef unsigned int   intptr_t;
 
 //
 typedef	u32		DBADDR;
