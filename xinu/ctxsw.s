@@ -1,45 +1,49 @@
-/*
-; ctxsw.s - ctxsw
-
-;------------------------------------------------------------------------
-; ctxsw  --  actually perform context switch, saving;loading registers
-;------------------------------------------------------------------------
-; The stack contains three items upon entry to this routine:
-;
-;	SP+4 =>	address of 9 word save area with new registers + PS
-;	SP+2 =>	address of 9 word save area for old registers + PS
-;	SP   =>	return address
-;
-; The saved state consists of: the values of R0-R5 upon entry, SP+2,
-; PC equal to the return address, and the PS (i.e., the PC and SP are
-; saved as if the calling process had returned to its caller).
-
-	.globl	_ctxsw		; declare the routine name global
-_ctxsw:				; entry point to context switch
-	mov	r0,*2(sp)	; Save old R0 in old register area
-	mov	2(sp),r0	; Get address of old register area
-	add	$2,r0		;  in R0; increment to saved pos. of R1
-	mov	r1,(r0)+	; Save registers R1-R5 in successive
-	mov	r2,(r0)+	;  locations of the old process
-	mov	r3,(r0)+	;  register save area.  (r0)+ denotes
-	mov	r4,(r0)+	;  indirect reference and, as a side
-	mov	r5,(r0)+	;  effect, incrementing r0 to next word.
-	add	$2,sp		; move sp beyond the return address,
-				;   as if a return had occurred.
-	mov	sp,(r0)+	; save stack pointer
-	mov	-(sp),(r0)+	; Save caller's return address as PC
-	mfps	(r0)		; Save processor status beyond registers
-	mov	4(sp),r0	; Pick up address of new registers in R0
-				; Ready to load registers for the new
-				;   process and abandon the old stack.
-	mov	2(r0),r1	; Load R1-R5 and SP from the saved area
-	mov	4(r0),r2	;   for the new process.
-	mov	6.(r0),r3	; NOTE: dot following a number makes it
-	mov	8.(r0),r4	;   decimal; all others are octal
-	mov	10.(r0),r5
-	mov	12.(r0),sp	; Have now actually switched stacks
-	mov	16.(r0),-(sp)	; Push new process PS on new process stack
-	mov	14.(r0),-(sp)	; Push new process PC on new process stack
-	mov	(r0),r0		; Finally, load R0 from new area
-	rtt			; Load PC, PS, and reset SP all at once
-*/
+|------------------------------------------------------------------------
+| ctxsw -- actually perform context switch, saving and loading registers
+|------------------------------------------------------------------------
+| The stack contains three items upon entry to this routine:
+|
+|	SP+8 =>	address save area with new registers + SR
+|	SP+4 =>	address save area for old registers + SR
+|	SP   =>	return address
+|
+| Stack frame:	(Offset relative to start of save area)
+|	0	PC
+|	4	SR (in lower 16-bit word)
+|	8	D0 (aka SP)
+|	12	D1 (aka FP)
+|	16	D2
+|	20	D3
+|	24	D4
+|	28	D5
+|	32	D6
+|	36	D7
+|	40	A0
+|	44	A1
+|	48	A2
+|	52	A3
+|	56	A4
+|	60	A5
+|	64	A6
+|	68	A7
+|------------------------------------------------------------------------
+.text
+.globl	ctxsw
+ctxsw:
+	move.l	%a0,-(%sp)		| Save A0 on current stack (make room)
+					| Adds 4 to SP offsets.
+	movea.l	8(%sp),%a0		| Move address of old save area into A0
+	move.w	%sr,6(%a0)		| Save SR
+	clr.w	4(%a0)			| Clear the other half of that long word
+	movem.l	%d0-%d7/%a0-%a7,8(%a0)	| Save all registers (including current A0)
+	add.l	#4,68(%a0)		| Pop old A0 off old saved stack pointer
+	move.l	(%sp),40(%a0)		| Save old A0 into the right place
+	move.l	4(%sp),(%a0)		| Save PC as return address
+	movea.l	12(%sp),%a0		| Move address of new save area into A0
+	movem.l	8(%a0),%d0-%d7/%a0-%a6	| Restore all registers but SP
+	movea.l	12(%sp),%a0		| Still need temporary A0....
+	movea.l	68(%a0),%sp		| Restore stack pointer
+	move.l	(%a0),-(%sp)		| Move PC into return address
+	move.w	6(%a0),%sr		| Restore SR
+	movea.l	40(%a0),%a0		| Restore real A0
+	rts				| Return to saved PC

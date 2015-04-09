@@ -44,11 +44,3 @@ memcmp(const void *a, const void *b, size_t len)
 
 	return 0;
 }
-
-// Things that should be elsewhere.
-void clkint() { }
-void setclkr() { }
-void inint() { }
-void outint() { }
-void restart() { }
-void ctxsw() { }

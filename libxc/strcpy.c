@@ -1,6 +1,7 @@
 // Copy string s2 to s1.  s1 must be large enough.
 // return s1
 
+#include <stddef.h>
 #include <string.h>
 
 char *

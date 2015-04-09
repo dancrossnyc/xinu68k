@@ -1,13 +1,17 @@
 // Returns the number of
 // non-NULL bytes in string argument.
 
-int
-strlen(char *s)
+#include <stddef.h>
+#include <string.h>
+
+size_t
+strlen(const char *s)
 {
-	int n;
+	size_t n;
 
 	n = 0;
 	while (*s++)
 		n++;
-	return (n);
+
+	return n;
 }

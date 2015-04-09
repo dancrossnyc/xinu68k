@@ -1,17 +1,11 @@
+|------------------------------------------------------------------------
+| setclkr  --  set cklruns to 1 iff real-time clock exists, 0 otherwise
+|------------------------------------------------------------------------
+.globl	setclkr
+setclkr:
+	rte
+
 /*
-; setclkr.s - setclkr
-
-CVECTPC	=	100			; clock interrupt vector address
-CVECTPS	=	102			;  "      "         "      "
-DISABLE	=	340			; PS that disables interrupts
-ENABLE	=	000			; PS that enables interrupts
-COUNT	=	32700.			; Times to loop (in decimal)
-
-;------------------------------------------------------------------------
-; setclkr  --  set cklruns to 1 iff real-time clock exists, 0 otherwise
-;------------------------------------------------------------------------
-	.globl	_setclkr
-_setclkr:
 	mov	r1,-(sp)		; save register	used
 	clr	_clkruns		; initialize for no clock
 	mov	*$CVECTPS,-(sp)		; save clock interrupt vector

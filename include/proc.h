@@ -19,7 +19,7 @@
 
 // miscellaneous process definitions
 
-#define	PNREGS		16		// size of saved register area
+#define	PNREGS		18		// size of saved register area
 #define	PNMLEN		16		// length of process "name"
 #define	NULLPROC	0		// id of the null process; it
 					// is always eligible to run

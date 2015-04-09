@@ -3,6 +3,8 @@
 #ifndef U_H__
 #define U_H__
 
+#include "stddef.h"
+
 typedef unsigned char  byte;
 typedef unsigned char  u8;
 typedef unsigned short u16;
@@ -13,8 +15,6 @@ typedef signed short   i16;
 typedef signed int     i32;
 typedef int            word;	// Register word.
 typedef unsigned int   uword;
-typedef unsigned long  size_t;
-typedef unsigned int   intptr_t;
 
 //
 typedef	u32		DBADDR;
@@ -24,7 +24,6 @@ typedef	u32		DBADDR;
 typedef	char		Bool;		// Boolean type
 #define	FALSE		0		// Boolean constants
 #define	TRUE		1
-#define	NULL		0		// Null pointer for linked lists
 #define	NULLCH		'\0'		// The null character
 #define	NULLSTR		""		// Pointer to empty string
 #define	SYSCALL		int		// System call declaration

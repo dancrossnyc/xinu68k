@@ -1,11 +1,11 @@
-/*
-; clkint.s -  clkint
+|------------------------------------------------------------------------
+| clkint  --  real-time clock interrupt service routine
+|------------------------------------------------------------------------
+.globl	clkint
+clkint:
+	rte
 
-;------------------------------------------------------------------------
-; clkint  --  real-time clock interrupt service routine
-;------------------------------------------------------------------------
-	.globl	_clkint
-_clkint:
+/*
 	dec	_count6			/ Is this the 6th interrupt?
 	bgt	clret			/  no => return
 	mov	$6,_count6		/  yes=> reset counter&continue

@@ -1,4 +1,5 @@
 | Disable interrupts.
+.text
 .globl disable
 disable:
 	move.w	%sr,%d0
