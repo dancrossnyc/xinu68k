@@ -44,3 +44,16 @@ memcmp(const void *a, const void *b, size_t len)
 
 	return 0;
 }
+
+void *
+memset(void *dst, int c, size_t len)
+{
+	unsigned char *p = (unsigned char *)p;
+	unsigned char v = c;
+
+	while (len-- > 0) {
+		*p++ = v;
+	}
+
+	return dst;
+}

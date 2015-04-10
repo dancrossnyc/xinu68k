@@ -4,10 +4,10 @@
 #include "network.h"
 
 static const char *states[] = {
-    [ARP_FREE]	 	"free",
-    [ARP_ALLOC]		"(alloc)",
-    [ARP_REMOTE]	"gateway",
-    [ARP_RESOLVED]	"direct",
+    [ARP_FREE]     = "free",
+    [ARP_USED]     = "(alloc)",
+    [ARP_REMOTE]   = "gateway",
+    [ARP_RESOLVED] = "direct",
 };
 
 //------------------------------------------------------------------------
@@ -20,7 +20,7 @@ adump(void)
 	kprintf("ARP cache: size=%d, next=%d\n", Arp.atabsiz, Arp.atabnxt);
 	for (int k = 0; k < Arp.atabsiz; k++) {
 		struct arpent *ap = &Arp.arptab[k];
-		if (ap->state < 0 || AP->state >= ARP_NSTATES || ap->state == ARP_FREE) {
+		if (ap->state < 0 || ap->state >= ARP_NSTATES || ap->state == ARP_FREE) {
 			kprintf(" %2d. Route=%7s, Dev=%2d ",
 				k, states[ap->state], ap->dev);
 			kprintf("IPaddr=%03d.%03d.%03d.%03d, ",

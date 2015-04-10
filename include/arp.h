@@ -33,17 +33,17 @@ struct	arppak	{		// format of DARPA ARP packet
 
 enum ArpStates {
 	ARP_FREE,	// Entry is unused (initial value)
-	ARP_ALLOC,	// Entry is used but route still unknown
+	ARP_USED,	// Entry is used but route still unknown
 	ARP_REMOTE,	// Entry is reachable only by gateway
 	ARP_RESOLVED,	// Entry has been resolved to Eth. addr.
 	ARP_NSTATES
 };
 
 struct	arpent	{		// format of entry in ARP cache
-	ArpSates state;		// state of this entry (see below)
-	Eaddr	ether_addr;	// Ethernet address of this host
-	IPaddr	ip_addr;	// IP address of this host
-	int	dev;		// Xinu device for this host route
+	enum ArpStates state;	// state of this entry (see below)
+	Eaddr ether_addr;	// Ethernet address of this host
+	IPaddr ip_addr;		// IP address of this host
+	int dev;		// Xinu device for this host route
 };
 
 struct	arpblk	{		// all information about ARP cache

@@ -19,13 +19,12 @@ getpath(IPaddr faddr)
 
 	wait(Arp.arpsem);
 	arpptr = &Arp.arptab[arindex = arpfind(faddr)];
-	if (arpptr->state != ARP_ALLOC) {
+	if (arpptr->state != ARP_USED) {
 		signal(Arp.arpsem);
 		return arindex;
 	}
 
 	// Use ARP to obtain and record IP-to-Ether binding
-
 	getaddr(myaddr);
 	mypid = getpid();
 	for (i = 0; i < AR_RTRY; i++) {

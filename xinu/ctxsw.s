@@ -31,26 +31,25 @@
 .text
 .globl	ctxsw
 ctxsw:
-	movem.l	%a0,-(%sp)		| Save A0 on current stack so we
+	movem.l	%a6,-(%sp)		| Save A6 on current stack so we
 					| can use an address register.  Adds
 					| 4 to SP offsets. MOVEM preserves CCR.
-	movea.l	8(%sp),%a0		| Move address of old save area into A0.
-					| MOVEA doesn't affect CCR.
-	move.w	%sr,6(%a0)		| Save SR
-	clr.w	4(%a0)			| Clear the other half of that long word
-	movem.l	%d0-%d7/%a0-%a7,8(%a0)	| Save all registers (including current A0)
-	move.l	%usp, %a1
-	move.l	%a1, 72(%a0)		| Save user stack pointer
-	add.l	#4,68(%a0)		| Pop old A0 off old saved stack pointer
-	move.l	(%sp),40(%a0)		| Put old A0 into the save area
-	move.l	4(%sp),(%a0)		| Save PC as return address
-	movea.l	12(%sp),%a0		| Move address of new save area into A0
-	movea.l	72(%a0),%a1		| Restore user stack pointer
-	move.l	%a1,%usp
-	movem.l	8(%a0),%d0-%d7/%a0-%a6	| Restore all registers but SP
-	movea.l	12(%sp),%a0		| Still need temporary A0....
-	movea.l	68(%a0),%sp		| Restore system stack pointer
-	move.l	(%a0),-(%sp)		| Move PC into return address
-	move.w	6(%a0),%sr		| Restore SR
-	movea.l	40(%a0),%a0		| Restore real A0. Doesn't affect CCR.
-	rts				| Return to saved PC
+	movea.l	8(%sp),%a6		| Move address of old save area into A6.
+					| MOVEA preserves CCR
+	move.w	%sr,6(%a6)		| Save SR in lower half of SR long word
+	clr.w	4(%a6)			| Clear the other half of that long word
+	movem.l	%d0-%d7/%a0-%a5,8(%a6)	| Save all registers except A6 and A7 (SP)
+	move.l	(%sp)+,64(%a6)		| Pop old A6 from stack into the save area
+	move.l	%sp,68(%a0)		| Put A7 (SP) int save area
+	movea.l	%usp, %a0		| Copy USP into a temporary register
+	movea.l	%a0, 72(%a6)		| Put user stack pointer into save area
+	move.l	(%sp),(%a6)		| Put return address into save area PC
+	movea.l	8(%sp),%a6		| Move address of new save area into A6
+	movea.l	72(%a6),%a0		| Restore user stack pointer
+	move.l	%a0,%usp
+	movem.l	8(%a6),%d0-%d7/%a0-%a5	| Restore all registers but A6 and SP
+	movea.l	68(%a6),%sp		| Restore system stack pointer
+	move.l	(%a6),-(%sp)		| Push PC onto stack for return address
+	move.w	6(%a0),%sr		| Restore status register
+	movea.l	64(%a6),%a7		| Restore real A6. Preserves CCR
+	rts				| Return to restored PC
