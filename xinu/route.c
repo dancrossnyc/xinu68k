@@ -6,41 +6,40 @@
 //  route  -  route a datagram to a given IP address
 //------------------------------------------------------------------------
 int
-route(IPaddr faddr, struct epacket *packet, int totlen)
+route(IPaddr addr, struct epacket *packet, int totlen)
 {
 	int result;
 	int dev;
-	struct arpent *arpptr;
+	struct arpent *ap;
 	IPaddr mynet, destnet;
 
 	// If IP address is broadcast address for my network, then use
 	// physical broadcast address.  Otherwise, establish a path to
 	// the destination directly or through a gateway
-
 	getnet(mynet);
-	netnum(destnet, faddr);
+	netnum(destnet, addr);
 	wait(Net.nmutex);
 
-	// NOTE: This code uses host 0 as broadcast like 4.2bsd UNIX
-	if (memcmp(mynet, faddr, IPLEN) == 0) {
+	// NOTE: This code uses host 0 as broadcast like 4.2BSD UNIX.
+	if (memcmp(mynet, addr, IPLEN) == 0) {
 		dev = ETHER;
 		memmove(packet->ep_hdr.e_dest, EBCAST, EPADLEN);
 	} else {
 		if (memcmp(destnet, mynet, IPLEN) != 0)
-			faddr = Net.gateway;
-		arpptr = &Arp.arptab[getpath(faddr)];
-		if (arpptr->arp_state != AR_RSLVD) {
-			arpptr->arp_state = AR_RGATE;
-			arpptr = &Arp.arptab[getpath(Net.gateway)];
-			if (arpptr->arp_state != AR_RSLVD) {
+			addr = Net.gateway;
+		ap = &Arp.arptab[getpath(addr)];
+		if (ap->state != ARP_RESOLVED) {
+			ap->state = ARP_REMOTE;
+			ap = &Arp.arptab[getpath(Net.gateway)];
+			if (ap->state != ARP_RESOLVED) {
 				panic("route - Cannot reach gateway");
 				freebuf(packet);
 				signal(Net.nmutex);
 				return SYSERR;
 			}
 		}
-		dev = arpptr->arp_dev;
-		memmove(packet->ep_hdr.e_dest, arpptr->arp_Ead, EPADLEN);
+		dev = ap->dev;
+		memmove(packet->ep_hdr.e_dest, ap->ether_addr, EPADLEN);
 	}
 	result = write(dev, packet, totlen);
 	signal(Net.nmutex);

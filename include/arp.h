@@ -31,19 +31,20 @@ struct	arppak	{		// format of DARPA ARP packet
 
 // Format of the IP-to-Ethernet address resolution cache
 
-struct	arpent	{		// format of entry in ARP cache
-	char	arp_state;	// state of this entry (see below)
-	Eaddr	arp_Ead;	// Ethernet address of this host
-	IPaddr	arp_Iad;	// IP address of this host
-	int	arp_dev;	// Xinu device for this host route
+enum ArpStates {
+	ARP_FREE,	// Entry is unused (initial value)
+	ARP_ALLOC,	// Entry is used but route still unknown
+	ARP_REMOTE,	// Entry is reachable only by gateway
+	ARP_RESOLVED,	// Entry has been resolved to Eth. addr.
+	ARP_NSTATES
 };
 
-// Definitions of table entry states
-
-#define	AR_FREE		'\0'	// Entry is unused (initial value)
-#define	AR_ALLOC	'\1'	// Entry is used but route still unknown
-#define	AR_RGATE	'\2'	// Entry is reachable only by gateway
-#define	AR_RSLVD	'\3'	// Entry has been resolved to Eth. addr.
+struct	arpent	{		// format of entry in ARP cache
+	ArpSates state;		// state of this entry (see below)
+	Eaddr	ether_addr;	// Ethernet address of this host
+	IPaddr	ip_addr;	// IP address of this host
+	int	dev;		// Xinu device for this host route
+};
 
 struct	arpblk	{		// all information about ARP cache
 	struct arpent arptab[AR_TAB]; // IP-to-Ethernet address cache

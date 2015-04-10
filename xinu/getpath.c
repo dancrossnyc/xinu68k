@@ -19,7 +19,7 @@ getpath(IPaddr faddr)
 
 	wait(Arp.arpsem);
 	arpptr = &Arp.arptab[arindex = arpfind(faddr)];
-	if (arpptr->arp_state != AR_ALLOC) {
+	if (arpptr->state != ARP_ALLOC) {
 		signal(Arp.arpsem);
 		return arindex;
 	}

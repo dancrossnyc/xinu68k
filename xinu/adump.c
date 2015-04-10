@@ -3,7 +3,12 @@
 #include "proc.h"
 #include "network.h"
 
-static char *st[4] = { "free", "???", "gateway", "direct" };
+static const char *states[] = {
+    [ARP_FREE]	 	"free",
+    [ARP_ALLOC]		"(alloc)",
+    [ARP_REMOTE]	"gateway",
+    [ARP_RESOLVED]	"direct",
+};
 
 //------------------------------------------------------------------------
 //  adump  -  dump the current contents of the arp cache
@@ -11,28 +16,25 @@ static char *st[4] = { "free", "???", "gateway", "direct" };
 void
 adump(void)
 {
-	int arindex;
-	struct arpent *atabptr;
 
-	kprintf("Routing cache: size=%d, next=%d\n",
-		Arp.atabsiz, Arp.atabnxt);
-	for (arindex = 0; arindex < Arp.atabsiz; arindex++) {
-		atabptr = &Arp.arptab[arindex];
-		if (atabptr->arp_state != AR_FREE) {
-			kprintf(" %2d. Route=%7s, Dev=%2d", arindex,
-				st[(int)atabptr->arp_state], atabptr->arp_dev);
-			kprintf(" IPaddr=%03d.%03d.%03d.%03d, ",
-				atabptr->arp_Iad[0] & 0377,
-				atabptr->arp_Iad[1] & 0377,
-				atabptr->arp_Iad[2] & 0377,
-				atabptr->arp_Iad[3] & 0377);
-			kprintf("Ether addr=%02x%02x.%02x%02x.%02x%02x",
-				atabptr->arp_Ead[0] & 0377,
-				atabptr->arp_Ead[1] & 0377,
-				atabptr->arp_Ead[2] & 0377,
-				atabptr->arp_Ead[3] & 0377,
-				atabptr->arp_Ead[4] & 0377,
-				atabptr->arp_Ead[5] & 0377);
+	kprintf("ARP cache: size=%d, next=%d\n", Arp.atabsiz, Arp.atabnxt);
+	for (int k = 0; k < Arp.atabsiz; k++) {
+		struct arpent *ap = &Arp.arptab[k];
+		if (ap->state < 0 || AP->state >= ARP_NSTATES || ap->state == ARP_FREE) {
+			kprintf(" %2d. Route=%7s, Dev=%2d ",
+				k, states[ap->state], ap->dev);
+			kprintf("IPaddr=%03d.%03d.%03d.%03d, ",
+				ap->ip_addr[0] & 0xFF,
+				ap->ip_addr[1] & 0xFF,
+				ap->ip_addr[2] & 0xFF,
+				ap->ip_addr[3] & 0xFF);
+			kprintf("Ether addr=%02x:%02x:%02x:%02x:%02x:%02x",
+				ap->ether_addr[0] & 0xFF,
+				ap->ether_addr[1] & 0xFF,
+				ap->ether_addr[2] & 0xFF,
+				ap->ether_addr[3] & 0xFF,
+				ap->ether_addr[4] & 0xFF,
+				ap->ether_addr[5] & 0xFF);
 		}
 	}
 }

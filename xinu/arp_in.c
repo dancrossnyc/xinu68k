@@ -12,47 +12,44 @@ arp_in(struct epacket *packet, int device)
 	uword ps;
 	int pid;
 	short arop;
-	struct arppak *apacptr;
-	struct arpent *atabptr;
-	struct etblk *etptr;
+	struct arppak *arp_packet;
+	struct arpent *ap;
+	struct etblk *ether_frame;
 
-	etptr = (struct etblk *)devtab[device].dvioblk;
-	apacptr = (struct arppak *)packet->ep_data;
-	atabptr = &Arp.arptab[arpfind(apacptr->ar_spa)];
-	if (atabptr->arp_state != AR_RSLVD) {
-		memmove(atabptr->arp_Ead, apacptr->ar_sha, EPADLEN);
-		atabptr->arp_dev = device;
-		atabptr->arp_state = AR_RSLVD;
+	ether_frame = (struct etblk *)devtab[device].dvioblk;
+	arp_packet = (struct arppak *)packet->ep_data;
+	ap = &Arp.arptab[arpfind(arp_packet->ar_spa)];
+	if (ap->state != ARP_RESOLVED) {
+		memmove(ap->ether_addr, arp_packet->ar_sha, EPADLEN);
+		ap->dev = device;
+		ap->state = ARP_RESOLVED;
 	}
-	arop = net2hs(apacptr->ar_op);
+	arop = net2hs(arp_packet->ar_op);
 	switch (arop) {
-
 	case AR_REQ:		// request - answer if for me
-		if (memcmp(Net.myaddr, apacptr->ar_tpa, IPLEN) != 0) {
+		if (memcmp(Net.myaddr, arp_packet->ar_tpa, IPLEN) != 0) {
 			freebuf(packet);
 			return OK;
 		}
-		apacptr->ar_op = hs2net(AR_RPLY);
-		memmove(apacptr->ar_tpa, apacptr->ar_spa, IPLEN);
-		memmove(apacptr->ar_tha, packet->ep_hdr.e_src, EPADLEN);
-		memmove(packet->ep_hdr.e_dest, apacptr->ar_tha, EPADLEN);
-		memmove(apacptr->ar_sha, etptr->etpaddr, EPADLEN);
-		memmove(apacptr->ar_spa, Net.myaddr, IPLEN);
+		arp_packet->ar_op = hs2net(AR_RPLY);
+		memmove(arp_packet->ar_tpa, arp_packet->ar_spa, IPLEN);
+		memmove(arp_packet->ar_tha, packet->ep_hdr.e_src, EPADLEN);
+		memmove(packet->ep_hdr.e_dest, arp_packet->ar_tha, EPADLEN);
+		memmove(arp_packet->ar_sha, ether_frame->etpaddr, EPADLEN);
+		memmove(arp_packet->ar_spa, Net.myaddr, IPLEN);
 		write(device, packet, EMINPAK);
 		return OK;
-
 	case AR_RPLY:		// reply - awaken requestor if any
 		ps = disable();
 		pid = Arp.arppid;
 		if (!isbadpid(pid) &&
-		    memcmp(Arp.arpwant, apacptr->ar_spa, IPLEN) == 0) {
+		    memcmp(Arp.arpwant, arp_packet->ar_spa, IPLEN) == 0) {
 			Arp.arppid = BADPID;
 			send(pid, OK);
 		}
 		freebuf(packet);
 		restore(ps);
 		return OK;
-
 	default:
 		Net.ndrop++;
 		freebuf(packet);
