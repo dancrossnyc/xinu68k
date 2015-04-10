@@ -9,17 +9,17 @@
 SYSCALL
 rename(char *old, char *new)
 {
+	struct devsw *dp;
+	int dev, dev2;
 	char fullold[NAMLEN];
 	char fullnew[NAMLEN];
-	struct devsw *devptr;
-	int dev, dev2;
 
 	// map names through namespace and restrict to single device
 	if ((dev = nammap(old, fullold)) == SYSERR ||
 	    (dev2 = nammap(new, fullnew)) == SYSERR ||
 	    dev != dev2)
 		return SYSERR;
-	devptr = &devtab[dev];
+	dp = &devtab[dev];
 
-	return (*devptr->dvcntl)(devptr, FLRENAME, fullold, fullnew);
+	return (*dp->ctl)(dp, FLRENAME, fullold, fullnew);
 }

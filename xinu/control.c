@@ -8,11 +8,11 @@
 SYSCALL
 control(int descrp, int func, int addr)
 {
-	struct devsw *devptr;
+	struct devsw *dp;
 
 	if (isbaddev(descrp))
 		return SYSERR;
-	devptr = &devtab[descrp];
+	dp = &devtab[descrp];
 
-	return (*devptr->dvcntl)(devptr, func, addr, NULL);
+	return (*dp->ctl)(dp, func, addr, NULL);
 }

@@ -39,15 +39,17 @@ ctxsw:
 	move.w	%sr,6(%a0)		| Save SR
 	clr.w	4(%a0)			| Clear the other half of that long word
 	movem.l	%d0-%d7/%a0-%a7,8(%a0)	| Save all registers (including current A0)
-	move.l	%usp, 72(%a0)		| Save user stack pointer
+	move.l	%usp, %a1
+	move.l	%a1, 72(%a0)		| Save user stack pointer
 	add.l	#4,68(%a0)		| Pop old A0 off old saved stack pointer
 	move.l	(%sp),40(%a0)		| Put old A0 into the save area
 	move.l	4(%sp),(%a0)		| Save PC as return address
 	movea.l	12(%sp),%a0		| Move address of new save area into A0
+	movea.l	72(%a0),%a1		| Restore user stack pointer
+	move.l	%a1,%usp
 	movem.l	8(%a0),%d0-%d7/%a0-%a6	| Restore all registers but SP
 	movea.l	12(%sp),%a0		| Still need temporary A0....
 	movea.l	68(%a0),%sp		| Restore system stack pointer
-	movea.l	72(%a0),%usp		| Restore user stack pointer
 	move.l	(%a0),-(%sp)		| Move PC into return address
 	move.w	6(%a0),%sr		| Restore SR
 	movea.l	40(%a0),%a0		| Restore real A0. Doesn't affect CCR.

@@ -9,13 +9,14 @@
 SYSCALL
 remove(char *name, int key)
 {
-	char fullnam[NAMLEN];
-	struct devsw *devptr;
+	struct devsw *dp;
 	int dev;
+	char fullname[NAMLEN];
 
-	if ((dev = nammap(name, fullnam)) == SYSERR)
+	dev = nammap(name, fullname);
+	if (dev == SYSERR)
 		return SYSERR;
-	devptr = &devtab[dev];
+	dp = &devtab[dev];
 
-	return (*devptr->dvcntl)(devptr, FLREMOVE, fullnam, key);
+	return (*dp->ctl)(dp, FLREMOVE, fullname, key);
 }

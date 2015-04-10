@@ -14,7 +14,7 @@ struct	devsw	{			/* device table entry */
 	int	(*dvseek)();
 	int	(*dvgetc)();
 	int	(*dvputc)();
-	int	(*dvcntl)();
+	int	(*ctl)();
 	int	dvcsr;
 	int	dvivec;
 	int	dvovec;

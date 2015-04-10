@@ -71,7 +71,7 @@ char *ftout[] = {
 	"\tint\t(*dvseek)();\n",
 	"\tint\t(*dvgetc)();\n",
 	"\tint\t(*dvputc)();\n",
-	"\tint\t(*dvcntl)();\n",
+	"\tint\t(*ctl)();\n",
 	"\tint\tdvcsr;\n",
 	"\tint\tdvivec;\n",
 	"\tint\tdvovec;\n",
