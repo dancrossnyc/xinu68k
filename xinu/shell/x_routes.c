@@ -5,17 +5,15 @@
 #include <proc.h>
 #include <network.h>
 
-LOCAL	char	st[] = "F?GD";
+static char st[] = "F?GD";
 
 //------------------------------------------------------------------------
 //  x_routes  -  (command routes) format and print routing cache entries
 //------------------------------------------------------------------------
 COMMAND
-x_routes (int stdin, int stdout, int stderr, int nargs, char *args[])
+x_routes(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
-	int	arindex;
-	char	str[80];
-	struct	arpent	*atabptr;
+	char str[80];
 
 	if (nargs > 1) {
 		Arp.atabsiz = Arp.atabnxt = 0;
@@ -24,27 +22,26 @@ x_routes (int stdin, int stdout, int stderr, int nargs, char *args[])
 	sprintf(str, "Routing cache: size=%d, next=%d\n",
 		Arp.atabsiz, Arp.atabnxt);
 	write(stdout, str, strlen(str));
-	for (arindex=0; arindex<Arp.atabsiz; arindex++) {
-		atabptr = &Arp.arptab[arindex];
-		if (atabptr->arp_state == AR_FREE)
+	for (int k = 0; k < Arp.atabsiz; k++) {
+		struct arpent *ap = &Arp.arptab[k];
+		if (ap->state < 0 || ap->state >= sizeof(st) || ap->state == ARP_FREE)
 			continue;
 		sprintf(str, " %2d. Route=%c, Dev=%2d",
-			arindex,st[(int)atabptr->arp_state],atabptr->arp_dev);
-		sprintf(&str[strlen(str)],
-			" IPaddr=%03d.%03d.%03d.%03d, ",
-				atabptr->arp_Iad[0] & 0377,
-				atabptr->arp_Iad[1] & 0377,
-				atabptr->arp_Iad[2] & 0377,
-				atabptr->arp_Iad[3] & 0377);
-		sprintf(&str[strlen(str)],
-			"Ether addr=%02x%02x.%02x%02x.%02x%02x\n",
-				atabptr->arp_Ead[0]&0377,
-				atabptr->arp_Ead[1]&0377,
-				atabptr->arp_Ead[2]&0377,
-				atabptr->arp_Ead[3]&0377,
-				atabptr->arp_Ead[4]&0377,
-				atabptr->arp_Ead[5]&0377 );
+			k, st[ap->state], ap->dev);
+		sprintf(&str[strlen(str)], " IPaddr=%03d.%03d.%03d.%03d, ",
+			ap->ip_addr[0] & 0xFF,
+			ap->ip_addr[1] & 0xFF,
+			ap->ip_addr[2] & 0xFF,
+			ap->ip_addr[3] & 0xFF);
+		sprintf(&str[strlen(str)], "Ether addr=%02x:%02x:%02x:%02x:%02x:%02x\n",
+			ap->ether_addr[0] & 0xFF,
+			ap->ether_addr[1] & 0xFF,
+			ap->ether_addr[2] & 0xFF,
+			ap->ether_addr[3] & 0xFF,
+			ap->ether_addr[4] & 0xFF,
+			ap->ether_addr[5] & 0xFF );
 		write(stdout, str, strlen(str));
 	}
-	return(OK);
+
+	return OK;
 }

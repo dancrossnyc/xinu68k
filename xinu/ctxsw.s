@@ -41,8 +41,8 @@ ctxsw:
 	movem.l	%d0-%d7/%a0-%a5,8(%a6)	| Save all registers except A6 and A7 (SP)
 	move.l	(%sp)+,64(%a6)		| Pop old A6 from stack into the save area
 	move.l	%sp,68(%a0)		| Put A7 (SP) int save area
-	movea.l	%usp, %a0		| Copy USP into a temporary register
-	movea.l	%a0, 72(%a6)		| Put user stack pointer into save area
+	move.l	%usp, %a0		| Copy USP into a temporary register
+	move.l	%a0, 72(%a6)		| Put user stack pointer into save area
 	move.l	(%sp),(%a6)		| Put return address into save area PC
 	movea.l	8(%sp),%a6		| Move address of new save area into A6
 	movea.l	72(%a6),%a0		| Restore user stack pointer
