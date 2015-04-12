@@ -14,5 +14,5 @@ read(int descrp, void *buff, int count)
 		return SYSERR;
 	devptr = &devtab[descrp];
 
-	return (*devptr->dvread)(devptr, buff, count);
+	return (*devptr->read)(devptr, buff, count);
 }

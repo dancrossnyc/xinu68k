@@ -14,5 +14,5 @@ getc(int descrp)
 		return SYSERR;
 	devptr = &devtab[descrp];
 
-	return (*devptr->dvgetc)(devptr);
+	return (*devptr->getc)(devptr);
 }

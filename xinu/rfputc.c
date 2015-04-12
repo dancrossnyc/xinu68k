@@ -11,7 +11,7 @@ rfputc(struct devsw *devptr, int ch)
 	char outch;
 
 	outch = ch;
-	if (write(devptr->dvnum, &outch, 1) != 1)
+	if (write(devptr->num, &outch, 1) != 1)
 		return SYSERR;
 
 	return OK;

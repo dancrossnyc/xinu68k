@@ -14,5 +14,5 @@ write(int descrp, const void *buff, int count)
 		return SYSERR;
 	devptr = &devtab[descrp];
 
-	return (*devptr->dvwrite)(devptr, buff, count);
+	return (*devptr->write)(devptr, buff, count);
 }

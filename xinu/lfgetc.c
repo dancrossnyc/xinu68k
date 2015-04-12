@@ -16,7 +16,7 @@ lfgetc(struct devsw *devptr)
 	int ps;
 
 	ps = disable();
-	flptr = (struct flblk *)devptr->dvioblk;
+	flptr = (struct flblk *)devptr->iobuf;
 	if (flptr->fl_pid != currpid || !(flptr->fl_mode & FLREAD)) {
 		restore(ps);
 		return SYSERR;

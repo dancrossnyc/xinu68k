@@ -15,7 +15,7 @@ lfsdfree(int diskdev, DBADDR dba)
 	struct freeblk *buf;
 
 	dirptr = (struct dir *)dsdirec(diskdev);
-	dirsem = ((struct dsblk *)devtab[diskdev].dvioblk)->dflsem;
+	dirsem = ((struct dsblk *)devtab[diskdev].iobuf)->dflsem;
 	buf = (struct freeblk *)getbuf(dskdbp);
 	wait(dirsem);
 	buf->fbnext = dirptr->d_fblst;

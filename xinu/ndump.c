@@ -11,20 +11,17 @@
 void
 ndump(void)
 {
-	struct nament *nptr;
-	int i, len, dev;
-	char *p;
 
-	for (i = 0; i < Nam.nnames; i++) {
-		nptr = &Nam.nametab[i];
+	for (int i = 0; i < Nam.nnames; i++) {
+		struct nament *nptr = &Nam.nametab[i];
+		int dev = nptr->ndev;
+		char *p = "SYSERR";
+
 		kprintf("\"%-s\"", nptr->npre);
-		for (len = strlen(nptr->npre); len < PADTO; len++)
+		for (int len = strlen(nptr->npre); len < PADTO; len++)
 			kprintf(" ");
-		dev = nptr->ndev;
-		if (isbaddev(dev))
-			p = "SYSERR";
-		else
-			p = devtab[dev].dvname;
+		if (!isbaddev(dev))
+			p = devtab[dev].name;
 		kprintf(" -> (%-8s) \"%s\"\n", p, nptr->nrepl);
 	}
 }

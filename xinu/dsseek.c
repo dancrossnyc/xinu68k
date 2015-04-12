@@ -20,7 +20,7 @@ dsseek(struct devsw *devptr, DBADDR block)
 	drptr->drop = DSEEK;
 
 	// enqueued with normal policy like other read/write requests
-	dskenq(drptr, (struct dsblk *)devptr->dvioblk);
+	dskenq(drptr, (struct dsblk *)devptr->iobuf);
 	restore(ps);
 	return OK;
 }

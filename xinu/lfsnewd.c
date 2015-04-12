@@ -21,7 +21,7 @@ lfsnewd(int diskdev, struct flblk *flptr)
 
 	dirptr = (struct dir *)dsdirec(diskdev);
 	fbptr = (struct freeblk *)(buf = flptr->fl_buff);
-	sem = ((struct dsblk *)devtab[diskdev].dvioblk)->dflsem;
+	sem = ((struct dsblk *)devtab[diskdev].iobuf)->dflsem;
 	wait(sem);
 	dba = dirptr->d_fblst;
 	read(diskdev, fbptr, dba);

@@ -15,7 +15,7 @@ lfputc(struct devsw *devptr, int ch)
 	int ps;
 
 	ps = disable();
-	flptr = (struct flblk *)devptr->dvioblk;
+	flptr = (struct flblk *)devptr->iobuf;
 	if (flptr->fl_pid != currpid || !(flptr->fl_mode & FLWRITE)) {
 		restore(ps);
 		return SYSERR;

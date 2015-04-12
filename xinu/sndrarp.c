@@ -3,7 +3,7 @@
 #include "network.h"
 
 //------------------------------------------------------------------------
-//  sndrarp  -  broadcast a RARP packet to obtain my IP address
+// sndrarp - broadcast a RARP packet to obtain my IP address
 //------------------------------------------------------------------------
 int
 sndrarp(void)
@@ -16,9 +16,9 @@ sndrarp(void)
 	int ps;
 
 	mypid = getpid();
-	for (int i = 0; i < AR_RTRY; i++) {
+	for (int k = 0; k < AR_RTRY; k++) {
 		packet = mkarp(EP_RARP, AR_RREQ, junk, junk);
-		if (((int) packet) == SYSERR)
+		if (packet == (struct epacket *)SYSERR)
 			break;
 		ps = disable();
 		Arp.rarppid = mypid;

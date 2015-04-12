@@ -17,7 +17,7 @@ ethwrite(struct devsw *devptr, char *buff, int len)
 		return SYSERR;
 	if (len < EMINPAK)
 		len = EMINPAK;
-	etptr = (struct etblk *)devptr->dvioblk;
+	etptr = (struct etblk *)devptr->iobuf;
 	memmove(((struct eheader *)buff)->e_src, etptr->etpaddr, EPADLEN);
 	ps = disable();
 	wait(etptr->etwsem);

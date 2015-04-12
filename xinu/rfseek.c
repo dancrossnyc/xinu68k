@@ -11,7 +11,7 @@ rfseek(struct devsw *devptr, long offset)
 {
 	struct rfblk *rfptr;
 
-	rfptr = (struct rfblk *)devptr->dvioblk;
+	rfptr = (struct rfblk *)devptr->iobuf;
 	wait(rfptr->rf_mutex);
 	rfptr->rf_pos = offset;
 	signal(rfptr->rf_mutex);

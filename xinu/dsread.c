@@ -19,7 +19,7 @@ dsread(struct devsw *devptr, char *buff, DBADDR block)
 	drptr->drpid = currpid;
 	drptr->drbuff = buff;
 	drptr->drop = DREAD;
-	if ((stat = dskenq(drptr, (struct dsblk *)devptr->dvioblk)) == DONQ) {
+	if ((stat = dskenq(drptr, (struct dsblk *)devptr->iobuf)) == DONQ) {
 		suspend(currpid);
 		stat = drptr->drstat;
 	}

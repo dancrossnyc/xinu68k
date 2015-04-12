@@ -23,9 +23,9 @@ x_devs (int stdin, int stdout, int stderr, int nargs, char *args[])
 	for (i=0 ; i<NDEVS ; i++) {
 		devptr = &devtab[i];
 		sprintf(str, "%2d. %-9s %3d   %07o %07o %07o  %07o\n",
-			i, devptr->dvname, devptr->dvminor,
-			devptr->dvcsr, devptr->dvivec, devptr->dvovec,
-			devptr->dvioblk);
+			i, devptr->name, devptr->minor,
+			devptr->csr, devptr->ivec, devptr->ovec,
+			devptr->iobuf);
 		write(stdout, str, strlen(str));
 	}
 

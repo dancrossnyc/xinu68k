@@ -14,5 +14,5 @@ open(int descrp, char *nam, char *mode)
 		return SYSERR;
 	devptr = &devtab[descrp];
 
-	return (*devptr->dvopen)(devptr, nam, mode);
+	return (*devptr->open)(devptr, nam, mode);
 }

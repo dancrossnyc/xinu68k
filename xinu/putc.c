@@ -14,5 +14,5 @@ putc(int descrp, int ch)
 		return SYSERR;
 	devptr = &devtab[descrp];
 
-	return (*devptr->dvputc)(devptr, ch);
+	return (*devptr->putc)(devptr, ch);
 }

@@ -17,7 +17,7 @@ rfdump(void)
 		if (rfptr->rf_state == RFREE)
 			continue;
 		kprintf(" %2d. ", rfptr->rf_dnum);
-		kprintf("mode=%03o, sem=%2d, pos=%6D, file name=%s\n",
+		kprintf("mode=%03o, sem=%2d, pos=%6d, file name=%s\n",
 			rfptr->rf_mode, rfptr->rf_mutex,
 			rfptr->rf_pos, rfptr->rf_name);
 	}

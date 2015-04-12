@@ -10,20 +10,20 @@ SYSCALL
 freebuf(void *buf)
 {
 	int ps;
-	int poolid;
+	int pool;
 	int *bp;
 
 	if (unmarked(bpmark))
 		return SYSERR;
 	bp = (int *)buf;
-	poolid = *(--bp);
-	if (poolid < 0 || poolid >= nbpools)
+	pool = *(--bp);
+	if (pool < 0 || pool >= nbpools)
 		return SYSERR;
 	ps = disable();
-	*bp = (int)bptab[poolid].bpnext;
-	bptab[poolid].bpnext = (void *)buf;
+	*bp = (int)bptab[pool].bpnext;
+	bptab[pool].bpnext = (void *)buf;
 	restore(ps);
-	signal(bptab[poolid].bpsem);
+	signal(bptab[pool].bpsem);
 
 	return OK;
 }

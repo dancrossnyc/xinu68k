@@ -17,7 +17,7 @@ dgwrite(struct devsw *devptr, struct xgram *buff, int len)
 
 	if (len < 0 || len > UMAXLEN)
 		return SYSERR;
-	dgptr = (struct dgblk *)devptr->dvioblk;
+	dgptr = (struct dgblk *)devptr->iobuf;
 	packet = (struct epacket *)getbuf(Net.netpool);
 	ipptr = (struct ip *)packet->ep_data;
 	udpptr = (struct udp *)ipptr->i_data;

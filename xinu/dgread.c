@@ -18,7 +18,7 @@ dgread(struct devsw *devptr, struct xgram *buff, int len)
 	int ps;
 
 	ps = disable();
-	dgptr = (struct dgblk *)devptr->dvioblk;
+	dgptr = (struct dgblk *)devptr->iobuf;
 	if (dgptr->dg_mode & DG_TMODE) {
 		nqptr = &Net.netqs[dgptr->dg_netq];
 		if (!isbadpid(nqptr->pid)) {

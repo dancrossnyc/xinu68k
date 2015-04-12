@@ -14,5 +14,5 @@ close(int descrp)
 		return SYSERR;
 	devptr = &devtab[descrp];
 
-	return (*devptr->dvclose)(devptr);
+	return (*devptr->close)(devptr);
 }

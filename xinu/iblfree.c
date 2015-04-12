@@ -32,7 +32,7 @@ iblfree(int diskdev, IBADDR iblist)
 	for (j = 0; j < IBLEN; j++)
 		if ((dba = iblock.ib_dba[j]) != DBNULL)
 			lfsdfree(diskdev, dba);
-	sem = ((struct dsblk *)devtab[diskdev].dvioblk)->dflsem;
+	sem = ((struct dsblk *)devtab[diskdev].iobuf)->dflsem;
 	wait(sem);
 	iblock.ib_next = dirptr->d_filst;
 	dirptr->d_filst = iblist;

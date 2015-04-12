@@ -7,16 +7,14 @@
 void
 devdump(void)
 {
-	struct devsw *devptr;
-	int i;
 
-	kprintf("Num  Device   minor   CSR   i-vect. o-vect. cntrl blk\n");
-	kprintf("--- --------  ----- ------- ------- ------- ---------\n");
-	for (i = 0; i < NDEVS; i++) {
-		devptr = &devtab[i];
-		kprintf("%2d. %-9s %3d   %07o %07o %07o  %07o\n",
-			i, devptr->dvname, devptr->dvminor,
-			devptr->dvcsr, devptr->dvivec, devptr->dvovec,
-			devptr->dvioblk);
+	kprintf("Num  Device   minor   CSR    i-vector o-vector I/O buffer\n");
+	kprintf("--- --------  ----- -------- -------- -------- ----------\n");
+	for (int k = 0; k < NDEVS; k++) {
+		struct devsw *dp = &devtab[k];
+		kprintf("%2d. %-9s %3d   %08x %08x %08  %08x\n",
+			k, dp->name, dp->minor,
+			dp->csr, dp->ivec, dp->ovec,
+			dp->iobuf);
 	}
 }

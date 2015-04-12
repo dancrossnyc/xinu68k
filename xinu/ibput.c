@@ -19,7 +19,7 @@ ibput(int diskdev, IBADDR inum, struct iblk *loc)
 
 	dba = ibtodb(inum);
 	buff = getbuf(dskdbp);
-	ibsem = ((struct dsblk *)devtab[diskdev].dvioblk)->dibsem;
+	ibsem = ((struct dsblk *)devtab[diskdev].iobuf)->dibsem;
 	wait(ibsem);
 	read(diskdev, buff, dba);
 	to = buff + ibdisp(inum);

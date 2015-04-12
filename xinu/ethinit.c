@@ -15,10 +15,10 @@ ethinit(struct devsw *devptr)
 	int i;
 	struct dqsetup setup;
 
-	etptr = &eth[devptr->dvminor];
-	devptr->dvioblk = (char *)etptr;
-	iosetvec(devptr->dvnum, etptr, etptr);
-	etptr->eioaddr = dqptr = (struct dqregs *)devptr->dvcsr;
+	etptr = &eth[devptr->minor];
+	devptr->iobuf = (char *)etptr;
+	iosetvec(devptr->num, etptr, etptr);
+	etptr->eioaddr = dqptr = (struct dqregs *)devptr->csr;
 	etptr->etdev = devptr;
 	etptr->etrsem = screate(1);
 	etptr->etwsem = screate(1);

@@ -16,8 +16,10 @@ lfinit(struct devsw *devptr)
 {
 	struct flblk *flptr;
 
-	devptr->dvioblk = (char *)(flptr = &fltab[devptr->dvminor]);
+	flptr = &fltab[devptr->minor];
+	devptr->iobuf = (void *)flptr;
 	flptr->fl_pid = 0;
-	flptr->fl_id = devptr->dvnum;
+	flptr->fl_id = devptr->num;
+
 	return OK;
 }

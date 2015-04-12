@@ -14,7 +14,7 @@ ttycntl(struct devsw *devptr, int func)
 	char ch;
 	int ps;
 
-	ttyp = &tty[devptr->dvminor];
+	ttyp = &tty[devptr->minor];
 	switch (func) {
 	case TCSETBRK:
 		ttyp->ioaddr->ctstat |= SLUTBREAK;

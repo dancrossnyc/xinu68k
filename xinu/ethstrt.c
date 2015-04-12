@@ -18,7 +18,7 @@ ethstrt(struct etblk *etptr, struct dqsetup *setup)
 
 	dqptr->d_csr |= DQ_REST;
 	dqptr->d_csr &= ~DQ_REST;
-	dqptr->d_vect = (char *)((etptr->etdev)->dvivec);
+	dqptr->d_vect = (char *)((etptr->etdev)->ivec);
 
 	// build setup packet
 

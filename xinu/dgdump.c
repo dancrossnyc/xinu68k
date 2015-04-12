@@ -9,8 +9,8 @@ int
 dgdump(void)
 {
 
-	for (int i = 0; i < Ndg; i++) {
-		struct dgblk *dgptr = &dgtab[i];
+	for (int k = 0; k < Ndg; k++) {
+		struct dgblk *dgptr = &dgtab[k];
 		if (dgptr->dg_state == DG_FREE)
 			continue;
 		kprintf("Dev=%2d: ", dgptr->dg_dnum);
@@ -18,10 +18,11 @@ dgdump(void)
 			dgptr->dg_fport);
 		kprintf("mode=%03o, xport=%2d addr=%d.%d.%d.%d\n",
 			dgptr->dg_mode, dgptr->dg_xport,
-			dgptr->dg_faddr[0] & 0377,
-			dgptr->dg_faddr[1] & 0377,
-			dgptr->dg_faddr[2] & 0377,
-			dgptr->dg_faddr[3] & 0377);
+			dgptr->dg_faddr[0] & 0xFF,
+			dgptr->dg_faddr[1] & 0xFF,
+			dgptr->dg_faddr[2] & 0xFF,
+			dgptr->dg_faddr[3] & 0xFF);
 	}
+
 	return OK;
 }

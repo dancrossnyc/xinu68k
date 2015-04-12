@@ -18,7 +18,7 @@ dswrite(struct devsw *devptr, char *buff, DBADDR block)
 	drptr->drdba = block;
 	drptr->drpid = currpid;
 	drptr->drop = DWRITE;
-	dskenq(drptr, (struct dsblk *)devptr->dvioblk);
+	dskenq(drptr, (struct dsblk *)devptr->iobuf);
 	restore(ps);
 	return OK;
 }

@@ -14,5 +14,5 @@ ttyopen(struct devsw *devptr, char *nam, char *mode)
 	if (*nam != '\0')
 		return SYSERR;
 
-	return devptr->dvnum;
+	return devptr->num;
 }

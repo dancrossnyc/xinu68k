@@ -19,16 +19,16 @@ dsinit(struct devsw *devptr)
 	int ps;
 
 	ps = disable();
-	devptr->dvioblk = (char *)(dsptr = &dstab[devptr->dvminor]);
-	dsptr->dcsr = (struct dtc *)devptr->dvcsr;
+	devptr->iobuf = (char *)(dsptr = &dstab[devptr->minor]);
+	dsptr->dcsr = (struct dtc *)devptr->csr;
 	dsptr->dreqlst = DRNULL;
-	dsptr->dnum = devptr->dvnum;
+	dsptr->dnum = devptr->num;
 	dsptr->dibsem = screate(1);
 	dsptr->dflsem = screate(1);
 	dsptr->ddirsem = screate(1);
 	dsptr->dnfiles = 0;
 	dsptr->ddir = getbuf(dskdbp);
-	iosetvec(devptr->dvnum, dsptr, dsptr);
+	iosetvec(devptr->num, dsptr, dsptr);
 
 	// read directory block: setup read command then start interface
 

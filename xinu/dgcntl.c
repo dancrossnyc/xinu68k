@@ -14,7 +14,7 @@ dgcntl(struct devsw *devptr, int func, int arg)
 	int ret;
 
 	ps = disable();
-	dgptr = (struct dgblk *)devptr->dvioblk;
+	dgptr = (struct dgblk *)devptr->iobuf;
 	ret = OK;
 	switch (func) {
 

@@ -25,7 +25,7 @@ mprint(int stdin, int stdout, int stderr)
 			str[len] = ' ';
 		write(stdout, str, PADTO);
 		dev = nptr->ndev;
-		p = isbaddev(dev) ? "SYSERR" : devtab[dev].dvname;
+		p = isbaddev(dev) ? "SYSERR" : devtab[dev].name;
 		sprintf(str, " -> (%-9s) \"%s\"\n", p, nptr->nrepl);
 		write(stdout, str, strlen(str));
 	}
@@ -47,7 +47,7 @@ x_mount(int stdin, int stdout, int stderr, int nargs, char *args[])
 		return(SYSERR);
 	}
 	for (dev=0 ; dev<NDEVS ; dev++)
-		if (strcmp(args[2], devtab[dev].dvname) == 0) {
+		if (strcmp(args[2], devtab[dev].name) == 0) {
 			break;
 		}
 	if (dev >=  NDEVS) {

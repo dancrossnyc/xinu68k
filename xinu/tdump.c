@@ -65,18 +65,18 @@ tdump1(int tnum)
 
 	ps = disable();
 	iptr = &tty[tnum];
+	i = scount(iptr->isem);
 	kprintf("Tty %d CSR at %o\n", tnum, iptr->ioaddr);
 	kprintf("INPUT -- tail at %d head at %d sem # %d value %d\n",
-		iptr->itail, iptr->ihead, iptr->isem, i =
-		scount(iptr->isem));
+		iptr->itail, iptr->ihead, iptr->isem, i);
 	if (i < 0)
 		i = 0;
 	else if (i > IBUFLEN)
 		i = IBUFLEN;
 	tqdump(iptr->itail, i, IBUFLEN, iptr->ibuff);
+	i = scount(iptr->osem);
 	kprintf("OUTPUT -- tail at %d head at %d sem # %d value %d\n",
-		iptr->otail, iptr->ohead, iptr->osem, i =
-		scount(iptr->osem));
+		iptr->otail, iptr->ohead, iptr->osem, i);
 	i = OBUFLEN - i;
 	if (i < 0)
 		i = 0;

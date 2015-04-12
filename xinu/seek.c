@@ -14,5 +14,5 @@ seek(int descrp, long pos)
 		return SYSERR;
 	devptr = &devtab[descrp];
 
-	return (*devptr->dvseek)(devptr, pos);
+	return (*devptr->seek)(devptr, pos);
 }

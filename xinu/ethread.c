@@ -14,7 +14,7 @@ ethread(struct devsw *devptr, char *buff, int len)
 	struct etblk *etptr;
 	struct dcmd *dcmptr;
 
-	etptr = (struct etblk *)devptr->dvioblk;
+	etptr = (struct etblk *)devptr->iobuf;
 	dcmptr = etptr->ercmd;
 	wait(etptr->etrsem);
 	ps = disable();

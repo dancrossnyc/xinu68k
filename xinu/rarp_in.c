@@ -18,7 +18,7 @@ rarp_in(struct epacket *packet, int device)
 	apacptr = (struct arppak *)packet->ep_data;
 	ret = SYSERR;
 	if (net2hs(apacptr->ar_op) == AR_RRLY) {
-		etptr = (struct etblk *)devtab[device].dvioblk;
+		etptr = (struct etblk *)devtab[device].iobuf;
 		if (memcmp(apacptr->ar_tha, etptr->etpaddr, EPADLEN) == 0) {
 			memmove(Net.myaddr, apacptr->ar_tpa, IPLEN);
 			netnum(Net.mynet, Net.myaddr);

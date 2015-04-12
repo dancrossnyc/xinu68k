@@ -18,13 +18,13 @@ lfclose(struct devsw *devptr)
 	int ps;
 
 	ps = disable();
-	flptr = (struct flblk *)devptr->dvioblk;
+	flptr = (struct flblk *)devptr->iobuf;
 	if (flptr->fl_pid != currpid) {
 		restore(ps);
 		return SYSERR;
 	}
 	diskdev = flptr->fl_dev;
-	dsptr = (struct dsblk *)devtab[diskdev].dvioblk;
+	dsptr = (struct dsblk *)devtab[diskdev].iobuf;
 	dirptr = (struct dir *)dsptr->ddir;
 	if ((flptr->fl_mode & FLWRITE) && flptr->fl_dch)
 		lfsflush(flptr);

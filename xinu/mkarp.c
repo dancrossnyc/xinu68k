@@ -12,7 +12,7 @@ mkarp(int typ, int op, IPaddr spaddr, IPaddr tpaddr)
 	struct epacket *packet;
 
 	packet = (struct epacket *)getbuf(Net.netpool);
-	if ((int)packet == SYSERR)
+	if (packet == (struct epacket *)SYSERR)
 		return (struct epacket *)SYSERR;
 	memmove(packet->ep_hdr.e_dest, EBCAST, AR_HLEN);
 	packet->ep_hdr.e_ptype = hs2net(typ);

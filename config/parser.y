@@ -61,24 +61,24 @@ dvptr currtype = NULL;
 
 char *ftout[] = {
 	"struct\tdevsw\t{\t\t\t// device table entry\n",
-	"\tint\tdvnum;\n",
-	"\tchar\t*dvname;\n",
-	"\tvoid\t(*dvinit)();\n",
-	"\tint\t(*dvopen)();\n",
-	"\tint\t(*dvclose)();\n",
-	"\tint\t(*dvread)();\n",
-	"\tint\t(*dvwrite)();\n",
-	"\tint\t(*dvseek)();\n",
-	"\tint\t(*dvgetc)();\n",
-	"\tint\t(*dvputc)();\n",
+	"\tint\tnum;\n",
+	"\tchar\t*name;\n",
+	"\tvoid\t(*init)();\n",
+	"\tint\t(*open)();\n",
+	"\tint\t(*close)();\n",
+	"\tint\t(*read)();\n",
+	"\tint\t(*write)();\n",
+	"\tint\t(*seek)();\n",
+	"\tint\t(*getc)();\n",
+	"\tint\t(*putc)();\n",
 	"\tint\t(*ctl)();\n",
-	"\tint\tdvcsr;\n",
-	"\tint\tdvivec;\n",
-	"\tint\tdvovec;\n",
-	"\tvoid\t(*dviint)();\n",
-	"\tvoid\t(*dvoint)();\n",
-	"\tchar\t*dvioblk;\n",
-	"\tint\tdvminor;\n",
+	"\tvoid\t*csr;\n",
+	"\tint\tivec;\n",
+	"\tint\tovec;\n",
+	"\tvoid\t(*iintr)();\n",
+	"\tvoid\t(*ointr)();\n",
+	"\tchar\t*iobuf;\n",
+	"\tint\tminor;\n",
 	"\t};\n\n",
 	"extern\tstruct\tdevsw devtab[];",
 	"\t\t// one entry per device\n",
@@ -300,7 +300,7 @@ main(int argc, char *argv[])
 			s->dvread, s->dvwrite, s->dvseek);
 		fprintf(confc, "%s, %s, %s,\n",
 			s->dvgetc, s->dvputc, s->dvcntl);
-		fprintf(confc, "0%06o, 0%03o, 0%03o,\n",
+		fprintf(confc, "(void*)0x%08x, 0x%02x, 0x%02x,\n",
 			s->dvcsr, s->dvivec, s->dvovec);
 		fprintf(confc, "%s, %s, NULLPTR, %d",
 			s->dviint, s->dvoint, s->dvminor);
@@ -324,13 +324,11 @@ main(int argc, char *argv[])
 
 	// finish up and write report for user if requested
 	if (verbose) {
-		printf("\nConfiguration complete. Number of devs=%d:\n\n",
-		       ndevs);
+		printf("\nConfiguration complete. Number of devs=%d:\n\n", ndevs);
 		for (s = devs; s != NULL; s = s->dvnext)
-			printf
-			    ("Device %s (on %s) csr=0%-7o, ivec=0%-3o, ovec=0%-3o, minor=%d\n",
-			     s->dvname, s->dvdevice, s->dvcsr, s->dvivec,
-			     s->dvovec, s->dvminor);
+			printf("Device %s (on %s) csr=0x%-8x, ivec=0x%-3x, ovec=0x%-3x, minor=%d\n",
+				s->dvname, s->dvdevice, s->dvcsr, s->dvivec,
+				s->dvovec, s->dvminor);
 	}
 
 

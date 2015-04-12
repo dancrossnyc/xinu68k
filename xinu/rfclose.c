@@ -11,7 +11,7 @@ rfclose(struct devsw *devptr)
 	struct rfblk *rfptr;
 	long junk;		// argument to rfmkpac; not really used
 
-	rfptr = (struct rfblk *)devptr->dvioblk;
+	rfptr = (struct rfblk *)devptr->iobuf;
 	if (rfptr->rf_state == RFREE)
 		return SYSERR;
 	wait(rfptr->rf_mutex);

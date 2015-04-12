@@ -10,12 +10,12 @@ int
 bpdump(void)
 {
 
-	for (int i = 0; i < NBPOOLS; i++) {
-		struct bpool *bpptr = &bptab[i];
+	for (int k = 0; k < NBPOOLS; k++) {
+		struct bpool *bp = &bptab[k];
 		kprintf("Buffer Pool %2d: buf size=%4d, "
 			"sem=%2d, count=%d\n",
-			i, bpptr->bpsize, bpptr->bpsem,
-			scount(bpptr->bpsem));
+			k, bp->bpsize, bp->bpsem,
+			scount(bp->bpsem));
 	}
 
 	return OK;

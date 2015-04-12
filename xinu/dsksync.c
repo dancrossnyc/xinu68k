@@ -12,7 +12,7 @@ dsksync(struct devsw *devptr)
 	struct dreq *drptr, *p, *q;
 	int stat;
 
-	if ((q = ((struct dsblk *)(devptr->dvioblk))->dreqlst) == DRNULL)
+	if ((q = ((struct dsblk *)(devptr->iobuf))->dreqlst) == DRNULL)
 		return OK;
 	drptr = (struct dreq *)getbuf(dskrbp);
 	drptr->drdba = 0;

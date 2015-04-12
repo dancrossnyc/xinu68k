@@ -13,7 +13,7 @@ ttyputc(struct devsw *devptr, int ch)
 	struct tty *iptr;
 	int ps;
 
-	iptr = &tty[devptr->dvminor];
+	iptr = &tty[devptr->minor];
 	if (ch == NEWLINE && iptr->ocrlf)
 		ttyputc(devptr, RETURN);
 	ps = disable();

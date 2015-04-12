@@ -16,7 +16,7 @@ arp_in(struct epacket *packet, int device)
 	struct arpent *ap;
 	struct etblk *ether_frame;
 
-	ether_frame = (struct etblk *)devtab[device].dvioblk;
+	ether_frame = (struct etblk *)devtab[device].iobuf;
 	arp_packet = (struct arppak *)packet->ep_data;
 	ap = &Arp.arptab[arpfind(arp_packet->ar_spa)];
 	if (ap->state != ARP_RESOLVED) {

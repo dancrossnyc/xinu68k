@@ -14,7 +14,7 @@ lfseek(struct devsw *devptr, long offset)
 	int ps;
 
 	ps = disable();
-	flptr = (struct flblk *)devptr->dvioblk;
+	flptr = (struct flblk *)devptr->iobuf;
 	if (flptr->fl_mode & FLWRITE) {
 		if (flptr->fl_dch)
 			lfsflush(flptr);

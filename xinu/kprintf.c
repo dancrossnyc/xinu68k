@@ -23,8 +23,8 @@ kputc(int device, int c)
 		return;
 	if (c == NEWLINE)
 		kputc(device, RETURN);
-	csrptr = (struct csr *)devtab[device].dvcsr;	// dev. address
-	ttyptr = (struct tty *)devtab[device].dvioblk;	// control block
+	csrptr = (struct csr *)devtab[device].csr;	// dev. address
+	ttyptr = (struct tty *)devtab[device].iobuf;	// control block
 
 	if (ttyptr && (ttyptr->oheld || (ttyptr->oflow &&	// flow control
 					 (csrptr->crstat & SLUREADY) &&
@@ -55,12 +55,12 @@ savestate(int device)
 	ps = disable();
 	saveps = ps;
 	savedev = device;
-	savecrstat = ((struct csr *)devtab[device].dvcsr)->crstat
+	savecrstat = ((struct csr *)devtab[device].csr)->crstat
 	    & SLUENABLE;
-	((struct csr *)devtab[device].dvcsr)->crstat = SLUDISABLE;
-	savectstat = ((struct csr *)devtab[device].dvcsr)->ctstat
+	((struct csr *)devtab[device].csr)->crstat = SLUDISABLE;
+	savectstat = ((struct csr *)devtab[device].csr)->ctstat
 	    & SLUENABLE;
-	((struct csr *)devtab[device].dvcsr)->ctstat = SLUDISABLE;
+	((struct csr *)devtab[device].csr)->ctstat = SLUDISABLE;
 }
 
 //------------------------------------------------------------------------
@@ -71,8 +71,8 @@ rststate(void)
 {
 	int ps;
 
-	((struct csr *)devtab[savedev].dvcsr)->crstat = savecrstat;
-	((struct csr *)devtab[savedev].dvcsr)->ctstat = savectstat;
+	((struct csr *)devtab[savedev].csr)->crstat = savecrstat;
+	((struct csr *)devtab[savedev].csr)->ctstat = savectstat;
 	ps = saveps;
 	restore(ps);
 }

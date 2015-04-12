@@ -17,12 +17,12 @@ ttyinit(struct devsw *devptr)
 
 	// set up interrupt vector and interrupt dispatch table
 
-	iptr = &tty[devptr->dvminor];
-	iosetvec(devptr->dvnum, iptr, iptr);
+	iptr = &tty[devptr->minor];
+	iosetvec(devptr->num, iptr, iptr);
 
-	devptr->dvioblk = (char *)iptr;	// fill tty control blk
-	isconsole = (devptr->dvnum == CONSOLE);	// make console cooked
-	iptr->ioaddr = (struct csr *)devptr->dvcsr;	// copy in csr addr.
+	devptr->iobuf = (char *)iptr;	// fill tty control blk
+	isconsole = (devptr->num == CONSOLE);	// make console cooked
+	iptr->ioaddr = (struct csr *)devptr->csr;	// copy in csr addr.
 	iptr->ihead = iptr->itail = 0;	// empty input queue
 	iptr->isem = screate(0);	// chars. read so far=0
 	iptr->osem = screate(OBUFLEN);	// buffer available=all
@@ -46,7 +46,7 @@ ttyinit(struct devsw *devptr)
 	iptr->ostop = STOPCH;
 	iptr->icursor = 0;
 	iptr->ifullc = TFULLC;
-	cptr = (struct csr *)devptr->dvcsr;
+	cptr = (struct csr *)devptr->csr;
 	cptr->crstat = SLUENABLE;	// enable in. interrupts
 	cptr->ctstat = SLUDISABLE;	// disable out.   "
 }

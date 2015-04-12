@@ -11,7 +11,7 @@ rfgetc(struct devsw *devptr)
 	char ch;
 	int retcode;
 
-	if ((retcode = read(devptr->dvnum, &ch, 1)) == 1)
+	if ((retcode = read(devptr->num, &ch, 1)) == 1)
 		return ch;
 	if (retcode == 0)
 		return EOF;

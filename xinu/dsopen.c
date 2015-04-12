@@ -20,17 +20,17 @@ dsopen(struct devsw *devptr, char *filenam, char *mode)
 	int ps;
 
 	ps = disable();
-	dirptr = dsdirec(devptr->dvnum);
+	dirptr = dsdirec(devptr->num);
 	if ((mbits = ckmode(mode)) == SYSERR)
 		retcode = SYSERR;
-	else if ((int) (fdptr = dfdsrch(devptr->dvioblk, filenam, mbits))
+	else if ((int) (fdptr = dfdsrch(devptr->iobuf, filenam, mbits))
 		 == SYSERR)
 		retcode = SYSERR;
 	else if ((findex = dfalloc()) == SYSERR)
 		retcode = SYSERR;
 	else {
 		flptr = &fltab[findex];
-		flptr->fl_dev = devptr->dvnum;
+		flptr->fl_dev = devptr->num;
 		flptr->fl_dent = fdptr;
 		flptr->fl_mode = mbits & FLRW;
 		flptr->fl_iba = fdptr->fdiba;
