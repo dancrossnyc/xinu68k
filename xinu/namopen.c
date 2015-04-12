@@ -11,7 +11,7 @@ namopen(struct devsw *devptr, char *filenam, char *mode)
 	int dev;
 	char newname[NAMLEN];
 
-	dev = nammap(filenam, newname);
+	dev = namemap(filenam, newname);
 	if (dev == SYSERR)
 		return SYSERR;
 

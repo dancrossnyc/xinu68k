@@ -15,8 +15,8 @@ rename(char *old, char *new)
 	char fullnew[NAMLEN];
 
 	// map names through namespace and restrict to single device
-	if ((dev = nammap(old, fullold)) == SYSERR ||
-	    (dev2 = nammap(new, fullnew)) == SYSERR ||
+	if ((dev = namemap(old, fullold)) == SYSERR ||
+	    (dev2 = namemap(new, fullnew)) == SYSERR ||
 	    dev != dev2)
 		return SYSERR;
 	dp = &devtab[dev];

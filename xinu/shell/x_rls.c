@@ -38,7 +38,7 @@ x_rls (int stdin, int stdout, int stderr, int nargs, char *args[])
 		fprintf(stderr, "rls: no memory\n");
 		return(SYSERR);
 	}
-	if (nammap(p, buf) != RFILSYS ||
+	if (namemap(p, buf) != RFILSYS ||
 	   (dev=open(NAMESPACE, p, "ro")) == SYSERR) {
 		fprintf(stderr, "cannot open %s\n", p);
 		freemem(buf, 512);

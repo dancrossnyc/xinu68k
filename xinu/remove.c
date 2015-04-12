@@ -13,7 +13,7 @@ remove(char *name, int key)
 	int dev;
 	char fullname[NAMLEN];
 
-	dev = nammap(name, fullname);
+	dev = namemap(name, fullname);
 	if (dev == SYSERR)
 		return SYSERR;
 	dp = &devtab[dev];

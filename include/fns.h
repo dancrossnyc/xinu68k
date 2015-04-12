@@ -227,8 +227,8 @@ SYSCALL mkpool(int bufsiz, int numbufs);
 SYSCALL mount(char *prefix, int dev, char *replace);
 // naminit.c
 void naminit(void);
-// nammap.c
-SYSCALL nammap(char *name, char *newname);
+// namemap.c
+SYSCALL namemap(char *name, char *newname);
 // namopen.c
 int namopen(struct devsw *devptr, char *filenam, char *mode);
 // namrepl.c

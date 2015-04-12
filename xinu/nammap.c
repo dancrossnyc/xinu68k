@@ -3,10 +3,10 @@
 #include "name.h"
 
 //------------------------------------------------------------------------
-//  nammap  -  using namespace, iteratively map name onto (newname,device)
+//  namemap  -  using namespace, iteratively map name onto (newname,device)
 //------------------------------------------------------------------------
 SYSCALL
-nammap(char *name, char *newname)
+namemap(char *name, char *newname)
 {
 	int ps;
 	int dev;
