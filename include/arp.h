@@ -12,7 +12,7 @@
 
 // Definitions of codes used in operation field of ARP packet
 
-#define	AR_REQ	1		// arp request to resolve address
+#define	AR_REQUEST	1	// arp request to resolve address
 #define	AR_RPLY	2		// reply to a resolve request
 #define	AR_RREQ	3		// reverse ARP request (RARP packets)
 #define	AR_RRLY	4		// reply to a reverse request (RARP ")

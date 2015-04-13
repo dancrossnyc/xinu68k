@@ -28,7 +28,7 @@ getpath(IPaddr faddr)
 	getaddr(myaddr);
 	mypid = getpid();
 	for (i = 0; i < AR_RTRY; i++) {
-		packet = mkarp(EP_ARP, AR_REQ, myaddr, faddr);
+		packet = mkarp(EP_ARP, AR_REQUEST, myaddr, faddr);
 		memmove(Arp.arpwant, faddr, AR_PLEN);
 		ps = disable();
 		Arp.arppid = mypid;

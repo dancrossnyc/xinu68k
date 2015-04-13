@@ -9,14 +9,11 @@
 int
 arp_in(struct epacket *packet, int device)
 {
-	uword ps;
 	int pid;
-	short arop;
+	uint16 arop;
 	struct arppak *arp_packet;
 	struct arpent *ap;
-	struct etblk *ether_frame;
 
-	ether_frame = (struct etblk *)devtab[device].iobuf;
 	arp_packet = (struct arppak *)packet->ep_data;
 	ap = &Arp.arptab[arpfind(arp_packet->ar_spa)];
 	if (ap->state != ARP_RESOLVED) {
@@ -26,7 +23,8 @@ arp_in(struct epacket *packet, int device)
 	}
 	arop = net2hs(arp_packet->ar_op);
 	switch (arop) {
-	case AR_REQ:		// request - answer if for me
+	case AR_REQUEST: {		// request - answer if for me
+		struct etblk *ether_frame = (struct etblk *)devtab[device].iobuf;
 		if (memcmp(Net.myaddr, arp_packet->ar_tpa, IPLEN) != 0) {
 			freebuf(packet);
 			return OK;
@@ -39,8 +37,9 @@ arp_in(struct epacket *packet, int device)
 		memmove(arp_packet->ar_spa, Net.myaddr, IPLEN);
 		write(device, packet, EMINPAK);
 		return OK;
-	case AR_RPLY:		// reply - awaken requestor if any
-		ps = disable();
+	}
+	case AR_RPLY: {		// reply - awaken requestor if any
+		int ps = disable();
 		pid = Arp.arppid;
 		if (!isbadpid(pid) &&
 		    memcmp(Arp.arpwant, arp_packet->ar_spa, IPLEN) == 0) {
@@ -50,6 +49,7 @@ arp_in(struct epacket *packet, int device)
 		freebuf(packet);
 		restore(ps);
 		return OK;
+	}
 	default:
 		Net.ndrop++;
 		freebuf(packet);
