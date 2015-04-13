@@ -1,26 +1,22 @@
-// x_devs.c - x_devs
+#include "conf.h"
+#include "kernel.h"
 
-#include <conf.h>
-#include <kernel.h>
-
-LOCAL	char hd1[] =
-	"Num  Device   minor   CSR   i-vect. o-vect. cntrl blk\n";
-LOCAL	char hd2[] =
-	"--- --------  ----- ------- ------- ------- ---------\n";
+static char hd1[] = "Num  Device   minor   CSR   i-vect. o-vect. cntrl blk\n";
+static char hd2[] = "--- --------  ----- ------- ------- ------- ---------\n";
 
 //------------------------------------------------------------------------
 //  x_devs  -  (command devs) print main fields of device switch table
 //------------------------------------------------------------------------
 COMMAND
-x_devs (int stdin, int stdout, int stderr, int nargs, char *args[])
+x_devs(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
-	struct	devsw	*devptr;
-	char	str[60];
-	int	i;
+	struct devsw *devptr;
+	char str[60];
+	int i;
 
-	write (stdout, hd1, strlen(hd1) );
-	write (stdout, hd2, strlen(hd2) );
-	for (i=0 ; i<NDEVS ; i++) {
+	write(stdout, hd1, strlen(hd1));
+	write(stdout, hd2, strlen(hd2));
+	for (i = 0; i < NDEVS; i++) {
 		devptr = &devtab[i];
 		sprintf(str, "%2d. %-9s %3d   %07o %07o %07o  %07o\n",
 			i, devptr->name, devptr->minor,

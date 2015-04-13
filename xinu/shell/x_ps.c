@@ -1,43 +1,42 @@
-// x_ps.c - x_ps
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
+static char hd1[] = "pid   name   state prio  stack range  stack length sem message\n";
+static char hd2[] = "--- -------- ----- ---- ------------- ------------ --- -------\n";
+static char *pstnams[] = {
+	"curr ", "free ", "ready", "recv ",
+	"sleep", "susp ", "wait ", "rtim "
+};
 
-LOCAL	char	hd1[] =
-	"pid   name   state prio  stack range  stack length sem message\n";
-LOCAL	char	hd2[] =
-	"--- -------- ----- ---- ------------- ------------ --- -------\n";
-LOCAL	char	*pstnams[] = {"curr ","free ","ready","recv ",
-			    "sleep","susp ","wait ","rtim "};
-LOCAL	int	psavsp;
+static int psavsp;
 
 //------------------------------------------------------------------------
 //  x_ps  -  (command ps) format and print process table information
 //------------------------------------------------------------------------
 COMMAND
-x_ps (int stdin, int stdout, int stderr, int nargs, char *args[])
+x_ps(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
-	int	i;
-	char	str[80];
-	struct	pentry	*pptr;
-	unsigned currstk;
+	char str[80];
+	uintptr_t currstk;
 
-	//asm("mov sp,_psavsp");	// capture current stack pointer
+	//asm("mov sp,_psavsp");        // capture current stack pointer
 	proctab[currpid].pregs[SP] = psavsp;
 	write(stdout, hd1, strlen(hd1));
 	write(stdout, hd2, strlen(hd2));
-	for (i=0 ; i<NPROC ; i++) {
-		if ((pptr = &proctab[i])->pstate == PRFREE)
+	for (int k = 0; k < NPROC; i++) {
+		struct pentry *pptr = &proctab[i];
+		if (pptr->pstate == PRFREE)
 			continue;
-		sprintf(str, "%3d %8s %s ", i, pptr->pname,
-			pstnams[pptr->pstate-1]);
+		sprintf(str, "%3d %8s %s ", k, pptr->pname,
+			pstnams[pptr->pstate - 1]);
 		write(stdout, str, strlen(str));
-		sprintf(str, "%4d %6o-%6o ", pptr->pprio,  pptr->plimit,
-			(unsigned)pptr->pbase + 1);
+		sprintf(str, "%4d %08x-%08x ", pptr->pprio, pptr->plimit,
+			(uintptr_t)pptr->pbase + 1);
 		write(stdout, str, strlen(str));
 		currstk = pptr->pregs[SP];
-		if ((char *)currstk < pptr->plimit || (char *)currstk > pptr->pbase)
+		if ((char *)currstk < pptr->plimit ||
+		    (char *)currstk > pptr->pbase)
 			sprintf(str, " OVERFLOWED)");
 		else
 			sprintf(str, "%4d /%4d    ", pptr->pbase - currstk,

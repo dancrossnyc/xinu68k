@@ -1,66 +1,63 @@
-// x_create.c - x_creat
+#include "conf.h"
+#include "kernel.h"
+#include "a.out.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <a.out.h>
-
-LOCAL	char	symfile[] = "a.out";	// name of object file to search
+static char symfile[] = "a.out";	// name of object file to search
 
 //------------------------------------------------------------------------
 //  x_creat  -  (command create) create a process given a starting address
 //------------------------------------------------------------------------
 COMMAND
-x_creat (int stdin, int stdout, int stderr, int nargs, char *args[])
+x_creat(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
-	int	ssize, prio;
-	struct	exec	*aoutptr;
-	int	dev, len;
-	int	pid;
-	int	(*loc)();
-	char	*buf;
-	Bool	found;
-	long	offset;
-	struct	nlist	*symptr;
-	struct	nlist	*last;
-	char	tmp[30];
+	int ssize, prio;
+	struct exec *aoutptr;
+	int dev, len;
+	int pid;
+	int (*loc) ();
+	char *buf;
+	Bool found;
+	long offset;
+	struct nlist *symptr;
+	struct nlist *last;
+	char tmp[30];
 
-
-	if (nargs <4 || nargs > 5) {
-	    fprintf(stderr,
-		"usage: create procedure stack-size prio [name]\n");
-	    return(SYSERR);
+	if (nargs < 4 || nargs > 5) {
+		fprintf(stderr,
+			"usage: create procedure stack-size prio [name]\n");
+		return SYSERR;
 	}
 	ssize = atoi(args[2]);
-	prio  = atoi(args[3]);
-	if ( (dev=open(NAMESPACE, symfile, "ro")) == SYSERR) {
+	prio = atoi(args[3]);
+	if ((dev = open(NAMESPACE, symfile, "ro")) == SYSERR) {
 		fprintf(stderr, "Cannot open %s\n", symfile);
-		return(SYSERR);
+		return SYSERR;
 	}
-	if ( ((int) (buf=(char *)getmem(512)) ) == SYSERR) {
+	if (((int)(buf = (char *)getmem(512))) == SYSERR) {
 		fprintf(stderr, "no memory\n");
-		return(SYSERR);
+		return SYSERR;
 	}
 	strcpy(tmp, "_");
 	strcat(tmp, args[1]);
 	printf("Looking up %s\n", tmp);
 	read(dev, buf, 16);
 	aoutptr = (struct exec *)buf;
-	offset = (long)  (aoutptr->a_text +  aoutptr->a_data
-				 + (unsigned) sizeof(struct exec));
+	offset = (long)(aoutptr->a_text + aoutptr->a_data
+			+ (unsigned)sizeof(struct exec));
 	seek(dev, offset);
-	for (found=FALSE ; !found ;) {
-		len = read(dev, buf, 42*sizeof(struct nlist));
-		if (len <= 0 ) {
+	for (found = FALSE; !found;) {
+		len = read(dev, buf, 42 * sizeof(struct nlist));
+		if (len <= 0) {
 			fprintf(stderr, "not found\n");
 			close(dev);
 			freemem(buf, 512);
-			return(SYSERR);
+			return SYSERR;
 		}
 		last = (struct nlist *)&buf[len];
-		for (symptr=(struct nlist *)buf ; symptr<last ;symptr++) {
-			if (symptr->n_type == (N_TEXT|N_EXT) &&
-				strncmp(symptr->n_name,tmp,8)==0) {
-				loc = (int(*)())symptr->n_value;
+		for (symptr = (struct nlist *)buf; symptr < last; symptr++) {
+			if (symptr->n_type == (N_TEXT | N_EXT)
+			    && strncmp(symptr->n_name, tmp, 8) == 0) {
+				loc = (int (*)())symptr->n_value;
 				found = TRUE;
 				break;
 			}
@@ -68,7 +65,8 @@ x_creat (int stdin, int stdout, int stderr, int nargs, char *args[])
 	}
 	close(dev);
 	freemem(buf, 512);
-	pid = create(loc, ssize, prio, nargs==5?args[4]:tmp, 0);
-	fprintf(stderr, "[%d]\n", pid );
-	return(resume(pid));
+	pid = create(loc, ssize, prio, nargs == 5 ? args[4] : tmp, 0);
+	fprintf(stderr, "[%d]\n", pid);
+
+	return resume(pid);
 }

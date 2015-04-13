@@ -1,9 +1,7 @@
-// x_mount.c - x_mount, mprint
-
-#include <conf.h>
-#include <kernel.h>
-#include <io.h>
-#include <name.h>
+#include "conf.h"
+#include "kernel.h"
+#include "io.h"
+#include "name.h"
 
 #define	PADTO	24
 
@@ -13,15 +11,15 @@
 static int
 mprint(int stdin, int stdout, int stderr)
 {
-	struct	nament	*nptr;
-	int	i, len, dev;
-	char	str[80];
-	char	*p;
+	struct nament *nptr;
+	int i, len, dev;
+	char str[80];
+	char *p;
 
-	for (i=0 ; i<Nam.nnames ; i++) {
-		nptr = & Nam.nametab[i];
+	for (i = 0; i < Nam.nnames; i++) {
+		nptr = &Nam.nametab[i];
 		sprintf(str, "\"%-s\"", nptr->npre);
-		for (len=strlen(str) ; len < PADTO ; len++)
+		for (len = strlen(str); len < PADTO; len++)
 			str[len] = ' ';
 		write(stdout, str, PADTO);
 		dev = nptr->ndev;
@@ -38,29 +36,29 @@ mprint(int stdin, int stdout, int stderr)
 COMMAND
 x_mount(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
-	int	dev;
+	int dev;
 
 	if (nargs == 1)
-		return(mprint(stdin, stdout, stderr));
+		return mprint(stdin, stdout, stderr);
 	if (nargs != 4) {
-		fprintf(stderr,"use: mount [prefix device new_prefix]\n");
-		return(SYSERR);
+		fprintf(stderr, "use: mount [prefix device new_prefix]\n");
+		return SYSERR;
 	}
-	for (dev=0 ; dev<NDEVS ; dev++)
+	for (dev = 0; dev < NDEVS; dev++)
 		if (strcmp(args[2], devtab[dev].name) == 0) {
 			break;
 		}
-	if (dev >=  NDEVS) {
-		if (strcmp(args[2],"SYSERR") == 0)
+	if (dev >= NDEVS) {
+		if (strcmp(args[2], "SYSERR") == 0)
 			dev = SYSERR;
 		else {
 			fprintf(stderr, "Device %s not found\n", args[2]);
-			return(SYSERR);
+			return SYSERR;
 		}
 	}
 	if (mount(args[1], dev, args[3]) == SYSERR) {
 		fprintf(stderr, "Mount failed\n");
-		return(SYSERR);
+		return SYSERR;
 	}
-	return(OK);
+	return OK;
 }

@@ -27,7 +27,6 @@ typedef	char		Bool;		// Boolean type
 #define	NULLCH		'\0'		// The null character
 #define	NULLSTR		""		// Pointer to empty string
 #define	SYSCALL		int		// System call declaration
-#define	LOCAL		static		// Local procedure declaration
 #define	COMMAND		int		// Shell command declaration
 #define	BUILTIN		int		// Shell builtin " "
 #define	INTPROC		void		// Interrupt procedure  "

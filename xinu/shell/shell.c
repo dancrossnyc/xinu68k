@@ -1,14 +1,12 @@
-// shell.c - shell
+#include "conf.h"
+#include "kernel.h"
+#include "proc.h"
+#include "shell.h"
+#include "cmd.h"
+#include "tty.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <proc.h>
-#include <shell.h>
-#include <cmd.h>
-#include <tty.h>
-
-struct	shvars	Shl;			// globals used by Xinu shell
-struct	cmdent	cmds[]  = {		// shell commands
+struct shvars Shl;		// globals used by Xinu shell
+struct cmdent cmds[] = {	// shell commands
 	{"bpool",	FALSE,		x_bpool},
 	{"cat",		FALSE,		x_cat},
 	{"close",	FALSE,		x_close},
@@ -41,10 +39,10 @@ struct	cmdent	cmds[]  = {		// shell commands
 	{"who",		FALSE,		x_who},
 	{"?",		FALSE,		x_help}
 };
-//extern	struct	cmdent	cmds[];
-LOCAL	char	errhd[] = "Syntax error\n";// global error messages
-LOCAL	char	fmt[]   = "Cannot open %s\n";
-LOCAL	char	fmt2[]  = "[%d]\n";
+
+static char errhd[] = "Syntax error\n";	// global error messages
+static char fmt[] = "Cannot open %s\n";
+static char fmt2[] = "[%d]\n";
 
 //------------------------------------------------------------------------
 //  shell  -  Xinu shell with file redirection and background processing
@@ -52,25 +50,25 @@ LOCAL	char	fmt2[]  = "[%d]\n";
 int
 shell(int dev)
 {
-	int	ntokens;
-	int	i, j, len;
-	int	com;
-	char	*outnam, *innam;
-	int	stdin, stdout, stderr;
-	Bool	backgnd;
-	char	ch, mach[SHMLEN];
-	int	child;
+	int ntokens;
+	int i, j, len;
+	int com;
+	char *outnam, *innam;
+	int stdin, stdout, stderr;
+	Bool backgnd;
+	char ch, mach[SHMLEN];
+	int child;
 
-	Shl.shncmds = sizeof(cmds)/sizeof(struct cmdent);
-	for (getname(mach) ; TRUE ; ) {
+	Shl.shncmds = sizeof(cmds) / sizeof(struct cmdent);
+	for (getname(mach); TRUE;) {
 		fprintf(dev, "%s %% ", mach);
 		getutim(&Shl.shlast);
-		if ( (len = read(dev, Shl.shbuf, SHBUFLEN)) == 0)
+		if ((len = read(dev, Shl.shbuf, SHBUFLEN)) == 0)
 			len = read(dev, Shl.shbuf, SHBUFLEN);
 		if (len == EOF)
 			break;
-		Shl.shbuf[len-1] = NULLCH;
-		if ( (ntokens=lexan(Shl.shbuf)) == SYSERR) {
+		Shl.shbuf[len - 1] = NULLCH;
+		if ((ntokens = lexan(Shl.shbuf)) == SYSERR) {
 			fprintf(dev, errhd);
 			continue;
 		} else if (ntokens == 0)
@@ -80,14 +78,13 @@ shell(int dev)
 
 		// handle '&'
 
-		if (Shl.shtktyp[ntokens-1] == '&') {
-			ntokens-- ;
+		if (Shl.shtktyp[ntokens - 1] == '&') {
+			ntokens--;
 			backgnd = TRUE;
 		}
-
 		// scan tokens, accumulating length;  handling redirect
 
-		for (len=0,i=0 ; i<ntokens ; ) {
+		for (len = 0, i = 0; i < ntokens;) {
 			if ((ch = Shl.shtktyp[i]) == '&') {
 				ntokens = -1;
 				break;
@@ -96,10 +93,11 @@ shell(int dev)
 					ntokens = -1;
 					break;
 				}
-				outnam = Shl.shtok[i+1];
-				for (ntokens--,j=i ; j<ntokens ; j++) {
-					Shl.shtktyp[j] = Shl.shtktyp[j+2];
-					Shl.shtok  [j] = Shl.shtok  [j+2];
+				outnam = Shl.shtok[i + 1];
+				for (ntokens--, j = i; j < ntokens; j++) {
+					Shl.shtktyp[j] =
+					    Shl.shtktyp[j + 2];
+					Shl.shtok[j] = Shl.shtok[j + 2];
 				}
 				continue;
 			} else if (ch == '<') {
@@ -107,14 +105,15 @@ shell(int dev)
 					ntokens = -1;
 					break;
 				}
-				innam = Shl.shtok[i+1];
-				for (ntokens--,j=i ; j < ntokens ; j++) {
-					Shl.shtktyp[j] = Shl.shtktyp[j+2];
-					Shl.shtok  [j] = Shl.shtok  [j+2];
+				innam = Shl.shtok[i + 1];
+				for (ntokens--, j = i; j < ntokens; j++) {
+					Shl.shtktyp[j] =
+					    Shl.shtktyp[j + 2];
+					Shl.shtok[j] = Shl.shtok[j + 2];
 				}
 				continue;
 			} else {
-				 len += strlen(Shl.shtok[i++]);
+				len += strlen(Shl.shtok[i++]);
 			}
 		}
 		if (ntokens <= 0) {
@@ -124,9 +123,8 @@ shell(int dev)
 		stdin = stdout = stderr = dev;
 
 		// Look up command in table
-
-		for (com=0 ; com<Shl.shncmds ; com++) {
-			if (strcmp(cmds[com].cmdnam,Shl.shtok[0]) == 0)
+		for (com = 0; com < Shl.shncmds; com++) {
+			if (strcmp(cmds[com].cmdnam, Shl.shtok[0]) == 0)
 				break;
 		}
 		if (com >= Shl.shncmds) {
@@ -135,42 +133,38 @@ shell(int dev)
 		}
 
 		// handle built-in commands with procedure call
-
 		if (cmds[com].cbuiltin) {
 			if (innam != NULL || outnam != NULL || backgnd)
 				fprintf(dev, errhd);
-			else if ( (*cmds[com].cproc)(stdin, stdout,
-				stderr, ntokens, Shl.shtok) == SHEXIT)
+			else if ((*cmds[com].cproc)(stdin, stdout,
+						    stderr, ntokens,
+						    Shl.shtok) == SHEXIT)
 				break;
 			continue;
 		}
 
 		// Open files and redirect I/O if specified
-
-		if (innam != NULL && (stdin=open(NAMESPACE,innam,"ro"))
-			== SYSERR) {
+		if (innam != NULL &&
+		    (stdin = open(NAMESPACE, innam, "ro")) == SYSERR) {
 			fprintf(dev, fmt, innam);
 			continue;
 		}
-		if (outnam != NULL && (stdout=open(NAMESPACE,outnam,"w"))
-			== SYSERR) {
+		if (outnam != NULL &&
+		    (stdout = open(NAMESPACE, outnam, "w")) == SYSERR) {
 			fprintf(dev, fmt, outnam);
 			continue;
 		}
 
 		// compute space needed for string args. (in bytes)
-
-		len += (ntokens+2) * (sizeof(char *) + sizeof(char));
+		len += (ntokens + 2) * (sizeof(char *) + sizeof(char));
 		if (isodd(len))
 			len--;
 		control(dev, TCINT, getpid());
 
 		// create process to execute conventional command
-
-		if ( (child = create(cmds[com].cproc, SHCMDSTK, SHCMDPRI,
-				Shl.shtok[0],(len/sizeof(int)) + 4,
-				stdin, stdout, stderr, ntokens))
-				== SYSERR) {
+		if ((child = create(cmds[com].cproc, SHCMDSTK, SHCMDPRI,
+				    Shl.shtok[0], (len / sizeof(int)) + 4,
+				    stdin, stdout, stderr, ntokens)) == SYSERR) {
 			fprintf(dev, "Cannot create\n");
 			close(stdout);
 			close(stdin);
@@ -191,5 +185,6 @@ shell(int dev)
 			}
 		}
 	}
-	return(OK);
+
+	return OK;
 }

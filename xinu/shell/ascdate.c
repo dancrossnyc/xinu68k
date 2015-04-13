@@ -1,10 +1,8 @@
-// ascdate.c - ascdate
+#include "conf.h"
+#include "kernel.h"
+#include "date.h"
 
-#include <conf.h>
-#include <kernel.h>
-#include <date.h>
-
-struct	datinfo	Dat = {
+struct datinfo Dat = {
 	{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
 	{"Jan", "Feb", "Mar", "Apr", "May", "Jun",
 	 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
@@ -29,7 +27,7 @@ ascdate(long time, char *str)
 		time -= tmp;
 	}
 	// set month (0-11)
-	for (month = 0 ; month < 12 ; month++) {
+	for (month = 0; month < 12; month++) {
 		tmp = Dat.dt_msize[month] * SECPERDY;
 		if (tmp > time)
 			break;
@@ -51,8 +49,7 @@ ascdate(long time, char *str)
 	// set second (0-59)
 	second = (int)time;
 	sprintf(str, "%3s %2d %4d %2d:%02d:%02d",
-		Dat.dt_mnam[month],
-		day, year, hour, minute, second);
+		Dat.dt_mnam[month], day, year, hour, minute, second);
 
 	return OK;
 }

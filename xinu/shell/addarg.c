@@ -6,9 +6,9 @@
 //------------------------------------------------------------------------
 //  addarg  -  copy arguments to area reserved on process stack
 //
-//	pid: process to receive arguments
-//	nargs: number of arguments to copy
-//	len: size of arg. area (in bytes)
+//      pid: process to receive arguments
+//      nargs: number of arguments to copy
+//      len: size of arg. area (in bytes)
 //------------------------------------------------------------------------
 int
 addarg(int pid, int nargs, int len)
@@ -19,7 +19,7 @@ addarg(int pid, int nargs, int len)
 	char *to;
 
 	if (isbadpid(pid) || proctab[pid].pstate != PRSUSP)
-		return(SYSERR);
+		return SYSERR;
 	pptr = &proctab[pid];
 	toarg = (uintptr_t *)((uintptr_t)pptr->pbase - (uintptr_t)len);
 	to = (char *)(toarg + nargs + 2);
