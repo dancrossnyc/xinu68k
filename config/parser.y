@@ -1,7 +1,8 @@
-%token DEFBRK COLON OCTAL INTEGER IDENT CSR IVEC OVEC IINT OINT
+%token DEFBRK COLON HEX OCTAL INTEGER IDENT CSR IVEC OVEC IINT OINT
 	INIT OPEN CLOSE	READ WRITE SEEK CNTL IS ON GETC PUTC
 %{
 #include <stdio.h>
+#include <stdlib.h>
 #include "lexer.c"
 
 #define	CONFIGC		"../xinu/conf.c"	// name of .c output
@@ -26,7 +27,7 @@ struct syment {
 } symtab[250];
 
 int nsym = 0;
-int linectr = 1;
+int lineno = 1;
 char *doing = "device type declaration";
 char *s;
 
@@ -87,7 +88,7 @@ char *ftout[] = {
 
 void yyerror(char *s);
 int lookup(char *str, int len);
-int otoi(char *str, int len);
+int strtoi(char *str);
 void newattr(int tok, int val);
 int cktname(int symid);
 void mktype(int deviceid);
@@ -153,14 +154,11 @@ attribute	:	CSR number
 					{newattr(CNTL,$2);}
 		;
 number		:	INTEGER
-					// Assume all input is octal
-					// for now; distinction is
-					// made in lexical routines
-					// just in case of change
-
-					{$$ = otoi(yytext,yyleng);}
+					{$$ = strtoi(yytext);}
+		|	HEX
+					{$$ = strtoi(yytext);}
 		|	OCTAL
-					{$$ = otoi(yytext,yyleng);}
+					{$$ = strtoi(yytext);}
 		;
 devicedescriptors	:	/**/
 		|	devicedescriptors descriptor
@@ -337,7 +335,7 @@ main(int argc, char *argv[])
 void
 yyerror(char *s)
 {
-	fprintf(stderr, "Syntax error in %s on line %d\n", doing, linectr);
+	fprintf(stderr, "Syntax error in %s on line %d\n", doing, lineno);
 }
 
 
@@ -366,21 +364,18 @@ lookup(char *str, int len)
 }
 
 int
-otoi(char *str, int len)
+strtoi(char *str)
 {
-	int i;
-	char c;
+	int n;
+	char *err;
 
-	for (i = 0; len > 0; len--) {
-		c = *str++;
-		if (c > '7')
-			fprintf(stderr, "invalid octal digit on line %d\n",
-				linectr);
-		else
-			i = 8 * i + (c - '0');
+	err = NULL;
+	n = strtol(str, &err, 0);
+	if (err != NULL && *err != '\0') {
+		fprintf(stderr, "invalid digit on line %d\n", lineno);
 	}
 
-	return i;
+	return n;
 }
 
 // newattr -- add a new attribute spec to current type/device description
@@ -464,7 +459,7 @@ cktname(int symid)
 		if (s->dvtname == name) {
 			fprintf(stderr,
 				"Duplicate type name %s on line %d\n",
-				name, linectr);
+				name, lineno);
 			exit(1);
 		}
 	}
@@ -485,7 +480,7 @@ mktype(int deviceid)
 		if (s->dvtname == tn && s->dvdevice == dn) {
 			fprintf(stderr,
 				"Duplicate device %s for type %s on line %d\n",
-				dn, tn, linectr);
+				dn, tn, lineno);
 			exit(1);
 		}
 		p = s;
@@ -571,7 +566,7 @@ mkdev(int nameid, int typid, int deviceid)
 	if (found == 0) {
 		fprintf(stderr,
 			"Bad type or device name in declaration of %s on line %d\n",
-			devn, linectr);
+			devn, lineno);
 		exit(1);
 	}
 	lastdv->dvnext = NULL;
@@ -588,7 +583,7 @@ ckdname(int devid)
 		if (s->dvname == name) {
 			fprintf(stderr,
 				"Duplicate device name %s on line %d\n",
-				name, linectr);
+				name, lineno);
 			exit(1);
 		}
 	}

@@ -73,16 +73,16 @@ nam:
 
 // Device definitions starting with terminals
 
-CONSOLE		is tty	on SLU		csr=0177560 ivec=0060 ovec=0064
-//TTY1		is tty	on SLU		csr=0176500 ivec=0300 ovec=0304
-//TTY2		is tty	on SLU		csr=0176510 ivec=0310 ovec=0314
-//TTY3		is tty	on SLU		csr=0176520 ivec=0320 ovec=0324
+CONSOLE		is tty	on SLU		csr=0xFF70 ivec=0x30 ovec=0x34
+//TTY1		is tty	on SLU		csr=0xFD40 ivec=0xC0 ovec=0xC4
+//TTY2		is tty	on SLU		csr=0xFD48 ivec=0xC8 ovec=0xCC
+//TTY3		is tty	on SLU		csr=0xFD50 ivec=0xD0 ovec=0xD4
 
 // Physical disks
-//DISK0		is dsk	on WIN		csr=0177460 ivec=0134 ovec=0134
+//DISK0		is dsk	on WIN		csr=0xFF30 ivec=0x5C ovec=0x5C
 
 // Physical ethernet raw packet interface
-ETHER		is eth	on DEQ		csr=0174440 ivec=0400 ovec=0400
+ETHER		is eth	on DEQ		csr=0xF920 ivec=0x100 ovec=0x100
 
 // Datagram network interface (master pseudo-device)
 INTERNET	is dgm	on ETH

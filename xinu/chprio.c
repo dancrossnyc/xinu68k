@@ -5,26 +5,29 @@
 //------------------------------------------------------------------------
 // chprio  --  change the scheduling priority of a process
 //
-// newprio > 0.
+//	newprio > 0.
 //------------------------------------------------------------------------
 SYSCALL
 chprio(int pid, int newprio)
 {
 	int oldprio;
-	struct pentry *pptr;
+	struct pentry *proc;
 	uword ps;
 
 	ps = disable();
-	if (isbadpid(pid) || newprio <= 0 ||
-	    (pptr = &proctab[pid])->pstate == PRFREE) {
+	if (isbadpid(pid) ||
+	    newprio <= 0 ||
+	    (proc = &proctab[pid])->pstate == PRFREE) {
 		restore(ps);
 		return SYSERR;
 	}
-	oldprio = pptr->pprio;
-	pptr->pprio = newprio;
-	switch (pptr->pstate) {
+	proc = &proctab[pid];
+	oldprio = proc->pprio;
+	proc->pprio = newprio;
+	switch (proc->pstate) {
 	case PRREADY:
 		insert(dequeue(pid), rdyhead, newprio);
+		// FALLTHROUGH
 	case PRCURR:
 		resched();
 	default:

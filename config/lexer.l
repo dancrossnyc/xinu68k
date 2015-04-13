@@ -1,6 +1,6 @@
 %{
 #include "y.tab.h"
-extern int brkcount, linectr;
+extern int brkcount, lineno;
 %}
 %x			COMMENT
 A			[a-z_A-Z]
@@ -14,11 +14,12 @@ M			[a-z_A-Z0-9]
 "*/"			BEGIN(INITIAL);
 [^*\n]+			;
 "*"			;
-\n			linectr++;
+\n			lineno++;
 }
 "%"			{return (++brkcount == 2) ? 0 : DEFBRK;} // end-of-file or DEFBRK
 ":"			{return(COLON);}
 0[0-9]*			{return(OCTAL);}
+0x[0-9a-fA-F]+		{return(HEX);}
 [1-9][0-9]+		{return(INTEGER);}
 is			{return(IS);}
 on			{return(ON);}
@@ -52,6 +53,6 @@ on			{return(ON);}
 "-n"			{return(CNTL);}
 "n"			{return(CNTL);}
 [ \t]+			;
-"\n"			{linectr++;}
+"\n"			{lineno++;}
 {A}{M}*			{return(IDENT);}
 .			{return(yytext[0]);}

@@ -7,50 +7,50 @@
 
 //------------------------------------------------------------------------
 // kill  --  kill a process and remove it from the system
-//  pid: process to kill
+//
+//	pid: process to kill
 //------------------------------------------------------------------------
 SYSCALL
 kill(int pid)
 {
-	struct pentry *pptr;	// points to proc. table for pid
+	struct pentry *proc;	// points to process table for pid
 	int dev;
 	int ps;
 
 	ps = disable();
-	if (isbadpid(pid) || (pptr = &proctab[pid])->pstate == PRFREE) {
+	if (isbadpid(pid) || &proctab[pid]->pstate == PRFREE) {
 		restore(ps);
 		return SYSERR;
 	}
 	if (--numproc == 0)
 		xdone();
-	dev = pptr->pdevs[0];
+	proc = &proctab[pid];
+	dev = proc->pdevs[0];
 	if (!isbaddev(dev))
 		close(dev);
-	dev = pptr->pdevs[1];
+	dev = proc->pdevs[1];
 	if (!isbaddev(dev))
 		close(dev);
-	send(pptr->pnxtkin, pid);
-	freestk(pptr->pbase, pptr->pstklen);
-	switch (pptr->pstate) {
-
+	send(proc->pnxtkin, pid);
+	freestk(proc->pbase, proc->pstklen);
+	switch (proc->pstate) {
 	case PRCURR:
-		pptr->pstate = PRFREE;	// suicide
+		proc->pstate = PRFREE;	// suicide
 		resched();
-
+		break;			// Unreached.
 	case PRWAIT:
-		semaph[pptr->psem].semcnt++;
+		semaph[proc->psem].semcnt++;
 		// fall through
 	case PRREADY:
 		dequeue(pid);
-		pptr->pstate = PRFREE;
+		proc->pstate = PRFREE;
 		break;
-
 	case PRSLEEP:
 	case PRTRECV:
 		unsleep(pid);
 		// fall through
 	default:
-		pptr->pstate = PRFREE;
+		proc->pstate = PRFREE;
 	}
 	restore(ps);
 
