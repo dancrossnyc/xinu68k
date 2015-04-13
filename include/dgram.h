@@ -5,8 +5,8 @@
 struct	dgblk	{			// Datagram device control block
 	int	dg_dnum;		// device number of this device
 	int	dg_state;		// whether this device allocated
-	u16	dg_lport;		// local datagram port number
-	u16	dg_fport;		// foreign datagram port number
+	uint16	dg_lport;		// local datagram port number
+	uint16	dg_fport;		// foreign datagram port number
 	IPaddr	dg_faddr;		// foreign machine IP address
 	int	dg_xport;		// incoming packet queue
 	int	dg_netq;		// index of our netq entry

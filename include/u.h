@@ -6,21 +6,20 @@
 #include "stddef.h"
 
 typedef unsigned char  byte;
-typedef unsigned char  u8;
-typedef unsigned short u16;
-typedef unsigned int   u32;
+typedef unsigned char  uint8;
+typedef unsigned short uint16;
+typedef unsigned int   uint32;
 typedef unsigned long  ulong;
-typedef signed char    i8;
-typedef signed short   i16;
-typedef signed int     i32;
+typedef signed char    int8;
+typedef signed short   int16;
+typedef signed int     int32;
 typedef int            word;	// Register word.
 typedef unsigned int   uword;
 
 //
-typedef	u32		DBADDR;
+typedef	uint32		DBADDR;
 
 // Symbolic constants used throughout Xinu
-
 typedef	char		Bool;		// Boolean type
 #define	FALSE		0		// Boolean constants
 #define	TRUE		1

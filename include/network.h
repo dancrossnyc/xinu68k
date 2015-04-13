@@ -19,4 +19,4 @@
 #define	net2hs(X)	(X)
 #define	hl2net(X)	(X)
 #define	net2hl(X)	(X)
-extern	u16		cksum(void *p, size_t nwords);	// 1s comp of 16-bit 2s comp sum
+extern	uint16		cksum(void *p, size_t nwords);	// 1s comp of 16-bit 2s comp sum

@@ -3,13 +3,13 @@
 #include "u.h"
 
 struct	exec {			// a.out header
-	i16	a_magic;	// magic number
-	u16	a_text;		// size of text segment
-	u16	a_data;		// size of initialized data
-	u16	a_bss;		// size of uninitialized data
-	u16	a_syms;		// size of symbol table
-	u16	a_entry;	// entry point
-	u16	a_unused;	// not used
+	int16	a_magic;	// magic number
+	uint16	a_text;		// size of text segment
+	uint16	a_data;		// size of initialized data
+	uint16	a_bss;		// size of uninitialized data
+	uint16	a_syms;		// size of symbol table
+	uint16	a_entry;	// entry point
+	uint16	a_unused;	// not used
 	char	a_flag;		// relocation info stripped
 	char	a_v6;		// UNIX V6 compatibility  mode
 };

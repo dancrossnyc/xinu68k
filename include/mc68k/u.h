@@ -3,5 +3,5 @@
  */
 
 typedef unsigned short uword;
-typedef short i16;
-typedef unsigned short u16;
+typedef short int16;
+typedef unsigned short uint16;
