@@ -24,8 +24,8 @@ x_ps(int stdin, int stdout, int stderr, int nargs, char *args[])
 	proctab[currpid].pregs[SP] = psavsp;
 	write(stdout, hd1, strlen(hd1));
 	write(stdout, hd2, strlen(hd2));
-	for (int k = 0; k < NPROC; i++) {
-		struct pentry *pptr = &proctab[i];
+	for (int k = 0; k < NPROC; k++) {
+		struct pentry *pptr = &proctab[k];
 		if (pptr->pstate == PRFREE)
 			continue;
 		sprintf(str, "%3d %8s %s ", k, pptr->pname,
