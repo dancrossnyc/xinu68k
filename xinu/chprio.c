@@ -15,9 +15,7 @@ chprio(int pid, int newprio)
 	uword ps;
 
 	ps = disable();
-	if (isbadpid(pid) ||
-	    newprio <= 0 ||
-	    (proc = &proctab[pid])->pstate == PRFREE) {
+	if (isbadpid(pid) || newprio <= 0 || proctab[pid].pstate == PRFREE) {
 		restore(ps);
 		return SYSERR;
 	}
@@ -30,6 +28,7 @@ chprio(int pid, int newprio)
 		// FALLTHROUGH
 	case PRCURR:
 		resched();
+		// FALLTHROUGH
 	default:
 		break;
 	}

@@ -18,7 +18,7 @@ kill(int pid)
 	int ps;
 
 	ps = disable();
-	if (isbadpid(pid) || &proctab[pid]->pstate == PRFREE) {
+	if (isbadpid(pid) || proctab[pid].pstate == PRFREE) {
 		restore(ps);
 		return SYSERR;
 	}

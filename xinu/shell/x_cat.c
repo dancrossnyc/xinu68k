@@ -4,9 +4,10 @@
 #include <kernel.h>
 
 //------------------------------------------------------------------------
-//  x_cat  -  (command cat) concatenate files and write on stdout
+// x_cat - (command cat) concatenate files and write on stdout
 //------------------------------------------------------------------------
-COMMAND	x_cat(int stdin, int stdout, int stderr, int nargs, char *args[])
+COMMAND
+x_cat(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	int	device;
 	char	*buf;

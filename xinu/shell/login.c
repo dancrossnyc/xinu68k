@@ -5,10 +5,10 @@
 #include <shell.h>
 
 //------------------------------------------------------------------------
-//  login  -  log user onto system
+// login - log user onto system
 //------------------------------------------------------------------------
 int
-login (int dev)
+login(int dev)
 {
 	int	len;
 

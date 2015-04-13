@@ -14,22 +14,24 @@
 int
 addarg(int pid, int nargs, int len)
 {
-	struct	pentry	*pptr;
-	char	**fromarg;
-	int	*toarg;
-	char	*to;
+	struct pentry *pptr;
+	char **fromarg;
+	uintptr_t *toarg;
+	char *to;
 
-	if (isbadpid(pid) || (pptr= &proctab[pid])->pstate != PRSUSP)
+	if (isbadpid(pid) || proctab[pid].pstate != PRSUSP)
 		return(SYSERR);
-	toarg = (int *)(((unsigned)pptr->pbase) - (unsigned)len);
-	to = (char *) (toarg + (nargs + 2));
-	*toarg = (int) (toarg + 1);
+	pptr = &proctab[pid];
+	toarg = (uintptr_t *)((uintptr_t)pptr->pbase - (uintptr_t)len);
+	to = (char *)(toarg + nargs + 2);
+	*toarg = (uintptr_t)(toarg + 1);
 	toarg++;
-	for (fromarg=Shl.shtok ; nargs > 0 ; nargs--) {
-		*toarg++ = (int)to;
+	for (fromarg = Shl.shtok; nargs > 0; nargs--) {
+		*toarg++ = (uintptr_t)to;
 		strcpy(to, *fromarg++);
 		to += strlen(to) + 1;
 	}
 	*toarg = 0;
-	return(OK);
+
+	return OK;
 }
