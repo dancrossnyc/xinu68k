@@ -2,15 +2,13 @@
 #include "kernel.h"
 #include "disk.h"
 
-#ifdef	Ndsk
 struct dsblk dstab[Ndsk];
-#endif
 int dskdbp, dskrbp;
 
 //------------------------------------------------------------------------
 //  dsinit  --  initialize disk drive device
 //------------------------------------------------------------------------
-int
+void
 dsinit(struct devsw *devptr)
 {
 	struct dsblk *dsptr;
@@ -48,5 +46,4 @@ dsinit(struct devsw *devptr)
 	if (status & DTERROR)
 		panic("Disk error");
 	restore(ps);
-	return OK;
 }

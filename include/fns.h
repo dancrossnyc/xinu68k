@@ -75,7 +75,7 @@ void dot2ip(char *ip, int nad1, int nad2, int nad3, int nad4);
 // dscntl.c
 int dscntl(struct devsw *devptr, int func);
 // dsinit.c
-int dsinit(struct devsw *devptr);
+void dsinit(struct devsw *devptr);
 // dsinter.c
 INTPROC dsinter(struct dsblk *dsptr);
 // dskbcpy.c
@@ -197,7 +197,7 @@ int lfclose(struct devsw *devptr);
 // lfgetc.c
 int lfgetc(struct devsw *devptr);
 // lfinit.c
-int lfinit(struct devsw *devptr);
+void lfinit(struct devsw *devptr);
 // lfputc.c
 int lfputc(struct devsw *devptr, int ch);
 // lfread.c

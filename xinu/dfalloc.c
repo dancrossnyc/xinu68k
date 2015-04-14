@@ -6,16 +6,16 @@
 //------------------------------------------------------------------------
 //  dfalloc  --  allocate a device table entry for a disk file; return id
 //------------------------------------------------------------------------
-#ifdef	Ndf
 int
 dfalloc(void)
 {				// assume exclusion for dir. provided by caller
-	for (int i = 0; i < Ndf; i++)
-		if (fltab[i].fl_pid == 0) {
-			fltab[i].fl_pid = getpid();
-			return i;
+
+	for (int k = 0; k < Ndf; k++) {
+		if (fltab[k].fl_pid == 0) {
+			fltab[k].fl_pid = getpid();
+			return k;
 		}
+	}
 
 	return SYSERR;
 }
-#endif

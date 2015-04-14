@@ -74,12 +74,12 @@ nam:
 // Device definitions starting with terminals
 
 CONSOLE		is tty	on SLU		csr=0xFF70 ivec=0x30 ovec=0x34
-//TTY1		is tty	on SLU		csr=0xFD40 ivec=0xC0 ovec=0xC4
-//TTY2		is tty	on SLU		csr=0xFD48 ivec=0xC8 ovec=0xCC
-//TTY3		is tty	on SLU		csr=0xFD50 ivec=0xD0 ovec=0xD4
+TTY1		is tty	on SLU		csr=0xFD40 ivec=0xC0 ovec=0xC4
+TTY2		is tty	on SLU		csr=0xFD48 ivec=0xC8 ovec=0xCC
+TTY3		is tty	on SLU		csr=0xFD50 ivec=0xD0 ovec=0xD4
 
 // Physical disks
-//DISK0		is dsk	on WIN		csr=0xFF30 ivec=0x5C ovec=0x5C
+DISK0		is dsk	on WIN		csr=0xFF30 ivec=0x5C ovec=0x5C
 
 // Physical ethernet raw packet interface
 ETHER		is eth	on DEQ		csr=0xF920 ivec=0x100 ovec=0x100
@@ -103,10 +103,10 @@ RFILE3		is rf	on DGM
 RFILE4		is rf	on DGM
 
 // Pseudo-device slots for local disk files
-//FILE1		is df	on DSK
-//FILE2		is df	on DSK
-//FILE3		is df	on DSK
-//FILE4		is df	on DSK
+FILE1		is df	on DSK
+FILE2		is df	on DSK
+FILE3		is df	on DSK
+FILE4		is df	on DSK
 
 // Pseudo device for the abstract (file) name space
 NAMESPACE	is nam	on TOP

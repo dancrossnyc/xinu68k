@@ -4,12 +4,12 @@
 #include "ctype.h"
 
 //------------------------------------------------------------------------
-//  dgparse  -  parse foreign address specification; get IP and port #s
+// dgparse - parse foreign address specification; get IP and port numbers
 //------------------------------------------------------------------------
 int
 dgparse(struct dgblk *dgptr, char *fspec)
 {
-	int i, byte;
+	int i, b;
 	int ch;
 	char *ipptr;
 
@@ -19,15 +19,14 @@ dgparse(struct dgblk *dgptr, char *fspec)
 	}
 
 	// parse forms like 192.5.48.30:3 into (ip-address,udp-port)
-
 	ipptr = (char *)dgptr->dg_faddr;
 	for (i = 0; i < 4; i++) {
-		byte = 0;
+		b = 0;
 		while (isdigit((ch = *fspec++)))
-			byte = 10 * byte + (ch - '0');
-		if (byte > 256 || (i < 3 && ch != '.'))
+			b = 10 * b + (ch - '0');
+		if (b > 256 || (i < 3 && ch != '.'))
 			return SYSERR;
-		*ipptr++ = (char) byte;
+		*ipptr++ = (byte)b;
 	}
 	if (ch != ':')
 		return SYSERR;

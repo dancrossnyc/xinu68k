@@ -11,15 +11,15 @@
 static int
 newpid(void)
 {
-	int pid;		// process id to return
-	int i;
 
-	for (i = 0; i < NPROC; i++) {	// check all NPROC slots
-		if ((pid = nextproc--) <= 0)
+	for (int k = 0; k < NPROC; k++) {	// check all NPROC slots
+		int pid = nextproc--;		// process id to return
+		if (pid <= 0)
 			nextproc = NPROC - 1;
 		if (proctab[pid].pstate == PRFREE)
 			return pid;
 	}
+
 	return SYSERR;
 }
 
@@ -40,14 +40,16 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	int pid;		// stores new process id
 	struct pentry *pptr;	// pointer to proc. table entry
 	int i;
-	int *saddr;		// stack address
-	uword ps;		// saved processor status
-	uword *procaddrp = (uword *)&procaddr;
+	uword *saddr;		// stack address
+	uintptr_t *procaddrp = (uintptr_t *)&procaddr;
+	int ps;			// saved processor status
 
 	ps = disable();
 	ssize = (int)roundew(ssize);
-	if (ssize < MINSTK || ((saddr = getstk(ssize)) == (int *)SYSERR) ||
-	    (pid = newpid()) == SYSERR || isodd(procaddr) ||
+	if (ssize < MINSTK ||
+	    ((saddr = (uword *)getstk(ssize)) == (uword *)SYSERR) ||
+	    (pid = newpid()) == SYSERR ||
+	    isodd(procaddr) ||
 	    priority < 1) {
 		restore(ps);
 		return SYSERR;
@@ -55,30 +57,30 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	numproc++;
 	pptr = &proctab[pid];
 	pptr->pstate = PRSUSP;
-	for (i = 0; i < PNMLEN && (pptr->pname[i] = name[i]) != 0; i++);
+	strncpy(pptr->pname, name, PNMLEN);
 	pptr->pprio = priority;
 	pptr->pbase = (char *)saddr;
 	pptr->pstklen = ssize;
 	pptr->psem = 0;
 	pptr->phasmsg = FALSE;
-	pptr->plimit = (char *)((uword)saddr - ssize + sizeof(int));
+	pptr->plimit = (char *)((uintptr_t)saddr - ssize + sizeof(int));
 	*saddr-- = MAGIC;
 	pptr->pargs = nargs;
 	for (i = 0; i < PNREGS; i++)
 		pptr->pregs[i] = INITREG;
-	pptr->paddr = (char *)(*procaddrp);
+	pptr->paddr = (void *)(*procaddrp);
 	pptr->pregs[PC] = *procaddrp;
 	pptr->pregs[PS] = INITPS;
 	pptr->pnxtkin = BADPID;
 	pptr->pdevs[0] = pptr->pdevs[1] = BADDEV;
-	va_start(args, nargs);
 	saddr -= nargs;
-	for (; nargs > 0; nargs--)	// machine dependent; copy args
+	va_start(args, nargs);
+	for (; nargs > 0; nargs--)		// machine dependent; copy args
 		*++saddr = va_arg(args, int);	// onto created process's stack
 	va_end(args);
 	saddr -= nargs;
-	*saddr = (int) INITRET;	// push on return address
-	pptr->pregs[SP] = (int) saddr;
+	*saddr = (uintptr_t)INITRET;	// push on return address
+	pptr->pregs[SP] = (uintptr_t)saddr;
 	restore(ps);
 
 	return pid;

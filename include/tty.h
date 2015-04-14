@@ -5,7 +5,6 @@
 #define	EBUFLEN		20		// size of echo queue
 
 // size constants
-
 #ifndef	Ntty
 #define	Ntty		1		// number of serial tty lines
 #endif

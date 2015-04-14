@@ -8,17 +8,14 @@
 int
 dgalloc(void)
 {
-	struct dgblk *dgptr;
-	int i;
-	int ps;
+	int ps = disable();
 
-	ps = disable();
-	for (i = 0; i < Ndg; i++) {
-		dgptr = &dgtab[i];
+	for (int k = 0; k < Ndg; k++) {
+		struct dgblk *dgptr = &dgtab[k];
 		if (dgptr->dg_state == DG_FREE) {
 			dgptr->dg_state = DG_USED;
 			restore(ps);
-			return i;
+			return k;
 		}
 	}
 	restore(ps);

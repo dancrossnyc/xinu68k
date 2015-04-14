@@ -1,6 +1,6 @@
 #include "u.h"
 
-unsigned short
+uint16
 cksum(unsigned short *p, size_t words)
 {
 	uint32 sum;

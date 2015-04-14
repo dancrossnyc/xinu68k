@@ -1,5 +1,3 @@
-// lfile.h
-
 // Local disk layout: disk block 0 is directory, then index area, and
 // then data blocks.  Each disk block (512 bytes) in the index area
 // contains 8 iblocks, which are 64 bytes long.  Iblocks are referenced
@@ -9,8 +7,8 @@
 // list of iblocks, and each iblock contains pointers to IBLEN (29) data
 // blocks. Index pointers contain a valid data block address or DBNULL.
 
-#include <iblock.h>
-#include <file.h>
+#include "iblock.h"
+#include "file.h"
 
 struct	flblk	{			// file "device" control block
 	int	fl_id;			// file's "device id" in devtab
@@ -27,6 +25,4 @@ struct	flblk	{			// file "device" control block
 	char	fl_buff[DBUFSIZ];	// current data block for file
 };
 
-#ifdef	Ndf
 extern	struct	flblk	fltab[];
-#endif

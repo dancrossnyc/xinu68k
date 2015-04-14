@@ -8,17 +8,16 @@
 int
 dgmcntl(struct devsw *devptr, int func, char *addr)
 {
-	int status;
 
 	switch (func) {
 #ifdef	NETDAEMON
 	case NC_SETGW:
 		memmove(Net.gateway, addr, IPLEN);
-		status = OK;
-		break;
+		return OK;
 #endif
 	default:
-		status = SYSERR;
+		break;
 	}
-	return status;
+
+	return SYSERR;
 }

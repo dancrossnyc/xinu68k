@@ -3,7 +3,6 @@
 #include "sleep.h"
 
 // real-time clock variables and sleeping process queue pointers
-
 #ifdef	RTCLOCK
 int count6;			// counts in 60ths of a second 6-0
 int count10;			// counts in 10ths of a second 10-0

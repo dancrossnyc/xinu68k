@@ -8,23 +8,23 @@
 //  dfdsrch  --  search disk directory for position of given file name
 //------------------------------------------------------------------------
 struct fdes *
-dfdsrch(struct dsblk *dsptr, char *filenam, int mbits)
+dfdsrch(struct dsblk *dsptr, char *filename, int mbits)
 {
 	struct dir *dirptr;
 	struct fdes *fdptr;
 	int len;
-	int i;
 	int inum;
 
-	if ((len = strlen(filenam)) <= 0 || len >= FDNLEN)
+	len = strlen(filename);
+	if (len <= 0 || len >= FDNLEN)
 		return (struct fdes *)SYSERR;
 	dirptr = dsdirec(dsptr->dnum);
-	for (i = 0; i < dirptr->d_nfiles; i++) {
-		if (strcmp(filenam, dirptr->d_files[i].fdname) == 0) {
+	for (int k = 0; k < dirptr->d_nfiles; k++) {
+		if (strcmp(filename, dirptr->d_files[k].fdname) == 0) {
 			if ((mbits & FLNEW) != 0)
 				return (struct fdes *)SYSERR;
 			else
-				return &dirptr->d_files[i];
+				return &dirptr->d_files[k];
 		}
 	}
 	wait(dsptr->ddirsem);
@@ -35,7 +35,7 @@ dfdsrch(struct dsblk *dsptr, char *filenam, int mbits)
 	inum = ibnew(dsptr->dnum, IBNWDIR);
 	fdptr = &(dirptr->d_files[dirptr->d_nfiles++]);
 	fdptr->fdlen = 0L;
-	strcpy(fdptr->fdname, filenam);
+	strcpy(fdptr->fdname, filename);
 	fdptr->fdiba = inum;
 	write(dsptr->dnum, dskbcpy(dirptr), DIRBLK);
 	signal(dsptr->ddirsem);

@@ -2,6 +2,8 @@
 #include "kernel.h"
 #include "network.h"
 
+struct dgblk dgtab[Ndg];	// dg device control blocks
+
 //------------------------------------------------------------------------
 //  dginit  -  initialize datagram protocol pseudo device marking it free
 //------------------------------------------------------------------------
@@ -14,7 +16,3 @@ dginit(struct devsw *devptr)
 	dgptr->dg_dnum = devptr->num;
 	dgptr->dg_state = DG_FREE;
 }
-
-#ifdef	Ndg
-struct dgblk dgtab[Ndg];	// dg device control blocks
-#endif
