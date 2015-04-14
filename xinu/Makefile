@@ -54,7 +54,7 @@ CFILES=		access.c adump.c arp_in.c arpfind.c	\
 		lfsflush.c lfsnewd.c lfwrite.c		\
 		libk.c					\
 		mark.c mdump.c mkarp.c mkpool.c mount.c	\
-		naminit.c nammap.c namopen.c namrepl.c	\
+		naminit.c namemap.c namopen.c namrepl.c	\
 		ndump.c netdump.c netin.c netinit.c	\
 		netnum.c netout.c newqueue.c nqalloc.c	\
 		open.c					\
@@ -118,7 +118,7 @@ OFILES=		access.o adump.o arp_in.o arpfind.o	\
 		lfsflush.o lfsnewd.o lfwrite.o		\
 		libk.o					\
 		mark.o mdump.o mkarp.o mkpool.o mount.o	\
-		naminit.o nammap.o namopen.o namrepl.o	\
+		naminit.o namemap.o namopen.o namrepl.o	\
 		ndump.o netdump.o netin.o netinit.o	\
 		netnum.o netout.o newqueue.o		\
 		nqalloc.o				\
@@ -626,9 +626,9 @@ mount.o: ../include/name.h
 naminit.o: ../include/conf.h
 naminit.o: ../include/kernel.h
 naminit.o: ../include/name.h
-nammap.o: ../include/conf.h
-nammap.o: ../include/kernel.h
-nammap.o: ../include/name.h
+namemap.o: ../include/conf.h
+namemap.o: ../include/kernel.h
+namemap.o: ../include/name.h
 namopen.o: ../include/conf.h
 namopen.o: ../include/kernel.h
 namopen.o: ../include/name.h
