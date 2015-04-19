@@ -208,7 +208,7 @@ xinu.o:		$(XOFILES)
 		$(LD) -r $(XOFILES) -o xinu.o
 
 a.out:		libx.a xinu.o test.o
-		$(LD) -S -e start xinu.o test.o libx.a libx.a ../libxc/libxc.a -L/opt/gnu/lib/gcc/m68k-none-elf/4.9.2/m68000 -lgcc
+		$(LD) -S -e start -Ttext=0x00001000 -Tdata=0x00080000 xinu.o test.o libx.a libx.a ../libxc/libxc.a -L/opt/gnu/lib/gcc/m68k-none-elf/4.9.2/m68000 -lgcc
 
 tags:		,tags
 

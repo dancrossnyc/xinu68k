@@ -1,6 +1,8 @@
 |------------------------------------------------------------------------
 | Xinu system entry point -- first location beyond interrupt vectors
 |------------------------------------------------------------------------
+.data
+_mystack:	.space	4*20,0
 .text
 .globl	start, restart, maxaddr, nulluser
 restart:			| a name used by C for reboot
@@ -21,8 +23,9 @@ start:
 	movea.l	0,%a4
 	movea.l	0,%a5
 	movea.l	0,%a6
-	movea.l	0,%a7
+	lea	_mystack,%a7
+	adda.l	#4*20,%a7
 	jsr	sizmem		| Find memory size. Use initial stack.
-	move.l	maxaddr,%sp	| switch stack to high memory
+	movea.l	maxaddr,%sp	| switch stack to high memory
 	clr.l	-(%sp)		| leave space for MAGIC word
 	jmp	nulluser	| Jump to C startup routine

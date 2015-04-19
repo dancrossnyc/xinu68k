@@ -12,7 +12,7 @@ clkint:
 	subi.l	#1,ticks10		| Is this 10th tick?
 	bgt	Lchkdefer		|  no => process tick
 	move.l	#10,ticks10		|  yes=> reset counter&continue
-	add	#1,clktime		| increment time-of-day clock
+	addi.l	#1,clktime		| increment time-of-day clock
 Lchkdefer:
 	tst.l	deferclock		| Are clock ticks deferred?
 	beq	Lnodefer		|  no => go process this tick
@@ -22,8 +22,9 @@ Lnodefer:
 	movem.l	%d0-%d1/%a0-%a1,-(%sp)	| (Likely to call C, so save regs.)
 	tst.l	slnempty		| Is sleep queue nonempty?
 	beq	Lpreempt		|  no => go process preemption
-	subi.l	#1,(%a0)		|  yes=> decrement delta key on
-	bgt	Lpreempt		|        first process, calling
+	movea.l	sltop,%a0		|  yes=> decrement delta key on
+	subi.l	#1,(%a0)		|        first process, calling
+	bgt	Lpreempt
 	jsr	wakeup			|        wakeup if zero
 Lpreempt:
 	subi.l	#1,preempt		| Decrement preemption counter
