@@ -1,11 +1,8 @@
-// domain.h - dn_cat
-
 #ifndef	NSERVER
 #define	NSERVER		"128.10.2.8:53"	// Server IP address & UDP port
 #endif
 
 // Definitions of bits in the operation and parameter field
-
 #define	DN_QR		0100000		// Query (0) or request (1) bit
 #define	DN_OPCDE	0074000		// operation  code for query:
 					// 0 => standard query
@@ -48,7 +45,6 @@ struct	dn_qsuf	{			// question section name suffix
 #define	dn_cat(t,f)	{*t++ =(char)strlen(f);strcpy(t,f);t+=strlen(f);}
 
 // Query type codes
-
 #define	DN_QTHA		1		// Host address
 #define	DN_QTNS		2		// Authoratative name server
 #define	DN_QTMD		3		// Mail destination (obsolete)
@@ -66,7 +62,6 @@ struct	dn_qsuf	{			// question section name suffix
 #define	DN_QTMX		15		// Mail, replaces MD & MF
 
 // Query class codes
-
 #define	DN_QCIN		1		// The DARPA Internet
 #define	DN_QCCS		2		// CSNET (now obsolete)
 #define	DN_QCHA		3		// Chaos network

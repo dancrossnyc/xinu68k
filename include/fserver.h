@@ -1,13 +1,10 @@
-// fserver.h
-
 #ifndef	RSERVER
-#define	RSERVER		"128.10.2.3:2001"// remote file server address
+#define	RSERVER		"128.10.2.3:2001"	// remote file server address
 #endif
 
 // Definitions of remote file server constants and packet format
 
 // Codes for operations
-
 #define	FS_ERROR	-1		// returned for error on op.
 #define	FS_OPEN		0		// open a file
 #define	FS_CLOSE	1		// close a file

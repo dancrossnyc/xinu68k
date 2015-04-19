@@ -1,7 +1,4 @@
-// arp.h
-
 // DARPA Internet Address Resolution Protocol  (see RFCs 826, 920)
-
 #define	AR_HRD	1		// Ethernet hardware type code
 #define	AR_PROT	0x0800		// IP protocol address code
 #define	AR_HLEN	6		// Ethernet physical address length
@@ -11,13 +8,13 @@
 #define	AR_RTRY	2		// num. of times to try an arp request
 
 // Definitions of codes used in operation field of ARP packet
-
 #define	AR_REQUEST	1	// arp request to resolve address
 #define	AR_RPLY	2		// reply to a resolve request
 #define	AR_RREQ	3		// reverse ARP request (RARP packets)
 #define	AR_RRLY	4		// reply to a reverse request (RARP ")
 
-struct	arppak	{		// format of DARPA ARP packet
+// format of DARPA ARP packet
+struct arppak {
 	short	ar_hrd;		// type of hardware (Ethernet = 1)
 	short	ar_prot;	// format of proto. address (IP=0x0800)
 	char	ar_hlen;	// hardware address length (6 for Ether)
@@ -30,7 +27,6 @@ struct	arppak	{		// format of DARPA ARP packet
 };
 
 // Format of the IP-to-Ethernet address resolution cache
-
 enum ArpStates {
 	ARP_FREE,	// Entry is unused (initial value)
 	ARP_USED,	// Entry is used but route still unknown
@@ -39,14 +35,16 @@ enum ArpStates {
 	ARP_NSTATES
 };
 
-struct	arpent	{		// format of entry in ARP cache
+// format of entry in ARP cache
+struct arpent {
 	enum ArpStates state;	// state of this entry (see below)
 	Eaddr ether_addr;	// Ethernet address of this host
 	IPaddr ip_addr;		// IP address of this host
 	int dev;		// Xinu device for this host route
 };
 
-struct	arpblk	{		// all information about ARP cache
+// all information about ARP cache
+struct arpcache {
 	struct arpent arptab[AR_TAB]; // IP-to-Ethernet address cache
 	int	atabsiz;	// current entries in arptab
 	int	atabnxt;	// next position in arptab to use
@@ -57,4 +55,4 @@ struct	arpblk	{		// all information about ARP cache
 	int	rarpsem;	// semaphore for access to RARP service
 };
 
-extern	struct	arpblk	Arp;
+extern	struct	arpcache	Arp;

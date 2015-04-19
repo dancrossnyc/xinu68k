@@ -1,5 +1,3 @@
-// bufpool.h
-
 #include "u.h"
 
 #ifndef	NBPOOLS
@@ -28,5 +26,5 @@ struct	bpool	{			// Description of a single pool	*/
 	int bpsem;			// semaphore that counts buffers*/
 };					//  currently in THIS pool	*/
 
-extern	struct	bpool bptab[];		// Buffer pool table		*/
-extern	size_t	nbpools;		// current number of pools	*/
+extern struct bpool bptab[];		// Buffer pool table		*/
+extern size_t nbpools;		// current number of pools	*/

@@ -1,7 +1,4 @@
-// cmd.h
-
 // Declarations for all commands known by the shell
-
 struct	cmdent	{			// entry in command table
 	char	*cmdnam;		// name of command
 	Bool	cbuiltin;		// Is this a builtin command?
@@ -18,7 +15,6 @@ extern	int
 	x_unmou(),	x_uptime(),	x_who();
 
 // Commands:	 name		Builtin?	procedure
-
 #define	CMDS 	"bpool",	FALSE,		x_bpool,	\
 		"cat",		FALSE,		x_cat,		\
 		"close",	FALSE,		x_close,	\

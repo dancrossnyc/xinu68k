@@ -3,7 +3,7 @@
 #include "proc.h"
 #include "network.h"
 
-struct arpblk Arp;
+struct arpcache Arp;
 
 //------------------------------------------------------------------------
 //  arpinit  -  initialize data structures for ARP processing

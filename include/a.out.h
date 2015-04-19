@@ -1,5 +1,3 @@
-// a.out.h
-
 #include "u.h"
 
 struct	exec {			// a.out header
@@ -26,7 +24,6 @@ struct	nlist {			// symbol table entry
 };
 
 // values for type flag
-
 #define	N_UNDF		0	// undefined
 #define	N_ABS		01	// absolute
 #define	N_TEXT		02	// text symbol

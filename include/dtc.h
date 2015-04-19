@@ -1,7 +1,4 @@
-// dtc.h
-
 // Data Technology Corp. DTC-11-1 disk controller host interface
-
 struct	dtc	{			// controller interface regs.
 	int	dt_ccsr;		// command completion status
 	int	dt_csr;			// control and status register
@@ -12,7 +9,6 @@ struct	dtc	{			// controller interface regs.
 };
 
 // bits in the dtc csr register
-
 #define	DTGO	0000001			// "go" bit - start interface
 #define	DTRESET	0000002			// "force reset" bit
 #define	DTINTR	0000100			// enable interface interrupt

@@ -1,5 +1,3 @@
-// disk.h - dssync, dsdirec
-
 #ifndef DISK_H__
 #define DISK_H__
 
@@ -53,7 +51,6 @@ extern	int	dskrbp;			// disk request node buffer pool
 extern	int	dskdbp;			// disk data block buffer pool
 
 // disk control function codes
-
 #define	DSKSYNC	0			// synchronize (flush all I/O)
 #define	dssync(ddev)	control((ddev),DSKSYNC, 0);
 

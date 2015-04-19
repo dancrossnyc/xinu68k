@@ -1,5 +1,3 @@
-// dir.h
-
 #include "u.h"
 
 #define	FDNLEN	10			// length of file name + 1

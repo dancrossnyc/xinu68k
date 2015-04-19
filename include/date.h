@@ -1,5 +1,3 @@
-// date.h - net2xt, xt2net, isleap, ut2ltim
-
 // Xinu stores time as seconds past Jan 1, 1970 (UNIX format), with
 // 1 being 1 second into Jan. 1, 1970, GMT (universal time).  The
 // Internet uses seconds past Jan 1, 1900 (also GMT or universal time)

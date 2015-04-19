@@ -1,6 +1,3 @@
-// ctype.h - isalpha, isupper, islower, isdigit, isspace, ispunct, isalnum,
-//	     isprshort, isprint, iscntrl, toupper, tolower, toascii
-
 #define	_U	0001
 #define	_L	0002
 #define	_N	0004

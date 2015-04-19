@@ -1,7 +1,4 @@
-// ether.h
-
 // Ethernet definitions and constants
-
 #define	EMINPAK	64		// minimum packet length
 #define	EMAXPAK	1150		// 1536. (cut here to conserve space)
 #define	EHLEN	14		// size of Ethernet packet header
@@ -30,7 +27,6 @@ struct	epacket	{		// complete structure of Ethernet packet
 };
 
 // Ethernet control block descriptions
-
 struct	etblk	{
 	struct	dqregs *eioaddr;// address of device csr
 	struct	devsw	*etdev;	// Address of device switch table entry

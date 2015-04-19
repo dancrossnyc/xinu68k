@@ -1,9 +1,6 @@
-// deqna.h
-
 // Definitions Digital Equipment Corporation's DEQNA Ethernet interface
 
 // Device register layout
-
 struct	dqregs	{			// deqna registers in I/O space
 	int	d_addr;			// when read, low order byte of
 	int	d_addr2;		// these and next 4 regs give
@@ -17,7 +14,6 @@ struct	dqregs	{			// deqna registers in I/O space
 };
 
 // Bits in the Control and Status Register
-
 #define	DQ_ENBL		0000001		// Receiver enable
 #define	DQ_REST		0000002		// Software reset
 #define	DQ_NXMI		0000004		// Nonexistent memory interrupt
@@ -36,7 +32,6 @@ struct	dqregs	{			// deqna registers in I/O space
 #define	DQ_RINT		0100000		// Receive interrupt
 
 // Command to device as it appears on buffer descriptor list in memory
-
 struct	dcmd	{			// DEQNA command in memory
 	int	dc_flag;		// flag word marked USED/UNUSED
 	int	dc_bufh;		// desc.+ high  buf. addr. bits
@@ -47,12 +42,10 @@ struct	dcmd	{			// DEQNA command in memory
 };
 
 // Bits in the flag word of dcm
-
 #define	DC_NUSED	0100000		// This dcmd entry not in use
 #define DC_USED		0140000		// DEQNA using this dcmd entry
 
 // Bits in the descriptor word of dcm (i.e. in dc_bufh)
-
 #define	DC_VALID	0100000		// This is a valid buffer addr.
 #define	DC_CADDR	0040000		// This is a chain address
 #define	DC_ENDM		0020000		// Xmit: end of message
@@ -64,7 +57,6 @@ struct	dcmd	{			// DEQNA command in memory
 #define	DC_HBIT		0000100		// Buffer starts on odd address
 
 // Bits returned to first status word (dc_st1)
-
 #define	DC_LUSE		0140000		// LAST/USE bits (see manual)
 #define	DC_INIT		0100000		// Initial value of status word
 #define	DC_ERRU		0040000		// ERROR/USED bit (see manual)
@@ -86,7 +78,6 @@ struct	dcmd	{			// DEQNA command in memory
 #define	DC_OVER		0000001		// Recv: overflow error
 
 // Definitions of device setup packet (see manual for details)
-
 #define	DQ_ROWS		16		// setup has 16 rows
 #define	DQ_COLS		8		// setup has 8 columns
 #define	DQ_SETD		8		// displacement of 2nd copy
