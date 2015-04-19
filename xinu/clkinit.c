@@ -3,8 +3,8 @@
 #include "sleep.h"
 
 // real-time clock variables and sleeping process queue pointers
-int count6;			// counts in 60ths of a second 6-0
-int count10;			// counts in 10ths of a second 10-0
+int clock6;			// counts in 60ths of a second 6-0
+int ticks10;			// counts in 10ths of a second 10-0
 int clmutex;			// mutual exclusion for time-of-day
 long clktime;			// current time in seconds since 1/1/70
 int deferclock;			// non-zero, then deferring clock count
@@ -31,8 +31,8 @@ clkinit(void)
 	*vector = DISABLE;
 	setclkr();
 	preempt = QUANTUM;	// initial time quantum
-	count6 = 6;		// 60ths of a sec. counter
-	count10 = 10;		// 10ths of a sec. counter
+	clock6 = 6;		// 60ths of a sec. counter
+	ticks10 = 10;		// 10ths of a sec. counter
 	clmutex = screate(1);	// semaphore for tod clock
 	clktime = 0L;		// initially a low number
 	slnempty = FALSE;	// initially, no process asleep

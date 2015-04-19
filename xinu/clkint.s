@@ -1,39 +1,35 @@
 |------------------------------------------------------------------------
 | clkint  --  real-time clock interrupt service routine
+|
+| If we jump into C, we must save D0, D1, A0 and A1.
 |------------------------------------------------------------------------
+.text
 .globl	clkint
 clkint:
-	subi.l	#1,ticks6		| Is this the 6th interrupt?
+	subi.l	#1,clock6		| Is this the 6th interrupt?
 	bgt	Lout			|  no => return
-	move.l	#6,ticks6		|  yes=> reset counter&continue
+	move.l	#6,clock6		|  yes=> reset counter&continue
 	subi.l	#1,ticks10		| Is this 10th tick?
 	bgt	Lchkdefer		|  no => process tick
 	move.l	#10,ticks10		|  yes=> reset counter&continue
 	add	#1,clktime		| increment time-of-day clock
 Lchkdefer:
-/*
-	tst     _defclk			| Are clock ticks deferred?
-	beq     notdef			|  no => go process this tick
-	inc     _clkdiff		|  yes=> count in clkdiff and
-	rtt				|        return quickly
-notdef:	
-	tst     _slnempty		| Is sleep queue nonempty?
-	beq     clpreem			|  no => go process preemption
-	dec     *_sltop			|  yes=> decrement delta key
-	bgt	clpreem			|        on first process,
-	mov	r0,-(sp)		|        calling wakeup if
-	mov	r1,-(sp)		|        it reaches zero
-	jsr	pc,_wakeup		|        (interrupt routine
-	mov	(sp)+,r1		|         saves & restores r0
-	mov	(sp)+,r0		|         and r1; C doesn't)
-clpreem:
-	dec	_preempt		| Decrement preemption counter
-	bgt	clret			|   and call resched if it
-	mov	r0,-(sp)		|   reaches zero
-	mov	r1,-(sp)		|	(As before, interrupt
-	jsr	pc,_resched		|	 routine must save &
-	mov	(sp)+,r1		|	 restore r0 and r1
-	mov	(sp)+,r0		|	 because C doesn't)
-*/
+	tst.l	deferclock		| Are clock ticks deferred?
+	beq	Lnodefer		|  no => go process this tick
+	addi.l	#1,clkdiff		|  yes=> count in clkdiff and
+	rte				|        return quickly
+Lnodefer:
+	movem.l	%d0-%d1/%a0-%a1,-(%sp)	| (Likely to call C, so save regs.)
+	tst.l	slnempty		| Is sleep queue nonempty?
+	beq	Lpreempt		|  no => go process preemption
+	subi.l	#1,(%a0)		|  yes=> decrement delta key on
+	bgt	Lpreempt		|        first process, calling
+	jsr	wakeup			|        wakeup if zero
+Lpreempt:
+	subi.l	#1,preempt		| Decrement preemption counter
+	bgt	Lreturn			|   and call resched if it
+	jsr	resched			|   reaches zero
+Lreturn:
+	movem.l	(%sp)+,%d0-%d1/%a0-%a1
 Lout:
 	rte				| Return from interrupt
