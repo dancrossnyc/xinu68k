@@ -129,8 +129,10 @@ nulluser(void)
 
 	kprintf("%lu real mem\n", (uintptr_t)maxaddr + sizeof(int));
 	kprintf("%lu avail mem\n", (uintptr_t)maxaddr - (uintptr_t)&end + sizeof(int));
-	kprintf("clock %sabled\n\n", clkruns == 1 ? "en" : "dis");
-	enable();		// enable interrupts
+	kprintf("clock %sabled\n\n", hasclock ? "en" : "dis");
+
+	// enable interrupts
+	enable();
 
 	// create a process to execute the user's main program
 	userpid = create(main, INITSTK, INITPRIO, INITNAME, INITARGS);

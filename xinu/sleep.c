@@ -12,7 +12,7 @@ sleep(int n)
 {
 	int ps;
 
-	if (n < 0 || clkruns == 0)
+	if (n < 0 || !hasclock)
 		return SYSERR;
 	if (n == 0) {
 		ps = disable();

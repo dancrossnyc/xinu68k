@@ -3,12 +3,11 @@
 #include "sleep.h"
 
 // real-time clock variables and sleeping process queue pointers
-#ifdef	RTCLOCK
 int count6;			// counts in 60ths of a second 6-0
 int count10;			// counts in 10ths of a second 10-0
 int clmutex;			// mutual exclusion for time-of-day
 long clktime;			// current time in seconds since 1/1/70
-int defclk;			// non-zero, then deferring clock count
+int deferclock;			// non-zero, then deferring clock count
 int clkdiff;			// deferred clock ticks
 int slnempty;			// FALSE if the sleep queue is empty
 int *sltop;			// address of key part of top entry in
@@ -17,10 +16,7 @@ int clockq;			// head of queue of sleeping processes
 int preempt;			// preemption counter.  Current process
 				// is preempted when it reaches zero;
 				// set in resched; counts in ticks
-int clkruns;			// set TRUE iff clock exists by setclkr
-#else
-int clkruns = FALSE;		// no clock configured; be sure sleep
-#endif				// doesn't wait forever
+int hasclock;			// set TRUE iff clock exists by setclkr
 
 //------------------------------------------------------------------------
 // clkinit - initialize the clock and sleep queue (called at startup)
@@ -41,6 +37,6 @@ clkinit(void)
 	clktime = 0L;		// initially a low number
 	slnempty = FALSE;	// initially, no process asleep
 	clkdiff = 0;		// zero deferred ticks
-	defclk = 0;		// clock is not deferred
+	deferclock = 0;		// clock is not deferred
 	clockq = newqueue();	// allocate clock queue in q
 }

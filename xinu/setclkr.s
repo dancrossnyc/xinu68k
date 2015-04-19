@@ -3,11 +3,12 @@
 |------------------------------------------------------------------------
 .globl	setclkr
 setclkr:
+	move.l	#1,hasclock
 	rte
 
 /*
 	mov	r1,-(sp)		; save register	used
-	clr	_clkruns		; initialize for no clock
+	clr	_hasclock		; initialize for no clock
 	mov	*$CVECTPS,-(sp)		; save clock interrupt vector
 	mov	*$CVECTPC,-(sp)		;   on caller's stack
 	mov	$DISABLE,*$CVECTPS	; set up new interrupt vector
@@ -21,7 +22,7 @@ setloop:
 	mtps	$DISABLE		; no interrupt occurred, so quit
 	br	setdone
 setint:
-	inc	_clkruns		; clock interrupt jumps here
+	inc	_hasclock		; clock interrupt jumps here
 	add	$4,sp			; pop pc/ps pushed by interrupt
 setdone:
 	mov	(sp)+,*$CVECTPC		; restore old interrupt vector

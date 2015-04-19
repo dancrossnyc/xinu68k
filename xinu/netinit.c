@@ -13,7 +13,7 @@ netinit(void)
 {
 
 	// Initialize pool of network buffers and rest of Net structure
-	if (clkruns == FALSE)
+	if (hasclock == FALSE)
 		panic("net: no clock");
 	Net.netpool = mkpool(EMAXPAK, NETBUFS);
 	for (int i = 0; i < NETQS; i++) {

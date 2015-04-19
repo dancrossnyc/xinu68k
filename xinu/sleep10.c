@@ -12,11 +12,10 @@ sleep10(int n)
 {
 	int ps;
 
-	if (n < 0 || clkruns == 0)
+	if (n < 0 || !hasclock)
 		return SYSERR;
 	ps = disable();
-	if (n == 0) {		// sleep10(0) -> end time slice
-	} else {
+	if (n > 0) {		// sleep10(0) -> end time slice
 		insertd(currpid, clockq, n);
 		slnempty = TRUE;
 		sltop = (int *)&q[q[clockq].qnext].qkey;

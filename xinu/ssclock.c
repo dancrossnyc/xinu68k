@@ -10,7 +10,7 @@
 void
 stopclk(void)
 {
-	defclk++;
+	deferclock++;
 }
 
 //------------------------------------------------------------------------
@@ -24,7 +24,7 @@ strtclk(void)
 	int next;
 
 	ps = disable();
-	if (defclk <= 0 || --defclk > 0) {
+	if (deferclock <= 0 || --deferclock > 0) {
 		restore(ps);
 		return;
 	}

@@ -14,7 +14,7 @@ recvtim(int maxwait)
 	int msg;
 	int ps;
 
-	if (maxwait < 0 || clkruns == 0)
+	if (maxwait < 0 || !hasclock)
 		return SYSERR;
 	ps = disable();
 	pptr = &proctab[currpid];
