@@ -19,10 +19,10 @@ sendf(int pid, int msg)
 	pptr->pmsg = msg;
 	pptr->phasmsg = TRUE;
 	if (pptr->pstate == PRRECV)
-		ready(pid, RESCHYES);
+		readysched(pid);
 	else if (pptr->pstate == PRTRECV) {
 		unsleep(pid);
-		ready(pid, RESCHYES);
+		readysched(pid);
 	}
 	restore(ps);
 

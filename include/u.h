@@ -30,20 +30,36 @@ typedef	char		Bool;		// Boolean type
 #define	BUILTIN		int		// Shell builtin " "
 #define	INTPROC		void		// Interrupt procedure  "
 #define	PROCESS		int		// Process declaration
-#define	RESCHYES	1		// tell	ready to reschedule
-#define	RESCHNO		0		// tell	ready not to resch.
-#define	MININT		-32768		// minimum integer (-32768)
-#define	MAXINT		0077777		// maximum integer
-#define	LOWBYTE		0377		// mask for low-order 8 bits
-#define	HIBYTE		0177400		// mask for high 8 of 16 bits
-#define	LOW16		0177777		// mask for low-order 16 bits
-#define	SP		6		// reg.	6 is stack pointer
-#define	PC		7		// reg.	7 is program counter
-#define	PS		8		// proc. status	in 8th reg. loc
+#define	MININT		-2147483648	// minimum integer (-2^31)
+#define	MAXINT		2147483647	// maximum integer (2^31+1)
+#define	LOWBYTE		0x000000FF	// mask for low-order 8 bits
 #define	MINSTK		40		// minimum process stack size
 #define	NULLSTK		300		// process 0 stack size
 #define	DISABLE		0340		// PS to disable interrupts
 #define	MAGIC		0125252		// unusual value for top of stk
+
+enum Registers {
+	PC,
+	SR,
+	D0,
+	D1,
+	D2,
+	D3,
+	D4,
+	D5,
+	D6,
+	D7,
+	A0,
+	A1,
+	A2,
+	A3,
+	A4,
+	A5,
+	A6,		// Frame pointer
+	SP,		// Supervisor Stack pointer; aka A7
+	USP,		// User stack pointer; aka A7
+	NREGS,
+};
 
 // Universal return constants
 
@@ -60,7 +76,7 @@ typedef	char		Bool;		// Boolean type
 #define	INITNAME	"main"		// initial process name
 #define	INITARGS	1,0		// initial count/arguments
 #define	INITRET		userret		// processes return address
-#define	INITPS		0		// initial process PS
+#define	INITSR		0		// initial process PS
 #define	INITREG		0		// initial register contents
 #define	QUANTUM		10		// clock ticks until preemption
 

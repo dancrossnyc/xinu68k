@@ -18,7 +18,7 @@ resume(int pid)
 		return SYSERR;
 	}
 	prio = pptr->pprio;
-	ready(pid, RESCHYES);
+	readysched(pid);
 	restore(ps);
 	return prio;
 }

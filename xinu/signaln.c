@@ -21,7 +21,7 @@ signaln(int sem, int count)
 	sptr = &semaph[sem];
 	for (; count > 0; count--)
 		if ((sptr->semcnt++) < 0)
-			ready(getfirst(sptr->sqhead), RESCHNO);
+			ready(getfirst(sptr->sqhead));
 	resched();
 	restore(ps);
 

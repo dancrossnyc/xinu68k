@@ -287,7 +287,8 @@ int rarp_in(struct epacket *packet, int device);
 // read.c
 SYSCALL read(int descrp, void *buff, int count);
 // ready.c
-int ready(int pid, int resch);
+int ready(int pid);
+int readysched(int pid);
 // receive.c
 SYSCALL receive(void);
 // recvclr.c

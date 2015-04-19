@@ -21,10 +21,10 @@ send(int pid, int msg)
 	pptr->pmsg = msg;	// deposit message
 	pptr->phasmsg = TRUE;
 	if (pptr->pstate == PRRECV)	// if receiver waits, start it
-		ready(pid, RESCHYES);
+		readysched(pid);
 	else if (pptr->pstate == PRTRECV) {
 		unsleep(pid);
-		ready(pid, RESCHYES);
+		readysched(pid);
 	}
 	restore(ps);
 

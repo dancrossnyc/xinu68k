@@ -17,23 +17,19 @@ dsinter(struct dsblk *dsptr)
 		panic("Disk interrupt when disk not busy");
 		return;
 	}
+	drptr->drstat = OK;
 	if (dtptr->dt_csr & DTERROR)
 		drptr->drstat = SYSERR;
-	else
-		drptr->drstat = OK;
 	if ((dsptr->dreqlst = drptr->drnext) != DRNULL)
 		dskstrt(dsptr);
 	switch (drptr->drop) {
-
 	case DREAD:
 	case DSYNC:
-		ready(drptr->drpid, RESCHYES);
+		readysched(drptr->drpid);
 		return;
-
 	case DWRITE:
 		freebuf(drptr->drbuff);
-		// fall through
-	case DSEEK:
+	case DSEEK:		// FALLTHROUGH
 		freebuf(drptr);
 	}
 }

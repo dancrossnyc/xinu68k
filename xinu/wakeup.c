@@ -11,7 +11,7 @@ INTPROC
 wakeup(void)
 {
 	while (nonempty(clockq) && firstkey(clockq) <= 0)
-		ready(getfirst(clockq), RESCHNO);
+		ready(getfirst(clockq));
 	if ((slnempty = nonempty(clockq)) != 0)
 		sltop = (int *)&q[q[clockq].qnext].qkey;
 	resched();

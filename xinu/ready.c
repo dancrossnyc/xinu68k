@@ -10,7 +10,7 @@
 //   resch: reschedule afterward?
 //------------------------------------------------------------------------
 int
-ready(int pid, int resch)
+ready(int pid)
 {
 	struct pentry *pptr;
 
@@ -19,8 +19,16 @@ ready(int pid, int resch)
 	pptr = &proctab[pid];
 	pptr->pstate = PRREADY;
 	insert(pid, rdyhead, pptr->pprio);
-	if (resch)
-		resched();
+
+	return OK;
+}
+
+int
+readysched(int pid)
+{
+	if (ready(pid) != OK)
+		return SYSERR;
+	resched();
 
 	return OK;
 }

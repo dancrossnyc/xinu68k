@@ -70,7 +70,7 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 		pptr->pregs[i] = INITREG;
 	pptr->paddr = (void *)(*procaddrp);
 	pptr->pregs[PC] = *procaddrp;
-	pptr->pregs[PS] = INITPS;
+	pptr->pregs[SR] = INITSR;
 	pptr->pnxtkin = BADPID;
 	pptr->pdevs[0] = pptr->pdevs[1] = BADDEV;
 	saddr -= nargs;

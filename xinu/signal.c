@@ -19,7 +19,7 @@ signal(int sem)
 		return SYSERR;
 	}
 	if ((sptr->semcnt++) < 0)
-		ready(getfirst(sptr->sqhead), RESCHYES);
+		readysched(getfirst(sptr->sqhead));
 	restore(ps);
 
 	return OK;

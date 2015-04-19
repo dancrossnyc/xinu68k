@@ -9,11 +9,9 @@
 int
 rfalloc(void)
 {
-	int i;
-	int ps;
+	int ps = disable();
 
-	ps = disable();
-	for (i = 0; i < Nrf; i++)
+	for (int i = 0; i < Nrf; i++)
 		if (Rf.rftab[i].rf_state == RFREE) {
 			Rf.rftab[i].rf_state = RUSED;
 			restore(ps);

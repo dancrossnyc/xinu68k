@@ -23,7 +23,7 @@ sreset(int sem, int count)
 	sptr = &semaph[sem];
 	slist = sptr->sqhead;
 	while ((pid = getfirst(slist)) != EMPTY)
-		ready(pid, RESCHNO);
+		ready(pid);
 	sptr->semcnt = count;
 	resched();
 	restore(ps);

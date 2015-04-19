@@ -56,7 +56,7 @@ dskqopt(struct dreq *p, struct dreq *q, struct dreq *drptr)
 			for (i = 0; i < DBUFSIZ; i++)
 				*to++ = *from++;
 			p->drstat = OK;
-			ready(p->drpid, RESCHNO);
+			ready(p->drpid);
 		}
 		drptr->drnext = p;
 		q->drnext = drptr;

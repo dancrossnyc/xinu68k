@@ -23,7 +23,7 @@ sdelete(int sem)
 	sptr->sstate = SFREE;
 	if (nonempty(sptr->sqhead)) {	// free waiting processes
 		while ((pid = getfirst(sptr->sqhead)) != EMPTY)
-			ready(pid, RESCHNO);
+			ready(pid);
 		resched();
 	}
 	restore(ps);
