@@ -2,6 +2,7 @@
 | Xinu system entry point -- first location beyond interrupt vectors
 |------------------------------------------------------------------------
 .data
+.align 8
 _mystack:	.space	4*20,0
 .text
 .globl	start, restart, maxaddr, nulluser

@@ -15,6 +15,7 @@ LD	=	m68k-none-elf-ld
 AR	=	m68k-none-elf-ar
 RANLIB	=	m68k-none-elf-ranlib
 LORDER	=	m68k-none-elf-lorder
+OBJCOPY	=	m68k-none-elf-objcopy
 LIB	=	$(DIR)/lib
 DOWNLOAD=	$(BINDIR)/download
 SIZE11	=	m68k-none-elf-size
@@ -209,6 +210,9 @@ xinu.o:		$(XOFILES)
 
 a.out:		libx.a xinu.o test.o
 		$(LD) -S -e start -Ttext=0x00001000 -Tdata=0x00080000 xinu.o test.o libx.a libx.a ../libxc/libxc.a -L/opt/gnu/lib/gcc/m68k-none-elf/4.9.2/m68000 -lgcc
+
+a.h68:		a.out
+		$(OBJCOPY) -O srec a.out a.h68
 
 tags:		,tags
 

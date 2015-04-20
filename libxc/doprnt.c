@@ -141,6 +141,8 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 	int leading;		// No. of leading/trailing fill chars.
 	char sign;		// Set to '-' for negative decimals
 	char digit1;		// Offset to add to first numeric digit
+	long larg = 0;
+	int iarg = 0;
 
 	for (;;) {
 		// Echo characters until '%' or end of fmt string
@@ -192,14 +194,14 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 
 		switch (f) {
 		case 'c':
-			string[0] = (char) va_arg(args, char);
+			string[0] = (char)va_arg(args, int);
 			string[1] = '\0';
 			fmax = 0;
 			fill = ' ';
 			break;
 
 		case 's':
-			str = (char *) va_arg(args, char *);
+			str = (char *)va_arg(args, char *);
 			fill = ' ';
 			break;
 
@@ -207,14 +209,16 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 			longflag = 1;
 		case 'd':
 			if (longflag) {
-				if (*(long *) args < 0) {
+				larg = va_arg(args, long);
+				if (larg < 0) {
 					sign = '-';
-					*(long *) args = -*(long *) args;
+					larg = -larg;
 				}
 			} else {
-				if (*args < 0) {
+				iarg = va_arg(args, int);
+				if (iarg < 0) {
 					sign = '-';
-					*args = -*args;
+					iarg = -iarg;
 				}
 			}
 			longflag--;
@@ -222,20 +226,24 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 			longflag++;
 		case 'u':
 			if (longflag) {
+				if (f == 'U')
+					larg = va_arg(args, long);
 				digit1 = '\0';
 				// "negative" longs in unsigned format
 				// can't be computed with long division
 				// convert *args to "positive", digit1
 				// = how much to add back afterwards
-				while (*(long *) args < 0) {
-					*(long *) args -= 1000000000L;
+				while (larg < 0) {
+					larg -= 1000000000L;
 					++digit1;
 				}
-				_prtl10(*(long *) args, str);
+				_prtl10(larg, str);
 				str[0] += digit1;
-				++args;
-			} else
-				_prt10(*args, str);
+			} else {
+				if (f == 'u')
+					iarg = va_arg(args, int);
+				_prt10(iarg, str);
+			}
 			fmax = 0;
 			break;
 
@@ -243,10 +251,10 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 			longflag++;
 		case 'o':
 			if (longflag) {
-				_prtl8(*(long *) args, str);
+				_prtl8(va_arg(args, long), str);
 				++args;
 			} else
-				_prt8(*args, str);
+				_prt8(va_arg(args, int), str);
 			fmax = 0;
 			break;
 
@@ -254,18 +262,17 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 			longflag++;
 		case 'x':
 			if (longflag) {
-				_prtl16(*(long *) args, str);
+				_prtl16(va_arg(args, long), str);
 				++args;
 			} else
-				_prt16(*args, str);
+				_prt16(va_arg(args, int), str);
 			fmax = 0;
 			break;
 
 		default:
-			(*func) (farg, f);
+			(*func)(farg, f);
 			break;
 		}
-		args++;
 		for (length = 0; str[length] != '\0'; length++);
 		if (fmin > MAXSTR || fmin < 0)
 			fmin = 0;
@@ -285,13 +292,13 @@ _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 			(*func) (farg, sign);
 		if (leftjust == 0)
 			for (i = 0; i < leading; i++)
-				(*func) (farg, fill);
+				(*func)(farg, fill);
 		if (sign == '-' && fill == ' ')
-			(*func) (farg, sign);
+			(*func)(farg, sign);
 		for (i = 0; i < length; i++)
-			(*func) (farg, str[i]);
+			(*func)(farg, str[i]);
 		if (leftjust != 0)
 			for (i = 0; i < leading; i++)
-				(*func) (farg, fill);
+				(*func)(farg, fill);
 	}
 }
