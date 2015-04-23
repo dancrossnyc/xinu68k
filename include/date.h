@@ -11,7 +11,7 @@ struct dateinfo {
 	char *dt_mnam[12];
 };
 
-extern struct datinfo Dat;
+extern struct dateinfo Dat;
 
 // Constants for converting time to month/day/year/hour/minute/second
 #define	isleap(x)	((x)%4==0)	// leap year? (1970-1999)

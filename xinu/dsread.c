@@ -7,7 +7,7 @@
 //  dsread  --  read a block from a disk device
 //------------------------------------------------------------------------
 int
-dsread(struct devsw *devptr, char *buff, DBADDR block)
+dsread(struct devsw *devptr, void *buff, DBADDR block)
 {
 	struct dreq *drptr;
 	int stat;

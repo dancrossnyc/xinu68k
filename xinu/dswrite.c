@@ -7,7 +7,7 @@
 //  dswrite  --  write a block (system buffer) onto a disk device
 //------------------------------------------------------------------------
 int
-dswrite(struct devsw *devptr, char *buff, DBADDR block)
+dswrite(struct devsw *devptr, void *buff, DBADDR block)
 {
 	struct dreq *drptr;
 	int ps;

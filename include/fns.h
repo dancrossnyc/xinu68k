@@ -92,11 +92,11 @@ int dsksync(struct devsw *devptr);
 // dsopen.c
 int dsopen(struct devsw *devptr, char *filenam, char *mode);
 // dsread.c
-int dsread(struct devsw *devptr, char *buff, DBADDR block);
+int dsread(struct devsw *devptr, void *buff, DBADDR block);
 // dsseek.c
 int dsseek(struct devsw *devptr, DBADDR block);
 // dswrite.c
-int dswrite(struct devsw *devptr, char *buff, DBADDR block);
+int dswrite(struct devsw *devptr, void *buff, DBADDR block);
 // dudir.c
 int dudir(int diskdev);
 // dumkfs.c

@@ -8,7 +8,7 @@
 int
 dskqopt(struct dreq *p, struct dreq *q, struct dreq *drptr)
 {
-	char *to, *from;
+	byte *to, *from;
 	int i;
 	DBADDR block;
 
