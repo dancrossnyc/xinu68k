@@ -20,7 +20,7 @@ struct dsblk {			// disk driver control block
 	int dnfiles;		// num. of currently open files
 	struct dir *ddir;	// address of in-core directory
 	struct xbdcb ddcb;	// holds command that interface
-	// sends to disk controller
+				// sends to disk controller
 };
 extern struct dsblk dstab[];
 
