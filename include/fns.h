@@ -43,7 +43,8 @@ SYSCALL close(int descrp);
 // control.c
 SYSCALL control(int descrp, int func, int addr);
 // create.c
-SYSCALL create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ...);
+SYSCALL create(PROCESS(*procaddr) (), int ssize, int priority, char *name,
+	       int nargs, ...);
 // devdump.c
 void devdump(void);
 // dfalloc.c
@@ -99,7 +100,8 @@ int dswrite(struct devsw *devptr, char *buff, DBADDR block);
 // dudir.c
 int dudir(int diskdev);
 // dumkfs.c
-int dumkfs(int diskdev, int niblks, unsigned int nblocks, int diskid, Bool verbose);
+int dumkfs(int diskdev, int niblks, unsigned int nblocks, int diskid,
+	   Bool verbose);
 int dumkdl(int diskdev, DBADDR firstfb, DBADDR lastfb, Bool verbose);
 int dumkil(int diskdev, int niblks, Bool verbose);
 // ethinit.c
@@ -256,7 +258,7 @@ SYSCALL pcount(int portid);
 // pcreate.c
 SYSCALL pcreate(int count);
 // pdelete.c
-SYSCALL pdelete(int portid, int (*dispose)(void *));
+SYSCALL pdelete(int portid, int (*dispose) (void *));
 // pinit.c
 SYSCALL pinit(int maxmsgs);
 // poolinit.c
@@ -268,11 +270,11 @@ void prdumpa(void);
 // preceive.c
 SYSCALL preceive(int portid);
 // preset.c
-SYSCALL preset(int portid, int (*dispose)(void *));
+SYSCALL preset(int portid, int (*dispose) (void *));
 // psend.c
 SYSCALL psend(int portid, uword msg);
 // ptclear.c
-void _ptclear(struct pt *ptptr, int newstate, int (*dispose)(void *));
+void _ptclear(struct pt *ptptr, int newstate, int (*dispose) (void *));
 // putc.c
 SYSCALL putc(int descrp, int ch);
 // qdump.c
@@ -401,7 +403,8 @@ PROCESS udpecho(void);
 // udpnxtp.c
 int udpnxtp(void);
 // udpsend.c
-int udpsend(IPaddr faddr, int fport, int lport, struct epacket *packet, int datalen);
+int udpsend(IPaddr faddr, int fport, int lport, struct epacket *packet,
+	    int datalen);
 // unmount.c
 SYSCALL unmount(char *prefix);
 // unsleep.c

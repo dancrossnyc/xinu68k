@@ -1,15 +1,15 @@
 #include "u.h"
 
-struct	exec {			// a.out header
-	int16	a_magic;	// magic number
-	uint16	a_text;		// size of text segment
-	uint16	a_data;		// size of initialized data
-	uint16	a_bss;		// size of uninitialized data
-	uint16	a_syms;		// size of symbol table
-	uint16	a_entry;	// entry point
-	uint16	a_unused;	// not used
-	char	a_flag;		// relocation info stripped
-	char	a_v6;		// UNIX V6 compatibility  mode
+struct exec {			// a.out header
+	int16 a_magic;		// magic number
+	uint16 a_text;		// size of text segment
+	uint16 a_data;		// size of initialized data
+	uint16 a_bss;		// size of uninitialized data
+	uint16 a_syms;		// size of symbol table
+	uint16 a_entry;		// entry point
+	uint16 a_unused;	// not used
+	char a_flag;		// relocation info stripped
+	char a_v6;		// UNIX V6 compatibility  mode
 };
 
 #define	A_MAGIC1	0407	// normal
@@ -17,10 +17,10 @@ struct	exec {			// a.out header
 #define	A_MAGIC3	0411	// separated I&D
 #define	A_MAGIC4	0405	// overlay
 
-struct	nlist {			// symbol table entry
-	char	n_name[8];	// symbol name
-	uword	n_type;		// type flag
-	uword	n_value;	// value
+struct nlist {			// symbol table entry
+	char n_name[8];		// symbol name
+	uword n_type;		// type flag
+	uword n_value;		// value
 };
 
 // values for type flag

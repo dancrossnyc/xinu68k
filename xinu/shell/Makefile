@@ -201,7 +201,6 @@ x_sleep.o: ../../include/conf.h
 x_sleep.o: ../../include/kernel.h
 x_snap.o: ../../include/conf.h
 x_snap.o: ../../include/kernel.h
-x_snap.o: ../../include/core11.h
 x_snap.o: ../../include/mem.h
 x_unmou.o: ../../include/conf.h
 x_unmou.o: ../../include/kernel.h

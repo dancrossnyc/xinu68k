@@ -10,19 +10,19 @@
 #include "iblock.h"
 #include "file.h"
 
-struct	flblk	{			// file "device" control block
-	int	fl_id;			// file's "device id" in devtab
-	int	fl_dev;			// file is on this disk device
-	int	fl_pid;			// process id accessing the file
-	struct	fdes	*fl_dent;	// file's in-core dir. entry
-	int	fl_mode;		// FLREAD, FLWRITE, or both
-	IBADDR	fl_iba;			// address of iblock in fl_iblk
-	struct	iblk	fl_iblk;	// current iblock for file
-	int	fl_ipnum;		// current iptr in fl_iblk
-	long	fl_pos;			// current file position (bytes)
-	Bool	fl_dch;			// has fl_buff been changed?
-	char	*fl_bptr;		// ptr to next char in fl_buff
-	char	fl_buff[DBUFSIZ];	// current data block for file
+struct flblk {			// file "device" control block
+	int fl_id;		// file's "device id" in devtab
+	int fl_dev;		// file is on this disk device
+	int fl_pid;		// process id accessing the file
+	struct fdes *fl_dent;	// file's in-core dir. entry
+	int fl_mode;		// FLREAD, FLWRITE, or both
+	IBADDR fl_iba;		// address of iblock in fl_iblk
+	struct iblk fl_iblk;	// current iblock for file
+	int fl_ipnum;		// current iptr in fl_iblk
+	long fl_pos;		// current file position (bytes)
+	Bool fl_dch;		// has fl_buff been changed?
+	char *fl_bptr;		// ptr to next char in fl_buff
+	char fl_buff[DBUFSIZ];	// current data block for file
 };
 
-extern	struct	flblk	fltab[];
+extern struct flblk fltab[];

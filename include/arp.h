@@ -15,23 +15,23 @@
 
 // format of DARPA ARP packet
 struct arppak {
-	short	ar_hrd;		// type of hardware (Ethernet = 1)
-	short	ar_prot;	// format of proto. address (IP=0x0800)
-	char	ar_hlen;	// hardware address length (6 for Ether)
-	char	ar_plen;	// protocol address length (4 for IP)
-	short	ar_op;		// arp operation (see list above)
-	Eaddr	ar_sha;		// sender's physical hardware address
-	IPaddr	ar_spa;		// sender's protocol address (IP addr.)
-	Eaddr	ar_tha;		// target's physical hardware address
-	IPaddr	ar_tpa;		// target's protocol address (IP)
+	short ar_hrd;		// type of hardware (Ethernet = 1)
+	short ar_prot;		// format of proto. address (IP=0x0800)
+	char ar_hlen;		// hardware address length (6 for Ether)
+	char ar_plen;		// protocol address length (4 for IP)
+	short ar_op;		// arp operation (see list above)
+	Eaddr ar_sha;		// sender's physical hardware address
+	IPaddr ar_spa;		// sender's protocol address (IP addr.)
+	Eaddr ar_tha;		// target's physical hardware address
+	IPaddr ar_tpa;		// target's protocol address (IP)
 };
 
 // Format of the IP-to-Ethernet address resolution cache
 enum ArpStates {
-	ARP_FREE,	// Entry is unused (initial value)
-	ARP_USED,	// Entry is used but route still unknown
-	ARP_REMOTE,	// Entry is reachable only by gateway
-	ARP_RESOLVED,	// Entry has been resolved to Eth. addr.
+	ARP_FREE,		// Entry is unused (initial value)
+	ARP_USED,		// Entry is used but route still unknown
+	ARP_REMOTE,		// Entry is reachable only by gateway
+	ARP_RESOLVED,		// Entry has been resolved to Eth. addr.
 	ARP_NSTATES
 };
 
@@ -45,14 +45,14 @@ struct arpent {
 
 // all information about ARP cache
 struct arpcache {
-	struct arpent arptab[AR_TAB]; // IP-to-Ethernet address cache
-	int	atabsiz;	// current entries in arptab
-	int	atabnxt;	// next position in arptab to use
-	int	arpsem;		// semaphore for access to ARP service
-	int	arppid;		// id of process waiting for ARP reply
-	IPaddr	arpwant;	// IP addr. process waiting to resolve
-	int	rarppid;	// id of process waiting for RARP reply
-	int	rarpsem;	// semaphore for access to RARP service
+	struct arpent arptab[AR_TAB];	// IP-to-Ethernet address cache
+	int atabsiz;		// current entries in arptab
+	int atabnxt;		// next position in arptab to use
+	int arpsem;		// semaphore for access to ARP service
+	int arppid;		// id of process waiting for ARP reply
+	IPaddr arpwant;		// IP addr. process waiting to resolve
+	int rarppid;		// id of process waiting for RARP reply
+	int rarpsem;		// semaphore for access to RARP service
 };
 
-extern	struct	arpcache	Arp;
+extern struct arpcache Arp;

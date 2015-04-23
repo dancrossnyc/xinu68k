@@ -2,7 +2,7 @@
 #include "kernel.h"
 #include "date.h"
 
-struct datinfo Dat = {
+struct dateinfo Dat = {
 	{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
 	{"Jan", "Feb", "Mar", "Apr", "May", "Jun",
 	 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}

@@ -1,25 +1,20 @@
-// udp.h
-
 // DARPA User Datagram Protocol (UDP) constants and formats
-
 #define	UHLEN	8		// UDP header length in bytes
-#define	UMAXLEN	IMAXLEN-IPHLEN-UHLEN // Maximum data in UDP packet
+#define	UMAXLEN	IMAXLEN-IPHLEN-UHLEN	// Maximum data in UDP packet
 
-struct	udp	{		// Message format of DARPA UDP
-	short	u_sport;	// Source UDP port number
-	short	u_dport;	// Destination UDP port number
-	short	u_udplen;	// Length of UDP data
-	short	u_ucksum;	// UDP checksum (0 => no checksum)
-	char	u_data[UMAXLEN];// Data in UDP message
+struct udp {			// Message format of DARPA UDP
+	short u_sport;		// Source UDP port number
+	short u_dport;		// Destination UDP port number
+	short u_udplen;		// Length of UDP data
+	short u_ucksum;		// UDP checksum (0 => no checksum)
+	char u_data[UMAXLEN];	// Data in UDP message
 };
 
 // UDP constants
-
-#define	UPROTO		(char)17// IP protocol type (17 => UDP)
+#define	UPROTO		(char)17	// IP protocol type (17 => UDP)
 #define	ULPORT		2050	// Initial UDP local "port" number
 
 // Assigned UDP port numbers
-
 #define	UECHO		7	// echo server
 #define	UDISCARD	9	// discard packet
 #define	UUSERS		11	// users server

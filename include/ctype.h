@@ -6,7 +6,7 @@
 #define _C	0040
 #define	_X	0100
 
-extern	char	_ctype_[];
+extern char _ctype_[];
 
 #define	isalpha(c)	((_ctype_+1)[c]&(_U|_L))
 #define	isupper(c)	((_ctype_+1)[c]&_U)

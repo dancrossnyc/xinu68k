@@ -151,7 +151,7 @@ OFILES=		access.o adump.o arp_in.o arpfind.o	\
 XOFILES=	lowcore.o startup.o initialize.o conf.o
 
 HFILES=		../include/a.out.h ../include/arp.h ../include/bufpool.h	\
-		../include/cmd.h ../include/conf.h ../include/core11.h	\
+		../include/cmd.h ../include/conf.h	\
 		../include/ctype.h ../include/date.h ../include/deqna.h	\
 		../include/dgram.h ../include/dir.h ../include/disk.h	\
 		../include/domain.h ../include/dtc.h ../include/ether.h	\

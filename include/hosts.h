@@ -1,5 +1,3 @@
-// hosts.h
-
 // Symbolic names and IP addresses for local hosts at Purdue
 // This file is useful for writing test programs, but not
 // strictly necessary.
@@ -12,4 +10,3 @@
 #define	LANCELOT 128,10,2,23	// sun160C -  Comer's office machine
 #define XINU     128,10,2,30	// lsi11/23-  Xinu test machine
 #define	KNIGHT1  128,10,2,31	// lsi11/23-  Student Xinu machine
-

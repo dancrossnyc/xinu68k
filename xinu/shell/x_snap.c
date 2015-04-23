@@ -1,6 +1,6 @@
 #include "conf.h"
 #include "kernel.h"
-#include "core11.h"
+//#include "core11.h"
 #include "mem.h"
 
 #define	SNAPSIZ	512
@@ -12,7 +12,7 @@ COMMAND
 x_snap(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	int dev;
-	struct core11 hdr;
+//	struct core11 hdr;
 	char *p, *limit;
 	unsigned len;
 
@@ -25,15 +25,13 @@ x_snap(int stdin, int stdout, int stderr, int nargs, char *args[])
 		fprintf(stderr, "snap: cannot write %s\n", p);
 		return SYSERR;
 	}
+#if 0
 	// make up a core image using core11 structure heading format
-
 	hdr.c_magic = COREMAGIC;
 	hdr.c_size = hdr.c_zero1 = hdr.c_zero2 = hdr.c_zero3 =
 	    hdr.c_zero4 = hdr.c_zero5 = 0;
 
 	// Capture machine registers
-
-/*
 	asm("mov r0,_snapreg"); hdr.c_regs[0] = snapreg;
 	asm("mov r1,_snapreg"); hdr.c_regs[1] = snapreg;
 	asm("mov r2,_snapreg"); hdr.c_regs[2] = snapreg;
@@ -43,12 +41,12 @@ x_snap(int stdin, int stdout, int stderr, int nargs, char *args[])
 	asm("mov sp,_snapreg"); hdr.c_regs[6] = snapreg;
 	asm("mov pc,_snapreg"); hdr.c_regs[7] = snapreg;
 	asm("clr _snapreg;mfps _snapreg"); hdr.c_psw = snapreg;
-*/
+
 	fprintf(stderr, "Writing core image");
 	write(dev, &hdr, sizeof(struct core11));
+#endif
 
 	// Add contents of real memory to core image
-
 	limit = (char *)(1 + (unsigned)maxaddr);
 	for (p = NULL; p <= limit; p += SNAPSIZ) {
 		putc(stderr, '.');
