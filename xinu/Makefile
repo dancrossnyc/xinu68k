@@ -7,7 +7,7 @@ DIR	=	/Users/cross/unix/project/xinu68k
 BINDIR	=	$(DIR)/bin
 INCDIR	=	$(DIR)/include
 CONFIG	=	./config
-CC	=	m68k-none-elf-gcc -mc68000
+CC	=	m68k-none-elf-gcc -mc68000 -mstrict-align
 CFLAGS	=	-O -c -I../include -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
 AFLAGS	=	-u $(INCDIR)/sys.s
 AS	=	m68k-none-elf-as
