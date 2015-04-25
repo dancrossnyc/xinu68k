@@ -1,5 +1,3 @@
-// doprnt.c - _doprnt, _prt10, _prtl10, _prt8, _prtl8, _prt16, _prtl16
-
 #include <stdarg.h>
 
 #define	MAXSTR	80
@@ -127,22 +125,22 @@ _prtl16(long num, char *str)
 void
 _doprnt(const char *fmt, va_list args, int (*func)(int, int), int farg)
 {
+	char *str;		// Running pointer in string
+	long larg = 0;
+	int iarg = 0;
 	int c;
 	int i;
 	int f;			// The format character (comes after %)
-	char *str;		// Running pointer in string
-	char string[20];	// The string str points to this output
 	//  from number conversion
-	int length;		// Length of string "str"
-	char fill;		// Fill character (' ' or '0')
 	int leftjust;		// 0 = right-justified, else left-just.
 	int longflag;		// != 0 for long numerics - not used
 	int fmax, fmin;		// Field specifications % MIN . MAX s
 	int leading;		// No. of leading/trailing fill chars.
+	int length;		// Length of string "str"
+	char fill;		// Fill character (' ' or '0')
 	char sign;		// Set to '-' for negative decimals
 	char digit1;		// Offset to add to first numeric digit
-	long larg = 0;
-	int iarg = 0;
+	char string[20];	// The string str points to this output
 
 	for (;;) {
 		// Echo characters until '%' or end of fmt string

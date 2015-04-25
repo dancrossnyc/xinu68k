@@ -1,8 +1,8 @@
 //----------------------------------------------------------------------
 // roundew, truncew - round or truncate address to next even word
 //----------------------------------------------------------------------
-#define	roundew(x)	(void *)((3 + (uword)(x)) & (~3) )
-#define	truncew(x)	(void *)(((uword)(x)) & (~3))
+#define	roundew(x)	(void *)(((uintptr_t)(x) + 3) & (~(uintptr_t)3) )
+#define	truncew(x)	(void *)(((uintptr_t)(x)) & (~(uintptr_t)3))
 
 //----------------------------------------------------------------------
 //  freestk  --  free stack memory allocated by getstk

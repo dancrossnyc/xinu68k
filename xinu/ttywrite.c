@@ -8,7 +8,7 @@
 //  writecopy - high-speed copy from user's buffer into system buffer
 //------------------------------------------------------------------------
 static int
-writecopy(char *buff, struct tty * ttyp, int count)
+writecopy(char *buff, struct tty *ttyp, int count)
 {
 	int avail;
 	char *cp, *qhead, *qend, *uend;

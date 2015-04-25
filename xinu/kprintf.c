@@ -6,6 +6,7 @@
 #include "stdarg.h"
 
 #define DELAY	100
+
 //------------------------------------------------------------------------
 //  kputc  --  write a character on the console using polled I/O
 //
@@ -17,6 +18,7 @@ kputc(int device, int c)
 	struct csr *csrptr;
 	struct tty *ttyptr;
 	int slowdown;		// added to delay polling, because
+
 	// polling immediately after a
 	// transmit seems to cause trouble
 	if (c == 0)
@@ -42,32 +44,31 @@ kputc(int device, int c)
 	while (!(csrptr->ctstat & SLUREADY));	// poll for idle
 }
 
-static int savedev, savecrstat, savectstat;
-static char saveps;
+static int saveps, savedev, savecrstat, savectstat;
 //------------------------------------------------------------------------
 //  savestate  --  save the console control and status register
 //------------------------------------------------------------------------
 static void
 savestate(int device)
 {
+	struct csr *c;
 	int ps;
 
 	ps = disable();
 	saveps = ps;
 	savedev = device;
-	savecrstat = ((struct csr *)devtab[device].csr)->crstat
-	    & SLUENABLE;
-	((struct csr *)devtab[device].csr)->crstat = SLUDISABLE;
-	savectstat = ((struct csr *)devtab[device].csr)->ctstat
-	    & SLUENABLE;
-	((struct csr *)devtab[device].csr)->ctstat = SLUDISABLE;
+	c = (struct csr *)devtab[device].csr;
+	savecrstat = c->crstat & SLUENABLE;
+	c->crstat = SLUDISABLE;
+	savectstat = c->ctstat & SLUENABLE;
+	c->ctstat = SLUDISABLE;
 }
 
 //------------------------------------------------------------------------
 //  rststate  --  restore the console output control and status register
 //------------------------------------------------------------------------
 static void
-rststate(void)
+restorestate(void)
 {
 	int ps;
 
@@ -91,6 +92,6 @@ kprintf(const char *fmt, ...)
 	va_start(args, fmt);
 	_doprnt(fmt, args, kputc, CONSOLE);
 	va_end(args);
-	rststate();
+	restorestate();
 	return OK;
 }

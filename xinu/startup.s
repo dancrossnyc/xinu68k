@@ -3,12 +3,12 @@
 |------------------------------------------------------------------------
 .data
 .align 8
-_mystack:	.space	4*20,0
+_mystack:	.space	4*8,0	| Eight longword initial scratch stack.
 .text
 .globl	start, restart, maxaddr, nulluser
 restart:			| a name used by C for reboot
 start:
-	move.w	0x2000,%sr	| Disable interrupts
+	move.w	#0x2700,%sr	| Disable interrupts
 	clr.l	%d0		| Clear all CPU registers.
 	clr.l	%d1
 	clr.l	%d2
