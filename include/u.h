@@ -76,7 +76,7 @@ enum Registers {
 #define	INITNAME	"main"	// initial process name
 #define	INITARGS	1,0	// initial count/arguments
 #define	INITRET		userret	// processes return address
-#define	INITSR		0	// initial process PS
+#define	INITSR		0x2700	// initial process PS
 #define	INITREG		0	// initial register contents
 #define	QUANTUM		10	// clock ticks until preemption
 
@@ -84,7 +84,6 @@ enum Registers {
 
 #define	isodd(x)	(01&(int)(x))
 #define	min(a,b)	( (a) < (b) ? (a) : (b) )
-#define	pause()
 #define	halt()
 
 #endif

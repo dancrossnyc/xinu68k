@@ -4,7 +4,7 @@
 .globl	setclkr
 setclkr:
 	move.l	#1,hasclock
-	rte
+	rts
 
 /*
 	mov	r1,-(sp)		; save register	used

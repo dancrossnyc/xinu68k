@@ -253,6 +253,8 @@ int newqueue(void);
 int nqalloc(void);
 // open.c
 SYSCALL open(int descrp, char *nam, char *mode);
+// pause.s
+void pause(void);
 // pcount.c
 SYSCALL pcount(int portid);
 // pcreate.c

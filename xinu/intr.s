@@ -9,7 +9,7 @@ disable:
 | Restore interrupt status from the given argument.
 .globl restore
 restore:
-	move.w	4(%sp),%sr
+	move.w	6(%sp),%sr
 	rts
 
 | Unconditionally enable interrupts.

@@ -14,8 +14,7 @@ ethstrt(struct etblk *etptr, struct dqsetup *setup)
 
 	dqptr = etptr->eioaddr;
 
-	// Hack for Simulator.
-	return OK;
+	return OK;	// XXX Hack for Simulator.
 
 	// initialize device
 	dqptr->d_csr |= DQ_REST;

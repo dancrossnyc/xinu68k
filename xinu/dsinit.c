@@ -42,7 +42,8 @@ dsinit(struct devsw *devptr)
 	dtptr->dt_xdar = NULL;
 	dtptr->dt_xcar = NULL;
 	dtptr->dt_csr = DTGO;
-	while (((status = dtptr->dt_csr) & DTDONE) == 0);
+	//while (((status = dtptr->dt_csr) & DTDONE) == 0);	// XXX Hack for simulator.
+	status = 0;
 	if (status & DTERROR)
 		panic("Disk error");
 	restore(ps);

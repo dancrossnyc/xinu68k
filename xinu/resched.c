@@ -28,11 +28,12 @@ resched(void)
 	}
 
 	// remove highest priority process at end of ready list
-	nptr = &proctab[(currpid = getlast(rdytail))];
+	currpid = getlast(rdytail);
+	nptr = &proctab[currpid];
 	nptr->pstate = PRCURR;	// mark it currently running
 
 	// Check the stack for corruption.
-	if (*((int *)nptr->pbase) != MAGIC) {
+	if (*((uword *)nptr->pbase) != MAGIC) {
 		kprintf("Bad magic pid=%d, value=%o, at %o\n",
 			currpid, *((int *)nptr->pbase), nptr->pbase);
 		panic("stack corrupted");

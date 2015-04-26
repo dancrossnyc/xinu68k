@@ -85,7 +85,7 @@ CFILES=		access.c adump.c arp_in.c arpfind.c	\
 SFILES=		clkint.s ctxsw.s			\
 		intr.s ioint.s				\
 		lowcore.s				\
-		panic.s					\
+		panic.s pause.s				\
 		setclkr.s sizmem.s startup.s
 
 OFILES=		access.o adump.o arp_in.o arpfind.o	\
@@ -124,9 +124,10 @@ OFILES=		access.o adump.o arp_in.o arpfind.o	\
 		netnum.o netout.o newqueue.o		\
 		nqalloc.o				\
 		open.o					\
-		panic.o pcount.o pcreate.o pdelete.o	\
-		pinit.o poolinit.o prdump.o preceive.o	\
-		preset.o psend.o ptclear.o putc.o	\
+		panic.o pause.o pcount.o pcreate.o	\
+		pdelete.o pinit.o poolinit.o prdump.o 	\
+		preceive.o preset.o psend.o ptclear.o	\
+		putc.o					\
 		qdump.o queue.o				\
 		rarp_in.o read.o ready.o receive.o	\
 		recvclr.o recvtim.o remove.o rename.o	\

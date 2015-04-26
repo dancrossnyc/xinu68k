@@ -8,7 +8,7 @@
 SYSCALL
 resume(int pid)
 {
-	int ps;		// saved processor status
+	int ps;			// saved processor status
 	struct pentry *pptr;	// pointer to proc. tab. entry
 	int prio;		// priority to return
 
@@ -20,5 +20,6 @@ resume(int pid)
 	prio = pptr->pprio;
 	readysched(pid);
 	restore(ps);
+
 	return prio;
 }
