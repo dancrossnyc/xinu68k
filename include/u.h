@@ -76,7 +76,7 @@ enum Registers {
 #define	INITNAME	"main"	// initial process name
 #define	INITARGS	1,0	// initial count/arguments
 #define	INITRET		userret	// processes return address
-#define	INITSR		0x2700	// initial process PS
+#define	INITSR		0x2000	// initial process PS
 #define	INITREG		0	// initial register contents
 #define	QUANTUM		10	// clock ticks until preemption
 

@@ -6,12 +6,14 @@
 //  getname  -  get name of this host and place it where specified
 //------------------------------------------------------------------------
 SYSCALL
-getname(char *nam)
+getname(char *name)
 {
+strcpy(name, "shireen");
+/*
 	IPaddr myaddr;
 	char *p;
 
-	*nam = NULLCH;
+	*name = NULLCH;
 	if (!Net.mnvalid) {
 		getaddr(myaddr);
 		if (ip2name(myaddr, Net.myname) == SYSERR)
@@ -19,7 +21,8 @@ getname(char *nam)
 		Net.mnvalid = TRUE;
 	}
 	for (p = Net.myname; *p != NULLCH && *p != '.';)
-		*nam++ = *p++;
-	*nam = NULLCH;
+		*name++ = *p++;
+	*name = NULLCH;
+*/
 	return OK;
 }

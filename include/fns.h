@@ -38,6 +38,8 @@ SYSCALL chprio(int pid, int newprio);
 int ckmode(char *mode);
 // clkinit.c
 void clkinit(void);
+// clkint.s
+void clkint(void);
 // close.c
 SYSCALL close(int descrp);
 // control.c

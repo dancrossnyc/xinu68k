@@ -51,5 +51,5 @@ ctxsw:
 	movea.l	68(%a6),%sp		| Restore system stack pointer
 	move.l	(%a6),-(%sp)		| Push PC onto stack for return address
 	move.w	6(%a6),%sr		| Restore status register
-	movea.l	64(%a6),%a7		| Restore real A6. Preserves CCR
+	movea.l	64(%a6),%a6		| Restore real A6. Preserves CCR
 	rts				| Return to restored PC

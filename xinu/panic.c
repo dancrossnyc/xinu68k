@@ -3,6 +3,12 @@
 #include "libk.h"
 
 void
+panic0(void)
+{
+	panic("zero");
+}
+
+void
 panic(const char *msg)
 {
 	int ps;

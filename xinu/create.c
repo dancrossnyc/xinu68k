@@ -63,7 +63,7 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	pptr->pstklen = ssize;
 	pptr->psem = 0;
 	pptr->phasmsg = FALSE;
-	pptr->plimit = (char *)((uintptr_t)saddr - ssize + sizeof(int));
+	pptr->plimit = (char *)((uintptr_t)saddr - ssize + sizeof(uword));
 	*saddr-- = MAGIC;
 	pptr->pargs = nargs;
 	for (i = 0; i < PNREGS; i++)
@@ -73,13 +73,12 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	pptr->pregs[SR] = INITSR;
 	pptr->pnxtkin = BADPID;
 	pptr->pdevs[0] = pptr->pdevs[1] = BADDEV;
-	saddr -= nargs;
 	va_start(args, nargs);
 	for (; nargs > 0; nargs--)		// machine dependent; copy args
-		*++saddr = va_arg(args, int);	// onto created process's stack
+		*saddr-- = va_arg(args, uword);	// onto created process's stack
 	va_end(args);
 	saddr -= nargs;
-	*saddr = (uintptr_t)INITRET;	// push on return address
+	*saddr = (uintptr_t)INITRET;		// push on return address
 	pptr->pregs[SP] = (uintptr_t)saddr;
 	restore(ps);
 

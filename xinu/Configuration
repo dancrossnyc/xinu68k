@@ -82,7 +82,7 @@ TTY3		is tty	on SLU		csr=0x0007FFC0 ivec=0xD00 ovec=0xD40
 DISK0		is dsk	on WIN		csr=0xFF30 ivec=0x5C ovec=0x5C
 
 // Physical ethernet raw packet interface
-ETHER		is eth	on DEQ		csr=0xF920 ivec=0x100 ovec=0x100
+ETHER		is eth	on DEQ		csr=0xF920 ivec=0x104 ovec=0x104
 
 // Datagram network interface (master pseudo-device)
 INTERNET	is dgm	on ETH

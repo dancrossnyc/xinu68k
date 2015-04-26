@@ -6,6 +6,13 @@
 .text
 .globl	clkint
 clkint:
+	| XXX Hack for simulator.
+	move.l	%a0,-(%sp)
+	lea	0x100100,%a0
+	bclr.b	#0,20(%a0)		| Acknowledge interrupt.
+	bset.b	#0,(%a0)
+	move.l	(%sp)+,%a0
+	|
 	subi.l	#1,clock6		| Is this the 6th interrupt?
 	bgt	Lout			|  no => return
 	move.l	#6,clock6		|  yes=> reset counter&continue

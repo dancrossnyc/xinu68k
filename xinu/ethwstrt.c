@@ -14,7 +14,7 @@ ethwstrt(struct etblk *etptr, char *buf, int len, int setup)
 	struct dqregs *dqptr;
 
 	dqptr = etptr->eioaddr;
-	while (!(dqptr->d_csr & DQ_XLI));
+	//while (!(dqptr->d_csr & DQ_XLI));	// XXX Hack for simulator.
 	etptr->etwtry = EXRETRY;
 	dcmptr = etptr->ewcmd;
 	dcmptr->dc_bufh = DC_VALID | DC_ENDM | (etptr->etsetup = setup);
