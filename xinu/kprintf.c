@@ -5,13 +5,32 @@
 #include "tty.h"
 #include "stdarg.h"
 
-#define DELAY	100
+#define DELAY	1  //00
 
 //------------------------------------------------------------------------
 //  kputc  --  write a character on the console using polled I/O
 //
 //  c is the character to print from _doprnt
 //------------------------------------------------------------------------
+static void
+kputc_mduart(int device, int c)
+{
+#define MDUART_STAT_REG_A	2
+#define	MDUART_TXB_REG_A	6
+	volatile byte *duart = (byte *)0x101000 + 1;
+	while ((duart[MDUART_STAT_REG_A] & 0x04) == 0)
+		;
+	duart[MDUART_TXB_REG_A] = c;	// transmit char
+	if (c == NEWLINE)
+		kputc_mduart(device, RETURN);
+}
+
+//------------------------------------------------------------------------
+//  kputc  --  write a character on the console using polled I/O
+//
+//  c is the character to print from _doprnt
+//------------------------------------------------------------------------
+/*
 static void
 kputc(int device, int c)
 {
@@ -43,6 +62,7 @@ kputc(int device, int c)
 	for (slowdown = 0; slowdown < DELAY; slowdown++);	// wait a bit
 	while (!(csrptr->ctstat & SLUREADY));	// poll for idle
 }
+*/
 
 static int saveps, savedev, savecrstat, savectstat;
 //------------------------------------------------------------------------
@@ -90,7 +110,7 @@ kprintf(const char *fmt, ...)
 	va_list args;
 	savestate(CONSOLE);
 	va_start(args, fmt);
-	_doprnt(fmt, args, kputc, CONSOLE);
+	_doprnt(fmt, args, kputc_mduart, CONSOLE);
 	va_end(args);
 	restorestate();
 	return OK;

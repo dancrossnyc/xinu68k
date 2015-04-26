@@ -14,14 +14,15 @@ ethstrt(struct etblk *etptr, struct dqsetup *setup)
 
 	dqptr = etptr->eioaddr;
 
-	// initialize device
+	// Hack for Simulator.
+	return OK;
 
+	// initialize device
 	dqptr->d_csr |= DQ_REST;
 	dqptr->d_csr &= ~DQ_REST;
 	dqptr->d_vect = (char *)((etptr->etdev)->ivec);
 
 	// build setup packet
-
 	for (i = 0; i < (DQ_ROWS >> 1); i++) {
 		setup->dq_set[i + DQ_SETD][0] = setup->dq_set[i][0] = 0;
 		setup->dq_set[i + DQ_SETD][1] = setup->dq_set[i][1] =
@@ -36,14 +37,13 @@ ethstrt(struct etblk *etptr, struct dqsetup *setup)
 	ethwstrt(etptr, (char *)setup->dq_set, sizeof(setup->dq_set), DC_SETUP);
 
 	// poll device until setup processed
-
 	for (dcmptr = etptr->ercmd; dcmptr->dc_st1 == DC_INIT;);
 
 	// reset device, leaving it online
-
 	dqptr->d_csr |= DQ_REST;
 	dqptr->d_csr &= ~DQ_REST;
 	dqptr->d_csr &= ~DQ_ELOP;
 	dqptr->d_csr |= (DQ_ENBL | DQ_IEN | DQ_ILOP);
+
 	return OK;
 }

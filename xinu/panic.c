@@ -5,10 +5,10 @@
 void
 panic(const char *msg)
 {
-	uword ps;
+	int ps;
 
 	ps = disable();
-	printf("%s", msg);
+	kprintf("%s", msg);
 	for (;;) { ; }
 	restore(ps);
 }
