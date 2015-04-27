@@ -135,6 +135,7 @@ nulluser(void)
 {				// babysit CPU when no one home
 	int userpid;
 
+	lowcore();
 	init_mduart();		// XXX Hack for simulator.
 
 	kprintf("\n\nXinu Version %s", vers);

@@ -429,6 +429,7 @@ int shell(int dev);
 
 void setclkr(void);
 void panic(const char *);
+void lowcore(void);
 void ctxsw(uword *, uword *);
 void restart(void);
 

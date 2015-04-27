@@ -3,12 +3,6 @@
 #include "libk.h"
 
 void
-panic0(void)
-{
-	panic("zero");
-}
-
-void
 panic(const char *msg)
 {
 	int ps;
@@ -17,4 +11,27 @@ panic(const char *msg)
 	kprintf("%s", msg);
 	for (;;) { ; }
 	restore(ps);
+}
+
+void
+panic0(void)
+{
+	panic("zero");
+}
+
+void
+panice(void)
+{
+	panic("unhandled exception");
+}
+
+void
+lowcore(void)
+{
+	volatile uword *vectors = (uword *)0;
+
+	vectors[0] = (uword)panic0;
+	for (int k = 1; k < 64; k++) {
+		vectors[k] = (uword)panice;
+	}
 }
