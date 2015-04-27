@@ -8,7 +8,7 @@
 clkint:
 	| XXX Hack for simulator.
 	move.l	%a0,-(%sp)
-	lea	0x100100,%a0
+	lea	0x100040,%a0
 	bclr.b	#0,20(%a0)		| Acknowledge interrupt.
 	bset.b	#0,(%a0)
 	move.l	(%sp)+,%a0

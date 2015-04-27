@@ -47,6 +47,7 @@ resched(void)
 
 	preempt = QUANTUM;	// reset preemption counter
 
+kprintf("Coroutine jump!\n");
 	// Coroutine jump.
 	ctxsw(optr->pregs, nptr->pregs);
 

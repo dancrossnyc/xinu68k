@@ -17,7 +17,7 @@ kputc_mduart(int device, int c)
 {
 #define MDUART_STAT_REG_A	2
 #define	MDUART_TXB_REG_A	6
-	volatile byte *duart = (byte *)0x101000 + 1;
+	volatile byte *duart = (byte *)0x100010 + 1;
 	while ((duart[MDUART_STAT_REG_A] & 0x04) == 0)
 		;
 	duart[MDUART_TXB_REG_A] = c;	// transmit char

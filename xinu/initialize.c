@@ -52,7 +52,7 @@ init_mduart()
 #define	MDUART_MR1_REG_A	0
 #define	MDUART_MR2_REG_A	0
 
-	volatile byte *duart = (byte *)0x101000 + 1;
+	volatile byte *duart = (byte *)0x100010 + 1;
 	duart[MDUART_CTL_REG_A] = 0x10;		// Reset MR?A pointer
 	duart[MDUART_MR1_REG_A] = 0x23;		// 8 data bits
 	duart[MDUART_MR2_REG_A] = 0x17;		// Normal mode

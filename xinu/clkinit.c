@@ -28,7 +28,7 @@ mclk_start(void)
 #define	TIMER_VECTOR_NUM	64
 #define	TIMER_TICKS		(125000/60)	// 60 times per second.
 #define	TIMER_INIT		0xA0
-	volatile byte *timer = (byte *)0x100100;
+	volatile byte *timer = (byte *)0x100040;
 	timer[TIMER_INTVEC_REG] = TIMER_VECTOR_NUM;
 	*(uword *)(timer + TIMER_PRELOAD_REG) = TIMER_TICKS;
 	timer[TIMER_CTL_REG] = TIMER_INIT;
