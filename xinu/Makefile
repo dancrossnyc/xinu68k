@@ -84,7 +84,6 @@ CFILES=		access.c adump.c arp_in.c arpfind.c	\
 
 SFILES=		clkint.s ctxsw.s			\
 		intr.s ioint.s				\
-		lowcore.s				\
 		panic.s pause.s				\
 		setclkr.s sizmem.s startup.s
 
@@ -149,7 +148,7 @@ OFILES=		access.o adump.o arp_in.o arpfind.o	\
 		wait.o wakeup.o write.o			\
 		xdone.o
 
-XOFILES=	lowcore.o startup.o initialize.o conf.o
+XOFILES=	startup.o initialize.o conf.o
 
 HFILES=		../include/a.out.h ../include/arp.h ../include/bufpool.h	\
 		../include/cmd.h ../include/conf.h	\

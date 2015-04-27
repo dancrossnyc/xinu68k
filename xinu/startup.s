@@ -17,13 +17,13 @@ start:
 	clr.l	%d5
 	clr.l	%d6
 	clr.l	%d7
-	movea.l	0,%a0
-	movea.l	0,%a1
-	movea.l	0,%a2
-	movea.l	0,%a3
-	movea.l	0,%a4
-	movea.l	0,%a5
-	movea.l	0,%a6
+	movea.l	#0,%a0
+	movea.l	#0,%a1
+	movea.l	#0,%a2
+	movea.l	#0,%a3
+	movea.l	#0,%a4
+	movea.l	#0,%a5
+	movea.l	#0,%a6
 	lea	_mystack,%a7
 	adda.l	#4*20,%a7
 	jsr	sizmem		| Find memory size. Use initial stack.
