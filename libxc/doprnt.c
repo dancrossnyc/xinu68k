@@ -6,14 +6,14 @@ static void
 _prt10(unsigned int num, char *str)
 {
 	int i;
-	char temp[6];
+	char temp[11];
 
 	temp[0] = '\0';
-	for (i = 1; i <= 5; i++) {
+	for (i = 1; i <= 10; i++) {
 		temp[i] = num % 10 + '0';
 		num /= 10;
 	}
-	for (i = 5; temp[i] == '0'; i--);
+	for (i = 10; temp[i] == '0'; i--);
 	if (i == 0)
 		i++;
 	while (i >= 0)
@@ -42,15 +42,15 @@ static void
 _prt8(unsigned int num, char *str)
 {
 	int i;
-	char temp[7];
+	char temp[12];
 
 	temp[0] = '\0';
-	for (i = 1; i <= 6; i++) {
+	for (i = 1; i <= 11; i++) {
 		temp[i] = (num & 07) + '0';
 		num = (num >> 3) & 0037777;
 	}
-	temp[6] &= '1';
-	for (i = 6; temp[i] == '0'; i--);
+	temp[11] &= '1';
+	for (i = 11; temp[i] == '0'; i--);
 	if (i == 0)
 		i++;
 	while (i >= 0)
@@ -80,14 +80,14 @@ static void
 _prt16(unsigned int num, char *str)
 {
 	int i;
-	char temp[5];
+	char temp[9];
 
 	temp[0] = '\0';
-	for (i = 1; i <= 4; i++) {
+	for (i = 1; i <= 8; i++) {
 		temp[i] = "0123456789abcdef"[num & 0x0f];
 		num = num >> 4;
 	}
-	for (i = 4; temp[i] == '0'; i--);
+	for (i = 8; temp[i] == '0'; i--);
 	if (i == 0)
 		i++;
 	while (i >= 0)
@@ -95,7 +95,7 @@ _prt16(unsigned int num, char *str)
 }
 
 static void
-_prtl16(long num, char *str)
+_prtl16(unsigned long num, char *str)
 {
 	int i;
 	char temp[9];

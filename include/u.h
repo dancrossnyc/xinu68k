@@ -35,8 +35,8 @@ typedef char Bool;		// Boolean type
 #define	LOWBYTE		0x000000FF	// mask for low-order 8 bits
 #define	MINSTK		40	// minimum process stack size
 #define	NULLSTK		300	// process 0 stack size
-#define	DISABLE		0340	// PS to disable interrupts
-#define	MAGIC		0125252	// unusual value for top of stk
+#define	DISABLE		0x2700	// PS to disable interrupts
+#define	MAGIC		0xDEADCAFE	// unusual value for top of stk
 
 enum Registers {
 	PC,

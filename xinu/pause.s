@@ -2,5 +2,5 @@
 .text
 .globl pause
 pause:
-	|STOP	#0x2000
+	STOP	#0x2000
 	RTS

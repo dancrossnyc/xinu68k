@@ -11,10 +11,10 @@ main(void)
 	int udpecho();
 
 	// start rwho daemon and input processes
-	rwho();
+	//rwho();
 
 	// start UDP echo server
-	resume(create(udpecho, 380, 30, "UDPecho", 0));
+	//resume(create(udpecho, 380, 30, "UDPecho", 0));
 
 	while (TRUE) {
 		login(CONSOLE);

@@ -8,8 +8,9 @@ panic(const char *msg)
 	int ps;
 
 	ps = disable();
-	kprintf("%s", msg);
-	for (;;) { ; }
+	kprintf("%s\n", msg);
+	prdump();
+	for (;;) { pause(); }
 	restore(ps);
 }
 

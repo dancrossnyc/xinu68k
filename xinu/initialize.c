@@ -156,12 +156,12 @@ nulluser(void)
 	// create a process to execute the user's main program
 	userpid = create(main, INITSTK, INITPRIO, INITNAME, INITARGS);
 
-#ifdef	NETDAEMON
+//#ifdef	NETDAEMON
 	// start the network input daemon process
-	resume(create(NETIN, NETISTK, NETIPRI, NETINAM, NETIARGC, userpid));
-#else
+//	resume(create(NETIN, NETISTK, NETIPRI, NETINAM, NETIARGC, userpid));
+//#else
 	resume(userpid);
-#endif
+//#endif
 
 	for (;;) {		// run forever without actually
 		pause();	// executing instructions

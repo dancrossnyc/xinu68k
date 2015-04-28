@@ -34,7 +34,7 @@ resched(void)
 
 	// Check the stack for corruption.
 	if (*((uword *)nptr->pbase) != MAGIC) {
-		kprintf("Bad magic pid=%d, value=%o, at %o\n",
+		kprintf("Bad magic pid=%d, value=%x, at %x\n",
 			currpid, *((int *)nptr->pbase), nptr->pbase);
 		panic("stack corrupted");
 	}
@@ -47,7 +47,6 @@ resched(void)
 
 	preempt = QUANTUM;	// reset preemption counter
 
-kprintf("Coroutine jump!\n");
 	// Coroutine jump.
 	ctxsw(optr->pregs, nptr->pregs);
 

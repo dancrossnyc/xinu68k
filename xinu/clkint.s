@@ -40,7 +40,7 @@ mclk_start(void)
 mclkstart:
 	lea	0x100040,%a0
 	move.b	#64,2(%a0)		| Vec. num 64 into vec num reg.
-	move.l	#(125000/60),%d0	| Clock ticks 60 times / sec.
+	move.l	#(125000),%d0	| Clock ticks 60 times / sec.
 	movep.l	%d0,4(%a0)		| Set preload register
 	move.b	#0xA0,0(%a0)		| Set ctl reg. to init timer
 	bset.b	#0,0(%a0)		| Start timer
