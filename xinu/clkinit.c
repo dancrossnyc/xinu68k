@@ -18,23 +18,6 @@ int preempt;			// preemption counter.  Current process
 				// set in resched; counts in ticks
 int hasclock;			// set TRUE iff clock exists by setclkr
 
-// XXX Hack for simulator.
-static void
-mclk_start(void)
-{
-#define	TIMER_CTL_REG		0
-#define	TIMER_INTVEC_REG	2
-#define	TIMER_PRELOAD_REG	4
-#define	TIMER_VECTOR_NUM	64
-#define	TIMER_TICKS		(125000/60)	// 60 times per second.
-#define	TIMER_INIT		0xA0
-	volatile byte *timer = (byte *)0x100040;
-	timer[TIMER_INTVEC_REG] = TIMER_VECTOR_NUM;
-	*(uword *)(timer + TIMER_PRELOAD_REG) = TIMER_TICKS;
-	timer[TIMER_CTL_REG] = TIMER_INIT;
-	timer[TIMER_CTL_REG] |= 0x01;
-}
-
 //------------------------------------------------------------------------
 // clkinit - initialize the clock and sleep queue (called at startup)
 //------------------------------------------------------------------------
@@ -55,5 +38,6 @@ clkinit(void)
 	clkdiff = 0;		// zero deferred ticks
 	deferclock = 0;		// clock is not deferred
 	clockq = newqueue();	// allocate clock queue in q
-	mclk_start();		// XXX Hack for simulator.
+	extern void mclkstart(void);	// XXX Hack for simulator.
+	mclkstart();		// XXX Hack for simulator.
 }

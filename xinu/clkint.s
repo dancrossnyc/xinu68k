@@ -3,7 +3,49 @@
 |
 | If we jump into C, we must save D0, D1, A0 and A1.
 |------------------------------------------------------------------------
+
+/*
+// XXX Hack for simulator.
+static void
+mclk_start(void)
+{
+#define	TIMER_CTL_REG		0
+#define	TIMER_INTVEC_REG	2
+#define	TIMER_PRELOAD_REG	4
+#define	TIMER_VECTOR_NUM	64
+#define	TIMER_TICKS		(125000/60)	// 60 times per second.
+#define	TIMER_INIT		0xA0
+	volatile byte *timer = (byte *)0x100040;
+	uword ticks = (uword)TIMER_TICKS;
+	timer[TIMER_INTVEC_REG] = TIMER_VECTOR_NUM;
+	// The next four statements simulate the 'MOVEP.L'
+	// instruction. The naive sequence:
+	// *(uword *)(timer + TIMER_PRELOAD_REG) = TIMER_TICKS;
+	// won't work due to the specifics of the MC68230 timer
+	// (as implemented in the simiulator).
+	timer[TIMER_PRELOAD_REG + 0] = (ticks >> 24) & 0xFF;
+	timer[TIMER_PRELOAD_REG + 2] = (ticks >> 16) & 0xFF;
+	timer[TIMER_PRELOAD_REG + 4] = (ticks >>  8) & 0xFF;
+	timer[TIMER_PRELOAD_REG + 6] = (ticks >>  0) & 0xFF;
+	timer[TIMER_CTL_REG] = TIMER_INIT;
+	timer[TIMER_CTL_REG] |= 0x01;
+	void mclkstart();
+	mclkstart();
+}
+*/
+
 .text
+| XXX Hack for simulator.
+.globl mclkstart
+mclkstart:
+	lea	0x100040,%a0
+	move.b	#64,2(%a0)		| Vec. num 64 into vec num reg.
+	move.l	#(125000/60),%d0	| Clock ticks 60 times / sec.
+	movep.l	%d0,4(%a0)		| Set preload register
+	move.b	#0xA0,0(%a0)		| Set ctl reg. to init timer
+	bset.b	#0,0(%a0)		| Start timer
+	rts
+
 .globl	clkint
 clkint:
 	| XXX Hack for simulator.
