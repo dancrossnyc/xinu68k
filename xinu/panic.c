@@ -30,8 +30,8 @@ lowcore(void)
 {
 	volatile uword *vectors = (uword *)0;
 
-	vectors[0] = (uword)panic0;
-	vectors[1] = 0x100000 - 4;
+	vectors[0] = 0x100000 - 4;
+	vectors[1] = (uword)panic0;
 	for (int k = 2; k < 64; k++) {
 		vectors[k] = (uword)panice;
 	}
