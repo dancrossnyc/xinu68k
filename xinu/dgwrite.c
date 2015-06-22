@@ -1,6 +1,7 @@
 #include "conf.h"
 #include "kernel.h"
 #include "network.h"
+#include "string.h"
 
 //------------------------------------------------------------------------
 //  dgwrite  -  write one datagram to a datagram protocol pseudo-device

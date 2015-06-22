@@ -2,6 +2,7 @@
 #include "kernel.h"
 #include "proc.h"
 #include "network.h"
+#include "string.h"
 
 //------------------------------------------------------------------------
 //  rarp_in  -  handle RARP packet coming in from Ethernet network

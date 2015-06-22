@@ -1,6 +1,7 @@
 #include "conf.h"
 #include "kernel.h"
 #include "network.h"
+#include "string.h"
 
 #define  MNAMLEN  24		// maximum size of this machine's name
 

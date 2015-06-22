@@ -1,9 +1,12 @@
+#include <stddef.h>
+#include <stdarg.h>
+#include <string.h>
+
 #include "conf.h"
 #include "kernel.h"
 #include "proc.h"
 #include "mem.h"
 #include "io.h"
-#include "stdarg.h"
 
 //------------------------------------------------------------------------
 // newpid  --  obtain a new (free) process id

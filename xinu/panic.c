@@ -1,6 +1,5 @@
 #include "u.h"
 #include "fns.h"
-#include "libk.h"
 
 void
 panic(const char *msg)

@@ -53,7 +53,6 @@ CFILES=		access.c adump.c arp_in.c arpfind.c	\
 		lfclose.c lfgetc.c lfinit.c lfputc.c	\
 		lfread.c lfsdfree.c lfseek.c lfsetup.c	\
 		lfsflush.c lfsnewd.c lfwrite.c		\
-		libk.c					\
 		mark.c mdump.c mkarp.c mkpool.c mount.c	\
 		naminit.c namemap.c namopen.c namrepl.c	\
 		ndump.c netdump.c netin.c netinit.c	\
@@ -116,7 +115,6 @@ OFILES=		access.o adump.o arp_in.o arpfind.o	\
 		lfclose.o lfgetc.o lfinit.o lfputc.o	\
 		lfread.o lfsdfree.o lfseek.o lfsetup.o	\
 		lfsflush.o lfsnewd.o lfwrite.o		\
-		libk.o					\
 		mark.o mdump.o mkarp.o mkpool.o mount.o	\
 		naminit.o namemap.o namopen.o namrepl.o	\
 		ndump.o netdump.o netin.o netinit.o	\
@@ -209,7 +207,7 @@ xinu.o:		$(XOFILES)
 		$(LD) -r $(XOFILES) -o xinu.o
 
 a.out:		libx.a xinu.o test.o
-		$(LD) -S -e start -Ttext=0x00001000 -Tdata=0x00080000 xinu.o test.o libx.a libx.a ../libxc/libxc.a -L/opt/gnu/lib/gcc/m68k-none-elf/4.9.2/m68000 -lgcc
+		$(LD) -S -e start -Ttext=0x00001000 -Tdata=0x00080000 xinu.o test.o libx.a libx.a ../lib/libxc.a -L/opt/gnu/lib/gcc/m68k-none-elf/4.9.2/m68000 -lgcc
 
 a.h68:		a.out
 		$(OBJCOPY) -O srec a.out a.h68
