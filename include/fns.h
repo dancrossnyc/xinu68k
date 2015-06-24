@@ -229,8 +229,8 @@ struct epacket *mkarp(int typ, int op, IPaddr spaddr, IPaddr tpaddr);
 SYSCALL mkpool(int bufsiz, int numbufs);
 // mount.c
 SYSCALL mount(char *prefix, int dev, char *replace);
-// naminit.c
-void naminit(void);
+// nameinit.c
+void nameinit(void);
 // namemap.c
 SYSCALL namemap(char *name, char *newname);
 // namopen.c

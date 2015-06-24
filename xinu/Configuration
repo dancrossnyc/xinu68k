@@ -64,7 +64,7 @@ rf:
 
 // Name system (topmost level of name resolution mechanism)
 nam:
-	on TOP		-i naminit	-o namopen	-c ioerr
+	on TOP		-i nameinit	-o namopen	-c ioerr
 			-r ioerr	-w ioerr	-s ioerr
 			-n ioerr	-g ioerr	-p ioerr
 			-iint interr	-oint interr	-csr 0

@@ -10,15 +10,14 @@ struct nam Nam;
 #endif
 
 //------------------------------------------------------------------------
-//  naminit  -  initialize the syntactic namespace pseudo-device
+// nameinit - initialize the syntactic namespace pseudo-device
 //------------------------------------------------------------------------
 void
-naminit(void)
+nameinit(void)
 {
 	Nam.nnames = 0;
 
-	// Xinu namespace definition
-
+	// Xinu namespace definition.
 	mount("", NAMESPACE, "Xinu/storage/");
 	mount("Xinu/", RFILSYS, "/usr/Xinu/");
 	mount("h/", NAMESPACE, "Xinu/src/sys/h/");

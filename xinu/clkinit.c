@@ -38,6 +38,8 @@ clkinit(void)
 	clkdiff = 0;		// zero deferred ticks
 	deferclock = 0;		// clock is not deferred
 	clockq = newqueue();	// allocate clock queue in q
+	// XXX Hack for simulator.
 	extern void mclkstart(void);	// XXX Hack for simulator.
-	mclkstart();		// XXX Hack for simulator.
+	mclkstart();			// XXX Hack for simulator.
+	// XXX Hack for simulator.
 }

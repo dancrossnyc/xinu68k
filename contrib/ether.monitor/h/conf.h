@@ -88,7 +88,7 @@ extern	int	rfwrite();
 extern	int	rfseek();
 extern	int	rfgetc();
 extern	int	rfputc();
-extern	int	naminit();
+extern	int	nameinit();
 extern	int	namopen();
 extern	int	namcntl();
 
