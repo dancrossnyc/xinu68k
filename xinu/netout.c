@@ -3,7 +3,7 @@
 #include "network.h"
 #include "string.h"
 
-#define  MNAMLEN  24		// maximum size of this machine's name
+#define  MNAMELEN  24		// maximum size of this machine's name
 
 //------------------------------------------------------------------------
 //  netout  -  start network by finding address and forward IP packets
@@ -15,12 +15,12 @@ netout(int userpid, int icmpp)
 	struct ip *ipptr;
 	long tim;
 	int len;
-	char nam[MNAMLEN];
+	char name[MNAMELEN];
 	IPaddr addr;
 
 	getaddr(addr);
 	gettime(&tim);
-	getname(nam);
+	getname(name, MNAMELEN);
 	resume(userpid);
 	while (TRUE) {
 		packet = (struct epacket *)preceive(icmpp);

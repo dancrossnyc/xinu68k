@@ -46,8 +46,8 @@ _prt8(unsigned int num, char *str)
 
 	temp[0] = '\0';
 	for (i = 1; i <= 11; i++) {
-		temp[i] = (num & 07) + '0';
-		num = (num >> 3) & 0037777;
+		temp[i] = (num & 0x07) + '0';
+		num = (num >> 3) & 0x3FFF;
 	}
 	temp[11] &= '1';
 	for (i = 11; temp[i] == '0'; i--);
@@ -65,7 +65,7 @@ _prtl8(long num, char *str)
 
 	temp[0] = '\0';
 	for (i = 1; i <= 11; i++) {
-		temp[i] = (num & 07) + '0';
+		temp[i] = (num & 0x07) + '0';
 		num = num >> 3;
 	}
 	temp[11] &= '3';

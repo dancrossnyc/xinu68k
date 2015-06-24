@@ -19,7 +19,7 @@ x_date(int stdin, int stdout, int stderr, int nargs, char *args[])
 		clktime = 0L;
 	gettime(&now);
 	ascdate(now, str);
-	strcat(str, "\n");
+	strlcat(str, "\n", sizeof(str));
 	write(stdout, str, strlen(str));
 
 	return OK;

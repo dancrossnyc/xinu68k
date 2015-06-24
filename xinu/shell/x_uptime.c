@@ -28,7 +28,7 @@ x_uptime(int stdin, int stdout, int stderr, int nargs, char *args[])
 			all = TRUE;
 			break;
 		}
-		getname(mach);	// called as "uptime"
+		getname(mach, sizeof(mach));	// called as "uptime"
 		args[1] = mach;
 		// fall through
 	case 2:
@@ -58,10 +58,10 @@ x_uptime(int stdin, int stdout, int stderr, int nargs, char *args[])
 		if (days > 0)
 			sprintf(&str[strlen(str)], " %2d +", days);
 		else
-			strcat(str, "     ");
+			strlcat(str, "     ", sizeof(str));
 		sprintf(&str[strlen(str)], " %2d:%02d", hours, mins);
 		if (!up) {
-			strcat(str, "\n");
+			strlcat(str, "\n", sizeof(str));
 			write(stdout, str, strlen(str));
 			continue;
 		}
@@ -69,12 +69,12 @@ x_uptime(int stdin, int stdout, int stderr, int nargs, char *args[])
 			"  %2d users,    load ", (int)rwptr->rwusers);
 		for (j = 0; j < RWNLOAD; j++) {
 			if (j > 0)
-				strcat(str, ", ");
+				strlcat(str, ", ", sizeof(str));
 			sprintf(&str[strlen(str)], "%2d.%02d",
 				rwptr->rwload[j] / 100,
 				rwptr->rwload[j] % 100);
 		}
-		strcat(str, "\n");
+		strlcat(str, "\n", sizeof(str));
 		write(stdout, str, strlen(str));
 	}
 	if (!found && !all)

@@ -38,7 +38,7 @@ dfdsrch(struct dsblk *dsptr, char *filename, int mbits)
 	inum = ibnew(dsptr->dnum, IBNWDIR);
 	fdptr = &(dirptr->d_files[dirptr->d_nfiles++]);
 	fdptr->fdlen = 0L;
-	strcpy(fdptr->fdname, filename);
+	strlcpy(fdptr->fdname, filename, FDNLEN);
 	fdptr->fdiba = inum;
 	write(dsptr->dnum, dskbcpy(dirptr), DIRBLK);
 	signal(dsptr->ddirsem);

@@ -50,7 +50,7 @@ dumkdl(int diskdev, DBADDR firstfb, DBADDR lastfb, Bool verbose)
 	buff = (struct freeblk *)getbuf(dskdbp);
 	bptr = (char *)buff;
 	for (i = 0; i < DBUFSIZ; i++)
-		*bptr++ = '\000';
+		*bptr++ = '\0';
 	for (dba = firstfb; dba < lastfb; dba++) {
 		buff->fbnext = (DBADDR) (dba + 1);
 		write(diskdev, dskbcpy(buff), dba);

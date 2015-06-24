@@ -47,9 +47,9 @@ tqdump(int start, int len, int maxlen, char *buff)
 {
 	int i;
 	for (i = start; len > 0; len--) {
-		if (buff[i] & 0200)
+		if (buff[i] & 0x80)
 			kprintf("M-");
-		kprintf("%s", unctrl[buff[i] & 0177]);
+		kprintf("%s", unctrl[buff[i] & 0x7F]);
 		if (++i >= maxlen)
 			i = 0;
 	}

@@ -30,7 +30,7 @@ rwhod(void)
 	Rwho.rwsend = TRUE;
 	getutim(&Rwho.rwbtime);
 	myptr = &Rwho.rwcache[0];
-	getname(myptr->rwmach);
+	getname(myptr->rwmach, RMACLEN);
 	myptr->rwboot = myptr->rwlast = myptr->rwslast = Rwho.rwbtime;
 	for (i = 0; i < 3; i++)
 		myptr->rwload[i] = 0L;
@@ -61,14 +61,14 @@ rwhod(void)
 		rpacptr->rw_type = RWSTATUS;
 		rpacptr->rw_sndtim = hl2net(now);
 		rpacptr->rw_rtim = 0L;
-		getname(rpacptr->rw_host);
+		getname(rpacptr->rw_host, sizeof(rpacptr->rw_host));
 		for (j = 0; j < RWNLOAD; j++)
 			rpacptr->rw_load[j] = 0L;
 		rpacptr->rw_btim = hl2net(Rwho.rwbtime);
 		len = RWMINP;
 		if (marked(Shl.shmark) && Shl.shused) {
 			rwwptr = &rpacptr->rw_rww[0];
-			strcpy(rwwptr->rw_tty, "Console");
+			strlcpy(rwwptr->rw_tty, "Console", RWNLEN);
 			strncpy(rwwptr->rw_nam, Shl.shuser, RWNLEN);
 			rwwptr->rw_ton = hl2net(Shl.shlogon);
 			rwwptr->rw_idle = hl2net(now - Shl.shlast);

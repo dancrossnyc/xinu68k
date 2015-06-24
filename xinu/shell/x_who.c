@@ -16,11 +16,11 @@ x_who(int stdin, int stdout, int stderr)
 	char str[80];
 
 	if (marked(Shl.shmark) && Shl.shused) {
-		getname(machine);
+		getname(machine, sizeof(machine));
 		sprintf(str, "%10s!%-10s Console : ", machine, Shl.shuser);
 		write(stdout, str, strlen(str));
 		ascdate(ut2ltim(Shl.shlogon), str);
-		strcat(str, "\n");
+		strlcat(str, "\n", sizeof(str));
 		write(stdout, str, strlen(str));
 	}
 

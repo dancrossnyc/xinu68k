@@ -18,8 +18,8 @@ dskstrt(struct dsblk *dsptr)
 	xptr = &dsptr->ddcb;
 	xptr->xop = (char) drptr->drop;	// opcode
 	xptr->xunit = (char) 0;	// top addr bits
-	xptr->xmaddr = (char) ((drptr->drdba >> 8) & 0377);	// mid addr bits
-	xptr->xladdr = (char) (drptr->drdba & 0377);	// low addr bits
+	xptr->xmaddr = (char) ((drptr->drdba >> 8) & 0xFF);	// mid addr bits
+	xptr->xladdr = (char) (drptr->drdba & 0xFF);	// low addr bits
 	xptr->xcount = (char) 1;	// num of blocks
 	xptr->xcntl = (char) XRETRY;	// retry code
 

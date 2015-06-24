@@ -11,16 +11,16 @@ COMMAND
 x_echo(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
 	char str[80];
-	int i;
 
-	str[0] = NULLCH;
+	str[0] = '\0';
 	if (nargs != 1) {
-		for (strcpy(str, args[1]), i = 2; i < nargs; i++) {
-			strcat(str, " ");
-			strcat(str, args[i]);
+		strlcpy(str, args[1], sizeof(str));
+		for (int i = 2; i < nargs; i++) {
+			strlcat(str, " ", sizeof(str));
+			strlcat(str, args[i], sizeof(str));
 		}
 	}
-	strcat(str, "\n");
+	strlcat(str, "\n", sizeof(str));
 	write(stdout, str, strlen(str));
 
 	return OK;

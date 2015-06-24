@@ -1,10 +1,10 @@
-#define	_U	0001
-#define	_L	0002
-#define	_N	0004
-#define	_S	0010
-#define _P	0020
-#define _C	0040
-#define	_X	0100
+#define	_U	0x01
+#define	_L	0x02
+#define	_N	0x04
+#define	_S	0x08
+#define _P	0x10
+#define _C	0x20
+#define	_X	0x40
 
 extern char _ctype_[];
 
@@ -19,7 +19,7 @@ extern char _ctype_[];
 #define isprshort(c)	((_ctype_+1)[c]&(_P|_U|_L|_N))
 #define isprint(c)	((_ctype_+1)[c]&(_P|_U|_L|_N|_S))
 #define iscntrl(c)	((_ctype_+1)[c]&_C)
-#define isascii(c)	((unsigned)(c)<=0177)
+#define isascii(c)	((unsigned)(c)<=0x7F)
 #define toupper(c)	((c)-'a'+'A')
 #define tolower(c)	((c)-'A'+'a')
-#define toascii(c)	((c)&0177)
+#define toascii(c)	((c)&0x7F)

@@ -26,7 +26,7 @@ mount(char *prefix, int dev, char *replace)
 	for (i = 0; i < Nam.nnames; i++) {
 		nptr = &Nam.nametab[i];
 		if (strcmp(prefix, nptr->npre) == 0) {
-			strcpy(nptr->nrepl, replace);
+			strlcpy(nptr->nrepl, replace, NAMRLEN);
 			nptr->ndev = dev;
 			restore(ps);
 			return OK;
@@ -41,8 +41,8 @@ mount(char *prefix, int dev, char *replace)
 		nptr = last - 1;
 		*last = *nptr;
 	}
-	strcpy(nptr->npre, prefix);
-	strcpy(nptr->nrepl, replace);
+	strlcpy(nptr->npre, prefix, NAMPLEN);
+	strlcpy(nptr->nrepl, replace, NAMRLEN);
 	nptr->ndev = dev;
 	restore(ps);
 

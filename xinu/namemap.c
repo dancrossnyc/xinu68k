@@ -11,15 +11,16 @@
 SYSCALL
 namemap(char *name, char *newname)
 {
+	size_t size = 80;
 	int ps;
 	int dev;
 	char tmpnam[NAMLEN];
 
 	ps = disable();
-	dev = namrepl(name, newname);
+	dev = namereplace(name, newname, size);
 	while (dev == NAMESPACE) {
-		strcpy(tmpnam, newname);
-		dev = namrepl(tmpnam, newname);
+		strlcpy(tmpnam, newname, NAMLEN);
+		dev = namereplace(tmpnam, newname, size);
 	}
 	restore(ps);
 

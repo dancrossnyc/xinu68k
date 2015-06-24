@@ -33,8 +33,8 @@ dsinit(struct devsw *devptr)
 	dsptr->ddcb.xop = (char) XOREAD;
 	dsptr->ddcb.xunit = (char) 0;
 	dsptr->ddcb.xcntl = (char) XRETRY;
-	dsptr->ddcb.xmaddr = (char) ((DIRBLK >> 8) & (0377));
-	dsptr->ddcb.xladdr = (char) (DIRBLK & 0377);
+	dsptr->ddcb.xmaddr = (char) ((DIRBLK >> 8) & 0xFF);
+	dsptr->ddcb.xladdr = (char) (DIRBLK & 0xFF);
 	dsptr->ddcb.xcount = (char) 1;
 	dtptr = dsptr->dcsr;
 	dtptr->dt_dar = dsptr->ddir;

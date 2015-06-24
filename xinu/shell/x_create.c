@@ -40,8 +40,8 @@ x_creat(int stdin, int stdout, int stderr, int nargs, char *args[])
 		fprintf(stderr, "no memory\n");
 		return SYSERR;
 	}
-	strcpy(tmp, "_");
-	strcat(tmp, args[1]);
+	strlcpy(tmp, "_", sizeof(tmp));
+	strlcat(tmp, args[1], sizeof(tmp));
 	printf("Looking up %s\n", tmp);
 	read(dev, buf, 16);
 	aoutptr = (struct exec *)buf;

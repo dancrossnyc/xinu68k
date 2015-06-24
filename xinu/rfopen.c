@@ -25,7 +25,7 @@ rfopen(struct devsw *devptr, char *name, char *mode)
 	}
 	rfptr = &Rf.rftab[i];
 	devnum = rfptr->rf_dnum;
-	strcpy(rfptr->rf_name, name);
+	strlcpy(rfptr->rf_name, name, RNAMLEN);
 	rfptr->rf_mode = mbits;
 	rfptr->rf_pos = 0L;
 

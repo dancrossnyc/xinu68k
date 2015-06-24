@@ -136,7 +136,7 @@ int getlast(int tail);
 // getmem.c
 SYSCALL *getmem(size_t nbytes);
 // getname.c
-SYSCALL getname(char *nam);
+SYSCALL getname(char *name, size_t size);
 // getnet.c
 SYSCALL getnet(IPaddr address);
 // getpath.c
@@ -146,7 +146,7 @@ SYSCALL getpid(void);
 // getprio.c
 SYSCALL getprio(int pid);
 // getstk.c
-SYSCALL *getstk(size_t nbytes);
+SYSCALL *getstk(size_t size);
 // gettime.c
 SYSCALL gettime(long *timvar);
 // getutim.c
@@ -235,8 +235,8 @@ void naminit(void);
 SYSCALL namemap(char *name, char *newname);
 // namopen.c
 int namopen(struct devsw *devptr, char *filenam, char *mode);
-// namrepl.c
-SYSCALL namrepl(char *name, char *newname);
+// namereplace.c
+SYSCALL namereplace(char *name, char *newname, size_t size);
 // ndump.c
 void ndump(void);
 // netdump.c

@@ -94,7 +94,7 @@ sysinit(void)
 	pptr = &proctab[NULLPROC];
 	pptr->pstate = PRCURR;
 	pptr->pprio = 0;
-	strcpy(pptr->pname, "prnull");
+	strlcpy(pptr->pname, "prnull", PNMLEN);
 	pptr->plimit = ((char *)maxaddr) - NULLSTK - sizeof(uword);
 	pptr->pbase = (char *)maxaddr;
 	*((uword *)pptr->pbase) = MAGIC;

@@ -4,8 +4,6 @@
 #include <stddef.h>
 #include <string.h>
 
-#define	strlcat	mystrlcat
-
 size_t
 strlcat(char *dst, const char *src, size_t size)
 {
