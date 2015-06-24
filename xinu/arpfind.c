@@ -2,6 +2,7 @@
 #include "kernel.h"
 #include "proc.h"
 #include "network.h"
+#include "string.h"
 
 //------------------------------------------------------------------------
 //  arpfind  -  find or insert entry in ARP cache and return its index

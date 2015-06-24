@@ -61,6 +61,7 @@ extern struct tty tty[];
 #define	BACKSP	'\b'		// backspace one character pos.
 #define	BELL	'\007'		// usually an audiable tone
 #define	BLANK	' '		// used to print a "space"
+#define	DEL	'\177'		// Delete character
 #define	EOFC	'\004'		// end-of-file character (^D)
 #define	KILLCH	'\025'		// line kill character (^U)
 #define	NEWLINE	'\n'		// line feed

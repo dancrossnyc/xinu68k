@@ -2,6 +2,7 @@
 #include "kernel.h"
 #include "proc.h"
 #include "network.h"
+#include "string.h"
 
 //------------------------------------------------------------------------
 //  arp_in  -  handle ARP packet coming in from Ethernet network

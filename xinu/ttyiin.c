@@ -28,7 +28,7 @@ erase1(struct tty *iptr, struct csr *cptr)
 		iptr->ihead += IBUFLEN;
 	ch = iptr->ibuff[iptr->ihead];
 	if (iptr->iecho) {
-		if (ch < BLANK || ch == 0177) {
+		if (ch < BLANK || ch == DEL) {
 			if (iptr->evis) {
 				eputc(BACKSP, iptr, cptr);
 				if (iptr->ieback) {
@@ -64,9 +64,9 @@ echoch(int ch, struct tty *iptr, struct csr *cptr)
 	if ((ch == NEWLINE || ch == RETURN) && iptr->ecrlf) {
 		eputc(RETURN, iptr, cptr);
 		eputc(NEWLINE, iptr, cptr);
-	} else if ((ch < BLANK || ch == 0177) && iptr->evis) {
+	} else if ((ch < BLANK || ch == DEL) && iptr->evis) {
 		eputc(UPARROW, iptr, cptr);
-		eputc(ch + 0100, iptr, cptr);	// make it printable
+		eputc(ch + 0x40, iptr, cptr);	// make it printable
 	} else {
 		eputc(ch, iptr, cptr);
 	}

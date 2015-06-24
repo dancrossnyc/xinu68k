@@ -2,6 +2,7 @@
 #include "kernel.h"
 #include "proc.h"
 #include "network.h"
+#include "string.h"
 
 //------------------------------------------------------------------------
 //  getpath  -  find a path (route table entry) for a given IP address

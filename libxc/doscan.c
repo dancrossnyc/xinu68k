@@ -7,8 +7,8 @@
 #define EOF     (-1)
 #define	NULL	0
 
-#define	SPC	01
-#define	STP	02
+#define	SPC	0x01
+#define	STP	0x02
 
 #define	SHORT	0
 #define	REGULAR	1
@@ -169,7 +169,7 @@ _getccl(const char *s)
 			_sctab[c] &= ~STP;
 		else
 			_sctab[c] |= STP;
-	while (((c = *s++) & 0177) != ']') {
+	while (((c = *s++) & 0x7F) != ']') {
 		if (t)
 			_sctab[c++] |= STP;
 		else

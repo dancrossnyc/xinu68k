@@ -9,5 +9,5 @@ srand(unsigned x)
 int
 rand(void)
 {
-	return (((randx = randx * 1103515245 + 12345) >> 16) & 077777);
+	return (((randx = randx * 1103515245 + 12345) >> 16) & 0x7FFF);
 }

@@ -1,3 +1,6 @@
+#include <stddef.h>
+#include <string.h>
+
 #include "conf.h"
 #include "kernel.h"
 #include "network.h"
@@ -6,9 +9,9 @@
 //  getname  -  get name of this host and place it where specified
 //------------------------------------------------------------------------
 SYSCALL
-getname(char *name)
+getname(char *name, size_t size)
 {
-strcpy(name, "shireen");
+strlcpy(name, "shireen", size);
 /*
 	IPaddr myaddr;
 	char *p;

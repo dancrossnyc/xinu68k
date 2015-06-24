@@ -1,3 +1,6 @@
+#include <stddef.h>
+#include <string.h>
+
 #include "conf.h"
 #include "kernel.h"
 #include "proc.h"
@@ -26,8 +29,9 @@ addarg(int pid, int nargs, int len)
 	*toarg = (uintptr_t)(toarg + 1);
 	toarg++;
 	for (fromarg = Shl.shtok; nargs > 0; nargs--) {
+		size_t size = strlen(*fromarg);
 		*toarg++ = (uintptr_t)to;
-		strcpy(to, *fromarg++);
+		strlcpy(to, *fromarg++, size);
 		to += strlen(to) + 1;
 	}
 	*toarg = 0;

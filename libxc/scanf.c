@@ -1,6 +1,5 @@
 // scanf.c - scanf, fscanf, sscanf, getch, ungetch, sgetch, sungetch
 
-#include <conf.h>
 #include <kernel.h>
 #include <io.h>
 #include <tty.h>

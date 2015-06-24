@@ -2,6 +2,7 @@
 #include "kernel.h"
 #include "proc.h"
 #include "network.h"
+#include "string.h"
 
 //------------------------------------------------------------------------
 //  dgread  -  read one datagram from a datagram protocol pseudo-device

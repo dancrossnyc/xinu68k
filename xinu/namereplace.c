@@ -1,3 +1,6 @@
+#include <stddef.h>
+#include <string.h>
+
 #include "conf.h"
 #include "kernel.h"
 #include "name.h"
@@ -6,7 +9,7 @@
 //  namrepl  -  using namespace, replace name with (newname,device)
 //------------------------------------------------------------------------
 SYSCALL
-namrepl(char *name, char *newname)
+namereplace(char *name, char *newname, size_t size)
 {
 	struct nament *nptr;
 	struct nament *nlast;
@@ -14,6 +17,7 @@ namrepl(char *name, char *newname)
 	int ps;
 
 	ps = disable();
+	memset(newname, '\0', size);
 	nlast = &Nam.nametab[Nam.nnames];
 	for (nptr = Nam.nametab; nptr < nlast; nptr++) {
 		plen = strlen(nptr->npre);
@@ -21,13 +25,12 @@ namrepl(char *name, char *newname)
 			rlen = strlen(nptr->nrepl);
 			if ((rlen + strlen(name) - plen) >= NAMLEN)
 				break;
-			strcpy(newname, nptr->nrepl);
-			strcat(newname, name + plen);
+			strlcpy(newname, nptr->nrepl, size);
+			strlcat(newname, name + plen, size);
 			restore(ps);
 			return nptr->ndev;
 		}
 	}
-	strcpy(newname, "");
 	restore(ps);
 
 	return SYSERR;

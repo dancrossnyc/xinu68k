@@ -1,3 +1,6 @@
+#include <stddef.h>
+#include <string.h>
+
 #include "conf.h"
 #include "kernel.h"
 #include "proc.h"
@@ -60,7 +63,8 @@ shell(int dev)
 	int child;
 
 	Shl.shncmds = sizeof(cmds) / sizeof(struct cmdent);
-	for (getname(mach); TRUE;) {
+	getname(mach, SHMLEN);
+	for (;;) {
 		fprintf(dev, "%s %% ", mach);
 		getutim(&Shl.shlast);
 		if ((len = read(dev, Shl.shbuf, SHBUFLEN)) == 0)
@@ -82,8 +86,8 @@ shell(int dev)
 			ntokens--;
 			backgnd = TRUE;
 		}
-		// scan tokens, accumulating length;  handling redirect
 
+		// scan tokens, accumulating length;  handling redirect
 		for (len = 0, i = 0; i < ntokens;) {
 			if ((ch = Shl.shtktyp[i]) == '&') {
 				ntokens = -1;

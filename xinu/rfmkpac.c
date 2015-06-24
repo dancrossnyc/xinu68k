@@ -1,6 +1,7 @@
 #include "conf.h"
 #include "kernel.h"
 #include "network.h"
+#include "string.h"
 
 static struct fpacket packet;
 

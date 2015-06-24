@@ -1,3 +1,6 @@
+#include <stddef.h>
+#include <string.h>
+
 #include "conf.h"
 #include "kernel.h"
 #include "shell.h"
@@ -53,8 +56,8 @@ x_rls(int stdin, int stdout, int stderr, int nargs, char *args[])
 				return SYSERR;
 			}
 			if (aflag || d->d_nam[0] != '.') {
-				strcpy(str, d->d_nam);
-				strcat(str, "\n");
+				strlcpy(str, d->d_nam, sizeof(str));
+				strlcat(str, "\n", sizeof(str));
 				write(stdout, str, strlen(str));
 			}
 			if (d->d_rlen == 0)

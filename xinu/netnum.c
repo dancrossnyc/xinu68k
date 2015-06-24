@@ -1,6 +1,7 @@
 #include "conf.h"
 #include "kernel.h"
 #include "network.h"
+#include "string.h"
 
 //------------------------------------------------------------------------
 //  netnum  -  obtain the network portion of a given IP address
