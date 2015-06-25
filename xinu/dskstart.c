@@ -3,10 +3,10 @@
 #include "disk.h"
 
 //------------------------------------------------------------------------
-//  dskstrt  --  start an I/O operation on a disk device
+// dskstart -- start an I/O operation on a disk device
 //------------------------------------------------------------------------
 void
-dskstrt(struct dsblk *dsptr)
+dskstart(struct dsblk *dsptr)
 {
 	struct xbdcb *xptr;
 	struct dtc *dtptr;

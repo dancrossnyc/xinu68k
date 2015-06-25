@@ -21,7 +21,7 @@ dsinter(struct dsblk *dsptr)
 	if (dtptr->dt_csr & DTERROR)
 		drptr->drstat = SYSERR;
 	if ((dsptr->dreqlst = drptr->drnext) != DRNULL)
-		dskstrt(dsptr);
+		dskstart(dsptr);
 	switch (drptr->drop) {
 	case DREAD:
 	case DSYNC:

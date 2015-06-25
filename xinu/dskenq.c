@@ -15,7 +15,7 @@ dskenq(struct dreq *drptr, struct dsblk *dsptr)
 	if ((q = dsptr->dreqlst) == DRNULL) {
 		dsptr->dreqlst = drptr;
 		drptr->drnext = DRNULL;
-		dskstrt(dsptr);
+		dskstart(dsptr);
 		return DONQ;
 	}
 	block = drptr->drdba;

@@ -5,19 +5,19 @@
 #include "sleep.h"
 
 //------------------------------------------------------------------------
-//  stopclk  --  put the clock in defer mode
+// stopclock -- put the clock in defer mode
 //------------------------------------------------------------------------
 void
-stopclk(void)
+stopclock(void)
 {
 	deferclock++;
 }
 
 //------------------------------------------------------------------------
-//  strtclk  --  take the clock out of defer mode
+// startclock -- take the clock out of defer mode
 //------------------------------------------------------------------------
 void
-strtclk(void)
+startclock(void)
 {
 	int ps;
 	int makeup;

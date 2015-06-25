@@ -8,10 +8,10 @@
 #include "dir.h"
 
 //------------------------------------------------------------------------
-//  dfdsrch  --  search disk directory for position of given file name
+//  dfdsearch  --  search disk directory for position of given file name
 //------------------------------------------------------------------------
 struct fdes *
-dfdsrch(struct dsblk *dsptr, char *filename, int mbits)
+dfdsearch(struct dsblk *dsptr, char *filename, int mbits)
 {
 	struct dir *dirptr;
 	struct fdes *fdptr;

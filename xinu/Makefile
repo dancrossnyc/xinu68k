@@ -21,20 +21,20 @@ OBJS=		access.o adump.o arp_in.o arpfind.o arpinit.o \
 		chprio.o ckmode.o cksum.o clkinit.o \
 		clkint.o close.o control.o create.o \
 		ctxsw.o \
-		devdump.o dfalloc.o dfdsrch.o dgalloc.o \
+		devdump.o dfalloc.o dfdsearch.o dgalloc.o \
 		dgclose.o dgcntl.o dgdump.o dginit.o \
 		dgmcntl.o dgmopen.o dgparse.o dgread.o \
 		dgwrite.o dot2ip.o dscntl.o dsinit.o \
 		dsinter.o dskbcpy.o dskenq.o dskqopt.o \
-		dskstrt.o dsksync.o dsopen.o dsread.o \
+		dskstart.o dsksync.o dsopen.o dsread.o \
 		dsseek.o dswrite.o dudir.o dumkfs.o \
-		ethinit.o ethinter.o ethread.o ethstrt.o \
-		ethrstrt.o ethwrite.o ethwstrt.o \
+		etherinit.o etherinter.o etherread.o etherstart.o \
+		etherrstart.o etherwrite.o etherwstart.o \
 		freebuf.o freemem.o \
 		getaddr.o getbuf.o getc.o getitem.o \
 		getmem.o getname.o getnet.o getpath.o \
 		getpid.o getprio.o getstk.o gettime.o \
-		getutim.o \
+		getutime.o \
 		ibclear.o ibfree.o ibget.o iblfree.o \
 		ibnew.o ibput.o icmp_in.o init.o \
 		insert.o insertd.o intr.o ioerr.o \
@@ -45,7 +45,7 @@ OBJS=		access.o adump.o arp_in.o arpfind.o arpinit.o \
 		lfread.o lfsdfree.o lfseek.o lfsetup.o \
 		lfsflush.o lfsnewd.o lfwrite.o \
 		mark.o mdump.o mkarp.o mkpool.o mount.o \
-		nameinit.o namemap.o namopen.o namereplace.o \
+		nameinit.o namemap.o nameopen.o namereplace.o \
 		ndump.o netdump.o netin.o netinit.o \
 		netnum.o netout.o newqueue.o \
 		nqalloc.o \

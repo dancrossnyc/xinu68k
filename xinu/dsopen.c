@@ -21,7 +21,7 @@ dsopen(struct devsw *devptr, char *filename, char *mode)
 	ps = disable();
 	//dirptr = dsdirec(devptr->num);
 	if ((mbits = ckmode(mode)) == SYSERR ||
-	    (fdptr = dfdsrch((struct dsblk *)devptr->iobuf, filename, mbits)) == (struct fdes *)SYSERR ||
+	    (fdptr = dfdsearch((struct dsblk *)devptr->iobuf, filename, mbits)) == (struct fdes *)SYSERR ||
 	    (findex = dfalloc()) == SYSERR) {
 		restore(ps);
 		return SYSERR;
