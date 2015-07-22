@@ -25,7 +25,7 @@ start:
 	movea.l	#0,%a5
 	movea.l	#0,%a6
 	lea	_mystack,%a7
-	adda.l	#4*20,%a7
+	adda.l	#4*8,%a7
 	jsr	sizmem		| Find memory size. Use initial stack.
 	movea.l	maxaddr,%sp	| switch stack to high memory
 	clr.l	-(%sp)		| leave space for MAGIC word

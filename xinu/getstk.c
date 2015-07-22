@@ -3,7 +3,7 @@
 #include "mem.h"
 
 //------------------------------------------------------------------------
-// getstk  --  allocate stack memory, returning address of topmost uword
+// getstk -- allocate stack memory, returning address of topmost uword
 //------------------------------------------------------------------------
 SYSCALL *
 getstk(size_t nbytes)

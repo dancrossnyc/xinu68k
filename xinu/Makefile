@@ -6,7 +6,7 @@ DIR=		/Users/cross/unix/project/xinu68k
 BINDIR=		$(DIR)/bin
 INCDIR=		$(DIR)/include
 CONFIG=		./config
-CC=		m68k-none-elf-gcc -mc68000 -mstrict-align
+CC=		m68k-none-elf-gcc -mc68000 -mstrict-align -fomit-frame-pointer
 CFLAGS=		-O -c -I../include -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
 AS=		m68k-none-elf-as
 LD=		m68k-none-elf-ld
@@ -101,7 +101,7 @@ xinu.o:		$(XOBJS)
 		$(LD) -r $(XOBJS) -o xinu.o
 
 a.out:		libx.a xinu.o test.o
-		$(LD) -S -e start -Ttext=0x00001000 -Tdata=0x00080000 xinu.o test.o libx.a libx.a ../lib/libxc.a -L/opt/gnu/lib/gcc/m68k-none-elf/4.9.2/m68000 -lgcc
+		$(LD) -S -e start -Ttext=0x00001000 -Tdata=0x00080000 xinu.o test.o libx.a libx.a ../lib/libxc.a -L/opt/gnu/lib/gcc/m68k-none-elf/5.2.0/m68000 -lgcc
 
 a.h68:		a.out
 		$(OBJCOPY) -O srec a.out a.h68

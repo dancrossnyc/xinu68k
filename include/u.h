@@ -34,7 +34,7 @@ typedef char Bool;		// Boolean type
 #define	MAXINT		2147483647	// maximum integer (2^31+1)
 #define	LOWBYTE		0x000000FF	// mask for low-order 8 bits
 #define	MINSTK		40	// minimum process stack size
-#define	NULLSTK		300	// process 0 stack size
+#define	NULLSTK		512	// process 0 stack size
 #define	DISABLE		0x2700	// PS to disable interrupts
 #define	MAGIC		0xDEADCAFE	// unusual value for top of stk
 
