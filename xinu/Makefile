@@ -6,7 +6,7 @@ DIR=		/Users/cross/unix/project/xinu68k
 BINDIR=		$(DIR)/bin
 INCDIR=		$(DIR)/include
 CONFIG=		./config
-CC=		m68k-none-elf-gcc -mc68000 -mstrict-align -fomit-frame-pointer
+CC=		m68k-none-elf-gcc -mc68000 -mstrict-align
 CFLAGS=		-O -c -I../include -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
 AS=		m68k-none-elf-as
 LD=		m68k-none-elf-ld
