@@ -5,7 +5,7 @@
 .SUFFIXES:.o .c .s
 DIR	=	/Users/cross/unix/project/xinu68k
 BINDIR	=	$(DIR)/bin
-CC	=	m68k-none-elf-gcc
+CC	=	m68k-none-elf-gcc -mc68000 -mstrict-align
 CFLAGS	=	-O -c -I../../include -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
 AFLAGS	=	-u $(DIR)/include/sys.s
 AS	=	m68k-none-elf-as
