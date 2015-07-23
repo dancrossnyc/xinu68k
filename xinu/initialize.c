@@ -50,16 +50,18 @@ char vers[] = VERSION;		// Xinu version printed at startup
 static void
 init_mduart()
 {
-#define	MDUART_STAT_REG_A	2
-#define	MDUART_CTL_REG_A	4
+#define	MDUART_STAT_REG_A	1
+#define	MDUART_CTL_REG_A	2
 #define	MDUART_MR1_REG_A	0
 #define	MDUART_MR2_REG_A	0
+#define MDUART_IMR_REG_A	5
 
-	volatile byte *duart = (byte *)0x100010 + 1;
+	volatile byte *duart = (byte *)0x100010;
 	duart[MDUART_CTL_REG_A] = 0x10;		// Reset MR?A pointer
 	duart[MDUART_MR1_REG_A] = 0x23;		// 8 data bits
 	duart[MDUART_MR2_REG_A] = 0x17;		// Normal mode
 	duart[MDUART_STAT_REG_A] = 0xBB;	// Set clock to 9600
+	duart[MDUART_IMR_REG_A] = 0x00;		// Enable interrupts.
 	duart[MDUART_CTL_REG_A] = 0x05;		// Enable Rx and Tx
 }
 

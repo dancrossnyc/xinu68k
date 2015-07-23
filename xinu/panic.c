@@ -32,7 +32,7 @@ lowcore(void)
 
 	vectors[0] = 0x100000 - 4;
 	vectors[1] = (uword)panic0;
-	for (int k = 2; k < 64; k++) {
+	for (int k = 2; k < 256; k++) {
 		vectors[k] = (uword)panice;
 	}
 }

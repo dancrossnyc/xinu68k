@@ -13,7 +13,7 @@ eputc(int ch, struct tty *iptr, struct csr *cptr)
 	iptr->ebuff[iptr->ehead++] = ch;
 	if (iptr->ehead >= EBUFLEN)
 		iptr->ehead = 0;
-	cptr->ctstat = SLUENABLE;
+	//cptr->ctstat = SLUENABLE;
 }
 
 //------------------------------------------------------------------------
@@ -49,7 +49,7 @@ erase1(struct tty *iptr, struct csr *cptr)
 			}
 		}
 	} else
-		cptr->ctstat = SLUENABLE;
+		return; //cptr->ctstat = SLUENABLE;
 }
 
 //------------------------------------------------------------------------
@@ -106,7 +106,7 @@ ttyiin(struct tty *iptr)
 		if (iptr->oflow) {
 			if (ch == iptr->ostart) {
 				iptr->oheld = FALSE;
-				cptr->ctstat = SLUENABLE;
+				//cptr->ctstat = SLUENABLE;
 				return;
 			}
 			if (ch == iptr->ostop) {
@@ -149,8 +149,7 @@ ttyiin(struct tty *iptr)
 				if (iptr->iecho) {
 					echoch(ch, iptr, cptr);
 					if (ch == iptr->ieofc)
-						echoch(NEWLINE, iptr,
-						       cptr);
+						echoch(NEWLINE, iptr, cptr);
 				}
 				iptr->ibuff[iptr->ihead++] = ch;
 				if (iptr->ihead >= IBUFLEN)

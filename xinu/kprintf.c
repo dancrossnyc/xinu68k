@@ -15,12 +15,13 @@
 static void
 kputc_mduart(int device, int c)
 {
-#define MDUART_STAT_REG_A	2
-#define	MDUART_TXB_REG_A	6
-	volatile byte *duart = (byte *)0x100010 + 1;
+#define MDUART_STAT_REG_A	1
+#define	MDUART_TXBUF_REG_A	3
+	volatile byte *duart = (byte *)0x100010;
 	while ((duart[MDUART_STAT_REG_A] & 0x04) == 0)
 		;
-	duart[MDUART_TXB_REG_A] = c;	// transmit char
+if (c == '@') panic("@?");
+	duart[MDUART_TXBUF_REG_A] = c;	// transmit char
 	if (c == NEWLINE)
 		kputc_mduart(device, RETURN);
 }

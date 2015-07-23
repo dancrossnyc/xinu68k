@@ -11,7 +11,7 @@
 SYSCALL
 getname(char *name, size_t size)
 {
-strlcpy(name, "shireen", size);
+strlcpy(name, "krem68k", size);
 /*
 	IPaddr myaddr;
 	char *p;

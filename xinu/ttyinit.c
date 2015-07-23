@@ -12,7 +12,7 @@ void
 ttyinit(struct devsw *devptr)
 {
 	struct tty *iptr;
-	struct csr *cptr;
+	//struct csr *cptr;
 	int isconsole;
 
 	// set up interrupt vector and interrupt dispatch table
@@ -46,7 +46,7 @@ ttyinit(struct devsw *devptr)
 	iptr->ostop = STOPCH;
 	iptr->icursor = 0;
 	iptr->ifullc = TFULLC;
-	cptr = (struct csr *)devptr->csr;
-	cptr->crstat = SLUENABLE;	// enable in. interrupts
-	cptr->ctstat = SLUDISABLE;	// disable out.   "
+	//cptr = (struct csr *)devptr->csr;
+	//cptr->crstat = SLUENABLE;	// enable in. interrupts
+	//cptr->ctstat = SLUDISABLE;	// disable out.   "
 }
