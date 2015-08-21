@@ -72,7 +72,6 @@ nam:
 %
 
 // Device definitions starting with terminals
-
 CONSOLE		is tty	on SLU		csr=0x00100010 ivec=0x070 ovec=0x070
 TTY1		is tty	on SLU		csr=0x0007FF40 ivec=0xC00 ovec=0xC40
 TTY2		is tty	on SLU		csr=0x0007FF80 ivec=0xC80 ovec=0xCC0
