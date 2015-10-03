@@ -32,7 +32,7 @@ typedef char Bool;		// Boolean type
 #define	PROCESS		int	// Process declaration
 #define	MININT		-2147483648	// minimum integer (-2^31)
 #define	MAXINT		2147483647	// maximum integer (2^31+1)
-#define	LOWBYTE		0x000000FF	// mask for low-order 8 bits
+#define	LOWBYTE		0x000000FFU	// mask for low-order 8 bits
 #define	MINSTK		40	// minimum process stack size
 #define	NULLSTK		512	// process 0 stack size
 #define	DISABLE		0x2700	// PS to disable interrupts

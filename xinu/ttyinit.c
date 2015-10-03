@@ -16,7 +16,6 @@ ttyinit(struct devsw *devptr)
 	int isconsole;
 
 	// set up interrupt vector and interrupt dispatch table
-
 	iptr = &tty[devptr->minor];
 	iosetvec(devptr->num, iptr, iptr);
 

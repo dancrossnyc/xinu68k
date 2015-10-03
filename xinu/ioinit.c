@@ -3,22 +3,7 @@
 #include "io.h"
 
 //------------------------------------------------------------------------
-//  ioinit --  standard interrupt vector and dispatch initialization
-//------------------------------------------------------------------------
-int
-ioinit(int descrp)
-{
-	int minor;
-
-	if (isbaddev(descrp))
-		return SYSERR;
-	minor = devtab[descrp].minor;
-	iosetvec(descrp, (void *)minor, (void *)minor);
-	return OK;
-}
-
-//------------------------------------------------------------------------
-//  iosetvec  -  fill in interrupt vectors and dispatch table entries
+// iosetvec -- fill in interrupt vectors and dispatch table entries
 //------------------------------------------------------------------------
 int
 iosetvec(int descrp, void *incode, void *outcode)

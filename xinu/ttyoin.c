@@ -10,30 +10,31 @@
 INTPROC
 ttyoin(struct tty *iptr)
 {
-	//struct csr *cptr;
+	struct csr *cptr;
 	int ct;
 
-	//cptr = iptr->ioaddr;
+	cptr = iptr->ioaddr;
 	if (iptr->ehead != iptr->etail) {
-		//cptr->ctbuf = iptr->ebuff[iptr->etail++];
+		cptr->ctbuf = iptr->ebuff[iptr->etail++];
 		if (iptr->etail >= EBUFLEN)
 			iptr->etail = 0;
 		return;
 	}
 	if (iptr->oheld) {	// honor flow control
-		//cptr->ctstat = SLUDISABLE;
+		cptr->ctstat = SLUDISABLE;
 		return;
 	}
-	if ((ct = scount(iptr->osem)) < OBUFLEN) {
-		//cptr->ctbuf = iptr->obuff[iptr->otail++];
-		if (iptr->otail >= OBUFLEN)
-			iptr->otail = 0;
-		if (ct > OBMINSP)
-			signal(iptr->osem);
-		else if (++(iptr->odsend) == OBMINSP) {
-			iptr->odsend = 0;
-			signaln(iptr->osem, OBMINSP);
-		}
-	} else
-		return; //cptr->ctstat = SLUDISABLE;
+	if ((ct = scount(iptr->osem)) >= OBUFLEN) {
+		cptr->ctstat = SLUDISABLE;
+		return;
+	}
+	cptr->ctbuf = iptr->obuff[iptr->otail++];
+	if (iptr->otail >= OBUFLEN)
+		iptr->otail = 0;
+	if (ct > OBMINSP)
+		signal(iptr->osem);
+	else if (++(iptr->odsend) == OBMINSP) {
+		iptr->odsend = 0;
+		signaln(iptr->osem, OBMINSP);
+	}
 }

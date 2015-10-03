@@ -1,4 +1,4 @@
-%token DEFBRK COLON HEX OCTAL INTEGER IDENT CSR IVEC OVEC IINT OINT
+%token DEFBRK COLON HEX OCTAL INTEGER IDENT CSR IVEC INTR
 	INIT OPEN CLOSE	READ WRITE SEEK CNTL IS ON GETC PUTC
 %{
 #include <stdio.h>
@@ -7,8 +7,8 @@
 
 #define	CONFIGC		"../xinu/conf.c"	// name of .c output
 #define	CONFIGH		"../include/conf.h"	// name of .h output
-#define	CONFHREF	"\"conf.h\""	// how conf.h referenced
-#define	CONFIGIN	"Configuration"	// name of input file
+#define	CONFHREF	"\"conf.h\""		// how conf.h referenced
+#define	DEFAULT		"xinu.conf"		// name of input file
 
 FILE *confc;
 FILE *confh;
@@ -38,9 +38,7 @@ struct dvtype {
 	char *dvdevice;		// device name
 	int dvcsr;		// Control Status Register addr
 	int dvivec;		// input interrupt vector
-	int dvovec;		// Output interrupt vector
-	char dviint[20];	// input interrupt routine
-	char dvoint[20];	// output interrupt routine
+	char dvintr[20];	// input interrupt routine
 	char dvinit[20];	// init routine name
 	char dvopen[20];	// open routine name
 	char dvclose[20];	// close routine name
@@ -75,9 +73,7 @@ char *ftout[] = {
 	"\tint\t(*ctl)();\n",
 	"\tvoid\t*csr;\n",
 	"\tint\tivec;\n",
-	"\tint\tovec;\n",
-	"\tvoid\t(*iintr)();\n",
-	"\tvoid\t(*ointr)();\n",
+	"\tvoid\t(*intr)();\n",
 	"\tchar\t*iobuf;\n",
 	"\tint\tminor;\n",
 	"\t};\n\n",
@@ -128,12 +124,8 @@ attribute	:	CSR number
 					{newattr(CSR,$2);}
 		|	IVEC number
 					{newattr(IVEC,$2);}
-		|	OVEC number
-					{newattr(OVEC,$2);}
-		|	IINT id
-					{newattr(IINT,$2);}
-		|	OINT id
-					{newattr(OINT,$2);}
+		|	INTR id
+					{newattr(INTR,$2);}
 		|	OPEN id
 					{newattr(OPEN,$2);}
 		|	CLOSE id
@@ -204,8 +196,8 @@ main(int argc, char *argv[])
 			exit(1);
 		}
 	} else {		// try to open Configuration file
-		if (freopen(CONFIGIN, "r", stdin) == NULL) {
-			fprintf(stderr, "Can't open %s\n", CONFIGIN);
+		if (freopen(DEFAULT, "r", stdin) == NULL) {
+			fprintf(stderr, "Can't open %s\n", DEFAULT);
 			exit(1);
 		}
 	}
@@ -270,8 +262,7 @@ main(int argc, char *argv[])
 		lookup(s->dvcntl, strlen(s->dvcntl));
 		lookup(s->dvgetc, strlen(s->dvgetc));
 		lookup(s->dvputc, strlen(s->dvputc));
-		lookup(s->dviint, strlen(s->dviint));
-		lookup(s->dvoint, strlen(s->dvoint));
+		lookup(s->dvintr, strlen(s->dvintr));
 
 	}
 
@@ -286,7 +277,7 @@ main(int argc, char *argv[])
 			"// read, write, seek,\n"
 			"// getc, putc, cntl,\n"
 			"// device-csr-address, input-vector, output-vector,\n"
-			"// iint-handler, oint-handler, control-block, minor-device,\n");
+			"// intr-handler, control-block, minor-device,\n");
 	}
 	for (fcount = 0, s = devs; s != NULL; s = s->dvnext, fcount++) {
 		fprintf(confc, "\n//  %s  is %s\n", s->dvname,
@@ -298,10 +289,10 @@ main(int argc, char *argv[])
 			s->dvread, s->dvwrite, s->dvseek);
 		fprintf(confc, "%s, %s, %s,\n",
 			s->dvgetc, s->dvputc, s->dvcntl);
-		fprintf(confc, "(void*)0x%08x, 0x%02x, 0x%02x,\n",
-			s->dvcsr, s->dvivec, s->dvovec);
-		fprintf(confc, "%s, %s, NULLPTR, %d",
-			s->dviint, s->dvoint, s->dvminor);
+		fprintf(confc, "(void*)0x%08x, 0x%02x,\n",
+			s->dvcsr, s->dvivec);
+		fprintf(confc, "%s, NULLPTR, %d",
+			s->dvintr, s->dvminor);
 		if (s->dvnext != NULL)
 			fprintf(confc, "},\n");
 		else
@@ -324,9 +315,8 @@ main(int argc, char *argv[])
 	if (verbose) {
 		printf("\nConfiguration complete. Number of devs=%d:\n\n", ndevs);
 		for (s = devs; s != NULL; s = s->dvnext)
-			printf("Device %s (on %s) csr=0x%-8x, ivec=0x%-3x, ovec=0x%-3x, minor=%d\n",
-				s->dvname, s->dvdevice, s->dvcsr, s->dvivec,
-				s->dvovec, s->dvminor);
+			printf("Device %s (on %s) csr=0x%-8x, ivec=0x%-3x, minor=%d\n",
+				s->dvname, s->dvdevice, s->dvcsr, s->dvivec, s->dvminor);
 	}
 
 
@@ -406,14 +396,8 @@ newattr(int tok, int val)
 	case IVEC:
 		s->dvivec = val;
 		break;
-	case OVEC:
-		s->dvovec = val;
-		break;
-	case IINT:
-		strcpy(s->dviint, c);
-		break;
-	case OINT:
-		strcpy(s->dvoint, c);
+	case INTR:
+		strcpy(s->dvintr, c);
 		break;
 	case READ:
 		strcpy(s->dvread, c);
@@ -505,11 +489,8 @@ initattr(dvptr fstr, int tnum, int deviceid)
 	fstr->dvdevice = symtab[deviceid].symname;
 	fstr->dvcsr = 0;
 	fstr->dvivec = 0;
-	fstr->dvovec = 0;
-	strcpy(fstr->dviint, typnam);
-	strcat(fstr->dviint, "iin");
-	strcpy(fstr->dvoint, typnam);
-	strcat(fstr->dvoint, "oin");
+	strcpy(fstr->dvintr, typnam);
+	strcat(fstr->dvintr, "intr");
 	strcpy(fstr->dvinit, typnam);
 	strcat(fstr->dvinit, "init");
 	strcpy(fstr->dvopen, typnam);

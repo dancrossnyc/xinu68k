@@ -3,15 +3,15 @@
 #include "name.h"
 
 //------------------------------------------------------------------------
-//  namopen  -  open an object (e.g., remote file) based on the name
+//  nameopen  -  open an object (e.g., remote file) based on the name
 //------------------------------------------------------------------------
 int
-namopen(struct devsw *devptr, char *filenam, char *mode)
+nameopen(struct devsw *devptr, char *filename, char *mode)
 {
 	int dev;
 	char newname[NAMLEN];
 
-	dev = namemap(filenam, newname);
+	dev = namemap(filename, newname);
 	if (dev == SYSERR)
 		return SYSERR;
 

@@ -106,7 +106,7 @@ ttyiin(struct tty *iptr)
 		if (iptr->oflow) {
 			if (ch == iptr->ostart) {
 				iptr->oheld = FALSE;
-				//cptr->ctstat = SLUENABLE;
+				cptr->ctstat = SLUENABLE;
 				return;
 			}
 			if (ch == iptr->ostop) {
