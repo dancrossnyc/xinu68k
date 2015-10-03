@@ -106,8 +106,8 @@ a.out:		libx.a xinu.o test.o
 a.h68:		a.out
 		$(OBJCOPY) -O srec a.out a.h68
 
-../include/conf.h:	Configuration
+../include/conf.h:	xinu.conf
 		$(CONFIG)
 
-conf.c:		Configuration
+conf.c:		xinu.conf
 		$(CONFIG)

@@ -174,3 +174,9 @@ ttyiin(struct tty *iptr)
 		}
 	}
 }
+
+INTPROC
+ttyint(struct tty *iptr)
+{
+	// ...
+}
