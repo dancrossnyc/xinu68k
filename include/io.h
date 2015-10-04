@@ -24,5 +24,4 @@ extern struct intmap intmap[NDEVS];
 
 struct vector {
 	void (*vproc) ();	// address of interrupt procedure
-	int vps;		// saved process status word
 };

@@ -37,9 +37,7 @@ iosetvec(int descrp, void *incode, void *outcode)
 	map->ocode = (uword)outcode;	//   minor device numbers
 	vptr = (struct vector *)devptr->ivec;
 	vptr->vproc = INTVECI;		// fill in input interrupt
-	vptr->vps = descrp | DISABLE;	//   vector PC and PS values
 	vptr = (struct vector *)devptr->ovec;
 	vptr->vproc = INTVECO;		// fill in output interrupt
-	vptr->vps = descrp | DISABLE;	//   vector PC and PS values
 	return OK;
 }
