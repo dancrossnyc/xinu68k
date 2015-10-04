@@ -8,7 +8,7 @@
 //  arp_in  -  handle ARP packet coming in from Ethernet network
 //------------------------------------------------------------------------
 int
-arp_in(struct epacket *packet, int device)
+arp_in(struct epacket *packet, int dev)
 {
 	int pid;
 	uint16 arop;
@@ -19,13 +19,13 @@ arp_in(struct epacket *packet, int device)
 	ap = &Arp.arptab[arpfind(arp_packet->ar_spa)];
 	if (ap->state != ARP_RESOLVED) {
 		memmove(ap->ether_addr, arp_packet->ar_sha, EPADLEN);
-		ap->dev = device;
+		ap->dev = dev;
 		ap->state = ARP_RESOLVED;
 	}
 	arop = net2hs(arp_packet->ar_op);
 	switch (arop) {
 	case AR_REQUEST: {		// request - answer if for me
-		struct etblk *ether_frame = (struct etblk *)devtab[device].iobuf;
+		struct etblk *ether_frame = (struct etblk *)devtab[dev].iobuf;
 		if (memcmp(Net.myaddr, arp_packet->ar_tpa, IPLEN) != 0) {
 			freebuf(packet);
 			return OK;
@@ -36,7 +36,7 @@ arp_in(struct epacket *packet, int device)
 		memmove(packet->ep_hdr.e_dest, arp_packet->ar_tha, EPADLEN);
 		memmove(arp_packet->ar_sha, ether_frame->etpaddr, EPADLEN);
 		memmove(arp_packet->ar_spa, Net.myaddr, IPLEN);
-		write(device, packet, EMINPAK);
+		write(dev, packet, EMINPAK);
 		return OK;
 	}
 	case AR_RPLY: {		// reply - awaken requestor if any

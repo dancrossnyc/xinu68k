@@ -3,9 +3,6 @@
 | device descriptor.  Interrupts are disabled.
 
 .text
-.globl	inint,outint,intmap
-outint:					| Output interrupt
-	br	ioint
-inint:					| Input interrupt
+.globl	ioint
 ioint:					| Code common to input & output
 	rte

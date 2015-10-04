@@ -7,7 +7,7 @@
 COMMAND
 x_cat(int stdin, int stdout, int stderr, int nargs, char *args[])
 {
-	int device;
+	int dev;
 	char *buf;
 	int ret;
 	int len;
@@ -23,14 +23,14 @@ x_cat(int stdin, int stdout, int stderr, int nargs, char *args[])
 			write(stdout, buf, len);
 	}
 	for (i = 1; i < nargs; i++) {
-		if ((device = open(NAMESPACE, args[i], "ro")) == SYSERR) {
+		if ((dev = open(NAMESPACE, args[i], "ro")) == SYSERR) {
 			fprintf(stderr, "Cannot open %s\n", args[i]);
 			ret = SYSERR;
 			break;
 		}
-		while ((len = read(device, buf, 512)) > 0)
+		while ((len = read(dev, buf, 512)) > 0)
 			write(stdout, buf, len);
-		close(device);
+		close(dev);
 	}
 	freemem(buf, 512);
 

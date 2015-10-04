@@ -8,7 +8,7 @@
 //  rarp_in  -  handle RARP packet coming in from Ethernet network
 //------------------------------------------------------------------------
 int
-rarp_in(struct epacket *packet, int device)
+rarp_in(struct epacket *packet, int dev)
 {
 	int ps;
 	int pid;
@@ -19,7 +19,7 @@ rarp_in(struct epacket *packet, int device)
 	apacptr = (struct arppak *)packet->ep_data;
 	ret = SYSERR;
 	if (net2hs(apacptr->ar_op) == AR_RRLY) {
-		etptr = (struct etblk *)devtab[device].iobuf;
+		etptr = (struct etblk *)devtab[dev].iobuf;
 		if (memcmp(apacptr->ar_tha, etptr->etpaddr, EPADLEN) == 0) {
 			memmove(Net.myaddr, apacptr->ar_tpa, IPLEN);
 			netnum(Net.mynet, Net.myaddr);

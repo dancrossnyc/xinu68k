@@ -18,7 +18,9 @@ ttyread(struct devsw *devptr, char *buff, int count)
 	if (count < 0)
 		return SYSERR;
 	ps = disable();
-	if ((avail = scount((iptr = &tty[devptr->minor])->isem)) < 0)
+	iptr = &tty[devptr->minor];
+	avail = scount(iptr->isem);
+	if (avail < 0)
 		avail = 0;
 	if (count == 0) {	// read whatever is available
 		if (avail == 0) {
@@ -27,10 +29,9 @@ ttyread(struct devsw *devptr, char *buff, int count)
 		}
 		count = avail;
 	}
-	if (count < avail) {
-		donow = count;
-		dolater = 0;
-	} else {
+	donow = count;
+	dolater = 0;
+	if (avail < count) {
 		donow = avail;
 		dolater = count - avail;
 	}
@@ -39,7 +40,8 @@ ttyread(struct devsw *devptr, char *buff, int count)
 		ch = iptr->ibuff[iptr->itail++];
 		if (iptr->itail >= IBUFLEN)
 			iptr->itail = 0;
-		if (((eofch = iptr->ieofc) == ch) && iptr->ieof) {
+		eofch = iptr->ieofc;
+		if (ch == eofch && iptr->ieof) {
 			sreset(iptr->isem, avail - 1);
 			restore(ps);
 			return EOF;
@@ -47,7 +49,7 @@ ttyread(struct devsw *devptr, char *buff, int count)
 		*buff++ = ch;
 		for (nread = 1; nread < donow;) {
 			ch = iptr->ibuff[iptr->itail];
-			if ((ch == eofch) && iptr->ieof) {
+			if (ch == eofch && iptr->ieof) {
 				sreset(iptr->isem, avail - nread);
 				restore(ps);
 				return nread;

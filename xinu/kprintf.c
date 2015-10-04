@@ -13,7 +13,7 @@
 //  c is the character to print from _doprnt
 //------------------------------------------------------------------------
 static void
-kputc_mduart(int device, int c)
+kputc_mduart(int dev, int c)
 {
 #define MDUART_STAT_REG_A	1
 #define	MDUART_TXBUF_REG_A	3
@@ -23,7 +23,7 @@ kputc_mduart(int device, int c)
 if (c == '@') panic("@?");
 	duart[MDUART_TXBUF_REG_A] = c;	// transmit char
 	if (c == NEWLINE)
-		kputc_mduart(device, RETURN);
+		kputc_mduart(dev, RETURN);
 }
 
 //------------------------------------------------------------------------
@@ -33,7 +33,7 @@ if (c == '@') panic("@?");
 //------------------------------------------------------------------------
 /*
 static void
-kputc(int device, int c)
+kputc(int dev, int c)
 {
 	struct csr *csrptr;
 	struct tty *ttyptr;
@@ -44,9 +44,9 @@ kputc(int device, int c)
 	if (c == 0)
 		return;
 	if (c == NEWLINE)
-		kputc(device, RETURN);
-	csrptr = (struct csr *)devtab[device].csr;	// dev. address
-	ttyptr = (struct tty *)devtab[device].iobuf;	// control block
+		kputc(dev, RETURN);
+	csrptr = (struct csr *)devtab[dev].csr;	// dev. address
+	ttyptr = (struct tty *)devtab[dev].iobuf;	// control block
 
 	if (ttyptr && (ttyptr->oheld || (ttyptr->oflow &&	// flow control
 					 (csrptr->crstat & SLUREADY) &&
@@ -70,15 +70,15 @@ static int saveps, savedev, savecrstat, savectstat;
 //  savestate  --  save the console control and status register
 //------------------------------------------------------------------------
 static void
-savestate(int device)
+savestate(int dev)
 {
 	struct csr *c;
 	int ps;
 
 	ps = disable();
 	saveps = ps;
-	savedev = device;
-	c = (struct csr *)devtab[device].csr;
+	savedev = dev;
+	c = (struct csr *)devtab[dev].csr;
 	savecrstat = c->crstat & SLUENABLE;
 	c->crstat = SLUDISABLE;
 	savectstat = c->ctstat & SLUENABLE;
