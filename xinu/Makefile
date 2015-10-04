@@ -68,7 +68,7 @@ OBJS=		access.o adump.o arp_in.o arpfind.o arpinit.o \
 		sizmem.o sleep.o sleep10.o sndrarp.o \
 		sreset.o ssclock.o suspend.o \
 		tdump.o test.o ttycntl.o ttygetc.o \
-		ttyiin.o ttyinit.o ttyoin.o ttyopen.o \
+		ttyiin.o ttyinit.o ttyint.o ttyoin.o ttyopen.o \
 		ttyputc.o ttyread.o ttywrite.o \
 		udpecho.o udpnxtp.o udpsend.o unmount.o \
 		unsleep.o userret.o \

@@ -26,7 +26,7 @@ dsinit(struct devsw *devptr)
 	dsptr->ddirsem = screate(1);
 	dsptr->dnfiles = 0;
 	dsptr->ddir = getbuf(dskdbp);
-	iosetvec(devptr->num, dsptr, dsptr);
+	//iosetvec(devptr->num, dsptr, dsptr);
 
 	// read directory block: setup read command then start interface
 

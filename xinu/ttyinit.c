@@ -17,7 +17,7 @@ ttyinit(struct devsw *devptr)
 
 	// set up interrupt vector and interrupt dispatch table
 	iptr = &tty[devptr->minor];
-	iosetvec(devptr->num, iptr, iptr);
+	iosetvec(devptr->ivec, vecduart, iptr);
 
 	devptr->iobuf = (char *)iptr;	// fill tty control blk
 	isconsole = (devptr->num == CONSOLE);	// make console cooked

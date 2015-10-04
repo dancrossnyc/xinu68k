@@ -17,7 +17,7 @@ ethinit(struct devsw *devptr)
 
 	etptr = &eth[devptr->minor];
 	devptr->iobuf = (char *)etptr;
-	iosetvec(devptr->num, etptr, etptr);
+	//iosetvec(devptr->num, etptr, etptr);
 	etptr->eioaddr = dqptr = (struct dqregs *)devptr->csr;
 	etptr->etdev = devptr;
 	etptr->etrsem = screate(1);

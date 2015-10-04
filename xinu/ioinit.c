@@ -1,24 +1,23 @@
 #include "conf.h"
 #include "kernel.h"
+#include "mc68k/machine.h"
 #include "io.h"
 
 //------------------------------------------------------------------------
 // iosetvec -- fill in interrupt vectors and dispatch table entries
 //------------------------------------------------------------------------
 int
-iosetvec(int descrp, void *incode, void *outcode)
+iosetvec(int dev, void (*handler)(void), void *arg)
 {
 	struct devsw *devptr;
-	struct intmap *map;
-	struct vector *vptr;
+	void (**vptr)(void) = (void (**)(void))VECTORS;
 
-	if (isbaddev(descrp))
+	if (isbaddev(dev))
 		return SYSERR;
-	devptr = &devtab[descrp];
-	map = &intmap[devptr->num];	// fill in interrupt dispatch
-	map->intr = devptr->intr;	//   map with addresses of high-
-	map->icode = (uword)incode;	//   level input and output
-	vptr = (struct vector *)devptr->ivec;
-	vptr->vproc = ioint;		// fill in input interrupt
+	devptr = &devtab[dev];
+	if (devptr->ivec == 0)			// No interrupt support.
+		return OK;
+	vptr[devptr->ivec] = handler;		// fill in input interrupt
+	intrargs[devptr->ivec] = arg;		// fill in handler argument
 	return OK;
 }

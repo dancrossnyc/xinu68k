@@ -21,7 +21,6 @@ int nextsem;			// next semaphore slot to use in screate
 struct qent q[NQENT];		// q table (see queue.c)
 int nextqueue;			// next slot in q structure to use
 char *maxaddr;			// max memory address (set by sizmem)
-struct intmap intmap[NDEVS];	// interrupt dispatch table
 struct mblock memlist;		// list of free memory blocks
 struct tty tty[Ntty];		// SLU buffers and mode control
 
@@ -64,7 +63,7 @@ init_mduart()
 	duart[MDUART_STAT_REG_A] = 0xBB;	// Set clock to 9600
 	duart[MDUART_IMR_REG_A] = 0x01;		// Enable interrupts.
 	duart[MDUART_CTL_REG_A] = 0x05;		// Enable Rx and Tx
-	duart[MDUART_IVR_REG] = 65;
+//	duart[MDUART_IVR_REG] = 65;
 }
 
 //------------------------------------------------------------------------

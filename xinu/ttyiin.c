@@ -83,6 +83,7 @@ ttyiin(struct tty *iptr)
 	int ch;
 	int ct;
 
+return;
 	cptr = iptr->ioaddr;
 	if ((ch = cptr->crbuf) & SLUERMASK)	// read char from device
 		return;		// discard if error
@@ -173,10 +174,4 @@ ttyiin(struct tty *iptr)
 				iptr->ihead = 0;
 		}
 	}
-}
-
-INTPROC
-ttyint(struct tty *iptr)
-{
-	// ...
 }
