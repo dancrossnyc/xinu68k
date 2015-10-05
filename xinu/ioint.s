@@ -13,7 +13,7 @@ vecduart:
 	movem.l	%d0-%d1/%a0-%a1,-(%sp)	| Will call C; save registers
 	lea	intrargs,%a0		| Load argument pointer into A0
 	adda.l	#(65*4),%a0		| and push onto the stack as C
-	move.l	%a0,-(%sp)		| handler argument.
+	move.l	(%a0),-(%sp)		| handler argument.
 	jsr 	ttyint			| Call C
 	movem.l	(%sp)+,%d0-%d1/%a0-%a1	| Restore registers
 	rte				| Return from exception

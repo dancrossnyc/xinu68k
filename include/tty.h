@@ -19,6 +19,8 @@
 #define	IMCBREAK	'K'	// honor echo, etc, no line edit
 #define	OMRAW		'R'	// raw mode => normal processing
 
+extern byte consimr;		// Interrupt mask for console.
+
 struct tty {			// tty line control block
 	int ihead;		// head of input queue
 	int itail;		// tail of input queue
@@ -55,6 +57,7 @@ struct tty {			// tty line control block
 	Bool ocrlf;		// echo CR/LF for LF ?
 	char ifullc;		// char to send when input full
 	struct csr *ioaddr;	// device address of this unit
+	byte imr;		// Interrupt mask
 };
 extern struct tty tty[];
 

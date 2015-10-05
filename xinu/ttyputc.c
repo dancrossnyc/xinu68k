@@ -21,7 +21,8 @@ ttyputc(struct devsw *devptr, int ch)
 	iptr->obuff[iptr->ohead++] = ch;
 	if (iptr->ohead >= OBUFLEN)
 		iptr->ohead = 0;
-	(iptr->ioaddr)->ctstat = SLUENABLE;
+	iptr->imr |= DUART_TxINTABLE;
+	(iptr->ioaddr)->imr = iptr->imr;
 	restore(ps);
 
 	return OK;

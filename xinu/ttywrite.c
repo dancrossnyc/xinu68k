@@ -31,7 +31,8 @@ writecopy(char *buff, struct tty *ttyp, int count)
 	}			// avail decremented one
 	ttyp->ohead = qhead - ttyp->obuff;	// extra time when loop
 	sreset(ttyp->osem, ++avail);	// condition fails.
-	(ttyp->ioaddr)->ctstat = SLUENABLE;
+	ttyp->imr |= DUART_TxINTABLE;
+	(ttyp->ioaddr)->imr = ttyp->imr;
 
 	return cp - buff;
 }

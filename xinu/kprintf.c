@@ -13,29 +13,9 @@
 //  c is the character to print from _doprnt
 //------------------------------------------------------------------------
 static void
-kputc_mduart(int dev, int c)
-{
-#define MDUART_STAT_REG_A	1
-#define	MDUART_TXBUF_REG_A	3
-	volatile byte *duart = (byte *)0x100010;
-	while ((duart[MDUART_STAT_REG_A] & 0x04) == 0)
-		;
-if (c == '@') panic("@?");
-	duart[MDUART_TXBUF_REG_A] = c;	// transmit char
-	if (c == NEWLINE)
-		kputc_mduart(dev, RETURN);
-}
-
-//------------------------------------------------------------------------
-//  kputc  --  write a character on the console using polled I/O
-//
-//  c is the character to print from _doprnt
-//------------------------------------------------------------------------
-/*
-static void
 kputc(int dev, int c)
 {
-	struct csr *csrptr;
+	volatile struct csr *csrptr;
 	struct tty *ttyptr;
 	int slowdown;		// added to delay polling, because
 
@@ -45,57 +25,53 @@ kputc(int dev, int c)
 		return;
 	if (c == NEWLINE)
 		kputc(dev, RETURN);
-	csrptr = (struct csr *)devtab[dev].csr;	// dev. address
-	ttyptr = (struct tty *)devtab[dev].iobuf;	// control block
+	csrptr = (struct csr *)devtab[dev].csr;			// dev. address
+	ttyptr = (struct tty *)devtab[dev].iobuf;		// control block
 
-	if (ttyptr && (ttyptr->oheld || (ttyptr->oflow &&	// flow control
-					 (csrptr->crstat & SLUREADY) &&
-					 (csrptr->crbuf & SLUCHMASK) ==
-					 ttyptr->ostop))) {
+	if (ttyptr &&
+	    (ttyptr->oheld ||
+		(ttyptr->oflow &&				// flow control
+		 (csrptr->sra & DUART_RxRDYA) &&
+		 (csrptr->rbufa & DUART_CHRMASK) == ttyptr->ostop)))
+	{
 		do {
-			while (!(csrptr->crstat & SLUREADY));	// wait for char
-		} while ((csrptr->crbuf & SLUCHMASK) == ttyptr->ostop);
+			while (!(csrptr->sra & DUART_RxRDYA));	// wait for char
+		} while ((csrptr->rbufa & DUART_CHRMASK) == ttyptr->ostop);
 		ttyptr->oheld = FALSE;
 	}
 
-	while (!(csrptr->ctstat & SLUREADY));	// poll for idle
-	csrptr->ctbuf = c;	// transmit char
+	while (!(csrptr->sra & DUART_TxRDYA));			// poll for idle
+	csrptr->tbufa = c;					// transmit char
 	for (slowdown = 0; slowdown < DELAY; slowdown++);	// wait a bit
-	while (!(csrptr->ctstat & SLUREADY));	// poll for idle
+	while (!(csrptr->sra & DUART_TxRDYA));			// poll for idle
 }
-*/
 
-static int saveps, savedev, savecrstat, savectstat;
 //------------------------------------------------------------------------
 //  savestate  --  save the console control and status register
 //------------------------------------------------------------------------
-static void
+static int
 savestate(int dev)
 {
-	struct csr *c;
+	volatile struct csr *c;
 	int ps;
 
 	ps = disable();
-	saveps = ps;
-	savedev = dev;
 	c = (struct csr *)devtab[dev].csr;
-	savecrstat = c->crstat & SLUENABLE;
-	c->crstat = SLUDISABLE;
-	savectstat = c->ctstat & SLUENABLE;
-	c->ctstat = SLUDISABLE;
+	c->imr = 0;
+
+	return ps;
 }
 
 //------------------------------------------------------------------------
-//  rststate  --  restore the console output control and status register
+//  restorestate  --  restore the console output control and status register
 //------------------------------------------------------------------------
 static void
-restorestate(void)
+restorestate(int dev, int ps)
 {
-	int ps;
+	volatile struct tty *ttyptr;
 
-	((struct csr *)devtab[savedev].csr)->crstat = savecrstat;
-	((struct csr *)devtab[savedev].csr)->ctstat = savectstat;
-	ps = saveps;
+	ttyptr = (struct tty *)devtab[dev].iobuf;
+	((volatile struct csr *)devtab[dev].csr)->imr = ttyptr->imr;
 	restore(ps);
 }
 
@@ -107,12 +83,13 @@ restorestate(void)
 int
 kprintf(const char *fmt, ...)
 {
+	int saveps;
 	extern void _doprnt(const char *, va_list, void (*putc)(int, int), int);
 	va_list args;
-	savestate(CONSOLE);
+	saveps = savestate(CONSOLE);
 	va_start(args, fmt);
-	_doprnt(fmt, args, kputc_mduart, CONSOLE);
+	_doprnt(fmt, args, kputc, CONSOLE);
 	va_end(args);
-	restorestate();
+	restorestate(CONSOLE, saveps);
 	return OK;
 }

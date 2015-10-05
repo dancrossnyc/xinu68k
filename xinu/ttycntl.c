@@ -17,10 +17,10 @@ ttycntl(struct devsw *devptr, int func)
 	ttyp = &tty[devptr->minor];
 	switch (func) {
 	case TCSETBRK:
-		ttyp->ioaddr->ctstat |= SLUTBREAK;
+		ttyp->ioaddr->mr1a = DUART_STARTBREAK;
 		break;
 	case TCRSTBRK:
-		ttyp->ioaddr->ctstat &= ~SLUTBREAK;
+		ttyp->ioaddr->mr1a = DUART_STOPBREAK;
 		break;
 	case TCNEXTC:
 		ps = disable();

@@ -13,7 +13,8 @@ eputc(int ch, struct tty *iptr, struct csr *cptr)
 	iptr->ebuff[iptr->ehead++] = ch;
 	if (iptr->ehead >= EBUFLEN)
 		iptr->ehead = 0;
-	//cptr->ctstat = SLUENABLE;
+	iptr->imr |= DUART_TxINTABLE;
+	cptr->imr = iptr->imr;
 }
 
 //------------------------------------------------------------------------
@@ -27,29 +28,31 @@ erase1(struct tty *iptr, struct csr *cptr)
 	if (--(iptr->ihead) < 0)
 		iptr->ihead += IBUFLEN;
 	ch = iptr->ibuff[iptr->ihead];
-	if (iptr->iecho) {
-		if (ch < BLANK || ch == DEL) {
-			if (iptr->evis) {
-				eputc(BACKSP, iptr, cptr);
-				if (iptr->ieback) {
-					eputc(BLANK, iptr, cptr);
-					eputc(BACKSP, iptr, cptr);
-				}
-			}
-			eputc(BACKSP, iptr, cptr);
-			if (iptr->ieback) {
-				eputc(BLANK, iptr, cptr);
-				eputc(BACKSP, iptr, cptr);
-			}
-		} else {
+	if (!iptr->iecho) {
+		iptr->imr |= DUART_TxINTABLE;
+		cptr->imr = iptr->imr;
+		return;
+	}
+	if (ch < BLANK || ch == DEL) {
+		if (iptr->evis) {
 			eputc(BACKSP, iptr, cptr);
 			if (iptr->ieback) {
 				eputc(BLANK, iptr, cptr);
 				eputc(BACKSP, iptr, cptr);
 			}
 		}
-	} else
-		return; //cptr->ctstat = SLUENABLE;
+		eputc(BACKSP, iptr, cptr);
+		if (iptr->ieback) {
+			eputc(BLANK, iptr, cptr);
+			eputc(BACKSP, iptr, cptr);
+		}
+		return;
+	}
+	eputc(BACKSP, iptr, cptr);
+	if (iptr->ieback) {
+		eputc(BLANK, iptr, cptr);
+		eputc(BACKSP, iptr, cptr);
+	}
 }
 
 //------------------------------------------------------------------------
@@ -76,27 +79,26 @@ echoch(int ch, struct tty *iptr, struct csr *cptr)
 //  ttyiin  --  lower-half tty device driver for input interrupts
 //  iptr is pointer to tty block
 //------------------------------------------------------------------------
-INTPROC
+void
 ttyiin(struct tty *iptr)
 {
 	struct csr *cptr;
 	int ch;
 	int ct;
 
-return;
 	cptr = iptr->ioaddr;
-	if ((ch = cptr->crbuf) & SLUERMASK)	// read char from device
-		return;		// discard if error
+	if ((ch = cptr->isr) & DUART_ERRMASK)	// read char from device
+		return;				// discard if error
 	if (iptr->imode == IMRAW) {
 		if (scount(iptr->isem) >= IBUFLEN) {
-			return;	// discard if no space
+			return;			// discard if no space
 		}
-		iptr->ibuff[iptr->ihead++] = ch & SLUCHMASK;
+		iptr->ibuff[iptr->ihead++] = ch & DUART_CHRMASK;
 		if (iptr->ihead >= IBUFLEN)	// wrap buffer pointer
 			iptr->ihead = 0;
 		signal(iptr->isem);
-	} else {		// cbreak | cooked mode
-		ch &= SLUCHMASK;
+	} else {				// cbreak | cooked mode
+		ch &= DUART_CHRMASK;
 		if (ch == RETURN && iptr->icrlf)
 			ch = NEWLINE;
 		if (iptr->iintr && ch == iptr->iintrc) {
@@ -107,7 +109,8 @@ return;
 		if (iptr->oflow) {
 			if (ch == iptr->ostart) {
 				iptr->oheld = FALSE;
-				cptr->ctstat = SLUENABLE;
+				iptr->imr |= DUART_TxINTABLE;
+				cptr->imr = iptr->imr;
 				return;
 			}
 			if (ch == iptr->ostop) {
