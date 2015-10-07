@@ -84,6 +84,5 @@ enum Registers {
 
 #define	isodd(x)	(01&(int)(x))
 #define	min(a,b)	( (a) < (b) ? (a) : (b) )
-#define	halt()
 
 #endif

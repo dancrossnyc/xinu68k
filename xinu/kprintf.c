@@ -5,22 +5,19 @@
 #include "tty.h"
 #include "stdarg.h"
 
-#define DELAY	1  //00
+#define	DELAY	1
 
 //------------------------------------------------------------------------
-//  kputc  --  write a character on the console using polled I/O
+// kputc -- write a character on the console using polled I/O
 //
-//  c is the character to print from _doprnt
+// c is the character to print from _doprnt
 //------------------------------------------------------------------------
 static void
 kputc(int dev, int c)
 {
 	volatile struct csr *csrptr;
-	struct tty *ttyptr;
-	int slowdown;		// added to delay polling, because
+	volatile struct tty *ttyptr;
 
-	// polling immediately after a
-	// transmit seems to cause trouble
 	if (c == 0)
 		return;
 	if (c == NEWLINE)
@@ -28,7 +25,7 @@ kputc(int dev, int c)
 	csrptr = (struct csr *)devtab[dev].csr;			// dev. address
 	ttyptr = (struct tty *)devtab[dev].iobuf;		// control block
 
-	if (ttyptr &&
+	if (ttyptr != NULL &&
 	    (ttyptr->oheld ||
 		(ttyptr->oflow &&				// flow control
 		 (csrptr->sra & DUART_RxRDYA) &&
@@ -42,12 +39,12 @@ kputc(int dev, int c)
 
 	while (!(csrptr->sra & DUART_TxRDYA));			// poll for idle
 	csrptr->tbufa = c;					// transmit char
-	for (slowdown = 0; slowdown < DELAY; slowdown++);	// wait a bit
+	for (volatile int slowdown = 0; slowdown < DELAY; slowdown++);	// wait a bit
 	while (!(csrptr->sra & DUART_TxRDYA));			// poll for idle
 }
 
 //------------------------------------------------------------------------
-//  savestate  --  save the console control and status register
+// savestate -- save the console control and status register
 //------------------------------------------------------------------------
 static int
 savestate(int dev)
@@ -63,33 +60,36 @@ savestate(int dev)
 }
 
 //------------------------------------------------------------------------
-//  restorestate  --  restore the console output control and status register
+// restorestate --  restore the console output control and status register
 //------------------------------------------------------------------------
 static void
 restorestate(int dev, int ps)
 {
 	volatile struct tty *ttyptr;
+	volatile struct csr *csrptr;
 
 	ttyptr = (struct tty *)devtab[dev].iobuf;
-	((volatile struct csr *)devtab[dev].csr)->imr = ttyptr->imr;
+	csrptr = (struct csr *)devtab[dev].csr;
+	csrptr->imr = ttyptr->imr;
 	restore(ps);
 }
 
 //------------------------------------------------------------------------
-//  kprintf  --  kernel printf: formatted, unbuffered output to CONSOLE
+// kprintf -- kernel printf: formatted, unbuffered output to CONSOLE
 // Derived by Bob Brown, Purdue U.
 // Flow control added by Steve Munson
 //------------------------------------------------------------------------
 int
 kprintf(const char *fmt, ...)
 {
-	int saveps;
+	int ps;
 	extern void _doprnt(const char *, va_list, void (*putc)(int, int), int);
 	va_list args;
-	saveps = savestate(CONSOLE);
+
+	ps = savestate(CONSOLE);
 	va_start(args, fmt);
 	_doprnt(fmt, args, kputc, CONSOLE);
 	va_end(args);
-	restorestate(CONSOLE, saveps);
+	restorestate(CONSOLE, ps);
 	return OK;
 }

@@ -200,6 +200,8 @@ SYSCALL sleep(int n);
 SYSCALL sleep10(int n);
 int sndrarp(void);
 SYSCALL sreset(int sem, int count);
+void halt(void);
+void stop(void);
 void stopclk(void);
 void strtclk(void);
 SYSCALL suspend(int pid);

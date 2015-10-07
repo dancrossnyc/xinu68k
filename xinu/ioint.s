@@ -5,7 +5,7 @@
 .globl ttyint
 
 | intrargs is an array of pointers that are arguments passed to C.
-.global intrargs
+.globl intrargs
 
 | Exception vector entry for DUART, IVR 65.
 .globl vecduart
@@ -15,5 +15,6 @@ vecduart:
 	adda.l	#(65*4),%a0		| and push onto the stack as C
 	move.l	(%a0),-(%sp)		| handler argument.
 	jsr 	ttyint			| Call C
+	addq.l	#4,%sp			| Pop arg.
 	movem.l	(%sp)+,%d0-%d1/%a0-%a1	| Restore registers
 	rte				| Return from exception

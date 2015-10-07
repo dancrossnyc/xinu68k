@@ -64,7 +64,7 @@ init_mduart()
 	duart[MDUART_IMR_REG_A] = 0x00;		// Disable interrupts.
 	duart[MDUART_CTL_REG_A] = 0x05;		// Enable Rx and Tx
 	duart[MDUART_IVR_REG] = 65;
-	init(CONSOLE);
+	//init(CONSOLE);
 }
 
 //------------------------------------------------------------------------
@@ -115,7 +115,8 @@ sysinit(void)
 	}
 
 	// initialize ready list
-	rdytail = 1 + (rdyhead = newqueue());
+	rdyhead = newqueue();
+	rdytail = 1 + rdyhead;
 
 	// initialize memory marking
 	_mkinit();

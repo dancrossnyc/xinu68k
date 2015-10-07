@@ -11,7 +11,6 @@ ttyint(void *arg)
 	struct csr *csr = tty->ioaddr;
 	byte isr = csr->isr;
 
-kprintf("TTY int! isr = %x\n", isr);
 	if (isr & DUART_TxRDYA) {
 		ttyoin(tty);
 	}
