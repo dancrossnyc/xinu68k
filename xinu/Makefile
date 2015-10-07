@@ -7,7 +7,7 @@ BINDIR=		$(DIR)/bin
 INCDIR=		$(DIR)/include
 CONFIG=		./config
 CC=		m68k-none-elf-gcc -mc68000 -mstrict-align
-CFLAGS=		-g -c -I../include -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
+CFLAGS=		-O -c -I../include -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
 AS=		m68k-none-elf-as
 LD=		m68k-none-elf-ld
 AR=		m68k-none-elf-ar

@@ -12,9 +12,8 @@
 vecduart:
 	movem.l	%d0-%d1/%a0-%a1,-(%sp)	| Will call C; save registers
 	lea	intrargs,%a0		| Load argument pointer into A0
-	adda.l	#(65*4),%a0		| and push onto the stack as C
-	move.l	(%a0),-(%sp)		| handler argument.
+	move.l	65*4(%a0),-(%sp)	| handler argument to C ttyint
 	jsr 	ttyint			| Call C
-	addq.l	#4,%sp			| Pop arg.
+	addq.l	#4,%sp			| Pop handler argument
 	movem.l	(%sp)+,%d0-%d1/%a0-%a1	| Restore registers
 	rte				| Return from exception
