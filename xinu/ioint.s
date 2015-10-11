@@ -10,6 +10,7 @@
 | Exception vector entry for DUART, IVR 65.
 .globl vecduart
 vecduart:
+	move.w	#0x2700,%sr
 	movem.l	%d0-%d1/%a0-%a1,-(%sp)	| Will call C; save registers
 	lea	intrargs,%a0		| Load argument pointer into A0
 	move.l	65*4(%a0),-(%sp)	| handler argument to C ttyint

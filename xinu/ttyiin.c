@@ -87,9 +87,9 @@ ttyiin(struct tty *iptr)
 	int ct;
 
 	cptr = iptr->ioaddr;
-	if (cptr->isr & DUART_ERRMASK)		// read char from device
+	ch = (cptr->rbufa & DUART_CHRMASK);	// read char from device
+	if (cptr->isr & DUART_ERRMASK)
 		return;				// discard if error
-	ch = (cptr->rbufa & DUART_CHRMASK);
 	if (iptr->imode == IMRAW) {
 		if (scount(iptr->isem) >= IBUFLEN) {
 			return;			// discard if no space

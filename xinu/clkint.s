@@ -13,7 +13,7 @@ mclk_start(void)
 #define	TIMER_INTVEC_REG	2
 #define	TIMER_PRELOAD_REG	4
 #define	TIMER_VECTOR_NUM	64
-#define	TIMER_TICKS		(125000/60)	// 60 times per second.
+#define	TIMER_TICKS		(125000/1000)	// 60 times per second.
 #define	TIMER_INIT		0xA0
 	volatile byte *timer = (byte *)0x100040;
 	uword ticks = (uword)TIMER_TICKS;
@@ -40,20 +40,27 @@ mclk_start(void)
 mclkstart:
 	lea	0x100040,%a0		| Load address of timer ctl dev into A0
 	move.b	#64,2(%a0)		| Vector num 64 into vec num register
-	move.l	#(125000),%d0		| Clock ticks 60 times / second
+	move.l	#(125000/60),%d0	| Clock ticks 60 times / second
 	movep.l	%d0,4(%a0)		| Set preload register
 	move.b	#0xA0,0(%a0)		| Set ctl register to init timer
 	bset.b	#0,0(%a0)		| Start timer
 	rts
 
+tck:	.long 0x54210a00
+
 .globl	clkint
 clkint:
+	move.w	#2700,%sr
 	| XXX Hack for simulator.
 	move.l	%a0,-(%sp)
 	lea	0x100040,%a0
 	bclr.b	#0,20(%a0)		| Acknowledge interrupt.
 	bset.b	#0,(%a0)
 	move.l	(%sp)+,%a0
+	movem.l	%d0-%d1/%a0-%a1,-(%sp)
+	pea	tck
+	jsr	kprintf
+	movem.l	(%sp)+,%d0-%d1/%a0-%a1
 	|
 	subi.l	#1,clock6		| Is this the 6th interrupt?
 	bgt	Lout			|  no => return

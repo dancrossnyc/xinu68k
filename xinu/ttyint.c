@@ -9,12 +9,12 @@ ttyint(void *arg)
 {
 	struct tty *tty = (struct tty *)arg;
 	struct csr *csr = tty->ioaddr;
-	byte isr = csr->isr;
+	volatile byte isr = csr->isr;
 
-	if (isr & DUART_TxRDYA) {
+	if (isr & DUART_TxINTABLE) {
 		ttyoin(tty);
 	}
-	if (isr & DUART_RxRDYA) {
+	if (isr & DUART_RxINTABLE) {
 		ttyiin(tty);
 	}
 }
