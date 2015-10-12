@@ -43,7 +43,7 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	int pid;		// stores new process id
 	struct pentry *pptr;	// pointer to proc. table entry
 	int i;
-	uword *saddr;		// stack address
+	uword *saddr, *sargs;	// stack address and pointer to args
 	uintptr_t *procaddrp = (uintptr_t *)&procaddr;
 	int ps;			// saved processor status
 
@@ -67,7 +67,7 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	pptr->psem = 0;
 	pptr->phasmsg = FALSE;
 	pptr->plimit = (char *)((uintptr_t)saddr - ssize + sizeof(uword));
-	*saddr-- = MAGIC;
+	*saddr-- = MAGIC;			// push magic onto top of stack
 	pptr->pargs = nargs;
 	for (i = 0; i < PNREGS; i++)
 		pptr->pregs[i] = INITREG;
@@ -76,13 +76,14 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	pptr->pregs[SR] = INITSR;
 	pptr->pnxtkin = BADPID;
 	pptr->pdevs[0] = pptr->pdevs[1] = BADDEV;
+	saddr -= nargs;				// make space for args
+	sargs = saddr;
 	va_start(args, nargs);
-	for (; nargs > 0; nargs--)		// machine dependent; copy args
-		*saddr-- = va_arg(args, uword);	// onto created process's stack
+	while (nargs-- > 0)		// machine dependent; copy args
+		*sargs++ = va_arg(args, uword);	// onto created process's stack
 	va_end(args);
-	saddr -= nargs;
-	*saddr = (uintptr_t)INITRET;		// push on return address
-	pptr->pregs[SP] = (uintptr_t)saddr;
+	*(--saddr) = (uintptr_t)INITRET;	// push return address
+	pptr->pregs[SP] = (uintptr_t)saddr;	// arg and set saved SP
 	restore(ps);
 
 	return pid;

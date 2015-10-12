@@ -11,7 +11,6 @@ lexan(char *line)
 	char **tokptr;
 	int ntok;
 	char *p;
-	char ch;
 	char *to;
 	char quote;
 
@@ -19,37 +18,36 @@ lexan(char *line)
 	tokptr = &Shl.shtok[0];	// array of ptrs to tokens
 	ntok = 0;		// no tokens
 	for (p = line; *p != '\0' && *p != '\n' && ntok < SHMAXTOK;) {
-		while ((ch = *p) == ' ')	// skip leading blanks
+		while (*p == ' ' || *p == '\t')	// skip leading blanks
 			p++;
-		if (ch == '\0' || ch == '\n')	// end of line or string
+		if (*p == '\0' || *p == '\n')	// end of line or string
 			return ntok;
-		*tokptr++ = to;	// save start of token
-		Shl.shtktyp[ntok++] = ch;
-		if (ch == '"' || ch == '\'') {	// check for quoted str.
-			quote = ch;
-			for (p++;
-			     (ch = *p++) != quote &&
-			     ch != '\n' && ch != '\0';)
-				*to++ = ch;
-			if (ch != quote)
+		ntok++;				// found a new token
+		*tokptr++ = to;			// save start of token
+		Shl.shtktyp[ntok] = *p;
+		if (*p == '"' || *p == '\'') {	// check for quoted str.
+			quote = *p++;
+			while (*p != quote && *p != '\n' && *p != '\0')
+				*to++ = *p++;
+			if (*p != quote)	// check for end quote
 				return SYSERR;
-		} else {	// other possible tokens
+			p++;			// skip terminating quote
+		} else {			// other possible tokens
 			*to++ = *p++;
-			if (ch != '>' && ch != '<' && ch != '&') {
-				ch = *p;
-				while (ch != '\0' &&
-				       ch != '\n' &&
-				       ch != '<' &&
-				       ch != '>' &&
-				       ch != ' ' &&
-				       ch != '"' &&
-				       ch != '\'' && ch != '&') {
+			if (*p != '>' && *p != '<' && *p != '&') {
+				while (*p != '\0' &&
+				       *p != '\n' &&
+				       *p != '<' &&
+				       *p != '>' &&
+				       *p != ' ' &&
+				       *p != '"' &&
+				       *p != '\'' &&
+				       *p != '&') {
 					*to++ = *p++;	// copy alphamerics
-					ch = *p;
 				}
 			}
 		}
-		*to++ = '\0';	// terminate token string
+		*to++ = '\0';			// terminate token string
 	}
 
 	return ntok;

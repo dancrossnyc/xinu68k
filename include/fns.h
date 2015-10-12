@@ -273,4 +273,4 @@ int x_sleep(int stdin, int stdout, int stderr, int nargs, char *args[]);
 int x_snap(int stdin, int stdout, int stderr, int nargs, char *args[]);
 int x_unmou(int stdin, int stdout, int stderr, int nargs, char *args[]);
 int x_uptime(int stdin, int stdout, int stderr, int nargs, char *args[]);
-int x_who(int stdin, int stdout, int stderr);
+int x_who(int stdin, int stdout, int stderr, int nargs, char *args[]);

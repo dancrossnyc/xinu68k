@@ -17,11 +17,9 @@ login(int dev)
 	Shl.shuser[0] = NULLCH;
 	getname(Shl.shmach, SHMLEN);
 	for (;;) {
-		//fprintf(dev, "\n\n%s - The magic of Xinu\n\nlogin: ", Shl.shmach);
-		kprintf("\n\n%s - The magic of Xinu\n\nlogin: ", Shl.shmach);
+		fprintf(dev, "\n\n%s - The magic of Xinu\n\nlogin: ", Shl.shmach);
 		while ((len = read(dev, Shl.shbuf, SHBUFLEN)) == 0 || len == 1)
-			//fprintf(dev, "login: ");
-			kprintf("login: ");
+			fprintf(dev, "login: ");
 		if (len == EOF) {
 			read(dev, Shl.shbuf, 0);
 			Shl.shused = FALSE;

@@ -40,27 +40,30 @@ mclk_start(void)
 mclkstart:
 	lea	0x100040,%a0		| Load address of timer ctl dev into A0
 	move.b	#64,2(%a0)		| Vector num 64 into vec num register
-	move.l	#(125000/60),%d0	| Clock ticks 60 times / second
+	move.l	#(125000),%d0	| Clock ticks 60 times / second
 	movep.l	%d0,4(%a0)		| Set preload register
 	move.b	#0xA0,0(%a0)		| Set ctl register to init timer
 	bset.b	#0,0(%a0)		| Start timer
 	rts
 
-tck:	.long 0x54210a00
+| XXX Hack for simulator.
+|tck:	.long 0x54210a00
+|
 
 .globl	clkint
 clkint:
-	move.w	#2700,%sr
+	move.w	#0x2700,%sr
 	| XXX Hack for simulator.
 	move.l	%a0,-(%sp)
 	lea	0x100040,%a0
 	bclr.b	#0,20(%a0)		| Acknowledge interrupt.
-	bset.b	#0,(%a0)
+	bset.b	#0,(%a0)		| Restart timer.
 	move.l	(%sp)+,%a0
-	movem.l	%d0-%d1/%a0-%a1,-(%sp)
-	pea	tck
-	jsr	kprintf
-	movem.l	(%sp)+,%d0-%d1/%a0-%a1
+|	movem.l	%d0-%d1/%a0-%a1,-(%sp)
+|	pea	tck
+|	jsr	kprintf
+|	addq.l	#4,%sp
+|	movem.l	(%sp)+,%d0-%d1/%a0-%a1
 	|
 	subi.l	#1,clock6		| Is this the 6th interrupt?
 	bgt	Lout			|  no => return

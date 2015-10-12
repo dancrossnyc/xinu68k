@@ -16,6 +16,7 @@ resched(void)
 	struct pentry *optr;	// pointer to old process entry
 	struct pentry *nptr;	// pointer to new process entry
 
+kprintf("Resched!\n");
 	// no switch needed if current process priority higher than next
 	if (((optr = &proctab[currpid])->pstate == PRCURR) &&
 	    (lastkey(rdytail) < optr->pprio))

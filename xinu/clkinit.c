@@ -3,20 +3,20 @@
 #include "sleep.h"
 
 // real-time clock variables and sleeping process queue pointers
-int clock6;			// counts in 60ths of a second 6-0
-int ticks10;			// counts in 10ths of a second 10-0
-int clmutex;			// mutual exclusion for time-of-day
-long clktime;			// current time in seconds since 1/1/70
-int deferclock;			// non-zero, then deferring clock count
-int clkdiff;			// deferred clock ticks
-int slnempty;			// FALSE if the sleep queue is empty
-int *sltop;			// address of key part of top entry in
+volatile int clock6;		// counts in 60ths of a second 6-0
+volatile int ticks10;		// counts in 10ths of a second 10-0
+volatile int clmutex;		// mutual exclusion for time-of-day
+volatile long clktime;		// current time in seconds since 1/1/70
+volatile int deferclock;	// non-zero, then deferring clock count
+volatile int clkdiff;		// deferred clock ticks
+volatile int slnempty;		// FALSE if the sleep queue is empty
+volatile int *sltop;		// address of key part of top entry in
 				// the sleep queue if slnempty==TRUE
-int clockq;			// head of queue of sleeping processes
-int preempt;			// preemption counter.  Current process
+volatile int clockq;		// head of queue of sleeping processes
+volatile int preempt;		// preemption counter.  Current process
 				// is preempted when it reaches zero;
 				// set in resched; counts in ticks
-int hasclock;			// set TRUE iff clock exists by setclkr
+volatile int hasclock;		// set TRUE iff clock exists by setclkr
 
 //------------------------------------------------------------------------
 // clkinit - initialize the clock and sleep queue (called at startup)

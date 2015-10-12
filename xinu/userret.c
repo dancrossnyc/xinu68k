@@ -2,7 +2,7 @@
 #include "kernel.h"
 
 //------------------------------------------------------------------------
-// userret  --  entered when a process exits by return
+// userret -- entered when a process exits by return
 //------------------------------------------------------------------------
 void
 userret(void)

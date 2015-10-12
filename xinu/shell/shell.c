@@ -59,13 +59,13 @@ shell(int dev)
 	char *outnam, *innam;
 	int stdin, stdout, stderr;
 	Bool backgnd;
-	char ch, mach[SHMLEN];
+	char ch, hostname[SHMLEN];
 	int child;
 
 	Shl.shncmds = sizeof(cmds) / sizeof(struct cmdent);
-	getname(mach, SHMLEN);
+	getname(hostname, SHMLEN);
 	for (;;) {
-		fprintf(dev, "%s %% ", mach);
+		fprintf(dev, "%s %% ", hostname);
 		getutim(&Shl.shlast);
 		if ((len = read(dev, Shl.shbuf, SHBUFLEN)) == 0)
 			len = read(dev, Shl.shbuf, SHBUFLEN);
@@ -75,13 +75,13 @@ shell(int dev)
 		if ((ntokens = lexan(Shl.shbuf)) == SYSERR) {
 			fprintf(dev, errhd);
 			continue;
-		} else if (ntokens == 0)
+		}
+		if (ntokens == 0)
 			continue;
 		outnam = innam = NULL;
 		backgnd = FALSE;
 
 		// handle '&'
-
 		if (Shl.shtktyp[ntokens - 1] == '&') {
 			ntokens--;
 			backgnd = TRUE;
@@ -116,9 +116,8 @@ shell(int dev)
 					Shl.shtok[j] = Shl.shtok[j + 2];
 				}
 				continue;
-			} else {
-				len += strlen(Shl.shtok[i++]);
 			}
+			len += strlen(Shl.shtok[i++]);
 		}
 		if (ntokens <= 0) {
 			fprintf(dev, errhd);
@@ -138,11 +137,13 @@ shell(int dev)
 
 		// handle built-in commands with procedure call
 		if (cmds[com].cbuiltin) {
-			if (innam != NULL || outnam != NULL || backgnd)
+			if (innam != NULL || outnam != NULL || backgnd) {
 				fprintf(dev, errhd);
-			else if ((*cmds[com].cproc)(stdin, stdout,
-						    stderr, ntokens,
-						    Shl.shtok) == SHEXIT)
+				continue;
+			}
+			if ((*cmds[com].cproc)(stdin, stdout,
+					       stderr, ntokens,
+					       Shl.shtok) == SHEXIT)
 				break;
 			continue;
 		}

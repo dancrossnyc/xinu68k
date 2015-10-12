@@ -14,6 +14,7 @@ getutim(long *timvar)
 	int ret;
 	long utnow;
 	char *msg = "No time server response";
+return SYSERR;	// XXX hack for simulator.
 
 	wait(clmutex);
 	ret = OK;

@@ -3,6 +3,7 @@
 
 #include "conf.h"
 #include "kernel.h"
+#include "mem.h"
 #include "proc.h"
 #include "shell.h"
 
@@ -25,11 +26,12 @@ addarg(int pid, int nargs, int len)
 		return SYSERR;
 	pptr = &proctab[pid];
 	toarg = (uintptr_t *)((uintptr_t)pptr->pbase - (uintptr_t)len);
+	toarg = truncew(toarg);
 	to = (char *)(toarg + nargs + 2);
 	*toarg = (uintptr_t)(toarg + 1);
 	toarg++;
 	for (fromarg = Shl.shtok; nargs > 0; nargs--) {
-		size_t size = strlen(*fromarg);
+		size_t size = strlen(*fromarg) + 1;
 		*toarg++ = (uintptr_t)to;
 		strlcpy(to, *fromarg++, size);
 		to += strlen(to) + 1;

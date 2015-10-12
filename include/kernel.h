@@ -1,7 +1,7 @@
 #include "u.h"
 
 extern int rdyhead, rdytail;
-extern int preempt;
+extern volatile int preempt;
 
 #include "fns.h"
 
