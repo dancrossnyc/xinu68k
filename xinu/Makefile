@@ -7,7 +7,7 @@ BINDIR=		$(DIR)/bin
 INCDIR=		$(DIR)/include
 CONFIG=		./config
 CC=		m68k-none-elf-gcc -mc68000 -mstrict-align
-CFLAGS=		-O -c -I../include -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
+CFLAGS=		-O -c -I../include -I. -ansi -pedantic -std=c11 -Wall -Werror -nostdlib -nostartfiles -ffreestanding
 AS=		m68k-none-elf-as
 LD=		m68k-none-elf-ld
 AR=		m68k-none-elf-ar
@@ -16,7 +16,8 @@ LORDER=		m68k-none-elf-lorder
 OBJCOPY=	m68k-none-elf-objcopy
 LIB=		$(DIR)/lib
 
-OBJS=		access.o adump.o arp_in.o arpfind.o arpinit.o \
+OBJS=		startup.o initialize.o conf.o \
+		access.o adump.o arp_in.o arpfind.o arpinit.o \
 		bpdump.o \
 		chprio.o ckmode.o cksum.o clkinit.o \
 		clkint.o close.o control.o create.o \
@@ -64,7 +65,7 @@ OBJS=		access.o adump.o arp_in.o arpfind.o arpinit.o \
 		route.o rwho.o rwhod.o rwhoind.o \
 		scount.o screate.o sdelete.o seek.o \
 		send.o sendf.o setclkr.o setdev.o \
-		setnok.o sh.o signal.o signaln.o \
+		setnok.o signal.o signaln.o \
 		sizmem.o sleep.o sleep10.o sndrarp.o \
 		sreset.o ssclock.o suspend.o \
 		tdump.o test.o ttycntl.o ttygetc.o \
@@ -73,41 +74,43 @@ OBJS=		access.o adump.o arp_in.o arpfind.o arpinit.o \
 		udpecho.o udpnxtp.o udpsend.o unmount.o \
 		unsleep.o userret.o \
 		wait.o wakeup.o write.o \
-		xdone.o
+		xdone.o \
+		shell/x_bpool.o shell/x_cat.o shell/x_close.o shell/x_cp.o \
+		shell/x_create.o shell/x_date.o shell/x_devs.o shell/x_dg.o \
+		shell/x_echo.o shell/x_exit.o shell/x_help.o shell/x_kill.o \
+		shell/x_mem.o shell/x_mount.o shell/x_mv.o shell/x_net.o \
+		shell/x_ps.o shell/x_reboot.o shell/x_rf.o shell/x_rm.o shell/x_rls.o \
+		shell/x_routes.o shell/x_sleep.o shell/x_snap.o \
+		shell/x_unmou.o shell/x_uptime.o shell/x_who.o \
+		shell/addarg.o shell/ascdate.o shell/login.o shell/lexan.o \
+		shell/shell.o
 
-XOBJS=		startup.o initialize.o conf.o
+DEPENDS:=	$(OBJS:.o=.d)
 
-all:		libx.a xinu.o
-
-install:	libx.a xinu.o
-		cp libx.a $(LIB)/libx.a
-		$(RANLIB) $(LIB)/libx.a
-		cp xinu.o $(LIB)
+all:		a.h68
 
 clean:
-		/bin/rm -f *.o ,* .,* ../include/,* ../include/.,*
-		/bin/rm -f libx.a a.out conf.c ../include/conf.h core make.out
-		(cd shell && make clean)
+		rm -f $(OBJS) $(DEPENDS) a.out conf.c conf.h core make.out
 
-sh.o:
-		cd shell; make install
-
-libx.a:		$(OBJS)
-		/bin/rm -f libx.a
-		$(AR) cr libx.a	$(OBJS)
-		$(RANLIB) libx.a
-
-xinu.o:		$(XOBJS)
-		$(LD) -r $(XOBJS) -o xinu.o
-
-a.out:		libx.a xinu.o test.o
-		$(LD) -S -e start -Ttext=0x00001000 -Tdata=0x00080000 xinu.o test.o libx.a libx.a ../lib/libxc.a -L/opt/gnu/lib/gcc/m68k-none-elf/5.2.0/m68000 -lgcc
+a.out:		$(OBJS)
+		$(LD) -S -e start -Ttext=0x00001000 -Tdata=0x00080000 $(OBJS) ../lib/libxc.a -L/opt/gnu/lib/gcc/m68k-none-elf/5.2.0/m68000 -lgcc
 
 a.h68:		a.out
 		$(OBJCOPY) -O srec a.out a.h68
 
-../include/conf.h:	xinu.conf
+conf.h:
 		$(CONFIG)
 
-conf.c:		xinu.conf
+conf.c:
 		$(CONFIG)
+
+conf.h:		xinu.conf
+conf.c:		xinu.conf
+
+%.d:		%.c
+		env CC="$(CC)" sh Mkdeps.sh `dirname $<` $(CFLAGS) $< > $@
+
+%.d:		%.s
+		touch $@
+
+include		$(DEPENDS)

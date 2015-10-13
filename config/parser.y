@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include "lexer.c"
 
-#define	CONFIGC		"../xinu/conf.c"	// name of .c output
-#define	CONFIGH		"../include/conf.h"	// name of .h output
+#define	CONFIGC		"conf.c"		// name of .c output
+#define	CONFIGH		"conf.h"		// name of .h output
 #define	CONFHREF	"\"conf.h\""		// how conf.h referenced
 #define	DEFAULT		"xinu.conf"		// name of input file
 
