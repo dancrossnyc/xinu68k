@@ -15,28 +15,27 @@
 //      len: size of arg. area (in bytes)
 //------------------------------------------------------------------------
 int
-addarg(int pid, int nargs, int len)
+addarg(int pid, int nargs, size_t len)
 {
 	struct pentry *pptr;
-	char **fromarg;
 	uintptr_t *toarg;
 	char *to;
 
 	if (isbadpid(pid) || proctab[pid].pstate != PRSUSP)
 		return SYSERR;
 	pptr = &proctab[pid];
-	toarg = (uintptr_t *)((uintptr_t)pptr->pbase - (uintptr_t)len);
-	toarg = truncew(toarg);
+	toarg = (uintptr_t *)((uintptr_t)pptr->pbase - (size_t)roundew(len));
 	to = (char *)(toarg + nargs + 2);
 	*toarg = (uintptr_t)(toarg + 1);
 	toarg++;
-	for (fromarg = Shl.shtok; nargs > 0; nargs--) {
+	for (char **fromarg = Shl.shtok; nargs-- > 0;
+	     toarg++, fromarg++, to += strlen(to) + 1)
+	{
 		size_t size = strlen(*fromarg) + 1;
-		*toarg++ = (uintptr_t)to;
-		strlcpy(to, *fromarg++, size);
-		to += strlen(to) + 1;
+		*toarg = (uintptr_t)to;
+		strlcpy(to, *fromarg, size);
 	}
-	*toarg = 0;
+	*toarg = (uintptr_t)NULL;
 
 	return OK;
 }

@@ -242,7 +242,7 @@ void ctxsw(uword *, uword *);
 void restart(void);
 
 // Shell.
-int addarg(int pid, int nargs, int len);
+int addarg(int pid, int nargs, size_t len);
 int ascdate(long time, char *str);
 int lexan(char *line);
 int login(int dev);

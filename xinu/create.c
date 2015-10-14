@@ -50,7 +50,7 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	ps = disable();
 	ssize = (int)roundew(ssize);
 	if (ssize < MINSTK ||
-	    ((saddr = (uword *)getstk(ssize)) == (uword *)SYSERR) ||
+	    (saddr = (uword *)getstk(ssize)) == (uword *)SYSERR ||
 	    (pid = newpid()) == SYSERR ||
 	    isodd(procaddr) ||
 	    priority < 1) {
@@ -79,7 +79,7 @@ create(PROCESS (*procaddr)(), int ssize, int priority, char *name, int nargs, ..
 	saddr -= nargs;				// make space for args
 	sargs = saddr;
 	va_start(args, nargs);
-	while (nargs-- > 0)		// machine dependent; copy args
+	while (nargs-- > 0)			// machine dependent; copy args
 		*sargs++ = va_arg(args, uword);	// onto created process's stack
 	va_end(args);
 	*(--saddr) = (uintptr_t)INITRET;	// push return address

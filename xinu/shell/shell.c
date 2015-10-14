@@ -3,6 +3,7 @@
 
 #include "conf.h"
 #include "kernel.h"
+#include "mem.h"
 #include "proc.h"
 #include "shell.h"
 #include "cmd.h"
@@ -54,8 +55,8 @@ int
 shell(int dev)
 {
 	int ntokens;
-	int i, j, len;
-	int com;
+	int i, j, k, n;
+	size_t len;
 	char *outnam, *innam;
 	int stdin, stdout, stderr;
 	Bool backgnd;
@@ -67,11 +68,11 @@ shell(int dev)
 	for (;;) {
 		fprintf(dev, "%s %% ", hostname);
 		getutim(&Shl.shlast);
-		if ((len = read(dev, Shl.shbuf, SHBUFLEN)) == 0)
-			len = read(dev, Shl.shbuf, SHBUFLEN);
-		if (len == EOF)
+		if ((n = read(dev, Shl.shbuf, SHBUFLEN)) == 0)
+			n = read(dev, Shl.shbuf, SHBUFLEN);
+		if (n == EOF)
 			break;
-		Shl.shbuf[len - 1] = NULLCH;
+		Shl.shbuf[n - 1] = NULLCH;
 		if ((ntokens = lexan(Shl.shbuf)) == SYSERR) {
 			fprintf(dev, errhd);
 			continue;
@@ -117,7 +118,7 @@ shell(int dev)
 				}
 				continue;
 			}
-			len += strlen(Shl.shtok[i++]);
+			len += strlen(Shl.shtok[i++]) + 1;
 		}
 		if (ntokens <= 0) {
 			fprintf(dev, errhd);
@@ -126,22 +127,22 @@ shell(int dev)
 		stdin = stdout = stderr = dev;
 
 		// Look up command in table
-		for (com = 0; com < Shl.shncmds; com++) {
-			if (strcmp(cmds[com].cmdnam, Shl.shtok[0]) == 0)
+		for (k = 0; k < Shl.shncmds; k++) {
+			if (strcmp(cmds[k].cmdnam, Shl.shtok[0]) == 0)
 				break;
 		}
-		if (com >= Shl.shncmds) {
+		if (k >= Shl.shncmds) {
 			fprintf(dev, "%s: not found\n", Shl.shtok[0]);
 			continue;
 		}
 
 		// handle built-in commands with procedure call
-		if (cmds[com].cbuiltin) {
+		if (cmds[k].cbuiltin) {
 			if (innam != NULL || outnam != NULL || backgnd) {
 				fprintf(dev, errhd);
 				continue;
 			}
-			if ((*cmds[com].cproc)(stdin, stdout,
+			if ((*cmds[k].cproc)(stdin, stdout,
 					       stderr, ntokens,
 					       Shl.shtok) == SHEXIT)
 				break;
@@ -160,15 +161,18 @@ shell(int dev)
 			continue;
 		}
 
-		// compute space needed for string args. (in bytes)
-		len += (ntokens + 2) * (sizeof(char *) + sizeof(char));
-		if (isodd(len))
-			len--;
+		// compute space needed for string arg pointers (in bytes)
+		len += (ntokens + 2) * sizeof(char *);
+		len = (size_t)(len + 3) & ~(size_t)3;
 		control(dev, TCINT, getpid());
 
 		// create process to execute conventional command
-		if ((child = create(cmds[com].cproc, SHCMDSTK, SHCMDPRI,
-				    Shl.shtok[0], (len / sizeof(int)) + 4,
+		// This is terrible; we walk the stack of the calling
+		// proc "copying" arguments that just don't exist.
+		// Who is to say we won't walk past the top of our own stack?
+		// The 3 should be a 4, too.  This should be rewritten.
+		if ((child = create(cmds[k].cproc, SHCMDSTK, SHCMDPRI,
+				    Shl.shtok[0], len / sizeof(uword) + 3,
 				    stdin, stdout, stderr, ntokens)) == SYSERR) {
 			fprintf(dev, "Cannot create\n");
 			close(stdout);
