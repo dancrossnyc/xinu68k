@@ -163,7 +163,6 @@ shell(int dev)
 
 		// compute space needed for string arg pointers (in bytes)
 		len += (ntokens + 2) * sizeof(char *);
-		len = (size_t)(len + 3) & ~(size_t)3;
 		control(dev, TCINT, getpid());
 
 		// create process to execute conventional command

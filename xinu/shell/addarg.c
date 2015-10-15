@@ -8,7 +8,8 @@
 #include "shell.h"
 
 //------------------------------------------------------------------------
-//  addarg  -  copy arguments to area reserved on process stack
+//  addarg - copy arguments to area reserved in process structure and
+//           adjust argument accordingly
 //
 //      pid: process to receive arguments
 //      nargs: number of arguments to copy
@@ -21,13 +22,11 @@ addarg(int pid, int nargs, size_t len)
 	uintptr_t *toarg;
 	char *to;
 
-	if (isbadpid(pid) || proctab[pid].pstate != PRSUSP)
+	if (isbadpid(pid) || proctab[pid].pstate != PRSUSP || len > PARGBLEN)
 		return SYSERR;
 	pptr = &proctab[pid];
-	if ((len + (nargs + 2) * sizeof(char *)) > sizeof(pptr->pargbuf))
-		return SYSERR;
 	toarg = (uintptr_t *)pptr->pargbuf;
-	*((uintptr_t *)(pptr->pbase - 2*sizeof(uword))) = (uintptr_t)toarg;
+	*((uintptr_t *)(pptr->pbase - 2 * sizeof(uword))) = (uintptr_t)toarg;
 	to = (char *)(toarg + nargs + 2);
 	*toarg = (uintptr_t)(toarg + 1);
 	toarg++;
