@@ -24,11 +24,14 @@ addarg(int pid, int nargs, size_t len)
 	if (isbadpid(pid) || proctab[pid].pstate != PRSUSP)
 		return SYSERR;
 	pptr = &proctab[pid];
-	toarg = (uintptr_t *)((uintptr_t)pptr->pbase - (size_t)roundew(len));
+	if ((len + (nargs + 2) * sizeof(char *)) > sizeof(pptr->pargbuf))
+		return SYSERR;
+	toarg = (uintptr_t *)pptr->pargbuf;
+	*((uintptr_t *)(pptr->pbase - 2*sizeof(uword))) = (uintptr_t)toarg;
 	to = (char *)(toarg + nargs + 2);
 	*toarg = (uintptr_t)(toarg + 1);
 	toarg++;
-	for (char **fromarg = Shl.shtok; nargs-- > 0;
+	for (char **fromarg = Shl.shtok + 1; nargs-- > 0;
 	     toarg++, fromarg++, to += strlen(to) + 1)
 	{
 		size_t size = strlen(*fromarg) + 1;

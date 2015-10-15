@@ -19,6 +19,7 @@ enum ProcStates {
 
 // miscellaneous process definitions
 #define	PNREGS		NREGS	// size of saved register area
+#define	PARGBLEN	150	// process arguments
 #define	PNMLEN		16	// length of process "name"
 #define	NULLPROC	0	// id of the null process; it
 					// is always eligible to run
@@ -33,15 +34,16 @@ struct pentry {
 	uword pregs[PNREGS];	// saved regs. R0-R5,SP,PC,PS
 	int psem;		// semaphore if process waiting
 	int pmsg;		// message sent to this process
-	Bool phasmsg;		// True iff pmsg is valid
 	char *pbase;		// base of run time stack
 	short pstklen;		// stack length
 	char *plimit;		// lowest extent of stack
 	char pname[PNMLEN];	// process name
 	int pargs;		// initial number of arguments
+	byte pargbuf[PARGBLEN];	// arguments and pointers
 	char *paddr;		// initial code address
 	int pnxtkin;		// next-of-kin notified of death
 	int pdevs[2];		// devices to close upon exit
+	Bool phasmsg;		// True iff pmsg is valid
 };
 
 extern struct pentry proctab[];
