@@ -8,7 +8,7 @@
 #include "shell.h"
 
 //------------------------------------------------------------------------
-//  rwhod  -  Periodically clean cache and (optionally) send rwho packets
+// rwhod - Periodically clean cache and (optionally) send rwho packets
 //------------------------------------------------------------------------
 PROCESS
 rwhod(void)
@@ -28,7 +28,7 @@ rwhod(void)
 
 	Rwho.rwnent = 1;
 	Rwho.rwsend = TRUE;
-	getutim(&Rwho.rwbtime);
+	getutime(&Rwho.rwbtime);
 	myptr = &Rwho.rwcache[0];
 	getname(myptr->rwmach, RMACLEN);
 	myptr->rwboot = myptr->rwlast = myptr->rwslast = Rwho.rwbtime;
@@ -38,7 +38,7 @@ rwhod(void)
 
 	getnet(mynet);
 	for (; TRUE; sleep(RWDELAY)) {
-		getutim(&now);
+		getutime(&now);
 		myptr->rwlast = myptr->rwslast = now;
 		ps = disable();
 		for (i = 0; i < Rwho.rwnent; i++) {

@@ -30,8 +30,8 @@ extern struct dateinfo Dat;
 #define	TIMEZONE	ZONE_EST	// timezone for this system
 
 // In-line procedures to convert universal-to-local time and vice versa
-#define	ut2ltim(x)	((x)-TIMEZONE*SECPERHR)
-#define	ltim2ut(x)	((x)+TIMEZONE*SECPERHR)
+#define	ut2ltime(x)	((x)-TIMEZONE*SECPERHR)
+#define	ltime2ut(x)	((x)+TIMEZONE*SECPERHR)
 
 #ifndef	TSERVER
 #define	TSERVER		"128.10.2.3:37"

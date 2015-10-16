@@ -5,10 +5,10 @@
 #include "sleep.h"
 
 //------------------------------------------------------------------------
-//  recvtim  -  wait to receive a message or timeout and return result
+// recvtime - wait to receive a message or timeout and return result
 //------------------------------------------------------------------------
 SYSCALL
-recvtim(int maxwait)
+recvtime(int maxwait)
 {
 	struct pentry *pptr;
 	int msg;
@@ -25,11 +25,10 @@ recvtim(int maxwait)
 		pptr->pstate = PRTRECV;
 		resched();
 	}
+	msg = TIMEOUT;
 	if (pptr->phasmsg) {
 		msg = pptr->pmsg;	// msg. arrived => retrieve it
 		pptr->phasmsg = FALSE;
-	} else {		// still no message => TIMEOUT
-		msg = TIMEOUT;
 	}
 	restore(ps);
 

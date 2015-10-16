@@ -49,7 +49,7 @@ static char fmt[] = "Cannot open %s\n";
 static char fmt2[] = "[%d]\n";
 
 //------------------------------------------------------------------------
-//  shell  -  Xinu shell with file redirection and background processing
+// shell - Xinu shell with file redirection and background processing
 //------------------------------------------------------------------------
 int
 shell(int dev)
@@ -67,7 +67,7 @@ shell(int dev)
 	getname(hostname, SHMLEN);
 	for (;;) {
 		fprintf(dev, "%s %% ", hostname);
-		getutim(&Shl.shlast);
+		getutime(&Shl.shlast);
 		if ((n = read(dev, Shl.shbuf, SHBUFLEN)) == 0)
 			n = read(dev, Shl.shbuf, SHBUFLEN);
 		if (n == EOF)

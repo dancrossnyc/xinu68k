@@ -5,7 +5,7 @@
 #include "string.h"
 
 //------------------------------------------------------------------------
-//  getpath  -  find a path (route table entry) for a given IP address
+// getpath - find a path (route table entry) for a given IP address
 //------------------------------------------------------------------------
 int
 getpath(IPaddr faddr)
@@ -36,7 +36,7 @@ getpath(IPaddr faddr)
 		recvclr();
 		write(ETHER, packet, EMINPAK);
 		restore(ps);
-		if (recvtim(AR_TIME) == OK)
+		if (recvtime(AR_TIME) == OK)
 			break;
 	}
 	Arp.arppid = BADPID;

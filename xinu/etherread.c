@@ -4,7 +4,7 @@
 #include "network.h"
 
 //------------------------------------------------------------------------
-//  ethread - read a single packet from the ethernet
+// ethread - read a single packet from the ethernet
 //------------------------------------------------------------------------
 int
 ethread(struct devsw *devptr, char *buff, int len)
@@ -21,7 +21,7 @@ ethread(struct devsw *devptr, char *buff, int len)
 	etptr->etrpid = currpid;
 	recvclr();
 	ethrstrt(etptr, buff, len);
-	while (recvtim(DQ_RTO) == TIMEOUT) {
+	while (recvtime(DQ_RTO) == TIMEOUT) {
 		wbuff = (dcmptr = etptr->ewcmd)->dc_buf;
 		ethstrt(etptr, (struct dqsetup *)buff);
 		ethrstrt(etptr, buff, len);

@@ -5,10 +5,10 @@
 #include "network.h"
 
 //------------------------------------------------------------------------
-// getutim  --  obtain time in seconds past Jan 1, 1970, ut (gmt)
+// getutime -- obtain time in seconds past Jan 1, 1970, ut (gmt)
 //------------------------------------------------------------------------
 SYSCALL
-getutim(long *timvar)
+getutime(long *timvar)
 {
 	int dev;
 	int ret;

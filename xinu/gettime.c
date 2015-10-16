@@ -3,15 +3,15 @@
 #include "date.h"
 
 //------------------------------------------------------------------------
-//  gettime  -  get local time in seconds past Jan 1, 1970
+// gettime - get local time in seconds past Jan 1, 1970
 //------------------------------------------------------------------------
 SYSCALL
 gettime(long *timvar)
 {
 	long now;
 
-	if (getutim(&now) == SYSERR)
+	if (getutime(&now) == SYSERR)
 		return SYSERR;
-	*timvar = ut2ltim(now);	// adjust for timezone
+	*timvar = ut2ltime(now);	// adjust for timezone
 	return OK;
 }

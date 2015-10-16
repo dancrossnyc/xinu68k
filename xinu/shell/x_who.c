@@ -7,7 +7,7 @@
 #include "shell.h"
 
 //------------------------------------------------------------------------
-//  x_who  -  (command who) print name user is logged in under
+// x_who - (command who) print name user is logged in under
 //------------------------------------------------------------------------
 COMMAND
 x_who(int stdin, int stdout, int stderr, int nargs, char *args[])
@@ -19,7 +19,7 @@ x_who(int stdin, int stdout, int stderr, int nargs, char *args[])
 		getname(machine, sizeof(machine));
 		sprintf(str, "%10s!%-10s Console : ", machine, Shl.shuser);
 		write(stdout, str, strlen(str));
-		ascdate(ut2ltim(Shl.shlogon), str);
+		ascdate(ut2ltime(Shl.shlogon), str);
 		strlcat(str, "\n", sizeof(str));
 		write(stdout, str, strlen(str));
 	}

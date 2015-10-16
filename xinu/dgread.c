@@ -5,7 +5,7 @@
 #include "string.h"
 
 //------------------------------------------------------------------------
-//  dgread  -  read one datagram from a datagram protocol pseudo-device
+// dgread - read one datagram from a datagram protocol pseudo-device
 //------------------------------------------------------------------------
 int
 dgread(struct devsw *devptr, struct xgram *buff, int len)
@@ -28,7 +28,7 @@ dgread(struct devsw *devptr, struct xgram *buff, int len)
 		}
 		if (pcount(dgptr->dg_xport) <= 0) {
 			nqptr->pid = getpid();
-			if (recvtim(DG_TIME) == TIMEOUT) {
+			if (recvtime(DG_TIME) == TIMEOUT) {
 				nqptr->pid = BADPID;
 				restore(ps);
 				return TIMEOUT;

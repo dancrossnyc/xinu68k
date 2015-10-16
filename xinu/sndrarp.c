@@ -24,7 +24,7 @@ sndrarp(void)
 		Arp.rarppid = mypid;
 		recvclr();
 		write(ETHER, packet, EMINPAK);
-		resp = recvtim(AR_TIME);
+		resp = recvtime(AR_TIME);
 		restore(ps);
 		if (resp != TIMEOUT)
 			return OK;

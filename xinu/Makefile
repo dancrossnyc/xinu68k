@@ -57,7 +57,7 @@ OBJS=		startup.o initialize.o conf.o \
 		putc.o \
 		qdump.o queue.o \
 		rarp_in.o read.o ready.o receive.o \
-		recvclr.o recvtim.o remove.o rename.o \
+		recvclr.o recvtime.o remove.o rename.o \
 		resched.o resume.o rfalloc.o rfclose.o \
 		rfcntl.o rfdump.o rfgetc.o rfinit.o \
 		rfio.o rfmkpac.o rfopen.o rfputc.o \

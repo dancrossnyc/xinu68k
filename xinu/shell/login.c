@@ -28,11 +28,11 @@ login(int dev)
 		Shl.shbuf[len - 1] = NULLCH;
 		strncpy(Shl.shuser, Shl.shbuf, SHNAMLEN - 1);
 		Shl.shused = TRUE;
-		getutim(&Shl.shlogon);
+		getutime(&Shl.shlogon);
 		mark(Shl.shmark);
 		fprintf(dev, "\n%s\n\n",
 			"      Welcome to Xinu (type ? for help)");
-		getutim(&Shl.shlast);
+		getutime(&Shl.shlast);
 
 		return OK;
 	}
