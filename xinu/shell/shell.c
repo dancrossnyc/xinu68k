@@ -166,10 +166,6 @@ shell(int dev)
 		control(dev, TCINT, getpid());
 
 		// create process to execute conventional command
-		// This is terrible; we walk the stack of the calling
-		// proc "copying" arguments that just don't exist.
-		// Who is to say we won't walk past the top of our own stack?
-		// The 3 should be a 4, too.  This should be rewritten.
 		if ((child = create(cmds[k].cproc, SHCMDSTK, SHCMDPRI,
 				    Shl.shtok[0], 5,
 				    stdin, stdout, stderr, ntokens, NULL)) == SYSERR) {
